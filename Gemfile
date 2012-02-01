@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.1'
 
 
+# Back-end stuff
+gem 'inherited_resources'
+
 
 # Front-end stuff
 gem 'sass-rails', '~> 3.2.3'
@@ -14,6 +17,8 @@ gem 'simple_form'
 
 # Database stuff
 gem 'pg'
+gem 'foreigner'
+
 
 # Stagging stuff
 gem 'heroku'
