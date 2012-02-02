@@ -18,7 +18,7 @@ gem 'simple_form'
 # Database stuff
 gem 'pg'
 gem 'foreigner'
-
+gem "database_cleaner"
 
 # Stagging stuff
 gem 'heroku'
@@ -29,6 +29,7 @@ group :development, :test do
   gem 'cucumber-rails'
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'factory_girl'
 end
 
 # Gems used only for assets and not required

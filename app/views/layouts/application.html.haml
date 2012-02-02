@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title Carioca Pergunta
+
+    = stylesheet_link_tag :application
+
+  %body
+
+    #wrapper
+
+      .warnings
+        = alert or notice
+      %header
+        %section#content
+          = yield
+      %footer
+
+
+  = javascript_include_tag :application

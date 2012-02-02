@@ -1,0 +1,14 @@
+= form_for @user do |f|
+  %label
+    Nome
+    = f.text_field :name
+  %label
+    Email
+    = f.text_field :email
+
+  = f.submit "Registrar"
+
+-#= simple_form_for new_splash_page_path do |f|
+  = f.input :nome, :label => "Digite seu nome"
+  = f.input :email, :label => "Digite seu e-mail"
+  = f.submit
