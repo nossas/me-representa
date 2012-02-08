@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Last updated version of rails
 gem 'rails', '3.2.1'
-
+gem 'thin'
 
 # Back-end stuff
 gem 'inherited_resources'
