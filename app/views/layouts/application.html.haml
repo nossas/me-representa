@@ -7,14 +7,15 @@
 
   %body
 
-    #wrapper
+    #wrapper.container_16
 
       .warnings
         = alert or notice
       %header
-        %section#content
-          = yield
+
+      %section
+        = yield
       %footer
 
 
-  = javascript_include_tag :application
+    = javascript_include_tag :application
