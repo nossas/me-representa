@@ -13,6 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/.sass-cache
 
 # ignoring database
 database.yml
