@@ -1,9 +1,8 @@
 = form_for @user do |f|
+  %span Cadastre-se para receber novidades:
   %label
-    Nome
-    = f.text_field :name
+    = f.hidden_field :name
   %label
-    Email
     = f.text_field :email
 
-  = f.submit "Registrar", :class => "button_submit"
+  = f.submit "Enviar", :class => "button_submit"

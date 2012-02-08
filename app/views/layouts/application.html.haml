@@ -2,19 +2,34 @@
 %html
   %head
     %title Carioca Pergunta
-
+    %meta{ :name => :description, :content => ""}
+    %meta{ :name => :keywords, :content => ""}
+    %meta{ :name => :author, :content => ""}
     = stylesheet_link_tag :application
 
   %body
-
     #wrapper.container_16
-
       .warnings
         = alert or notice
-      %header
-
-      %section
+      %header.main.head
+        %h2
+          %strong
+            Meu Rio
+          apresenta
+      %section.content
+        %header
+          .logo
+            = image_tag asset_path('bg_logo.png'), :alt => "Truth or Dare", :title => "Truth or Dare", :size => "178x145"
+          %h1
+            Verdade ou consequência?
+        %article.about
+          %p= t('about.text')
         = yield
+        %hr
+        %section.candidates
+          %h2 Para candidatos
+          %p
+            = t('about.candidates.text')
       %footer
 
 
