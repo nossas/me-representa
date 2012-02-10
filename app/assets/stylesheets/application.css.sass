@@ -1,21 +1,107 @@
-// Compass utilities + Grid
 @import compass/reset
 @import compass/utilities
 @import compass/css3
 @import 960/grid
 
+$green: #40a468
+$blue: #2cbae2
+$pink: #df499a
+$orange: #ef803b
 
-// Layout rules + Default style
-@import defaults/layouts
-@import defaults/fonts
-@import defaults/buttons
-@import defaults/form_fields
+$ninesixty-columns: 16
 
-//
-  General style is something that will be present in every single page, but in different forms;
-  like input with different classes, body with data- params etc.
+@mixin btn($color1, $color2)
+  color: white
+  font-weight: bold
+  border: 1px solid $color1
+  font-family: "Folksolid"
+  text-transform: uppercase
+  font-size: 22px
+  padding: 10px 10px 7px 10px
+  letter-spacing: 1px
+  cursor: pointer
+  +border-radius(10px)
+  +background-image(linear-gradient(lighten($color1, 10%) 50%, $color1 50%))
+  +box-shadow(lighten(gray, 20%) 0 1px 1px)
+  &:hover
+    border: 1px solid $color2
+    +background-image(linear-gradient(lighten($color2, 10%) 50%, $color2 50%))
 
-@import general
+@font-face
+  font-family: 'Folksolid'
+  src: url(asset_path('folksolid-webfont.eot','font'))
+  src: url(asset_path('folksolid-webfont.eot?#iefix','font')) format('embedded-opentype')
+  src: url(asset_path('folksolid-webfont.woff', 'font')) format('woff')
+  src: url(asset_path('folksolid-webfont.ttf', 'font')) format('truetype')
+  src: url(asset_path('folksolid-webfont.svg#Folksolid', 'font')) format('svg')
+  font-weight: normal
+  font-style: normal
 
-// Pages Style
-@import pages/home
+body
+  font: normal 16px/28px "Arial"
+  color: #333333
+
+hr
+  margin: 50px 0
+  background: #999
+
+input[type=text]
+  border: 1px solid #dedede
+  padding: 10px 15px
+  font: normal 20px "Tahoma"
+  font-weight: bold
+  color: green
+  width: 320px
+  float: left
+  +box-shadow(inset 1px 1px 2px #999)
+
+input[type=submit]
+  +btn($orange, $pink)
+  float: right
+
+form
+  +clearfix
+
+section
+  +grid(8)
+  +grid-push(4)
+  .logo
+    width: 178px
+    margin: 20px auto
+  .about
+    padding: 20px 0
+    text-align: justify
+  h1
+    font: normal 44px/36px "Folksolid"
+    color: rgba(56,153,196,1)
+    color: #3899c4
+    text-align: center
+  p
+    color: #333
+
+.wrapper
+  +grid-container
+
+.stripe
+  +clearfix
+  background: url(asset_path('bg_header.png', 'image'))
+  margin-bottom: 10px
+  header
+    +grid(16)
+    margin: 10px 0
+    position: relative
+    img
+      float: left
+      vertical-align: bottom
+    span
+      position: absolute
+      bottom: 0
+
+.candidates
+  margin: 20px 0
+  h2
+    font-size: 20px
+    font-weight: bold
+    color: #333
+    text-transform: uppercase
+    margin: 10px 0
