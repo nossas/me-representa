@@ -9,8 +9,13 @@ $pink: #df499a
 $orange: #ef803b
 $gray: #333
 
-$grid-system: 12
-$ninesixty-columns: 12
+$grid-system: 16
+$ninesixty-columns: $grid-system
+
+@mixin grid-padded
+  +grid($grid-system - 2)
+  +grid-push(1)
+  +alpha
 
 @mixin btn($color1, $color2)
   color: white
@@ -39,11 +44,23 @@ body
   border-top: 10px $green solid
   background: url(asset_path('bg_header.png', 'image'))
 
+
 h1
   font-family: "Folksolid"
   font-size: 3.5em
   text-transform: uppercase
   color: $blue
+
+h2
+  font-size: 1.2em
+h3
+  font-size: 1em
+h4
+  font-size: 0.8em
+h5
+  font-size: 0.6em
+h6
+  font-size: 0.4em
 
 input[type=text]
   border: 1px solid #dedede
@@ -52,10 +69,6 @@ input[type=text]
 
 input[type=submit]
   +btn($orange, $pink)
-
-
-.special_grid
-  +grid($grid-system - 2)
 
 .wrapper
   +grid-container
@@ -81,14 +94,21 @@ input[type=submit]
   header
     +clearfix
     text-align: center
-  section
+
+  .ask
+    +grid-padded
     img
-      // Using a mathematical awesome calculation (not) to handle a grid
+      // Using a mathematical awesome calc. (not) to handle the grid
       +grid($grid-system * 0.5 - 1)
-      +grid-push(1)
       +alpha
-    fieldset
+    .form
       +grid($grid-system * 0.5 - 1)
-      +grid-push(1)
       +omega
-      background: darken($blue, 5%)
+      fieldset
+        background: darken($blue, 5%)
+        padding: 15px
+        color: white
+        +border-radius(16px)
+        h2
+          font: normal 2em/24px "Folksolid"
+        form

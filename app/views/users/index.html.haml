@@ -3,11 +3,19 @@
     %h2 Eleições Municipais 2012
     %h1 Verdade ou Consequência?
     %span.headline O carioca pergunta e os candidatos respondem!
-  %section
+  %section.ask
     = image_tag ""
-    %fieldset
-      = form_for @user do |f|
-        = f.submit "Enviar", :class => "button_submit"
+    %section.form
+      %p
+        Nós já giramos a garrafa, agora cabe a você fazer as
+        perguntas para os candidatos!
+      %fieldset
+        %h2 Participe
+        %h4 Seja um dos primeiros a questionar os vereadores!
+        = form_for @user do |f|
+          %label
+            = f.text_field :email, :placeholder => "E-mail"
+          = f.submit "Enviar", :class => "button_submit"
 
 %section.how
 
