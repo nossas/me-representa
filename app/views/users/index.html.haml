@@ -1,8 +1,14 @@
-= form_for @user do |f|
-  %span Cadastre-se para receber novidades:
-  %label
-    = f.hidden_field :name
-  %label
-    = f.text_field :email
+%section.join
+  %header
+    %h2 Eleições Municipais 2012
+    %h1 Verdade ou Consequência?
+    %span.headline O carioca pergunta e os candidatos respondem!
+  %section
+    = image_tag ""
+    %fieldset
+      = form_for @user do |f|
+        = f.submit "Enviar", :class => "button_submit"
 
-  = f.submit "Enviar", :class => "button_submit"
+%section.how
+
+%section.why

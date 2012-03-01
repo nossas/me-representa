@@ -3,21 +3,22 @@
 @import compass/css3
 @import 960/grid
 
-$green: #40a468
+$green: #189047
 $blue: #2cbae2
 $pink: #df499a
 $orange: #ef803b
+$gray: #333
 
-$ninesixty-columns: 16
+$grid-system: 12
+$ninesixty-columns: 12
 
 @mixin btn($color1, $color2)
   color: white
   border: 1px solid $color1
   font-family: "Folksolid"
   text-transform: uppercase
-  font-size: 22px
+  font-size: 1.5em
   padding: 10px
-  letter-spacing: 1px
   cursor: pointer
   +border-radius(10px)
   +background-image(linear-gradient(lighten($color1, 10%) 50%, $color1 50%))
@@ -33,70 +34,61 @@ $ninesixty-columns: 16
   font-style: normal
 
 body
-  font: normal 16px/28px "Arial"
-  color: #333333
+  font: normal 1em/28px "Lucida Grande"
+  color: $gray
+  border-top: 10px $green solid
+  background: url(asset_path('bg_header.png', 'image'))
 
-hr
-  margin: 50px 0
-  background: #999
+h1
+  font-family: "Folksolid"
+  font-size: 3.5em
+  text-transform: uppercase
+  color: $blue
 
 input[type=text]
   border: 1px solid #dedede
   padding: 10px 15px
-  font: normal 20px "Tahoma"
-  font-weight: bold
-  color: green
-  width: 320px
-  float: left
   +box-shadow(inset 1px 1px 2px #999)
 
 input[type=submit]
   +btn($orange, $pink)
-  float: right
 
-form
-  +clearfix
 
-section
-  +grid(8)
-  +grid-push(4)
-  .logo
-    width: 178px
-    margin: 20px auto
-  .about
-    padding: 20px 0
-    text-align: justify
-  h1
-    font: normal 44px/36px "Folksolid"
-    color: rgba(56,153,196,1)
-    color: #3899c4
-    text-align: center
-  p
-    color: #333
+.special_grid
+  +grid($grid-system - 2)
 
 .wrapper
   +grid-container
-
-.stripe
   +clearfix
-  background: url(asset_path('bg_header.png', 'image'))
-  margin-bottom: 10px
+
+.header
   header
-    +grid(16)
-    margin: 10px 0
-    position: relative
+    +grid($grid-system)
+    margin-top: 10px
+    margin-bottom: 10px
+    text-transform: uppercase
+    font-size: .8em
     img
       float: left
-      vertical-align: bottom
     span
-      position: absolute
-      bottom: 0
+      line-height: 60px
 
-.candidates
-  margin: 20px 0
-  h2
-    font-size: 20px
-    font-weight: bold
-    color: #333
-    text-transform: uppercase
-    margin: 10px 0
+.join
+  background: white
+  +grid($grid-system)
+  +border-radius(6px)
+  +clearfix
+  header
+    +clearfix
+    text-align: center
+  section
+    img
+      // Using a mathematical awesome calculation (not) to handle a grid
+      +grid($grid-system * 0.5 - 1)
+      +grid-push(1)
+      +alpha
+    fieldset
+      +grid($grid-system * 0.5 - 1)
+      +grid-push(1)
+      +omega
+      background: darken($blue, 5%)

@@ -8,27 +8,11 @@
     = stylesheet_link_tag :application
 
   %body
-    .wrapper
-      #warnings= alert or notice
-    .stripe
-      .wrapper
-        %header
-          = image_tag "bg_meu_rio.png", :title => "Meu Rio"
-          %span apresenta
-    .wrapper
-      %section
-        %header
-          .logo
-            = image_tag asset_path('bg_logo.png'), :alt => "Truth or Dare", :title => "Truth or Dare", :size => "178x145"
-          %h1 Verdade ou consequência?
-        %article.about
-          %p= t('about.text')
-        = yield
-        %hr
-        .candidates
-          %h2 Para candidatos
-          %p
-            = t('about.candidates.text')
-      %footer
+    .wrapper.header
+      %header
+        = image_tag "bg_meu_rio.png", :title => "Meu Rio"
+        %span apresenta:
+    .wrapper.content
+      = yield
 
-    = javascript_include_tag :application
+  = javascript_include_tag :application
