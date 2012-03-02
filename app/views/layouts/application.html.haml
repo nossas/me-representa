@@ -5,6 +5,7 @@
     %meta{ :name => :description, :content => ""}
     %meta{ :name => :keywords, :content => ""}
     %meta{ :name => :author, :content => ""}
+    = stylesheet_link_tag "https://s3.amazonaws.com/meu-rio-production/assets/webfonts/fonts.css"
     = stylesheet_link_tag :application
 
   %body
@@ -15,4 +16,4 @@
     .wrapper.content
       = yield
 
-  = javascript_include_tag :application
+    = javascript_include_tag :application
