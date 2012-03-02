@@ -5,9 +5,8 @@
     %meta{ :name => :description, :content => ""}
     %meta{ :name => :keywords, :content => ""}
     %meta{ :name => :author, :content => ""}
-    = stylesheet_link_tag "https://s3.amazonaws.com/meu-rio-production/assets/webfonts/fonts.css"
     = stylesheet_link_tag :application
-
+    = stylesheet_link_tag "https://s3.amazonaws.com/meu-rio-production/assets/webfonts/fonts.css"
   %body
     .wrapper.header
       %header
@@ -15,5 +14,10 @@
         %span apresenta:
     .wrapper.content
       = yield
-
+    .wrapper.footer
+      %footer
+        %nav.links
+          = link_to "Quem somos?", ""
+          %span.marker
+          = link_to "Contate-nos", ""
     = javascript_include_tag :application

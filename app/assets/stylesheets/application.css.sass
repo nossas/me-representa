@@ -4,12 +4,13 @@
 @import 960/grid
 
 $green: #159147
-$blue: #11a9db
+$blue: #3399CB
 $pink: #df499a
 $orange: #ef803b
 $gray: #333
+$header: #2BB1E3
 
-$grid-system: 16
+$grid-system: 12
 $ninesixty-columns: $grid-system
 $grid-half: $grid-system * 0.5
 
@@ -21,10 +22,11 @@ $grid-half: $grid-system * 0.5
 @mixin btn($color1, $color2)
   color: white
   border: 1px solid $color1
-  font-family: "Folk-solid"
+  font: normal 14px "Folk-solid"
   text-transform: uppercase
-  font-size: 1.5em
-  padding: 10px
+  padding: 7px 10px
+  position: relative
+  top: 2px
   cursor: pointer
   +border-radius(10px)
   +background-image(linear-gradient(lighten($color1, 10%) 50%, $color1 50%))
@@ -34,25 +36,36 @@ $grid-half: $grid-system * 0.5
     +background-image(linear-gradient(lighten($color2, 10%) 50%, $color2 50%))
 
 body
-  font: normal 1em/28px "Akagi-book", Tahoma, Lucida Grande
+  font: normal .9em/28px "Akagi-book", Tahoma, Lucida Grande
   color: $gray
   border-top: 10px $green solid
   background: url(asset_path('bg_header.png', 'image'))
 
-h2, h3, h4, h5, h6
+strong
   font-weight: bold
+
+a
+  color: white
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+h1, h2, h3, h4, h5, h6
+  font-weight: bold
+  margin: 8px 0
 h1
   font-family: "Folk-solid", Arial, Tahoma
   font-size: 3.5em
+  line-height: 72px
   text-transform: uppercase
-  color: $blue
+  color: $header
   text-shadow: 0 -1px 1px #999
 h2
   font-size: 1.9em
 h3
   font-size: 1.4em
 h4
-  font-size: 0.8em
+  font-size: 0.9em
 h5
   font-size: 0.6em
 h6
@@ -73,8 +86,8 @@ input[type=submit]
 .header
   header
     +grid($grid-system)
-    margin-top: 10px
-    margin-bottom: 10px
+    margin-top: 2px
+    margin-bottom: 2px
     text-transform: uppercase
     font-size: .8em
     img
@@ -91,6 +104,8 @@ input[type=submit]
   margin-bottom: 20px
   padding-top: 10px
   padding-bottom: 20px
+  header
+    margin-bottom: 40px
 
 .how, .why
   header
@@ -104,10 +119,24 @@ input[type=submit]
 
 .join
   background: white
+  h3
+    background: url(asset_path('bg_header_3.png', 'image')) center no-repeat
+    color: white
+  .headline
+    color: #999
+    font-size: 1.3em
   header
     +clearfix
     text-align: center
-
+  section
+    +clearfix
+  .about
+    +grid_padded
+    padding: 25px 0
+    span
+      color: #999
+      font-weight: 600
+      font-size: 1.2em
   .ask
     +grid-padded
     img
@@ -118,17 +147,25 @@ input[type=submit]
       +grid($grid-half - 1)
       +omega
       fieldset
-        background: darken($blue, 5%)
+        background: #11A9DB
         padding: 15px
         color: white
+        margin: 10px 0
         +border-radius(16px)
         h2
           font: normal 2em/24px "Folk-solid"
         form
+          input[type=text]
+            border: none
+            width: 210px
+
 .how
+  background: $blue
   section
     +grid-padded
-  background: $blue
+    img
+      +grid($grid-system * 0.9)
+      margin-left: -20px
   article
     +grid($grid-half / 2)
     &.middle
@@ -154,3 +191,13 @@ input[type=submit]
     +alpha
   .candidate
     +omega
+
+footer
+  +grid($grid-system)
+  a
+    color: $gray
+    font-size: 1.2em
+    font-weight: 600
+  .marker
+    border-left: 1px solid $gray
+    margin: 0 10px
