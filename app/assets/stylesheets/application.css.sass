@@ -3,24 +3,25 @@
 @import compass/css3
 @import 960/grid
 
-$green: #189047
-$blue: #2cbae2
+$green: #159147
+$blue: #11a9db
 $pink: #df499a
 $orange: #ef803b
 $gray: #333
 
 $grid-system: 16
 $ninesixty-columns: $grid-system
+$grid-half: $grid-system * 0.5
 
-@mixin grid-padded
+@mixin grid-padded($push: 1)
   +grid($grid-system - 2)
-  +grid-push(1)
+  +grid-push($push)
   +alpha
 
 @mixin btn($color1, $color2)
   color: white
   border: 1px solid $color1
-  font-family: "Folksolid"
+  font-family: "Folk-solid"
   text-transform: uppercase
   font-size: 1.5em
   padding: 10px
@@ -32,29 +33,24 @@ $ninesixty-columns: $grid-system
     border: 1px solid $color2
     +background-image(linear-gradient(lighten($color2, 10%) 50%, $color2 50%))
 
-@font-face
-  font-family: 'Folksolid'
-  src: url(asset_path('folksolid-webfont.eot','font')), url(asset_path('folksolid-webfont.eot?#iefix','font')) format('embedded-opentype'), url(asset_path('folksolid-webfont.woff', 'font')) format('woff'), url(asset_path('folksolid-webfont.ttf', 'font')) format('truetype'), url(asset_path('folksolid-webfont.svg#Folksolid', 'font')) format('svg')
-  font-weight: normal
-  font-style: normal
-
 body
-  font: normal 1em/28px "Lucida Grande"
+  font: normal 1em/28px "Akagi-book", Tahoma, Lucida Grande
   color: $gray
   border-top: 10px $green solid
   background: url(asset_path('bg_header.png', 'image'))
 
-
+h2, h3, h4, h5, h6
+  font-weight: bold
 h1
-  font-family: "Folksolid"
+  font-family: "Folk-solid", Arial, Tahoma
   font-size: 3.5em
   text-transform: uppercase
   color: $blue
-
+  text-shadow: 0 -1px 1px #999
 h2
-  font-size: 1.2em
+  font-size: 1.9em
 h3
-  font-size: 1em
+  font-size: 1.4em
 h4
   font-size: 0.8em
 h5
@@ -86,11 +82,28 @@ input[type=submit]
     span
       line-height: 60px
 
-.join
-  background: white
+// General rules for the three sections
+.join, .how, .why
   +grid($grid-system)
   +border-radius(6px)
+  +box-shadow(1px 1px 3px #666)
   +clearfix
+  margin-bottom: 20px
+  padding-top: 10px
+  padding-bottom: 20px
+
+.how, .why
+  header
+    +grid-padded
+  color: white
+  h2
+    font-family: "Folk-solid"
+    font-size: 38px
+    text-shadow: 0 -1px 1px #999
+    color: white
+
+.join
+  background: white
   header
     +clearfix
     text-align: center
@@ -99,10 +112,10 @@ input[type=submit]
     +grid-padded
     img
       // Using a mathematical awesome calc. (not) to handle the grid
-      +grid($grid-system * 0.5 - 1)
+      +grid($grid-half - 1)
       +alpha
     .form
-      +grid($grid-system * 0.5 - 1)
+      +grid($grid-half - 1)
       +omega
       fieldset
         background: darken($blue, 5%)
@@ -110,5 +123,34 @@ input[type=submit]
         color: white
         +border-radius(16px)
         h2
-          font: normal 2em/24px "Folksolid"
+          font: normal 2em/24px "Folk-solid"
         form
+.how
+  section
+    +grid-padded
+  background: $blue
+  article
+    +grid($grid-half / 2)
+    &.middle
+      +grid($grid-half - 2)
+    &:first-child
+      +alpha
+    &:last-child
+      +omega
+.why
+  section.sections
+    +grid-padded
+  background: $green
+  .voter, .candidate
+    +grid($grid-half - 1)
+
+    img
+      +grid(2)
+      +alpha
+    article
+      +grid($grid-half - 3)
+      +omega
+  .voter
+    +alpha
+  .candidate
+    +omega
