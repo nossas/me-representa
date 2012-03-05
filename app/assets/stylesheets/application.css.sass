@@ -14,19 +14,18 @@ $grid-system: 16
 $ninesixty-columns: $grid-system
 $grid-half: $grid-system * 0.5
 
-@mixin grid-padded($push: 1)
-  +grid($grid-system - 2)
-  +grid-push($push)
-  +alpha
+@mixin grid-padded
+  +grid($grid-system)
 
 @mixin btn($color1, $color2)
   color: white
   border: 1px solid $color1
-  font: normal 14px "Folk-solid"
+  font: normal 1.2em "Folk-solid"
+  letter-spacing: 2px
   text-transform: uppercase
   padding: 7px 10px
   position: relative
-  top: 2px
+  top: 4px
   cursor: pointer
   +border-radius(10px)
   +background-image(linear-gradient(lighten($color1, 10%) 50%, $color1 50%))
@@ -36,7 +35,7 @@ $grid-half: $grid-system * 0.5
     +background-image(linear-gradient(lighten($color2, 10%) 50%, $color2 50%))
 
 body
-  font: normal .9em/28px "Akagi-book", Tahoma, Lucida Grande
+  font: normal 1em/28px "Akagi-book", Tahoma, Lucida Grande
   color: $gray
   border-top: 10px $green solid
   background: url(asset_path('bg_header.png', 'image'))
@@ -51,15 +50,14 @@ a
     text-decoration: underline
 
 h1, h2, h3, h4, h5, h6
-  font-weight: bold
   margin: 8px 0
 h1
   font-family: "Folk-solid", Arial, Tahoma
   font-size: 3.5em
-  line-height: 72px
+  line-height: 64px
   text-transform: uppercase
   color: $header
-  text-shadow: 0 -1px 1px #999
+  text-shadow: 0 -1px 1px #666
 h2
   font-size: 1.9em
 h3
@@ -81,7 +79,6 @@ input[type=submit]
 
 .wrapper
   +grid-container
-  +clearfix
 
 .header
   header
@@ -100,10 +97,11 @@ input[type=submit]
   +grid($grid-system)
   +border-radius(6px)
   +box-shadow(1px 1px 3px #666)
-  +clearfix
-  margin-bottom: 20px
-  padding-top: 10px
-  padding-bottom: 20px
+  margin-bottom: 30px
+  // IMplementing full grid with paddin on right and left
+  padding: 30px
+  padding-left: 0
+
   header
     margin-bottom: 40px
 
@@ -119,9 +117,13 @@ input[type=submit]
 
 .join
   background: white
-  h3
-    background: url(asset_path('bg_header_3.png', 'image')) center no-repeat
+  span.elections
+    background: url(asset_path('bg_header_3.png', 'image')) center -10px no-repeat
+    text-transform: uppercase
     color: white
+    display: block
+    margin: 5px 0
+    font-size: 1.2em
   .headline
     color: #999
     font-size: 1.3em
@@ -131,7 +133,7 @@ input[type=submit]
   section
     +clearfix
   .about
-    +grid_padded
+    +grid-padded
     padding: 25px 0
     span
       color: #999
@@ -141,7 +143,8 @@ input[type=submit]
     +grid-padded
     img
       // Using a mathematical awesome calc. (not) to handle the grid
-      +grid($grid-half - 1)
+      +grid($grid-half)
+      +grid-suffix(1)
       +alpha
     .form
       +grid($grid-half - 1)
@@ -150,39 +153,51 @@ input[type=submit]
         background: #11A9DB
         padding: 15px
         color: white
-        margin: 10px 0
         +border-radius(16px)
+        text-shadow: 2px 1px 2px #333
+        span
+          display: block
+          line-height: 20px
         h2
-          font: normal 2em/24px "Folk-solid"
+          font: normal 1.4em/30px "Folk-solid"
+          text-transform: uppercase
         form
           input[type=text]
             border: none
-            width: 210px
+            padding: 12px 0
+            width: 276px
+            text-indent: 10px
 
 .how
   background: $blue
   section
     +grid-padded
     img
-      +grid($grid-system * 0.9)
-      margin-left: -20px
+      +grid($grid-system)
   article
-    +grid($grid-half / 2)
+    +grid($grid-system / 4)
+    +grid-prefix(1)
+    line-height: 24px
     &.middle
-      +grid($grid-half - 2)
+      //+grid($grid-half - 2)
     &:first-child
       +alpha
     &:last-child
       +omega
 .why
+  padding-bottom: 10px
   section.sections
     +grid-padded
   background: $green
   .voter, .candidate
-    +grid($grid-half - 1)
-
+    +grid($grid-half)
+    h3
+      text-transform: uppercase
+      text-shadow: 1px 1px 3px #333
+      font-weight: 600
+      font-size: 1.3em
     img
-      +grid(2)
+      +grid(3)
       +alpha
     article
       +grid($grid-half - 3)
@@ -191,17 +206,33 @@ input[type=submit]
     +alpha
   .candidate
     +omega
-    .participate
-      padding-top: 30px
-      font-weight: bold
-
 
 footer
-  +grid($grid-system)
+  width: 960px
+  margin: 0 auto
+  overflow: hidden
+  padding-left: 30px
+  padding-right: 30px
+  padding-bottom: 20px
   a
     color: $gray
-    font-size: 1.2em
     font-weight: 600
+  .links
+    float: left
+    width: 25%
+    line-height: 36px
   .marker
     width: 10px
     padding: 5px
+  .participate
+    background: url(asset_path('bg_footer_contact_us.png', 'image')) -8px -6px  no-repeat
+    text-align: right
+    text-shadow: 1px 1px 2px #666
+    padding: 0 10px
+    padding-left: 40px
+    padding-bottom: 15px
+    line-height: 36px
+    float: right
+    a
+      color: #ffcc00
+

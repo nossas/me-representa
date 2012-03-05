@@ -16,11 +16,17 @@
         %span apresenta:
     .wrapper.content
       = yield
-    .wrapper.footer
-      %footer
-        %nav.links
-          = link_to "Quem somos?", ""
-          %strong.marker
-            |
-          = link_to "Contate-nos", ""
+    %footer
+      %nav.links
+        = link_to "Quem somos?", ""
+        %strong.marker
+          |
+        = link_to "Contate-nos", ""
+      %section.participate
+        %strong
+          Você é candidato e quer participar?
+        Mande um
+        = mail_to "contato@meurio.org", "e-mail", :encode => :hex
+        pra gente!
+
     = javascript_include_tag :application
