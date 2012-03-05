@@ -99,8 +99,7 @@ input[type=submit]
   +box-shadow(1px 1px 3px #666)
   margin-bottom: 30px
   // IMplementing full grid with paddin on right and left
-  padding: 30px
-  padding-left: 0
+  padding: 30px 0
 
   header
     margin-bottom: 40px
@@ -114,6 +113,7 @@ input[type=submit]
     font-size: 38px
     text-shadow: 0 -1px 1px #999
     color: white
+    text-indent: 30px
 
 .join
   background: white
@@ -133,7 +133,8 @@ input[type=submit]
   section
     +clearfix
   .about
-    +grid-padded
+    +grid($grid-system - 2)
+    +grid-push(1)
     padding: 25px 0
     span
       color: #999
@@ -144,7 +145,6 @@ input[type=submit]
     img
       // Using a mathematical awesome calc. (not) to handle the grid
       +grid($grid-half)
-      +grid-suffix(1)
       +alpha
     .form
       +grid($grid-half - 1)
@@ -173,7 +173,8 @@ input[type=submit]
   section
     +grid-padded
     img
-      +grid($grid-system)
+      +grid($grid-system - 1)
+      margin-left: 30px
   article
     +grid($grid-system / 4)
     +grid-prefix(1)
@@ -197,7 +198,7 @@ input[type=submit]
       font-weight: 600
       font-size: 1.3em
     img
-      +grid(3)
+      +grid(2)
       +alpha
     article
       +grid($grid-half - 3)
