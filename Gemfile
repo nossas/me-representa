@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Last updated version of rails
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 gem 'thin'
 
 # Back-end stuff
@@ -36,7 +36,13 @@ end
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
-  gem 'compass-960-plugin'
+
+  gem "compass-columnal-plugin"
+
+  # When the splash page isn't necessary, remove the line
+    gem 'compass-960-plugin' # <=
+
+
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
