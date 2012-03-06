@@ -6,7 +6,5 @@ before_install:
 notifications:
   email:
     - luiz@engage.is
-env:
-  - DB=postgres
 before_script:
   - "psql -c 'create database myapp_test;' -U postgres"
