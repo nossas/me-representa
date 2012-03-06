@@ -1,6 +1,8 @@
 rvm:
   - 1.9.3
   - 1.9.2
+before_install:
+  - 'cp config/database.sample.yml config/database.yml'
 notifications:
   email:
     - luiz@engage.is

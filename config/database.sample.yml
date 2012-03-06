@@ -1,17 +1,4 @@
-development: &defaults
+postgres:
   adapter: postgresql
-  host: localhost
+  database: myapp_test
   username: postgres
-  database: carioca_pergunta_development
-
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test: &test
-  <<: *defaults
-  database: carioca_pergunta_test
-
-cucumber:
-  <<: *test
-
