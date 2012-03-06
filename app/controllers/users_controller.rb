@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def new
+  def create
     create!{ return redirect_to root_path, :notice => "Obrigado pelo interesse, lhe manteremos informado!"}
   end
 
