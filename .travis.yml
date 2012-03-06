@@ -6,3 +6,5 @@ before_install:
 notifications:
   email:
     - luiz@engage.is
+env:
+  - DB=postgres
