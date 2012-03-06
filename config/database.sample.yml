@@ -1,4 +1,5 @@
-postgres:
+test:
+  host: 127.0.0.1
   adapter: postgresql
   database: myapp_test
   username: postgres
