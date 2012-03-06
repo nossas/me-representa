@@ -7,7 +7,6 @@ Then /^I should see the "([^"]*)" field$/ do |arg1|
 end
 
 When /^I fill the form with my information$/ do
- fill_in "Nome", :with => "Luiz"
  fill_in "Email", :with => "runeroniek@gmail.com"
 end
 
