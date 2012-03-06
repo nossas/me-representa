@@ -1,6 +1,6 @@
 %section.join
   %header
-    %h3 Eleições Municipais 2012
+    %span.elections Eleições Municipais 2012
     %h1 Verdade ou Consequência?
     %span.headline O carioca pergunta e os candidatos respondem!
   %section.ask
@@ -12,24 +12,24 @@
         Agora, você pode jogar com os candidatos a vereador!
 
       %fieldset
-        %h2 Participe
-        %span Seja um dos primeiros a questionar os vereadores!
+        %h2 O jogo já vai começar
+        %span
+          Cadastre seu email e seja um dos primeiros a
+          contribuir com nosso questionário coletivo.
         = form_for @user do |f|
           %label
             = f.text_field :email, :placeholder => "E-mail"
           = f.submit "Enviar", :class => "button_submit"
   %section.about
     %p
-      Não tinha jeito melhor de conhecer as pessoas e fortalecer
-      as amizades. E se interagir com os nossos políticos fosse tão
-      legal quanto uma rodada de verdade ou consequência com os amigos?
-      E se a gente pudesse simplesmente virar para os candidatos, fazer
-      as perguntas mais relevantes e exigir compromisso com causas
-      importantes de verdade? Na TV, no rádio e na internet, tudo o que
-      a gente vê sobre as eleições municipais só nos deixa mais confusos.
-      Mas aqui é diferente, o jogo é nosso e o papo é reto.
-    %span
-      Nós já giramos a garrafa. Agora é a sua vez: Verdade ou Consequência?
+      E se interagir com os nossos políticos fosse tão legal quanto
+      uma rodada de verdade ou consequência com os amigos? E se a gente
+      pudesse simplesmente virar para os candidatos, fazer as perguntas
+      mais relevantes e exigir compromisso com causas importantes de verdade?
+      Na TV, no rádio e na internet, tudo o que a gente vê sobre as eleições
+      municipais só nos deixa mais confusos.
+      Mas aqui é diferente: o jogo é
+      nosso e o papo é reto.
 
 %section.how
   %header
@@ -75,9 +75,3 @@
           conectada, que compartilha tudo o tempo todo. Aqui não tem censura
           e você pode falar o que quiser. Se você mandar bem, pode ter certeza
           que vai ficar popular na internet e pode até ser eleito!
-
-        %p.participate
-          Você é candidato e quer participar?
-          = mail_to "contato@meurio.org", "Mande um e-mail pra gente!", :encode => :hex
-
-
