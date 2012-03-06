@@ -6,7 +6,6 @@ Feature: Register my interest on the cause
 
   Scenario: I'm a new interested user
     Given I'm in the root petition page
-    Then I should see the "name" field
     And I should see the "email" field
     When I fill the form with my information
     And I send the form
