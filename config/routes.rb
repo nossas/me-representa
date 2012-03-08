@@ -5,5 +5,6 @@ CariocaPergunta::Application.routes.draw do
 
   resources :questions
 
-  root :to => "users#index"
+  # Remove the default if you're running the app and not the splash page :)
+  root :to => "users#index", :defaults => { :is_splash => true }
 end

@@ -20,6 +20,9 @@
           %label
             = f.text_field :email, :placeholder => "E-mail"
           = f.submit "Enviar", :class => "button_submit"
+
+      .share.tweet= link_to "Tweet", "https://twitter.com/share", :class => "twitter-share-button"
+      .share.fb-like{:data => {:send => false, :layout => :button_count, :width => 200, :"show-faces" => true }}
   %section.about
     %p
       E se interagir com os nossos políticos fosse tão legal quanto
@@ -28,8 +31,7 @@
       mais relevantes e exigir compromisso com causas importantes de verdade?
       Na TV, no rádio e na internet, tudo o que a gente vê sobre as eleições
       municipais só nos deixa mais confusos.
-      Mas aqui é diferente: o jogo é
-      nosso e o papo é reto.
+      Mas aqui é diferente: o jogo é nosso e o papo é reto.
 
 %section.how
   %header
@@ -75,3 +77,6 @@
           conectada, que compartilha tudo o tempo todo. Aqui não tem censura
           e você pode falar o que quiser. Se você mandar bem, pode ter certeza
           que vai ficar popular na internet e pode até ser eleito!
+
+
+
