@@ -3,8 +3,9 @@ class QuestionsController < ApplicationController
 
   def index
     @question = Question.new
-    @truths = Question.truth
-    @dares = Question.dare
+    @truths ||= Question.truth
+    @dares ||= Question.dare
   end
+
 
 end

@@ -19,7 +19,7 @@ section.questions
       h2 Verdade
       fieldset
         = simple_form_for @question do |f|
-          = f.input :text
+          = f.input :text, :label => false
           = f.association :category
           = f.hidden_field :role_type, :value => :truth
           = f.submit "Enviar"
@@ -31,7 +31,7 @@ section.questions
       h2 Consequência
       fieldset
         = simple_form_for @question do |f|
-          = f.input :text
+          = f.input :text, :label => false
           = f.association :category
           = f.hidden_field :role_type, :value => :dare
           = f.submit "Enviar"
