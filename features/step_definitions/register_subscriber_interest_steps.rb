@@ -1,4 +1,4 @@
-Given /^I'm in the root petition page$/ do
+Given /^I'm in the splash page$/ do
   visit root_path
 end
 
@@ -6,8 +6,8 @@ Then /^I should see the "([^"]*)" field$/ do |arg1|
   page.has_xpath?("//form/input[@name=\"user[#{arg1}]\"]")
 end
 
-When /^I fill the form with my information$/ do
- fill_in "user[email]", :with => "runeroniek@gmail.com"
+When /^I fill the form with my email$/ do
+ fill_in "subscriber[email]", :with => "runeroniek@gmail.com"
 end
 
 When /^I send the form$/ do
