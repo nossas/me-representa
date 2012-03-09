@@ -1,3 +1,5 @@
+// THis file is not being used by the Splash Page. This is the application. :)
+
 // Import all the resets
 @import compass/reset
 @import compass/utilities
@@ -10,7 +12,62 @@
 @import mixins/buttons
 
 
-// Defaults
-
+// Defaults (styles for body, h1, strong etc)
 @import defaults
 
+h1
+  font-size: 2.1em
+  letter-spacing: 3px
+h2
+  font-size: 1.1em
+
+.header
+  header
+    +grid($grid-system)
+    +clearfix
+    text-shadow: 1px 1px 1px white
+    font-weight: 600
+    font-size: .9em
+    img
+      float: left
+    span
+      line-height: 60px
+      text-transform: uppercase
+      width: 100px
+      float: left
+    .login
+      float: right
+      a
+        margin-left: 10px
+        line-height: 60px
+
+section.info, section.questions
+  +grid($grid-system)
+  +box-shadow(1px 1px 4px #333)
+  +border-radius(6px)
+  background: white
+  margin-bottom: 20px
+  padding: 10px
+
+
+section.questions
+  background: $blue
+  text-align: center
+  h1, h2, h3, h4
+    color: white
+  header
+    +grid($grid-system)
+  .truth, .dare
+    +grid($grid-system / 2)
+    .form
+      +border-radius(6px)
+      background: white
+
+    h2, h3
+      font-family: "Folk-solid"
+      color: $blue
+
+  section.truth
+    +alpha
+  section.dare
+    +omega

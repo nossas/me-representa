@@ -9,6 +9,9 @@
 body
   border-top: 10px $green solid
 
+h1, h2, h3, h4, h5, h6
+  margin: 8px 0
+
 .header
   header
     +grid($grid-system)
@@ -20,7 +23,8 @@ body
       float: left
     span
       line-height: 60px
-
+    .login
+      display: none
 // General rules for the three sections
 .join, .how, .why
   +grid($grid-system)
