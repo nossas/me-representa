@@ -17,9 +17,12 @@
         = image_tag "bg_meu_rio.png", :title => "Meu Rio"
         %span apresenta:
 
-        %section.login
-          = link_to "Junte-se a nós", ""
-          = link_to "Entrar", ""
+        - if signed_in?
+          = image_tag current_user.picture
+        - else
+          %section.login
+            = link_to "Junte-se a nós", ""
+            = link_to "Entrar", "/auth/meurio"
     .wrapper.content
       = yield
     %footer
