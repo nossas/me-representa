@@ -1,0 +1,40 @@
+section.info
+  header
+    h4 Eleições municipais 2012
+    h3 Verdade ou Consequência?
+  section.steps
+    ul
+      li 1. Sugira
+      li 2. Envie
+      li 3. Compare
+section.questions
+  header
+    h3 Já giramos a garrafa. E agora?
+    h1 O que você quer do candidato?
+
+    = image_tag "app_main_questions_image.png"
+
+  section.truth
+    .form
+      h2 Verdade
+      fieldset
+        = simple_form_for @question do |f|
+          = f.input :text
+          = f.association :category
+          = f.hidden_field :role_type, :value => :truth
+          = f.submit "Enviar"
+    .questions_list
+      - @truths.each do |q|
+        = q.text
+  section.dare
+    .form
+      h2 Consequência
+      fieldset
+        = simple_form_for @question do |f|
+          = f.input :text
+          = f.association :category
+          = f.hidden_field :role_type, :value => :dare
+          = f.submit "Enviar"
+    .questions_list
+        - @dares.each do |q|
+          = q.text
