@@ -24,8 +24,10 @@ section.questions
           = f.hidden_field :role_type, :value => :truth
           = f.submit "Enviar"
     .questions_list
-      - @truths.each do |q|
-        = q.text
+      h3 Verdades sugeridas recentemente
+      ol
+        - @truths.each do |q|
+          li= q.text
   section.dare
     .form
       h2 Consequência
@@ -36,5 +38,7 @@ section.questions
           = f.hidden_field :role_type, :value => :dare
           = f.submit "Enviar"
     .questions_list
-        - @dares.each do |q|
-          = q.text
+        h3 Consequências sugeridas recentemente
+        ol
+          - @dares.each do |q|
+            li= q.text
