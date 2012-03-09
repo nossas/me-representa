@@ -23,3 +23,4 @@ database.yml
 *.swp
 *.swo
 config/initializers/01_envvars.rb
+db/schema.rb
