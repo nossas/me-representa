@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title MeuRio - Verdade ou Consequência?
+    - stylesheet = params[:is_splash] == true ? :splash_page : :application
+    = stylesheet_link_tag stylesheet
+    = stylesheet_link_tag "https://s3.amazonaws.com/meu-rio-production/assets/webfonts/fonts.css"
+    = favicon_link_tag "http://meurio.org/assets/favicon.png", :type => "image/png"
+    meta[name="description" content="Lembra como era bom jogar Verdade ou Consequência? Agora, você pode jogar com os candidatos a vereador!"]
+    meta[name="keywords" content="Candidatura, Vereador, Câmara, Rio de Janeiro, Meu Rio"]
+    meta[name="author" content="MeuRio - contato@meurio.org"]
+    = csrf_meta_tag
+  body
+    .alert= alert or notice
+    .wrapper.header
+      header
+        = image_tag "bg_meu_rio.png", :title => "Meu Rio"
+        span apresenta:
+
+        section.login
+          = link_to "Junte-se a nós", ""
+          = link_to "Entrar", ""
+    .wrapper.content
+      = yield
+    footer
+      nav.links
+        = link_to "Quem somos?", ""
+        strong.marker |
+        = link_to "Contate-nos", ""
+      section.participate
+        span
+          | Você é candidato e quer participar? Mande um #{mail_to "contato@meurio.org", "e-mail", :encode => :hex} pra gente!
+
+    #fb-root
+    = javascript_include_tag :application
