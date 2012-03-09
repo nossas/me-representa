@@ -22,3 +22,5 @@ database.yml
 # ignoring vim ghost files
 *.swp
 *.swo
+config/initializers/01_envvars.rb
+db/schema.rb
