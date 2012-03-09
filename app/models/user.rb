@@ -1,3 +1,4 @@
 class User < ActiveRecord::Base
-  validates_presence_of :email, :name
+  has_many :questions
+  validates_presence_of :email
 end

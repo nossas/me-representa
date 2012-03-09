@@ -7,12 +7,11 @@ Then /^I should see the "([^"]*)" field$/ do |arg1|
 end
 
 When /^I fill the form with my information$/ do
- fill_in "Nome", :with => "Luiz"
- fill_in "Email", :with => "runeroniek@gmail.com"
+ fill_in "user[email]", :with => "runeroniek@gmail.com"
 end
 
 When /^I send the form$/ do
-  click_button "Registrar"
+  click_button "Enviar"
 end
 
 Then /^I should see "([^"]*)"$/ do |arg1|

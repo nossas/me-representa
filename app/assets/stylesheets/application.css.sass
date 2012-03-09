@@ -1,156 +1,16 @@
+// Import all the resets
 @import compass/reset
 @import compass/utilities
 @import compass/css3
+
+// Import all the grid
 @import 960/grid
 
-$green: #159147
-$blue: #11a9db
-$pink: #df499a
-$orange: #ef803b
-$gray: #333
+// Mixins then Defaults :)
+@import mixins/buttons
 
-$grid-system: 16
-$ninesixty-columns: $grid-system
-$grid-half: $grid-system * 0.5
 
-@mixin grid-padded($push: 1)
-  +grid($grid-system - 2)
-  +grid-push($push)
-  +alpha
+// Defaults
 
-@mixin btn($color1, $color2)
-  color: white
-  border: 1px solid $color1
-  font-family: "Folk-solid"
-  text-transform: uppercase
-  font-size: 1.5em
-  padding: 10px
-  cursor: pointer
-  +border-radius(10px)
-  +background-image(linear-gradient(lighten($color1, 10%) 50%, $color1 50%))
-  +box-shadow(lighten(gray, 20%) 0 1px 1px)
-  &:hover
-    border: 1px solid $color2
-    +background-image(linear-gradient(lighten($color2, 10%) 50%, $color2 50%))
+@import defaults
 
-body
-  font: normal 1em/28px "Akagi-book", Tahoma, Lucida Grande
-  color: $gray
-  border-top: 10px $green solid
-  background: url(asset_path('bg_header.png', 'image'))
-
-h2, h3, h4, h5, h6
-  font-weight: bold
-h1
-  font-family: "Folk-solid", Arial, Tahoma
-  font-size: 3.5em
-  text-transform: uppercase
-  color: $blue
-  text-shadow: 0 -1px 1px #999
-h2
-  font-size: 1.9em
-h3
-  font-size: 1.4em
-h4
-  font-size: 0.8em
-h5
-  font-size: 0.6em
-h6
-  font-size: 0.4em
-
-input[type=text]
-  border: 1px solid #dedede
-  padding: 10px 15px
-  +box-shadow(inset 1px 1px 2px #999)
-
-input[type=submit]
-  +btn($orange, $pink)
-
-.wrapper
-  +grid-container
-  +clearfix
-
-.header
-  header
-    +grid($grid-system)
-    margin-top: 10px
-    margin-bottom: 10px
-    text-transform: uppercase
-    font-size: .8em
-    img
-      float: left
-    span
-      line-height: 60px
-
-// General rules for the three sections
-.join, .how, .why
-  +grid($grid-system)
-  +border-radius(6px)
-  +box-shadow(1px 1px 3px #666)
-  +clearfix
-  margin-bottom: 20px
-  padding-top: 10px
-  padding-bottom: 20px
-
-.how, .why
-  header
-    +grid-padded
-  color: white
-  h2
-    font-family: "Folk-solid"
-    font-size: 38px
-    text-shadow: 0 -1px 1px #999
-    color: white
-
-.join
-  background: white
-  header
-    +clearfix
-    text-align: center
-
-  .ask
-    +grid-padded
-    img
-      // Using a mathematical awesome calc. (not) to handle the grid
-      +grid($grid-half - 1)
-      +alpha
-    .form
-      +grid($grid-half - 1)
-      +omega
-      fieldset
-        background: darken($blue, 5%)
-        padding: 15px
-        color: white
-        +border-radius(16px)
-        h2
-          font: normal 2em/24px "Folk-solid"
-        form
-.how
-  section
-    +grid-padded
-  background: $blue
-  article
-    +grid($grid-half / 2)
-    &.middle
-      +grid($grid-half - 2)
-    &:first-child
-      +alpha
-    &:last-child
-      +omega
-.why
-  section.sections
-    +grid-padded
-  background: $green
-  .voter, .candidate
-    +grid($grid-half - 1)
-
-    img
-      +grid(2)
-      +alpha
-    article
-      +grid($grid-half - 3)
-      +omega
-  .voter
-    +alpha
-  .candidate
-    +omega

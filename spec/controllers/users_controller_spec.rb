@@ -2,20 +2,18 @@ require 'spec_helper'
 
 describe UsersController do
 
-  describe "GET 'index'" do
+  describe "GET #index" do
     it "returns http success" do
       get :index
       response.should be_success
     end
   end
 
-  describe "POST 'new'" do
+  describe "POST #create" do
     before do
-      post :new
+      post :create, :user => {:email => "my_email@test.com"}
     end
-    it "returns http success" do
-      response.should be_success
-    end
+    its(:status) { should == 302 }
   end
 
 end
