@@ -16,11 +16,10 @@
       %header
         = image_tag "bg_meu_rio.png", :title => "Meu Rio"
         %span apresenta:
-
-        - if signed_in?
-          = image_tag current_user.picture
-        - else
-          %section.login
+        %section.login
+          - if signed_in?
+            = current_user.first_name
+          - else
             = link_to "Junte-se a nós", ""
             = link_to "Entrar", "/auth/meurio"
     .wrapper.content

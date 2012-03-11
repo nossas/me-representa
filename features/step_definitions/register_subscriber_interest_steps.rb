@@ -1,16 +1,6 @@
-Given /^I'm in the splash page$/ do
+When /^I send the subscriber form with my email$/ do
   visit root_path
-end
-
-Then /^I should see the "([^"]*)" field$/ do |arg1|
-  page.has_xpath?("//form/input[@name=\"user[#{arg1}]\"]")
-end
-
-When /^I fill the form with my email$/ do
- fill_in "subscriber[email]", :with => "runeroniek@gmail.com"
-end
-
-When /^I send the form$/ do
+  fill_in "subscriber[email]", :with => "runeroniek@gmail.com"
   click_button "Enviar"
 end
 
