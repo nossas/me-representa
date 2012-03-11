@@ -4,6 +4,7 @@ FactoryGirl.define do
   sequence(:email) { |s| "user#{s}@email.com" }
 
   factory(:user) do |user|
+    user.name FactoryGirl.generate(:name)
     user.email FactoryGirl.generate(:email)
   end
 
