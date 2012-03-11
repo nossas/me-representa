@@ -18,8 +18,11 @@ html
         span apresenta:
 
         section.login
-          = link_to "Junte-se a nós", ""
-          = link_to "Entrar", ""
+          - if signed_in?
+            = current_user.first_name
+          - else
+            = link_to "Junte-se a nós", ""
+            = link_to "Entrar", "/auth/meurio"
     .wrapper.content
       = yield
     footer
