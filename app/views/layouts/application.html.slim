@@ -19,7 +19,7 @@ html
 
         section.login
           - if signed_in?
-            = current_user.first_name
+            = link_to current_user.name, ""
           - else
             = link_to "Junte-se a nós", ""
             = link_to "Entrar", "/auth/meurio"
