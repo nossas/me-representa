@@ -2,17 +2,22 @@ FactoryGirl.define do
 
   sequence(:name) { |s| "User #{s}" }
   sequence(:email) { |s| "user#{s}@email.com" }
+  sequence(:uid) { |s| "#{s * 116}" }
 
   factory(:user) do |user|
     user.name FactoryGirl.generate(:name)
     user.email FactoryGirl.generate(:email)
   end
 
+  factory(:authorization) do |service|
+    service.association :user
+    service.uid FactoryGirl.generate(:uid)
+    service.provider "meurio"
+  end
+
   factory(:category) do |c|
     c.name "Name"
   end
-
-
 
   factory(:question) do |q|
     q.text "Text"
