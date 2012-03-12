@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_authorization_check
+
   def create
     auth = request.env['omniauth.auth']
     unless @auth = Authorization.find_from_hash(auth)
@@ -6,6 +8,7 @@ class SessionsController < ApplicationController
       # whether there is already a user signed in.
       @auth = Authorization.create_from_hash(auth, current_user)
     end
+
     # Log the authorizing user in.
     self.current_user = @auth.user
     redirect_to questions_path

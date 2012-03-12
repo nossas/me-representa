@@ -5,6 +5,7 @@ gem 'rails', '3.2.2'
 
 # Back-end stuff
 gem 'inherited_resources'
+gem 'cancan'
 
 # Front-end stuff
 gem 'sass-rails', '~> 3.2.3'
