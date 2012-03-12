@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
     # Log the authorizing user in.
     self.current_user = @auth.user
-    redirect_to root_path
+    redirect_to questions_path
   end
 
   def destroy
