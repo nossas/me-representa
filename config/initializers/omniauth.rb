@@ -8,6 +8,8 @@ module OmniAuth
         :authorize_path => "/oauth/authorize"
       }
 
+      uid { info['id'].to_s }
+
       info do
         @raw_info ||= access_token.get('/api/v1/me.json').parsed
       end
