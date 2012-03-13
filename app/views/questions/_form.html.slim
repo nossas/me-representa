@@ -1,0 +1,6 @@
+= simple_form_for @question do |f|
+  = f.input :text, :label => false
+  = f.association :category
+  = f.hidden_field :role_type, :value => type
+  = f.submit "Enviar"
+
