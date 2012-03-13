@@ -53,21 +53,34 @@ section.info, section.questions
 
 section.questions
   background: $blue
-  text-align: center
   h1, h2, h3, h4
     color: white
   header
     +grid($grid-system)
+    text-align: center
   .truth, .dare
-    +grid($grid-system / 2)
+    +grid($grid-half)
     .form, .questions_list
       +border-radius(6px)
       background: white
       margin-bottom: 20px
+      padding: 15px
     h2, h3
       font-family: "Folk-solid"
       color: $blue
-
+    .questions_list
+      +clearfix
+      ol li
+        clear: both
+        padding: 20px 0
+        margin: 10px 0
+      .avatar
+        +grid($grid-half * 0.1)
+        +alpha
+      .text
+        +grid($grid-half * 0.8)
+        +omega
+        padding-left: 10px
   section.truth
     +alpha
   section.dare

@@ -19,28 +19,32 @@ section.questions
       .form
         h2 Verdade
         fieldset
-          = simple_form_for @question do |f|
-            = f.input :text, :label => false
-            = f.association :category
-            = f.hidden_field :role_type, :value => :truth
-            = f.submit "Enviar"
+          = render :partial => "form", :locals => {:type => :truth}
     .questions_list
       h3 Verdades sugeridas recentemente
       ol
-        - @truths.each do |q|
-          li= q.text
+        - @dares.each do |q|
+          li
+            .avatar
+              = image_tag q.user.picture, :size => "50x50"
+            .text
+              | #{link_to q.user.name, ""} lançou desafio para "#{link_to q.category.name, ""}"
+              p
+              | Sr. candidato, você deverá #{q.text}
   section.dare
     - if can? :create, @question
       .form
         h2 Consequência
         fieldset
-          = simple_form_for @question do |f|
-            = f.input :text, :label => false
-            = f.association :category
-            = f.hidden_field :role_type, :value => :dare
-            = f.submit "Enviar"
+          = render :partial => "form", :locals => {:type => :dare }
     .questions_list
         h3 Consequências sugeridas recentemente
         ol
           - @dares.each do |q|
-            li= q.text
+            li
+              .avatar
+                = image_tag q.user.picture, :size => "50x50"
+              .text
+                | #{link_to q.user.name, ""} lançou desafio para "#{link_to q.category.name, ""}"
+                p
+                | Sr. candidato, você deverá #{q.text}
