@@ -1,10 +1,8 @@
 var App = {
 
   initialize: function(){
-    $('.chosen-select').each(function(){
-      $(this).chosen({
-        no_results_text: "Nenhum assunto encontrado :("
-      });
+    $('.chosen-select').chosen({
+      no_results_text: "Nenhum assunto encontrado com "
     });
   }
 };
