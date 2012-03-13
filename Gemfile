@@ -8,7 +8,6 @@ gem 'inherited_resources'
 gem 'cancan'
 
 # Front-end stuff
-gem 'sass-rails', '~> 3.2.3'
 gem 'slim'
 gem 'simple_form'
 gem 'jquery-rails'
@@ -35,12 +34,13 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
+  gem 'compass-960-plugin' # <=
   gem "compass-columnal-plugin"
 
   # When the splash page isn't necessary, remove the line
-    gem 'compass-960-plugin' # <=
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'

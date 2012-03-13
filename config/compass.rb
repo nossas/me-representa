@@ -1,4 +1,3 @@
-require "compass"
 require "ninesixty"
 
 project_type = :rails
