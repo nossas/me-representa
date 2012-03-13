@@ -28,14 +28,14 @@ section.questions
     .questions_list
       h3 Verdades sugeridas recentemente
       ol
-        - @dares.each do |q|
+        - @truths.each do |q|
           li
             .avatar
               = image_tag q.user.picture, :size => "50x50"
             .text
               | #{link_to q.user.name, ""} lançou desafio para "#{link_to q.category.name, ""}"
               p
-              | Sr. candidato, você deverá #{q.text}
+              | Sr. candidato, é verdade que #{q.text}
   section.dare
     - if can? :create, @question
       .form

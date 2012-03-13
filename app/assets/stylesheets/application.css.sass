@@ -27,8 +27,7 @@ h2
 .header
   header
     +grid($grid-system)
-    +clearfix
-    padding: 10px 0
+    padding: 10px
     text-shadow: 1px 1px 1px white
     font-weight: 600
     font-size: .9em
@@ -41,6 +40,10 @@ h2
       float: left
     .login
       float: right
+      //&:hover
+        +box-shadow(1px 0 4px #333)
+        +border-radius(4px)
+        padding: 0 10px
       img
         display: inline
         margin-top: 11px
