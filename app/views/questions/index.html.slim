@@ -19,12 +19,11 @@ section.questions
     = image_tag "app_main_questions_image.png"
 
   section.truth
-    - if can? :create, @question
-      .form
-        h2 Verdade
-        fieldset
-          h4 Quero que diga uma verdade
-          = render :partial => "form", :locals => {:type => :truth}
+    .form
+      h2 Verdade
+      fieldset
+        h4 Quero que diga uma verdade
+        = render :partial => "form", :locals => {:type => :truth}
     .questions_list
       h3 Verdades sugeridas recentemente
       ol
@@ -37,12 +36,11 @@ section.questions
               p
               | Sr. candidato, é verdade que #{q.text}
   section.dare
-    - if can? :create, @question
-      .form
-        h2 Consequência
-        fieldset
-          h4 Quero que faça uma consequência
-          = render :partial => "form", :locals => {:type => :dare }
+    .form
+      h2 Consequência
+      fieldset
+        h4 Quero que faça uma consequência
+        = render :partial => "form", :locals => {:type => :dare }
     .questions_list
         h3 Consequências sugeridas recentemente
         ol
