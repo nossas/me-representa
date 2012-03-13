@@ -17,8 +17,9 @@
 @import defaults
 
 h1
-  font-size: 2.1em
+  font-size: 2.3em
   letter-spacing: 3px
+  line-height: 40px
 h2
   font-size: 1.1em
 
@@ -57,39 +58,60 @@ section.questions
   background: $blue
   h1, h2, h3, h4
     color: white
+    font-family: "Folk-solid"
   header
     +grid($grid-system)
     text-align: center
+    h3
+      font-family: "Akagi-Book"
+      font-size: 16px
+      font-weight: bold
+      text-transform: uppercase
+      margin-top: 20px
+    img
+      margin: 20px 0
   .truth, .dare
     +grid($grid-half)
     .form, .questions_list
       +border-radius(6px)
       background: white
       margin-bottom: 20px
-      padding: 15px
-    h2, h3
-      font-family: "Folk-solid"
+      fieldset
+        display: block
+        padding: 15px
+    h2
       color: $blue
-    .questions_list
-      +clearfix
-      ol li
-        clear: both
-        padding: 20px 0
-        margin: 10px 0
-      .avatar
-        +grid($grid-half * 0.1)
-        +alpha
-      .text
-        +grid($grid-half * 0.8)
-        +omega
-        padding-left: 10px
+      font-size: 40px
+      background: #e1eef2
+      padding: 25px
+      text-transform: uppercase
+      text-shadow: 1px -1px 1px #fff
+      +border-radius(6px 6px 0 0)
+    h4
+      font-size: 20px
+      color: lighten($gray, 0.9)
+
   section.truth
     +alpha
   section.dare
     +omega
 
-
-
+  .questions_list
+    +clearfix
+    padding: 15px
+    h2, h3
+      color: #333
+    ol li
+      clear: both
+      padding: 20px 0
+      margin: 10px 0
+    .avatar
+      +grid($grid-half * 0.1)
+      +alpha
+    .text
+      +grid($grid-half * 0.8)
+      +omega
+      padding-left: 10px
 
 
 .participate

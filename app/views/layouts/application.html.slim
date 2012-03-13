@@ -19,8 +19,8 @@ html
 
         section.login
           - if signed_in?
-            = image_tag current_user.picture, :size => "30x30"
             = current_user.name
+            = image_tag current_user.picture, :size => "30x30"
           - else
             = link_to "Entrar", "/auth/meurio"
     .wrapper.content
