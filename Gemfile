@@ -9,7 +9,6 @@ gem 'cancan'
 
 # Front-end stuff
 gem 'sass-rails', '~> 3.2.3'
-gem 'haml'
 gem 'slim'
 gem 'simple_form'
 gem 'jquery-rails'
