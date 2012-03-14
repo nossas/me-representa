@@ -22,7 +22,9 @@ html
             = image_tag current_user.picture, :size => "30x30"
             = current_user.name
           - else
-            = link_to "Entrar", "/auth/meurio"
+            = link_to "Entrar via Meu Rio", "/auth/meurio"
+            |  ou 
+            = link_to "Entrar via Facebook", "/auth/facebook"
     .wrapper.content
       = yield
     footer
