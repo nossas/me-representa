@@ -41,6 +41,7 @@ img
       float: left
     .login
       float: right
+      font-weight: bold
       //&:hover
         +box-shadow(1px 0 4px #333)
         +border-radius(4px)
@@ -52,9 +53,17 @@ img
 
 a[href="/auth/meurio"]
   color: $green
+  &:hover
+    text-decoration: none
+    color: lighten($green, 5%)
+    border-bottom: none
 
 a[href="/auth/facebook"]
   color: $fb_blue
+  &:hover
+    text-decoration: none
+    color: lighten($fb_blue, 5%)
+    border-bottom: none
 
 section.info, section.questions
   +grid($grid-system)
