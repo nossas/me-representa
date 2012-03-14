@@ -11,7 +11,7 @@ html
     meta[name="author" content="MeuRio - contato@meurio.org"]
     = csrf_meta_tag
   body
-    .alert= alert or notice
+    .message[class=(alert ? "alert hidden" : "notice hidden")]=alert or notice
     .wrapper.header
       header
         = image_tag "bg_meu_rio.png", :title => "Meu Rio"
@@ -19,7 +19,7 @@ html
 
         section.login
           - if signed_in?
-            = current_user.name
+            | Olá, #{current_user.name}
             = image_tag current_user.picture, :size => "30x30"
           - else
             = link_to "Entrar", "/auth/meurio"
@@ -30,7 +30,7 @@ html
         = link_to "Quem somos?", ""
         strong.marker |
         = link_to "Contate-nos", ""
-      section.participate
+      section.participate.white
         span
           | Você é candidato e quer participar? Mande um #{mail_to "contato@meurio.org", "e-mail", :encode => :hex} pra gente!
 

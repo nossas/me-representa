@@ -19,10 +19,11 @@ section.questions
     = image_tag "app_main_questions_image.png"
 
   section.truth
-    .form
+    .form.truth
       h2 Verdade
       fieldset
-        h4 Quero que diga uma verdade
+        h4 Quero que responda com sinceridade
+        h4.hidden Sobre
         = render :partial => "form", :locals => {:type => :truth}
     .questions_list
       h3 Verdades sugeridas recentemente
@@ -36,10 +37,11 @@ section.questions
               p
               | Sr. candidato, é verdade que #{q.text}
   section.dare
-    .form
+    .form.dare
       h2 Consequência
       fieldset
-        h4 Quero que faça uma consequência
+        h4 Quero que se comprometa com algo
+        h4.hidden Relacionado a
         = render :partial => "form", :locals => {:type => :dare }
     .questions_list
         h3 Consequências sugeridas recentemente
