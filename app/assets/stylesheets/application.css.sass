@@ -65,6 +65,13 @@ a[href="/auth/facebook"]
     color: lighten($fb_blue, 5%)
     border-bottom: none
 
+a[data-method="delete"]
+  color: $green
+  &:hover
+    text-decoration: none
+    color: lighten($green, 5%)
+    border-bottom: none
+
 section.info, section.questions
   +grid($grid-system)
   +box-shadow(1px 1px 4px #333)
