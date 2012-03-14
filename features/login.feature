@@ -6,11 +6,11 @@ Feature: Login
   @omniauth_test
   Scenario: when I choose Meu Rio provider
     Given I'm on the questions page
-    When I click "Entrar via Meu Rio"
+    When I click "Meu Rio"
     Then I should see "Nícolas Iensen"
 
   @omniauth_test
   Scenario: when I choose Facebook provider
     Given I'm on the questions page
-    When I click "Entrar via Facebook"
+    When I click "Facebook"
     Then I should see "Nícolas Iensen"
