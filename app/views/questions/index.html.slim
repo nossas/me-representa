@@ -1,5 +1,9 @@
 section.info
   header
+    = image_tag "bg_header_truth_dare.png", :size => "925x145"
+
+//section.info
+  header
     h4 Eleições municipais 2012
     h3 Verdade ou Consequência?
   section.steps
@@ -9,7 +13,7 @@ section.info
       li 3. Compare
 section.questions
   header
-    h3 Já giramos a garrafa. E agora?
+    h3 Já giramos a garrafa.
     h1 O que você quer do candidato?
 
     = image_tag "app_main_questions_image.png"
@@ -19,23 +23,25 @@ section.questions
       .form
         h2 Verdade
         fieldset
+          h4 Quero que diga uma verdade
           = render :partial => "form", :locals => {:type => :truth}
     .questions_list
       h3 Verdades sugeridas recentemente
       ol
-        - @dares.each do |q|
+        - @truths.each do |q|
           li
             .avatar
               = image_tag q.user.picture, :size => "50x50"
             .text
               | #{link_to q.user.name, ""} lançou desafio para "#{link_to q.category.name, ""}"
               p
-              | Sr. candidato, você deverá #{q.text}
+              | Sr. candidato, é verdade que #{q.text}
   section.dare
     - if can? :create, @question
       .form
         h2 Consequência
         fieldset
+          h4 Quero que faça uma consequência
           = render :partial => "form", :locals => {:type => :dare }
     .questions_list
         h3 Consequências sugeridas recentemente

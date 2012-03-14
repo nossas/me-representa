@@ -1,6 +1,6 @@
 = simple_form_for @question do |f|
-  = f.input :text, :label => false
-  = f.association :category
+  = f.input :text, :label => false, :input_html => {:placeholder => "Sr(a) candidato, você..."}
+  = f.association :category, :label => false,  :input_html => {:id => "select_#{type}", :class => "chosen-select", :data => {:placeholder => "Escolha um assunto" }}
   = f.hidden_field :role_type, :value => type
   = f.submit "Enviar"
 
