@@ -91,7 +91,6 @@ GEM
     fssm (0.2.8.1)
     gherkin (2.9.0)
       json (>= 1.4.6)
-    haml (3.1.4)
     has_scope (0.5.1)
     hashie (1.2.0)
     heroku (2.21.2)
@@ -125,6 +124,8 @@ GEM
     omniauth (1.0.2)
       hashie (~> 1.2)
       rack
+    omniauth-facebook (1.2.0)
+      omniauth-oauth2 (~> 1.0.0)
     omniauth-oauth2 (1.0.0)
       oauth2 (~> 0.5.0)
       omniauth (~> 1.0)
@@ -225,11 +226,11 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   foreigner
-  haml
   heroku
   inherited_resources
   jquery-rails
   omniauth
+  omniauth-facebook
   omniauth-oauth2
   pg
   rails (= 3.2.2)
