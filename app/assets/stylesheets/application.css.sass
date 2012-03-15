@@ -29,6 +29,13 @@ img
 
 .hidden
   display: none
+
+// Due to order of precedence, the !important shit is necessary :/
+.error_field
+  border: 1px solid red !important
+.error_message
+  color: red
+  font-size: .7em
 .header
   header
     +grid($grid-system)
