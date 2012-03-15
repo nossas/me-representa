@@ -1,22 +1,30 @@
-var Questions = {
+window.Questions = {
   self: this,
+  expandTextarea: function(obj){
+    var klass = obj.attr('data-form-type');
+    var hiddens = $('.' + klass + ' .hidden');
+    $('.' + klass + ' textarea').animate({ height: "200px" })
+    hiddens.slideDown("fast");
+  },
+
+  returnTextarea: function(obj){
+    var klass = obj.attr('data-form-type');
+    var hiddens = $('.' + klass + ' .hidden');
+    $('.' + klass + ' textarea').animate({ height: "60px" });
+    hiddens.slideUp("fast");
+  },
+
   initialize: function(){
     $('.chosen-select').chosen({
       no_results_text: "Nenhum assunto encontrado com "
     });
 
     $('.form textarea').live('focus', function(){
-      var klass = $(this).attr('data-form-type');
-      var hiddens = $('.' + klass + ' .hidden');
-      $('.' + klass + ' textarea').animate({ height: "200px" })
-      hiddens.slideDown("fast");
+      Questions.expandTextarea($(this));
     });
 
     $('button.reset').click(function(){
-      var klass = $(this).attr('data-form-type');
-      var hiddens = $('.' + klass + ' .hidden');
-      $('.' + klass + ' textarea').animate({ height: "60px" });
-      hiddens.slideUp("fast");
+      Questions.returnTextarea($(this));
     });
 
     if ( $('.message').text() !== '' ){
@@ -38,4 +46,4 @@ var Questions = {
   },
 };
 
-Questions.initialize();
+window.Questions ? Questions.initialize() : null;
