@@ -1,11 +1,10 @@
-// Main button (submit etc)
 @mixin btn($color1, $color2)
   color: white
   border: 1px solid $color1
   font: normal 1.2em "Folk-solid"
   letter-spacing: 2px
   text-transform: uppercase
-  padding: 7px 10px
+  padding: 4px 10px 10px 10px
   position: relative
   top: 4px
   cursor: pointer
@@ -15,5 +14,3 @@
   &:hover
     border: 1px solid $color2
     +background-image(linear-gradient(lighten($color2, 10%) 50%, $color2 50%))
-
-
