@@ -27,15 +27,8 @@ section.questions
         = render :partial => "form", :locals => {:type => :truth}
     .questions_list
       h3 Verdades sugeridas recentemente
-      ol
-        - @truths.each do |q|
-          li
-            .avatar
-              = image_tag q.user.picture, :size => "50x50"
-            .text
-              | #{link_to q.user.name, ""} lançou desafio para "#{link_to q.category.name, ""}"
-              p
-              | Sr. candidato, é verdade que #{q.text}
+      ol= render @truths
+
   section.dare
     .form.dare
       h2 Consequência
@@ -44,13 +37,5 @@ section.questions
         h4.hidden Relacionado a
         = render :partial => "form", :locals => {:type => :dare }
     .questions_list
-        h3 Consequências sugeridas recentemente
-        ol
-          - @dares.each do |q|
-            li
-              .avatar
-                = image_tag q.user.picture, :size => "50x50"
-              .text
-                | #{link_to q.user.name, ""} lançou desafio para "#{link_to q.category.name, ""}"
-                p
-                | Sr. candidato, você deverá #{q.text}
+      h3 Consequências sugeridas recentemente
+      ol= render @dares

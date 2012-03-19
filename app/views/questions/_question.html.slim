@@ -1,0 +1,6 @@
+li
+  .avatar= image_tag question.user.picture, :size => "50x50"
+  .text
+    | #{link_to question.user.name, ""} lançou desafio para "#{link_to question.category.name, ""}"
+    p
+    | Sr. candidato, é verdade que #{question.text}
