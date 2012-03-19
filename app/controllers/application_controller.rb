@@ -1,5 +1,8 @@
+# coding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :create_user_question_through_session
+
   protected
 
   def current_user
@@ -15,6 +18,22 @@ class ApplicationController < ActionController::Base
   def current_user=(user)
     @current_user = user
     session[:user_id] = user.id
+  end
+
+
+  def create_user_question_through_session
+    if session[:question] and current_user
+      @question = Question.new session[:question]
+      @question.user = current_user
+      respond_to do |format|
+        if @question.save
+          session[:question] = nil
+          format.html { redirect_to questions_path, :notice => "Sua pergunta foi publicada com sucesso! :-D" }
+        else
+          format.html { redirect_to questions_path, :alert => "Ops! Aparentemente alguma coisa deu errado! Cheque o formulário e tente novamente" }
+        end
+      end
+    end
   end
 
 end

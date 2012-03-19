@@ -1,5 +1,12 @@
 window.Questions = {
   self: this,
+
+  isLoggedIn: function(){
+    if ($('.logged').length()){
+      return true;
+    }
+  },
+
   expandTextarea: function(obj){
     var klass = obj.attr('data-form-type');
     var hiddens = $('.' + klass + ' .hidden');
@@ -42,6 +49,21 @@ window.Questions = {
         field.addClass('error_field');
         field.after('<span class="error_message">'+errors[name][0]+'</span>');
       }
+    });
+
+    $('form').validate();
+    $('input[type=submit]').click(function(e){
+      e.preventDefault();
+
+      if ($('input.provider_field').length){
+        $('input.provider_field').remove();
+      }
+
+      var provider = $(this).attr('data-provider');
+      var element = $('<input type="hidden" name="provider['+provider+']" value="'+provider+'" class ="provider_field">');
+
+      $(this).parent('form').append(element);
+      $(this).parent('form').trigger('submit');
     });
   },
 };

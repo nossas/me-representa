@@ -12,12 +12,19 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new params[:question]
-    @question.user = current_user
-    create! do |success, failure|
-      success.html { redirect_to :back, :notice => "Sua pergunta foi publicada com sucesso! :-D" }
-      failure.html { redirect_to :back, :alert => "Ops! Aparentemente alguma coisa deu errado! Cheque o formulário e tente novamente" }
+    if current_user
+      @question = Question.new params[:question]
+      @question.user = current_user
+      create! do |success, failure|
+        success.html { redirect_to :back, :notice => "Sua pergunta foi publicada com sucesso! :-D" }
+        failure.html { redirect_to :back, :alert => "Ops! Aparentemente alguma coisa deu errado! Cheque o formulário e tente novamente" }
+      end
+    else
+      session[:question] = params[:question]
+      redirect_to '/auth/facebook/' and return if params[:provider][:facebook]
+      redirect_to '/auth/meurio/' and return if params[:provider][:meurio]
     end
+
   end
 
 

@@ -19,14 +19,15 @@ html
 
         section.login
           - if signed_in?
-            | Olá, #{current_user.name}
-            |  | 
-            = link_to "Sair", session_path(current_user.id), :method => :delete
-            = image_tag current_user.picture, :size => "30x30"
+            .logged
+              | Olá, #{current_user.name}
+              |  |
+              = link_to "Sair", session_path(current_user.id), :method => :delete
+              = image_tag current_user.picture, :size => "30x30"
           - else
-            | Entre com a sua conta do 
+            | Entre com a sua conta do
             = link_to "Meu Rio", "/auth/meurio"
-            |  ou do 
+            |  ou do
             = link_to "Facebook", "/auth/facebook"
     .wrapper.content
       = yield
