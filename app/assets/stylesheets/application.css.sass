@@ -31,11 +31,12 @@ img
   display: none
 
 // Due to order of precedence, the !important shit is necessary :/
-.error_field
-  border: 1px solid red !important
-.error_message
+.error
+  border: 1px solid red
+label.error
   color: red
   font-size: .7em
+  border: none !important
 .header
   header
     +grid($grid-system)
