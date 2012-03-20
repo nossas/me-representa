@@ -12,7 +12,7 @@ App.Questions = {
 
     expandTextarea: function(event){
       var obj = $(event.target);
-      var klass = obj.attr('data-form-type');
+      var klass = obj.data('form-type');
       var hiddens = $('.' + klass + ' .hidden');
       $('.' + klass + ' textarea').animate({ height: "200px" })
       hiddens.slideDown("fast");
@@ -20,23 +20,25 @@ App.Questions = {
 
     returnTextarea: function(event){
       var obj = $(event.target);
-      var klass = obj.attr('data-form-type');
+      var klass = obj.data('form-type');
       var hiddens = $('.' + klass + ' .hidden');
       $('.' + klass + ' textarea').animate({ height: "60px" });
       hiddens.slideUp("fast");
     },
 
     initialize: function(){
-      $('.chosen-select').chosen({
+      this.forms = this.$('form');
+
+      this.$('.chosen-select').chosen({
         no_results_text: "Nenhum assunto encontrado com "
       });
 
-      if ( $('.message').text() !== '' ){
-        $('.message').slideDown('fast');
+      if ( this.$('.message').text() !== '' ){
+        this.$('.message').slideDown('fast');
         window.setTimeout("$('.message').slideUp()", 4000);
       }
 
-      $('form').bind('ajax:error', function(evt, xhr, settings){
+      this.forms.bind('ajax:error', function(evt, xhr, settings){
         var response = $.parseJSON(xhr.responseText);
         var errors = response.errors;
         $('*', $(this)).removeClass('error_field');
@@ -48,8 +50,8 @@ App.Questions = {
         }
       });
 
-      $('form').validate();
-      $('input[type=submit]').click(function(e){
+      this.forms.validate();
+      this.$('input[type=submit]').click(function(e){
         e.preventDefault();
 
         if ($('input.provider_field').length){
