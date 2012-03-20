@@ -11,12 +11,13 @@ gem 'cancan'
 gem 'slim'
 gem 'simple_form'
 gem 'jquery-rails'
+gem 'jasmine'
 
 # Database stuff
 gem 'pg'
 gem 'foreigner'
 
-# Stagging stuff
+# Staging stuff
 group :development, :production do
   gem 'heroku'
   gem 'thin'
@@ -52,17 +53,3 @@ gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'

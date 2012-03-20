@@ -12,5 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.validate
-//= require_tree .
+//= require_tree ./lib
+//= require_tree ./app
