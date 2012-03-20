@@ -86,15 +86,42 @@ section.questions
     font-family: "Folk-solid"
   header
     +grid($grid-system)
-    text-align: center
+    h1, h2, h3, h4
+      text-align: center
+    h1
+      margin-top: 30px
     h3
       font-family: "Akagi-Book"
       font-size: 16px
       font-weight: bold
+      text-shadow: 0 1px 2px #333
       text-transform: uppercase
-      margin-top: 20px
-    img
+      margin-top: 10px
+      color: rgb(172, 215, 234)
+    h4
+      font-family: "Akagi-Book"
+      text-transform: uppercase
+      font-weight: bold
+      font-size: 14px
+      text-shadow: 0 1px 1px #666
       margin: 20px 0
+      &:hover
+        cursor: pointer
+        text-shadow: 0 1px 4px $fb_blue
+      &:after
+        content: "▾"
+        background: $fb_blue
+        margin: 0 5px
+        padding: 0 5px
+        +border-radius(20px)
+        +box-shadow(0 1px 2px #333)
+      &.active
+        &:after
+          content: "▴"
+    h4
+    img
+      margin: 10px 0
+      +box-shadow(inset 1px 1px 4px #333)
   section.truth, section.dare
     +grid($grid-half)
     .form, .questions_list
