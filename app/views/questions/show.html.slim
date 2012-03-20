@@ -1,0 +1,4 @@
+- content_for :og do
+  meta property="og:title" content="#{@question.user.name} fez uma pergunta para os candidatos a vereador do Rio"
+  meta property="og:description" content=@question.text
+  meta property="og:url" content=question_url(@question)
