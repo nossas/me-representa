@@ -4,5 +4,5 @@ li data-id=question.id
     p #{link_to question.user.name, ""} lançou desafio para #{link_to question.category.name, ""}
     p Sr. candidato, é verdade que #{question.text}
   .share
-    a.twitter-share-button data-count="none" data-lang="pt" data-text="Fiz uma pergunta para os candidatos a vereador do Rio #{question_url(question)}" data-url=question_url(question) href=question_url(question) Tweetar
+    a.twitter-share-button data-count="none" data-lang="pt" data-text="Fiz uma pergunta para os candidatos a vereador do Rio!" data-url=question_url(question) href=question_url(question) Tweetar
     .fb-send data-href=question_url(question)
