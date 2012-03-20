@@ -3,11 +3,18 @@ App.Questions = {
     el: 'body',
     events: {
       'focus form textarea' : 'expandTextarea',
-      'click button.reset' : 'returnTextarea'
+      'click button.reset' : 'returnTextarea',
+      'click h4.discover' : 'toggleInfographic'
     },
 
     isLoggedIn: function(){
       return this.$('.logged').length();
+    },
+
+    toggleInfographic: function(event){
+      var obj = $(event.target);
+      obj.siblings('.infographic').slideToggle('slow');
+      obj.toggleClass('active');
     },
 
     expandTextarea: function(event){
@@ -50,19 +57,19 @@ App.Questions = {
         }
       });
 
-      this.forms.validate();
-      this.$('input[type=submit]').click(function(e){
+      $('input[type=submit]').click(function(e){
         e.preventDefault();
+        var parent_element = $(this).parent('form');
+        parent_element.validate();
 
-        if ($('input.provider_field').length){
-          $('input.provider_field').remove();
-        }
+        var child = parent_element.children('input.provider_field');
+        if (child.length) { child.remove(); }
 
-        var provider = $(this).attr('data-provider');
+        var provider = $(this).data('provider');
         var element = $('<input type="hidden" name="provider['+provider+']" value="'+provider+'" class ="provider_field">');
 
-        $(this).parent('form').append(element);
-        $(this).parent('form').trigger('submit');
+        parent_element.append(element);
+        parent_element.trigger('submit');
       });
     },
   })
