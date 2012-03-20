@@ -1,0 +1,8 @@
+li data-id=question.id
+  .clearfix
+    = image_tag question.user.picture, :size => "50x50"
+    p #{link_to question.user.name, ""} lançou desafio para #{link_to question.category.name, ""}
+    p Sr. candidato, é verdade que #{question.text}
+  .share
+    a.twitter-share-button data-count="none" data-lang="pt" data-text="Fiz uma pergunta para os candidatos a vereador do Rio!" data-url=question_url(question) href=question_url(question) Tweetar
+    .fb-send data-href=question_url(question)
