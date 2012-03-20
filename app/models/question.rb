@@ -4,6 +4,6 @@ class Question < ActiveRecord::Base
   validates_presence_of :text, :role_type, :category, :user
   validates_inclusion_of :role_type, :in => %Q{truth dare}, :message => "Only truth or dare."
 
-  scope :truth, where(['role_type = ?', 'truth'])
-  scope :dare, where(['role_type = ?', 'dare'])
+  scope :truth, where(['role_type = ?', 'truth']).order('created_at DESC')
+  scope :dare, where(['role_type = ?', 'dare']).order('created_at DESC')
 end
