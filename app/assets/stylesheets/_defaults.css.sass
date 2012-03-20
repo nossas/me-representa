@@ -1,3 +1,21 @@
+// Import standards
+@import compass/reset
+@import compass/utilities
+@import compass/css3
+
+// Import Grid System
+@import 960/grid
+
+
+// Mixins for fonts
+@import mixins/fonts
+
+// Mixins For buttons
+@import mixins/buttons
+
+
+
+// Define variables
 $green: #7DC241
 $blue: #3399CB
 $pink: #df499a
@@ -6,6 +24,8 @@ $gray: #333
 $header: #2BB1E3
 $fb_blue: #3B5998
 
+
+// Define the column grid system
 $grid-system: 16
 $ninesixty-columns: $grid-system
 $grid-half: $grid-system * 0.5
@@ -13,6 +33,8 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
+
+// Universal styles
 body
   font: normal 1em/28px "Akagi-Book", Tahoma, Lucida Grande
   color: $gray
