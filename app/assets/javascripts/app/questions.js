@@ -14,7 +14,7 @@ App.Questions = {
       var obj = $(event.target);
       var klass = obj.data('form-type');
       var hiddens = $('.' + klass + ' .hidden');
-      $('.' + klass + ' textarea').animate({ height: "200px" })
+      this.$('.' + klass + ' textarea').animate({ height: "200px" })
       hiddens.slideDown("fast");
     },
 
@@ -22,7 +22,7 @@ App.Questions = {
       var obj = $(event.target);
       var klass = obj.data('form-type');
       var hiddens = $('.' + klass + ' .hidden');
-      $('.' + klass + ' textarea').animate({ height: "60px" });
+      this.$('.' + klass + ' textarea').animate({ height: "60px" });
       hiddens.slideUp("fast");
     },
 
