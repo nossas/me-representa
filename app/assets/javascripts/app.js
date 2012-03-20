@@ -1,9 +1,9 @@
 var App = window.App = {
   Common: {
     init: function(){
-      $(".questions_list .share").hide();
-      $("li").mouseover(function(){ $(this).find(".share").show(); });
-      $("li").mouseout(function(){ $(this).find(".share").hide(); });
+      $(".questions_list .share").css({ 'opacity' : 0.5 });;
+      $("li").mouseover(function(){ $(this).find(".share").css({ 'opacity' : 1 }); });
+      $("li").mouseout(function(){ $(this).find(".share").css({ 'opacity' : 0.5 }); });
       $("li").click(function(){ $(this).find(".share").toggle(); });
     },
 
