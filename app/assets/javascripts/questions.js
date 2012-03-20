@@ -43,6 +43,11 @@ window.Questions = {
         field.after('<span class="error_message">'+errors[name][0]+'</span>');
       }
     });
+
+    $(".questions_list .share").hide();
+    $("li").mouseover(function(){ $(this).find(".share").show(); });
+    $("li").mouseout(function(){ $(this).find(".share").hide(); });
+    $("li").click(function(){ $(this).find(".share").toggle(); });
   },
 };
 

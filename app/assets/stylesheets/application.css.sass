@@ -30,6 +30,9 @@ img
 .hidden
   display: none
 
+.clearfix
+  +clearfix
+
 // Due to order of precedence, the !important shit is necessary :/
 .error_field
   border: 1px solid red !important
@@ -171,20 +174,20 @@ section.questions
       color: $orange
 
   .questions_list
-    +clearfix
     padding: 15px
     h2, h3
       color: #333
     ol li
-      clear: both
       padding: 20px 0
       margin: 10px 0
-    .avatar
-      +grid($grid-half * 0.1)
-      +alpha
-    .text
-      +grid($grid-half * 0.8)
-      +omega
-      padding-left: 10px
+    .clearfix
+      img
+        float: left
+        margin-right: 10px
+      p
+        line-height: 100%
+        margin-bottom: 10px
     .share
-      float: right
+      iframe, .fb-send
+        float: right
+        margin-left: 10px
