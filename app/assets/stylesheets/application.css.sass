@@ -162,8 +162,12 @@ section.questions
     h2, h3
       color: #333
     ol li
-      padding: 20px 0
-      margin: 10px 0
+      position: relative
+      padding-bottom: 20px
+      margin-top: 20px
+      border-bottom: 1px dashed $blue
+      &:last-child
+        border-bottom: none
     .clearfix
       img
         float: left
@@ -171,7 +175,16 @@ section.questions
       p
         line-height: 100%
         margin-bottom: 10px
+        &:last-child
+          margin-bottom: 0
     .share
+      position: absolute
+      top: 0
+      right: -85px
+      background: white
+      padding: 10px
+      +border-radius(0 6px 6px 0)
       iframe, .fb-send
-        float: right
-        margin-left: 10px
+        display: block
+      .fb-send
+        margin-bottom: 10px
