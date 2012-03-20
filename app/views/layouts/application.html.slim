@@ -10,7 +10,7 @@ html
     meta[name="keywords" content="Candidatura, Vereador, Câmara, Rio de Janeiro, Meu Rio"]
     meta[name="author" content="MeuRio - contato@meurio.org"]
     = csrf_meta_tag
-  body
+  body data-controller-class=controller.class.name data-controller-name=controller.controller_name.camelize data-action=controller.action_name.camelize
     .message[class=(alert ? "alert hidden" : "notice hidden")]=alert or notice
     .wrapper.header
       header
