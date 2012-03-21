@@ -6,4 +6,8 @@ class Question < ActiveRecord::Base
 
   scope :truth, where(['role_type = ?', 'truth']).order('created_at DESC')
   scope :dare, where(['role_type = ?', 'dare']).order('created_at DESC')
+
+  def truth?
+    role_type == "truth"
+  end
 end

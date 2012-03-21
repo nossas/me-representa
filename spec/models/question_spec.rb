@@ -6,7 +6,6 @@ describe Question do
     it { should belong_to :user }
   end
 
-
   describe "Truth or Dare questions" do
     before do
       @user = Factory(:user)
@@ -24,6 +23,17 @@ describe Question do
       question =  Question.create(:text => "Some text", :user => @user, :category => @category, :role_type => role[rand(2)])
       question.should have(0).error_on(:role_type)
       question.should be_valid
+    end
+  end
+
+  describe "#truth?" do
+    context "when it's a truth" do
+      before { subject.role_type = "truth" }
+      it{ should be_truth }
+    end
+    context "when it's not a truth" do
+      before { subject.role_type = "dare" }
+      it{ should_not be_truth }
     end
   end
 end
