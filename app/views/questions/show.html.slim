@@ -2,3 +2,8 @@
   meta property="og:title" content=@question.headline
   meta property="og:description" content=@question.text
   meta property="og:url" content=question_url(@question)
+
+section.info
+  = @question.text
+  = @question.user.name
+section.questions
