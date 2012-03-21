@@ -1,9 +1,10 @@
-// THis file is not being used by the Splash Page. This is the application. :)
+@import compass/css3
 @import defaults
-
-// The select style plugin
 @import chosen
 
++font-face('Akagi-Book', font-files(asset_path('ttf/style_174436.ttf', 'font'), asset_path('woff/style_174436.woff', 'font'), asset_path('svg/style_174436.svg', 'font')), asset_path('eot/style_174436.eot', 'font'))
++font-face('Akagi-Book', font-files(asset_path('ttf/Akagi-Ex.ttf', 'font')), asset_path('eot/style_174436.eot', 'font'), bold)
++font-face('Folk-solid', font-files(asset_path('woff/style_192110.woff', 'font'), asset_path('ttf/style_192110.ttf', 'font'), asset_path('svg/style_192110.svg', 'font')), asset_path('eot/style_192110.eot', 'font'))
 
 h1
   font-size: 2.3em
@@ -187,11 +188,12 @@ section.questions
   .questions_list
     padding: 15px
     h2, h3
-      color: #333
+      color: gray
+      margin-bottom: 20px
+      text-transform: uppercase
     ol li
-      position: relative
-      padding: 20px 0 40px 0
-      border-bottom: 1px dashed $blue
+      padding: 10px 0 30px 0
+      border-top: 1px dashed gray
       &:last-child
         border-bottom: none
     .clearfix
