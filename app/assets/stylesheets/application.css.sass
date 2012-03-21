@@ -49,6 +49,10 @@ label.error
         display: inline
         margin-top: 11px
         margin-right: 10px
+      span
+        margin: 0 10px
+        float: none
+        width: auto
 
 a[href="/auth/meurio"]
   color: darken($green, 10%)
@@ -65,11 +69,34 @@ a[href="/auth/facebook"]
     border-bottom: none
 
 a[data-method="delete"]
-  color: $green
+  color: darken($green, 10%)
   &:hover
     text-decoration: none
-    color: lighten($green, 5%)
+    color: darken($green, 5%)
     border-bottom: none
+
+footer
+  +grid-container
+  nav.links
+    +grid(8)
+    text-shadow: 1px 1px 1px white
+    a
+      color: $gray
+      text-transform: uppercase
+      &:hover
+        color: $gray
+    span
+      margin: 0 10px
+  .participate
+    +grid(8)
+    +clearfix
+    margin-bottom: 10px
+    span
+      background: white
+      float: right
+      line-height: 100%
+      padding: 10px
+      +border-radius(5px)
 
 section.info, section.questions
   +grid($grid-system)

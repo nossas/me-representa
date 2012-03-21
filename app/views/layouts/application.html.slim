@@ -21,7 +21,7 @@ html
           - if signed_in?
             .logged
               | Olá, #{current_user.name}
-              |  |
+              span |
               = link_to "Sair", session_path(current_user.id), :method => :delete
               = image_tag current_user.picture, :size => "30x30"
           - else
@@ -30,12 +30,11 @@ html
       = yield
     footer
       nav.links
-        = link_to "Quem somos?", ""
-        strong.marker |
+        = link_to "Quem somos", ""
+        span |
         = link_to "Contate-nos", ""
-      section.participate.white
-        span
-          | Você é candidato e quer participar? Mande um #{mail_to "contato@meurio.org", "e-mail", :encode => :hex} pra gente!
+      section.participate
+        span Você é candidato e quer participar? Mande um #{mail_to "contato@meurio.org", "e-mail", :encode => :hex} pra gente!
 
     #fb-root
     = javascript_include_tag :application
