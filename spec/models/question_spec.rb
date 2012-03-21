@@ -36,4 +36,28 @@ describe Question do
       it{ should_not be_truth }
     end
   end
+
+  describe "#dare?" do
+    context "when it's a dare" do
+      before { subject.role_type = "dare" }
+      it{ should be_dare }
+    end
+    context "when it's not a dare" do
+      before { subject.role_type = "truth" }
+      it{ should_not be_dare }
+    end
+  end
+
+  describe "#headline" do
+    before { subject.user = stub_model(User, :name => "Nicolas Iensen") }
+    before { subject.category = stub_model(Category, :name => "Transporte") }
+    context "when it's a truth" do
+      before { subject.stub(:truth?).and_return true }
+      its(:headline){ should be_== "Nicolas Iensen fez uma pergunta sobre Transporte aos candidatos a vereador do Rio" }
+    end
+    context "when it's a dare" do
+      before { subject.stub(:dare?).and_return true }
+      its(:headline){ should be_== "Nicolas Iensen fez uma demanda de Transporte aos candidatos a vereador do Rio" }
+    end
+  end
 end

@@ -10,4 +10,13 @@ class Question < ActiveRecord::Base
   def truth?
     role_type == "truth"
   end
+  
+  def dare?
+    role_type == "dare"
+  end
+
+  def headline
+    return "#{user.name} fez uma pergunta sobre #{category.name} aos candidatos a vereador do Rio" if truth?
+    return "#{user.name} fez uma demanda de #{category.name} aos candidatos a vereador do Rio" if dare?
+  end
 end
