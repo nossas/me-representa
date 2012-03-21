@@ -6,7 +6,7 @@ Feature: Login
   @omniauth_test
   Scenario: when I choose Meu Rio provider
     Given I'm on the questions page
-    When I click "Meu Rio"
+    When I click "MeuRio"
     Then I should see Nícolas Iensen
 
   @omniauth_test
@@ -21,4 +21,4 @@ Feature: Login
     And I'm on the questions page
     When I click "Sair"
     Then I should not see "Nícolas Iensen"
-    And I should see Entre com a sua conta do Meu Rio ou do Facebook
+    And I should see Entre com a sua conta do MeuRio ou do Facebook
