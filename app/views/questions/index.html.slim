@@ -1,6 +1,6 @@
 section.info
   header
-    = image_tag "bg_header_truth_dare2.png"
+    = image_tag "bg_header_truth_dare2.png", :size => "936x118", :alt => "Jogo da Verdade ou Consequência", :title => "Jogo da Verdade ou Consequência"
 
 section.questions
   header
@@ -16,10 +16,11 @@ section.questions
       fieldset
         h4 Quero que responda com sinceridade
         h4.hidden Sobre
-        = render :partial => "form", :locals => {:type => :truth}
+        = render :partial => "form", :locals => { :type => :truth }
     .questions_list
       h3 Verdades sugeridas recentemente
-      ol= render @truths
+      ol
+        = render @truths
 
   section.dare
     .form.dare
@@ -27,7 +28,8 @@ section.questions
       fieldset
         h4 Quero que se comprometa com algo
         h4.hidden Relacionado a
-        = render :partial => "form", :locals => {:type => :dare }
+        = render :partial => "form", :locals => { :type => :dare }
     .questions_list
       h3 Consequências sugeridas recentemente
-      ol= render @dares
+      ol
+        = render @dares
