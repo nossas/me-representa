@@ -20,6 +20,7 @@ gem 'foreigner'
 # Staging stuff
 group :development, :production do
   gem 'heroku'
+  gem 'taps'
   gem 'thin'
 end
 
@@ -52,4 +53,3 @@ end
 gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
-gem 'taps'
