@@ -20,8 +20,11 @@ gem 'foreigner'
 # Staging stuff
 group :development, :production do
   gem 'heroku'
-  gem 'taps'
   gem 'thin'
+end
+
+group :development do
+  gem 'taps'
 end
 
 group :test do
