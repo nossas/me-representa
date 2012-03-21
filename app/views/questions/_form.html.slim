@@ -5,8 +5,8 @@
   h4.hidden.placeholder
     - phrase = (type == :truth ? "Sr(a) candidato é verdade que" : "Sr(a) candidato você deverá")
     = phrase
-  = f.input :text, :label => false, :input_html => {:placeholder => "#{phrase}...", :data => {:"form-type" => type} }
-  = f.hidden_field :role_type, :value => type
+  = f.input :text, :label => false, :input_html => {:id => "question_text_#{type}", :placeholder => "#{phrase}...", :data => {:"form-type" => type} }
+  = f.hidden_field :role_type, :value => type, :id => "question_role_type_#{type}"
   = f.button :button, "Cancelar", :type => :reset, :class => "hidden reset", :"data-form-type" => type
   - if signed_in?
     = f.submit "Enviar", :class => :hidden, :disable_with => "Enviando..."
