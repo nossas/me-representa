@@ -11,3 +11,10 @@
 
   // TODO: Work on validation if the user is currently logged in or not.
   = f.submit "Publicar!", :class => :hidden
+  = f.button :button, "Pré-visualizar", :type => :reset, :class => "hidden preview", :"data-form-type" => type
+  .preview.hidden
+    - if signed_in?
+      = f.submit "Enviar", :class => :hidden, :disable_with => "Enviando..."
+    - else
+      = f.submit "Publicar usando Facebook", :class => :hidden, :"data-provider" => :facebook
+      = f.submit "Publicar usando MeuRio", :class => :hidden, :"data-provider" => :meurio
