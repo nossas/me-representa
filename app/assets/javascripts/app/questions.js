@@ -78,6 +78,23 @@ App.Questions = {
         obj.after('Valeu por votar!');
         obj.remove();
       });
+
+      $('input[type=submit]').click(function(e){
+        e.preventDefault();
+        var parent_element = $(this).parent('form');
+        parent_element.validate();
+
+        var child = parent_element.children('input.provider_field');
+        if (child.length) { child.remove(); }
+
+        var provider = $(this).data('provider');
+        var element = $('<input type="hidden" name="provider['+provider+']" value="'+provider+'" class ="provider_field">');
+
+        parent_element.append(element);
+        parent_element.trigger('submit');
+      });
+
+      $('#questions_truth').bind("ajax:success", function(event, data){ $(".form.truth").html(data); });
     },
   })
 };

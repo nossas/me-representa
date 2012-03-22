@@ -198,3 +198,7 @@ pt-BR:
       long: ! '%A, %d de %B de %Y, %H:%M h'
       short: ! '%d/%m, %H:%M h'
     pm: ''
+  activerecord:
+    attributes:
+      question:
+        category: "Assunto"

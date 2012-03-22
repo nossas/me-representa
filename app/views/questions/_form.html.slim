@@ -1,4 +1,4 @@
-= simple_form_for @question, :html => { :id => "questions_#{type}" } do |f|
+= simple_form_for @question, :remote => true, :html => { :id => "questions_#{type}" } do |f|
   .question
     = f.association :category, :label => false,  :input_html => {:id => "select_#{type}", :class => "chosen-select", :data => {:placeholder => "Escolha um assunto" }}, :wrapper_html => {:class => :hidden }
 
