@@ -5,6 +5,7 @@ App.Questions = {
       'focus form textarea' : 'expandTextarea',
       'click button.reset' : 'returnTextarea',
       'click h4.discover' : 'toggleInfographic',
+      'click button.preview' : 'preview'
     },
 
     isLoggedIn: function(){
@@ -15,6 +16,9 @@ App.Questions = {
       var obj = $(event.target);
       obj.siblings('.infographic').slideToggle('slow');
       obj.toggleClass('active');
+    },
+
+    preview: function(event){
     },
 
     expandTextarea: function(event){
