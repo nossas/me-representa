@@ -1,6 +1,21 @@
 App.Questions = {
+  Form:  Backbone.View.extend({
+    initialize: function(){
+      this.preview = this.$('.preview');
+      this.question = this.$('.question');
+    },
+
+    showPreview: function(){
+      if(App.Common.login.validate()){
+        this.question.hide();
+        this.preview.show();
+      }
+    }
+  }),
+
   Index: Backbone.View.extend({
     el: 'body',
+
     events: {
       'focus form textarea' : 'expandTextarea',
       'click button.reset' : 'returnTextarea',
@@ -25,7 +40,7 @@ App.Questions = {
     expandTextarea: function(event){
       var obj = $(event.target);
       var klass = obj.data('form-type');
-      var hiddens = $('.' + klass + ' .hidden');
+      var hiddens = $('.' + klass + ' .action');
       this.$('.' + klass + ' textarea').animate({ height: "200px" })
       hiddens.slideDown("fast");
     },
@@ -55,35 +70,13 @@ App.Questions = {
     },
 
     initialize: function(){
-      this.forms = this.$('form');
-
-      this.$('.chosen-select').chosen({
-        no_results_text: "Nenhum assunto encontrado com "
-      });
-
-      if ( this.$('.message').text() !== '' ){
-        this.$('.message').slideDown('fast');
-        window.setTimeout("$('.message').slideUp()", 4000);
-      }
-
+      this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
+      this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
 
       $('form.new_vote').bind('ajax:complete', function(){
         var obj = $(this);
         obj.after('Valeu por votar!');
         obj.remove();
-
-      })
-
-      this.forms.bind('ajax:error', function(evt, xhr, settings){
-        var response = $.parseJSON(xhr.responseText);
-        var errors = response.errors;
-        $('*', $(this)).removeClass('error_field');
-        $('.error_message', $(this)).remove();
-        for (name in errors) {
-          var field = $('*[name="question['+name+']"]', $(this));
-          field.addClass('error_field');
-          field.after('<span class="error_message">'+errors[name][0]+'</span>');
-        }
       });
     },
   })

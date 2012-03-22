@@ -1,17 +1,14 @@
 = simple_form_for @question, :html => { :id => "questions_#{type}" } do |f|
-  = f.association :category, :label => false,  :input_html => {:id => "select_#{type}", :class => "chosen-select", :data => {:placeholder => "Escolha um assunto" }}, :wrapper_html => {:class => :hidden }
+  .question
+    = f.association :category, :label => false,  :input_html => {:id => "select_#{type}", :class => "chosen-select", :data => {:placeholder => "Escolha um assunto" }}, :wrapper_html => {:class => :hidden }
 
-  // Using data-form-type for filtering on the forms (truth or dare will be generated on type)
-  h4.hidden.placeholder
-    - phrase = (type == :truth ? "Sr(a) candidato é verdade que" : "Sr(a) candidato você deverá")
-    = phrase
-  = f.input :text, :label => false, :input_html => {:id => "question_text_#{type}", :placeholder => "#{phrase}...", :data => {:"form-type" => type} }
-  = f.hidden_field :role_type, :value => type, :id => "question_role_type_#{type}"
-  = f.button :button, "Cancelar", :type => :reset, :class => "hidden reset", :"data-form-type" => type
-  = f.button :button, "Pré-visualizar", :type => :reset, :class => "hidden preview", :"data-form-type" => type
+    // Using data-form-type for filtering on the forms (truth or dare will be generated on type)
+    h4.hidden.placeholder
+      - phrase = (type == :truth ? "Sr(a) candidato é verdade que" : "Sr(a) candidato você deverá")
+      = phrase
+    = f.input :text, :label => false, :input_html => {:id => "question_text_#{type}", :placeholder => "#{phrase}...", :data => {:"form-type" => type} }
+    = f.hidden_field :role_type, :value => type, :id => "question_role_type_#{type}"
+    = f.button :button, "Cancelar", :type => :reset, :class => "hidden action reset", :"data-form-type" => type
+    = f.button :button, "Pré-visualizar", :type => :reset, :class => "hidden action preview", :"data-form-type" => type
   .preview.hidden
-    - if signed_in?
-      = f.submit "Enviar", :class => :hidden, :disable_with => "Enviando..."
-    - else
-      = f.submit "Publicar usando Facebook", :class => :hidden, :"data-provider" => :facebook
-      = f.submit "Publicar usando MeuRio", :class => :hidden, :"data-provider" => :meurio
+    = f.submit "Publicar"
