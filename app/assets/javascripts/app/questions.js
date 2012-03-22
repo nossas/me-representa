@@ -5,7 +5,8 @@ App.Questions = {
       'focus form textarea' : 'expandTextarea',
       'click button.reset' : 'returnTextarea',
       'click h4.discover' : 'toggleInfographic',
-      'click button.preview' : 'preview'
+      'click button.preview' : 'preview',
+      'click input[type=submit]' : 'submit'
     },
 
     isLoggedIn: function(){
@@ -35,6 +36,22 @@ App.Questions = {
       var hiddens = $('.' + klass + ' .hidden');
       this.$('.' + klass + ' textarea').animate({ height: "60px" });
       hiddens.slideUp("fast");
+    },
+
+    submit: function(e){
+      e.preventDefault();
+      var parent_element = $(e.target).parents('form:first');
+      console.log(parent_element);
+      parent_element.validate();
+
+      var child = parent_element.children('input.provider_field');
+      if (child.length) { child.remove(); }
+
+      var provider = $(this).data('provider');
+      var element = $('<input type="hidden" name="provider['+provider+']" value="'+provider+'" class ="provider_field">');
+
+      parent_element.append(element);
+      parent_element.trigger('submit');
     },
 
     initialize: function(){
@@ -67,21 +84,6 @@ App.Questions = {
           field.addClass('error_field');
           field.after('<span class="error_message">'+errors[name][0]+'</span>');
         }
-      });
-
-      $('input[type=submit]').click(function(e){
-        e.preventDefault();
-        var parent_element = $(this).parent('form');
-        parent_element.validate();
-
-        var child = parent_element.children('input.provider_field');
-        if (child.length) { child.remove(); }
-
-        var provider = $(this).data('provider');
-        var element = $('<input type="hidden" name="provider['+provider+']" value="'+provider+'" class ="provider_field">');
-
-        parent_element.append(element);
-        parent_element.trigger('submit');
       });
     },
   })
