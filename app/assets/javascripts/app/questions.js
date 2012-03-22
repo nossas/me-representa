@@ -1,12 +1,30 @@
 App.Questions = {
   Form:  Backbone.View.extend({
+    events: {
+      'click button.reset' : 'returnTextarea',
+      'click button.preview' : 'showPreview',
+      'focus textarea' : 'expandTextarea'
+    },
+
     initialize: function(){
       this.preview = this.$('.preview');
       this.question = this.$('.question');
+      this.textarea = this.$('textarea');
+      this.actions = this.$('.action');
+    },
+
+    returnTextarea: function(){
+      this.textarea.animate({ height: "60px" })
+      this.actions.slideUp('fast');
+    },
+
+    expandTextarea: function(){
+      this.textarea.animate({ height: "200px" })
+      this.actions.slideDown('fast');
     },
 
     showPreview: function(){
-      if(App.Common.login.validate()){
+      if($(this.el).valid() && App.Common.login.validate()){
         this.question.hide();
         this.preview.show();
       }
@@ -17,56 +35,13 @@ App.Questions = {
     el: 'body',
 
     events: {
-      'focus form textarea' : 'expandTextarea',
-      'click button.reset' : 'returnTextarea',
       'click h4.discover' : 'toggleInfographic',
-      'click button.preview' : 'preview',
-      'click input[type=submit]' : 'submit'
-    },
-
-    isLoggedIn: function(){
-      return this.$('.logged').length();
     },
 
     toggleInfographic: function(event){
       var obj = $(event.target);
       obj.siblings('.infographic').slideToggle('slow');
       obj.toggleClass('active');
-    },
-
-    preview: function(event){
-    },
-
-    expandTextarea: function(event){
-      var obj = $(event.target);
-      var klass = obj.data('form-type');
-      var hiddens = $('.' + klass + ' .action');
-      this.$('.' + klass + ' textarea').animate({ height: "200px" })
-      hiddens.slideDown("fast");
-    },
-
-    returnTextarea: function(event){
-      var obj = $(event.target);
-      var klass = obj.data('form-type');
-      var hiddens = $('.' + klass + ' .hidden');
-      this.$('.' + klass + ' textarea').animate({ height: "60px" });
-      hiddens.slideUp("fast");
-    },
-
-    submit: function(e){
-      e.preventDefault();
-      var parent_element = $(e.target).parents('form:first');
-      console.log(parent_element);
-      parent_element.validate();
-
-      var child = parent_element.children('input.provider_field');
-      if (child.length) { child.remove(); }
-
-      var provider = $(this).data('provider');
-      var element = $('<input type="hidden" name="provider['+provider+']" value="'+provider+'" class ="provider_field">');
-
-      parent_element.append(element);
-      parent_element.trigger('submit');
     },
 
     initialize: function(){
@@ -77,21 +52,6 @@ App.Questions = {
         var obj = $(this);
         obj.after('Valeu por votar!');
         obj.remove();
-      });
-
-      $('input[type=submit]').click(function(e){
-        e.preventDefault();
-        var parent_element = $(this).parent('form');
-        parent_element.validate();
-
-        var child = parent_element.children('input.provider_field');
-        if (child.length) { child.remove(); }
-
-        var provider = $(this).data('provider');
-        var element = $('<input type="hidden" name="provider['+provider+']" value="'+provider+'" class ="provider_field">');
-
-        parent_element.append(element);
-        parent_element.trigger('submit');
       });
 
       $('#questions_truth').bind("ajax:success", function(event, data){ $(".form.truth").html(data); });
