@@ -8,10 +8,12 @@ App.Questions = {
 
     initialize: function(){
       this.preview = this.$('.preview');
+      this.previewCategory = this.$('.preview .category');
+      this.previewDescription = this.$('.preview .description');
       this.question = this.$('.question');
       this.textarea = this.$('textarea');
       this.actions = this.$('.action');
-      this.$('select').chosen();
+      this.$('select.chosen-select').chosen();
     },
 
     returnTextarea: function(){
@@ -24,9 +26,15 @@ App.Questions = {
       this.actions.slideDown('fast');
     },
 
+    generatePreview: function(){
+      this.previewDescription.html(this.textarea.val());
+      this.previewCategory.html(this.$('[name="question[category_id]"] option:selected').html());
+    },
+
     showPreview: function(){
       if($(this.el).valid() && App.Common.login.validate()){
         this.question.hide();
+        this.generatePreview();
         this.preview.show();
       }
     }

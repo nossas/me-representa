@@ -8,7 +8,9 @@
       = phrase
     = f.input :text, :label => false, :input_html => {:id => "question_text_#{type}", :placeholder => "#{phrase}...", :data => {:"form-type" => type} }
     = f.hidden_field :role_type, :value => type, :id => "question_role_type_#{type}"
-    = f.button :button, "Cancelar", :type => :reset, :class => "hidden action reset", :"data-form-type" => type
-    = f.button :button, "Pré-visualizar", :class => "hidden action preview", :"data-form-type" => type
+    = f.button :button, "Cancelar", :type => :reset, :class => "hidden action reset"
+    = f.button :button, "Pré-visualizar", :class => "hidden action preview"
   .preview.hidden
+    .category
+    .description
     = f.submit "Publicar"

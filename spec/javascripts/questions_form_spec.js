@@ -2,13 +2,23 @@ describe("Questions.Form", function(){
   var view;
 
   beforeEach(function(){
-    view = new App.Questions.Form();
+    view = new App.Questions.Form({
+      el: $('<form><div class="preview"><div class="description"></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
+    });
     App.Common.login = {
       validate: function(){}
     };
   });
 
   describe("#intitalize", function(){
+    it("should initialize a preview description element", function(){
+      expect(view.previewDescription).toEqual(jasmine.any(Object));
+    });
+
+    it("should initialize a preview category element", function(){
+      expect(view.previewCategory).toEqual(jasmine.any(Object));
+    });
+
     it("should initialize a preview element", function(){
       expect(view.preview).toEqual(jasmine.any(Object));
     });
@@ -58,6 +68,20 @@ describe("Questions.Form", function(){
     });
   });
 
+  describe("#generatePreview", function(){
+    beforeEach(function(){
+      view.generatePreview();
+    });
+
+    it("should copy text to preview description", function(){
+      expect(view.previewDescription.html()).toEqual(view.textarea.val());
+    });
+
+    it("should copy selected option to preview category", function(){
+      expect(view.previewCategory.html()).toEqual(view.$('[name="question[category_id]"] option:selected').html());
+    });
+  });
+
   describe("#showPreview", function(){
     var validator = {
       valid: function(){ return true }
@@ -84,6 +108,12 @@ describe("Questions.Form", function(){
     it("should require login", function(){
       view.showPreview();
       expect(App.Common.login.validate).toHaveBeenCalled();
+    });
+
+    it("should generate the preview", function(){
+      spyOn(view, "generatePreview");
+      view.showPreview();
+      expect(view.generatePreview).toHaveBeenCalled();
     });
 
     it("should validate the form", function(){
