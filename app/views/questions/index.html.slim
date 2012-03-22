@@ -16,10 +16,10 @@ section.questions
       fieldset
         h4 Quero que responda com sinceridade
         h4.hidden Sobre
-        = render :partial => "form", :locals => { :type => :truth }
+        = render :partial => "form", :locals => { :question => Question.new(:role_type => "truth") }
     .questions_list
       h3 Verdades sugeridas recentemente
-      ol
+      ol#truths
         = render @truths
 
   section.dare
@@ -28,8 +28,8 @@ section.questions
       fieldset
         h4 Quero que se comprometa com algo
         h4.hidden Relacionado a
-        = render :partial => "form", :locals => { :type => :dare }
+        = render :partial => "form", :locals => { :question => Question.new(:role_type => "dare") }
     .questions_list
       h3 Consequências sugeridas recentemente
-      ol
+      ol#dares
         = render @dares

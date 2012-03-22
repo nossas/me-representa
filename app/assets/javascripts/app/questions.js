@@ -101,7 +101,10 @@ App.Questions = {
         parent_element.trigger('submit');
       });
 
-      $('#questions_truth').bind("ajax:success", function(event, data){ $(".form.truth").html(data); });
+      $('#questions_truth').bind("ajax:success", function(event, data){ 
+        $.get('questions?type_role=truth', function(data) { $('#truths').html(data); });
+        $(".form.truth").html(data);
+      });
     },
   })
 };
