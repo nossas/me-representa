@@ -4,7 +4,7 @@ App.Questions = {
     events: {
       'focus form textarea' : 'expandTextarea',
       'click button.reset' : 'returnTextarea',
-      'click h4.discover' : 'toggleInfographic'
+      'click h4.discover' : 'toggleInfographic',
     },
 
     isLoggedIn: function(){
@@ -44,6 +44,14 @@ App.Questions = {
         this.$('.message').slideDown('fast');
         window.setTimeout("$('.message').slideUp()", 4000);
       }
+
+
+      $('form.new_vote').bind('ajax:complete', function(){
+        var obj = $(this);
+        obj.after('Valeu por votar!');
+        obj.remove();
+
+      })
 
       this.forms.bind('ajax:error', function(evt, xhr, settings){
         var response = $.parseJSON(xhr.responseText);

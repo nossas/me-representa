@@ -10,10 +10,15 @@ li data-id=question.id class=question.role_type
     p
       span
         - if question.truth?
-          | Sr. candidato, é verdade que 
+          | Sr. candidato, é verdade que
         - else
-          | Sr. candidato, você deverá 
+          | Sr. candidato, você deverá
       = question.text
   .share
     .fb-send data-href=question_url(question)
     a.twitter-share-button data-count="none" data-lang="pt" data-text=question.headline data-url=question_url(question) href=question_url(question) Tweetar
+
+  .vote
+    = simple_form_for [question, Vote.new], :remote => true, :format => :json do |f|
+      = f.submit "Votar", :disable_with => "carregando..."
+

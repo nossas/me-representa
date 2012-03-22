@@ -4,6 +4,7 @@ describe Question do
   describe "Validations/Associations" do
     it { should belong_to :category }
     it { should belong_to :user }
+    it { should have_many :votes }
   end
 
   describe "Truth or Dare questions" do

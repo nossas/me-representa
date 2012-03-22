@@ -17,8 +17,13 @@ When /^I send the subscriber form with my email$/ do
 end
 
 When /^I click "([^"]*)"$/ do |arg1|
-  click_link arg1
+  begin
+    click_link arg1
+  rescue
+    click_button arg1
+  end
 end
+
 
 When /^I go to the questions page$/ do
   visit questions_path
