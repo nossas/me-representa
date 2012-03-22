@@ -79,6 +79,8 @@ App.Questions = {
         parent_element.append(element);
         parent_element.trigger('submit');
       });
+
+      $('#questions_truth').bind("ajax:success", function(event, data){ $(".form.truth").html(data); });
     },
   })
 };
