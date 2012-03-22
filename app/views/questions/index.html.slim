@@ -1,22 +1,14 @@
 section.info
   header
-    = image_tag "bg_header_truth_dare.png", :size => "925x145"
+    = image_tag "bg_header_truth_dare2.png", :size => "936x118", :alt => "Jogo da Verdade ou Consequência", :title => "Jogo da Verdade ou Consequência"
 
-//section.info
-  header
-    h4 Eleições municipais 2012
-    h3 Verdade ou Consequência?
-  section.steps
-    ul
-      li 1. Sugira
-      li 2. Envie
-      li 3. Compare
 section.questions
   header
-    h3 Já giramos a garrafa.
     h1 O que você quer do candidato?
-
-    = image_tag "app_main_questions_image.png"
+    h3 Você está frente a frente com os candidatos a vereador
+    h4.discover Entenda como o jogo da verdade ou consequência funciona
+    section.infographic.hidden
+      = image_tag "bg_infographic.jpg"
 
   section.truth
     .form.truth
@@ -24,33 +16,20 @@ section.questions
       fieldset
         h4 Quero que responda com sinceridade
         h4.hidden Sobre
-        = render :partial => "form", :locals => {:type => :truth}
+        = render :partial => "form", :locals => { :type => :truth }
     .questions_list
       h3 Verdades sugeridas recentemente
       ol
-        - @truths.each do |q|
-          li
-            .avatar
-              = image_tag q.user.picture, :size => "50x50"
-            .text
-              | #{link_to q.user.name, ""} lançou desafio para "#{link_to q.category.name, ""}"
-              p
-              | Sr. candidato, é verdade que #{q.text}
+        = render @truths
+
   section.dare
     .form.dare
       h2 Consequência
       fieldset
         h4 Quero que se comprometa com algo
         h4.hidden Relacionado a
-        = render :partial => "form", :locals => {:type => :dare }
+        = render :partial => "form", :locals => { :type => :dare }
     .questions_list
-        h3 Consequências sugeridas recentemente
-        ol
-          - @dares.each do |q|
-            li
-              .avatar
-                = image_tag q.user.picture, :size => "50x50"
-              .text
-                | #{link_to q.user.name, ""} lançou desafio para "#{link_to q.category.name, ""}"
-                p
-                | Sr. candidato, você deverá #{q.text}
+      h3 Consequências sugeridas recentemente
+      ol
+        = render @dares

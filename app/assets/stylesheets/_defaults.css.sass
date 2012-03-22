@@ -1,21 +1,9 @@
-// Import standards
 @import compass/reset
 @import compass/utilities
 @import compass/css3
-
-// Import Grid System
 @import 960/grid
-
-
-// Mixins for fonts
-@import mixins/fonts
-
-// Mixins For buttons
 @import mixins/buttons
 
-
-
-// Define variables
 $green: #7DC241
 $blue: #3399CB
 $pink: #df499a
@@ -24,8 +12,6 @@ $gray: #333
 $header: #2BB1E3
 $fb_blue: #3B5998
 
-
-// Define the column grid system
 $grid-system: 16
 $ninesixty-columns: $grid-system
 $grid-half: $grid-system * 0.5
@@ -33,12 +19,10 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
-
-// Universal styles
 body
   font: normal 1em/28px "Akagi-Book", Tahoma, Lucida Grande
   color: $gray
-  background: url(asset_path('bg_header.png', 'image'))
+  background: url(asset_path('bg.png', 'image'))
 
 strong
   font-weight: bold
@@ -62,23 +46,17 @@ h6
   font-size: 0.4em
 
 a, a:active, a:visited
-  color: #333
+  color: $blue
   text-decoration: none
-  transition: opacity 0.35s ease-in-out, color 0.25s ease-in-out
-  -moz-transition: opacity 0.35s ease-in-out, color 0.25s ease-in-out
-  -o-transition: opacity 0.35s ease-in-out, color 0.25s ease-in-out
-  -webkit-transition: opacity 0.35s ease-in-out, color 0.25s ease-in-out
   &:hover
-    color: $green
-    border-bottom: 1px solid $green
+    color: lighten($blue, 10%)
+    text-decoration: underline
 
 input[type=text]
   border: 1px solid #dedede
   padding: 10px 15px
   +box-shadow(inset 1px 1px 2px #999)
   font-size: 14px
-
-
 
 input[type=submit]
   +btn($orange, $pink)
@@ -106,35 +84,3 @@ input[disabled]
   background: red
 .notice
   background: $green
-
-footer
-  width: 940px
-  margin: 0 auto
-  overflow: hidden
-  padding-left: 30px
-  padding-right: 30px
-  padding-bottom: 20px
-  a
-    color: $gray
-  .links
-    float: left
-    width: 30%
-    line-height: 36px
-    text-transform: uppercase
-  .marker
-    width: 10px
-    padding: 15px
-  .participate
-    background: url(asset_path('bg_footer_contact_us.png', 'image')) -8px -6px  no-repeat
-    text-align: right
-    padding: 0 10px
-    padding-left: 40px
-    padding-bottom: 15px
-    font-weight: 100
-    line-height: 36px
-    float: right
-    color: #06567e
-    a
-      color: #ffcc00
-
-

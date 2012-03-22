@@ -23,6 +23,10 @@ group :development, :production do
   gem 'thin'
 end
 
+group :development do
+  gem 'taps'
+end
+
 group :test do
   gem 'rspec-rails'
   gem 'cucumber-rails'
@@ -52,4 +56,3 @@ end
 gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
-

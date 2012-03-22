@@ -25,6 +25,11 @@ FactoryGirl.define do
     q.association :user
     q.association :category
   end
+
+  factory(:vote) do |v|
+    v.association :question
+    v.association :user
+  end
 end
 
 

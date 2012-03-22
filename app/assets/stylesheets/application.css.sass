@@ -1,9 +1,10 @@
-// THis file is not being used by the Splash Page. This is the application. :)
+@import compass/css3
 @import defaults
-
-// The select style plugin
 @import chosen
 
++font-face('Akagi-Book', font-files(asset_path('ttf/style_174436.ttf', 'font'), asset_path('woff/style_174436.woff', 'font'), asset_path('svg/style_174436.svg', 'font')), asset_path('eot/style_174436.eot', 'font'))
++font-face('Akagi-Book', font-files(asset_path('ttf/Akagi-Ex.ttf', 'font')), asset_path('eot/style_174436.eot', 'font'), bold)
++font-face('Folk-solid', font-files(asset_path('woff/style_192110.woff', 'font'), asset_path('ttf/style_192110.ttf', 'font'), asset_path('svg/style_192110.svg', 'font')), asset_path('eot/style_192110.eot', 'font'))
 
 h1
   font-size: 2.3em
@@ -16,6 +17,9 @@ img
 
 .hidden
   display: none
+
+.clearfix
+  +clearfix
 
 // Due to order of precedence, the !important shit is necessary :/
 .error
@@ -41,20 +45,20 @@ label.error
     .login
       float: right
       font-weight: bold
-      //&:hover
-        +box-shadow(1px 0 4px #333)
-        +border-radius(4px)
-        padding: 0 10px
       img
         display: inline
         margin-top: 11px
         margin-right: 10px
+      span
+        margin: 0 10px
+        float: none
+        width: auto
 
 a[href="/auth/meurio"]
-  color: $green
+  color: darken($green, 10%)
   &:hover
     text-decoration: none
-    color: lighten($green, 5%)
+    color: darken($green, 5%)
     border-bottom: none
 
 a[href="/auth/facebook"]
@@ -65,11 +69,34 @@ a[href="/auth/facebook"]
     border-bottom: none
 
 a[data-method="delete"]
-  color: $green
+  color: darken($green, 10%)
   &:hover
     text-decoration: none
-    color: lighten($green, 5%)
+    color: darken($green, 5%)
     border-bottom: none
+
+footer
+  +grid-container
+  nav.links
+    +grid(8)
+    text-shadow: 1px 1px 1px white
+    a
+      color: $gray
+      text-transform: uppercase
+      &:hover
+        color: $gray
+    span
+      margin: 0 10px
+  .participate
+    +grid(8)
+    +clearfix
+    margin-bottom: 10px
+    span
+      background: white
+      float: right
+      line-height: 100%
+      padding: 10px
+      +border-radius(5px)
 
 section.info, section.questions
   +grid($grid-system)
@@ -87,15 +114,42 @@ section.questions
     font-family: "Folk-solid"
   header
     +grid($grid-system)
-    text-align: center
+    h1, h2, h3, h4
+      text-align: center
+    h1
+      margin-top: 30px
     h3
       font-family: "Akagi-Book"
       font-size: 16px
       font-weight: bold
+      text-shadow: 0 1px 2px #333
       text-transform: uppercase
-      margin-top: 20px
-    img
+      margin-top: 10px
+      color: rgb(172, 215, 234)
+    h4
+      font-family: "Akagi-Book"
+      text-transform: uppercase
+      font-weight: bold
+      font-size: 14px
+      text-shadow: 0 1px 1px #666
       margin: 20px 0
+      &:hover
+        cursor: pointer
+        text-shadow: 0 1px 4px $fb_blue
+      &:after
+        content: "▾"
+        background: $fb_blue
+        margin: 0 5px
+        padding: 0 5px
+        +border-radius(20px)
+        +box-shadow(0 1px 2px #333)
+      &.active
+        &:after
+          content: "▴"
+    h4
+    img
+      margin: 10px 0
+      +box-shadow(inset 1px 1px 4px #333)
   section.truth, section.dare
     +grid($grid-half)
     .form, .questions_list
@@ -106,6 +160,11 @@ section.questions
       fieldset
         display: block
         padding: 15px
+        h4.placeholder
+          font-family: "Akagi-Book"
+          font-size: 1em
+          text-transform: none
+          margin-bottom: 1px
         textarea
           border: 1px solid #f9f9f9
           padding: 10px
@@ -159,19 +218,49 @@ section.questions
       color: $orange
 
   .questions_list
-    +clearfix
     padding: 15px
-    h2, h3
-      color: #333
-    ol li
-      clear: both
-      padding: 20px 0
-      margin: 10px 0
-    .avatar
-      +grid($grid-half * 0.1)
-      +alpha
-    .text
-      +grid($grid-half * 0.8)
-      +omega
-      padding-left: 10px
+    h3
+      color: gray
+      margin-bottom: 20px
+      text-transform: uppercase
+    li
+      padding: 10px 0 30px 0
+      border-top: 1px dashed gray
+      &:last-child
+        border-bottom: none
+      .question
+        +clearfix
+        img
+          float: left
+          margin-right: 10px
+        p
+          line-height: 100%
+          margin-bottom: 10px
+          width: 370px
+          float: right
+        p.headline
+          font-size: .8em
+      .share
+        iframe, .fb-send
+          float: right
+          margin-left: 5px
 
+      .vote
+        input
+          background: none
+          font-family: "Akagi-Book"
+          color: $blue
+          border: none
+          text-transform: none
+          +box-shadow(none)
+          float: right
+    li.truth
+      p
+        &:last-child
+          span
+            color: $green
+    li.dare
+      p
+        &:last-child
+          span
+            color: $orange
