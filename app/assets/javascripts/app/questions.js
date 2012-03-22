@@ -11,6 +11,7 @@ App.Questions = {
       this.question = this.$('.question');
       this.textarea = this.$('textarea');
       this.actions = this.$('.action');
+      this.$('select').chosen();
     },
 
     returnTextarea: function(){
