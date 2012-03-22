@@ -7,6 +7,6 @@ Feature: Vote for a question
   Scenario: I have not voted yet
     Given there is a question
     And I'm on the questions page
-    When I click "Votar"
+    When I press "Votar"
     Then I should see Valeu por votar!
 
