@@ -41,10 +41,6 @@ When /^I go to the questions page$/ do
   visit questions_path
 end
 
-When /^I pass over this question$/ do
-  page.execute_script("$('li[data-id=#{@question.id}]').trigger('mouseover');")
-end
-
 Then /^I should not see "([^"]*)"$/ do |arg1|
   page.should_not have_content(arg1)
 end
@@ -52,11 +48,12 @@ end
 Then /^I should see ([^"]*)$/ do |arg1|
   case arg1
     when "a Facebook share button for this question"
-      page.find("li[data-id=\"#{@question.id}\"] .fb-send").should be_visible
+      page.find("li[data-id=\"#{@question.id}\"] a.fb_btn").should be_visible
     when "a Twitter share button for this question"
-      page.find("li[data-id=\"#{@question.id}\"] .twitter-share-button").should be_visible
+      page.find("li[data-id=\"#{@question.id}\"] a.twitter_btn").should be_visible
     when "some share buttons for my question"
-      page.find("li[data-id=\"#{@question.id}\"] .twitter-share-button").should be_visible
+      page.find(".form.truth").should have_css("a.twitter_btn")
+      page.find(".form.truth").should have_css("a.fb_btn")
     else
       page.should have_content(arg1)
   end
