@@ -14,8 +14,6 @@ section.questions
     .form.truth
       h2 Verdade
       fieldset
-        h4 Quero que responda com sinceridade
-        h4.hidden Sobre
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "truth") }
     .questions_list
       h3 Verdades sugeridas recentemente
@@ -26,8 +24,6 @@ section.questions
     .form.dare
       h2 Consequência
       fieldset
-        h4 Quero que se comprometa com algo
-        h4.hidden Relacionado a
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "dare") }
     .questions_list
       h3 Consequências sugeridas recentemente

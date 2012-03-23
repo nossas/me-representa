@@ -3,16 +3,9 @@ li data-id=question.id class=question.role_type
     = image_tag question.user.picture, :size => "50x50"
     p.headline
       strong= question.user.name
-      - if question.truth?
-        |  quer saber sobre #{link_to question.category.name, ""}:
-      - else
-        |  lançou uma demanda para #{link_to question.category.name, ""}:
+      = t "questions.list.#{question.role_type}.want_to_know_html", :link => link_to(question.category.name, "")
     p
-      span
-        - if question.truth?
-          | Sr. candidato é verdade que 
-        - else
-          | Sr. candidato você deverá 
+      span= t "questions.list.#{question.role_type}.text"
       = question.text
   .share
     .fb-send data-href=question_url(question)
