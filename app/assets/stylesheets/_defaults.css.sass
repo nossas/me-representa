@@ -19,6 +19,12 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
+// Fonts defaults
++font-face('Akagi-Book', font-files(asset_path('ttf/style_174436.ttf', 'font'), asset_path('woff/style_174436.woff', 'font'), asset_path('svg/style_174436.svg', 'font')), asset_path('eot/style_174436.eot', 'font'))
++font-face('Akagi-Book', font-files(asset_path('ttf/Akagi-Ex.ttf', 'font')), asset_path('eot/style_174436.eot', 'font'), bold)
++font-face('Folk-solid', font-files(asset_path('woff/style_192110.woff', 'font'), asset_path('ttf/style_192110.ttf', 'font'), asset_path('svg/style_192110.svg', 'font')), asset_path('eot/style_192110.eot', 'font'))
+
+// Main layout style
 body
   font: normal 1em/28px "Akagi-Book", Tahoma, Lucida Grande
   color: $gray
@@ -50,7 +56,7 @@ a, a:active, a:visited
   text-decoration: none
   &:hover
     color: lighten($blue, 10%)
-    text-decoration: underline
+    border-bottom: 1px solid lighten($blue, 10%)
 
 input[type=text]
   border: 1px solid #dedede
@@ -84,3 +90,30 @@ input[disabled]
   background: red
 .notice
   background: $green
+
+// Footer is repeated in the splash and the application layouts.
+footer
+  +grid-container
+  nav.links
+    +grid(8)
+    text-shadow: 1px 1px 1px white
+    a
+      color: $gray
+      text-transform: uppercase
+      &:hover
+        color: $gray
+        border-bottom: 1px solid $gray
+    span
+      margin: 0 10px
+  .participate
+    +grid(8)
+    +clearfix
+    margin-bottom: 10px
+    span
+      background: white
+      float: right
+      line-height: 100%
+      padding: 10px
+      +border-radius(5px)
+
+

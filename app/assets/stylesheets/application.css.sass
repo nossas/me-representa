@@ -2,9 +2,6 @@
 @import defaults
 @import chosen
 
-+font-face('Akagi-Book', font-files(asset_path('ttf/style_174436.ttf', 'font'), asset_path('woff/style_174436.woff', 'font'), asset_path('svg/style_174436.svg', 'font')), asset_path('eot/style_174436.eot', 'font'))
-+font-face('Akagi-Book', font-files(asset_path('ttf/Akagi-Ex.ttf', 'font')), asset_path('eot/style_174436.eot', 'font'), bold)
-+font-face('Folk-solid', font-files(asset_path('woff/style_192110.woff', 'font'), asset_path('ttf/style_192110.ttf', 'font'), asset_path('svg/style_192110.svg', 'font')), asset_path('eot/style_192110.eot', 'font'))
 
 h1
   font-size: 2.3em
@@ -74,29 +71,6 @@ a[data-method="delete"]
     text-decoration: none
     color: darken($green, 5%)
     border-bottom: none
-
-footer
-  +grid-container
-  nav.links
-    +grid(8)
-    text-shadow: 1px 1px 1px white
-    a
-      color: $gray
-      text-transform: uppercase
-      &:hover
-        color: $gray
-    span
-      margin: 0 10px
-  .participate
-    +grid(8)
-    +clearfix
-    margin-bottom: 10px
-    span
-      background: white
-      float: right
-      line-height: 100%
-      padding: 10px
-      +border-radius(5px)
 
 section.info, section.questions
   +grid($grid-system)
