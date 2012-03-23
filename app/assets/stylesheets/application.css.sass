@@ -126,6 +126,20 @@ section.questions
       +box-shadow(inset 1px 1px 4px #333)
   section.truth, section.dare
     +grid($grid-half)
+    .form.truth
+      .share
+        text-align: center
+        a.twitter_btn, a.fb_btn
+          padding-top: 128px
+          width: 128px
+          +scale(.9)
+          +transition-duration(.3s)
+          &:hover
+            +scale(1)
+        a.twitter_btn
+          background: url(asset_path('social-twitter-box-white-icon-128.png', 'image'))
+        a.fb_btn
+          background: url(asset_path('social-facebook-box-white-icon-128.png', 'image'))
     .form, .questions_list
       +border-radius(6px)
       +box-shadow(4px 4px 0 #00639D)
@@ -198,7 +212,7 @@ section.questions
       margin-bottom: 20px
       text-transform: uppercase
     li
-      padding: 10px 0 30px 0
+      padding: 10px 0
       border-top: 1px dashed gray
       &:last-child
         border-bottom: none
@@ -214,12 +228,10 @@ section.questions
           float: right
         p.headline
           font-size: .8em
-      .share
-        iframe, .fb-send
-          float: right
-          margin-left: 5px
-
-      .vote
+      .buttons
+        text-align: right
+        form
+          display: inline-block
         input
           background: none
           font-family: "Akagi-Book"
@@ -227,7 +239,14 @@ section.questions
           border: none
           text-transform: none
           +box-shadow(none)
-          float: right
+          padding: 0
+          font-size: 1em
+        a.twitter_btn, a.fb_btn
+          opacity: .5 
+          +transition-property(opacity)
+          +transition-duration(.3s)
+          &:hover
+            opacity: 1
     li.truth
       p
         &:last-child
@@ -242,3 +261,22 @@ section.questions
 form[action="/questions"]
   label
     display: none
+
+a.twitter_btn, a.fb_btn
+  display: inline-block
+  width: 24px
+  height: 0
+  padding-top: 24px
+  color: transparent
+  overflow: hidden
+  cursor: pointer
+  &:hover
+    text-decoration: none
+    border: none
+    color: transparent
+
+a.twitter_btn
+  background: url(asset_path('social-twitter-box-white-icon.png', 'image'))
+
+a.fb_btn
+  background: url(asset_path('social-facebook-box-white-icon.png', 'image'))
