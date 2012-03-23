@@ -37,6 +37,7 @@ App.Questions = {
         this.generatePreview();
         this.preview.show();
       }
+      return false;
     }
   }),
 
@@ -62,7 +63,7 @@ App.Questions = {
         obj.after('Valeu por votar!');
         obj.remove();
       });
-
+      
       $('#questions_truth').bind("ajax:success", function(event, data){ 
         $.get('questions?type_role=truth', function(data) { $('#truths').html(data); });
         $(".form.truth").html(data);
