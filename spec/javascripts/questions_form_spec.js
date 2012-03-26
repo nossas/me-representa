@@ -1,10 +1,14 @@
 describe("Questions.Form", function(){
   var view;
   var context = describe;
+  var storeStub;
   beforeEach(function(){
     view = new App.Questions.Form({
       el: $('<form><div class="preview"><div class="description"></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
     });
+
+    storeStub = { get: function(){}, set: function(){}, remove: function(){} };
+
     App.Common.login = {
       validate: function(){},
       showOptions: function(){}
@@ -28,12 +32,20 @@ describe("Questions.Form", function(){
       expect(view.actions).toEqual(jasmine.any(Object));
     });
 
+    it("shoud initialize a select element", function(){
+      expect(view.select).toEqual(jasmine.any(Object));
+    });
+
     it("should initialize a textarea element", function(){
       expect(view.textarea).toEqual(jasmine.any(Object));
     });
 
     it("should initialize a question element", function(){
       expect(view.question).toEqual(jasmine.any(Object));
+    });
+
+    it("should create a question store", function(){
+      expect(view.store).toEqual(jasmine.any(Store));
     });
   });
 
@@ -81,6 +93,22 @@ describe("Questions.Form", function(){
     it("should copy selected option to preview category", function(){
       expect(view.previewCategory.html()).toEqual(view.$('[name="question[category_id]"] option:selected').html());
     });
+  });
+
+
+  describe("#storeQuestionData", function(){
+
+    beforeEach(function(){
+      view.store = storeStub;
+    });
+    it("should store question[category_id] and question[text]", function(){
+      spyOn(view.store, "set");
+      spyOn(view.select, "val").andReturn('1')
+      spyOn(view.textarea, "val").andReturn('My question text');
+      view.storeQuestionData();
+      expect(view.store.set).toHaveBeenCalledWith('category', '1');
+      expect(view.store.set).toHaveBeenCalledWith('text', 'My question text');
+    })
   });
 
   describe("#showPreview", function(){
@@ -180,6 +208,12 @@ describe("Questions.Form", function(){
         spyOn(view.preview, "show");
         view.showPreview();
         expect(view.preview.show).wasNotCalled();
+      });
+
+      it("should store the question data", function(){
+        spyOn(view, "storeQuestionData");
+        view.showPreview();
+        expect(view.storeQuestionData).toHaveBeenCalled();
       });
 
       it("should show the box with login options", function(){

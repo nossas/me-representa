@@ -11,8 +11,10 @@ App.Questions = {
       this.previewCategory = this.$('.preview .category');
       this.previewDescription = this.$('.preview .description');
       this.question = this.$('.question');
+      this.select = this.$('select');
       this.textarea = this.$('textarea');
       this.actions = this.$('.action');
+      this.store = new Store('question');
       this.$('select.chosen-select').chosen();
     },
 
@@ -31,12 +33,18 @@ App.Questions = {
       this.previewCategory.html(this.$('[name="question[category_id]"] option:selected').html());
     },
 
+    storeQuestionData: function(){
+      this.store.set('category', this.select.val());
+      this.store.set('text', this.textarea.val());
+    },
+
     showPreview: function(){
       if($(this.el).valid() && App.Common.login.validate()){
         this.question.hide();
         this.generatePreview();
         this.preview.show();
       } else {
+        this.storeQuestionData();
         App.Common.login.showOptions();
       }
       return false;
@@ -70,8 +78,8 @@ App.Questions = {
         $.get('questions?type_role=truth', function(data) { $('#truths').html(data); });
         $(".form.truth fieldset").html(data);
       });
-      
-      $('#questions_dare').bind("ajax:success", function(event, data){ 
+
+      $('#questions_dare').bind("ajax:success", function(event, data){
         $.get('questions?type_role=dare', function(data) { $('#dares').html(data); });
         $(".form.dare fieldset").html(data);
       });
