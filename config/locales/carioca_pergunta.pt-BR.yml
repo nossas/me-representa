@@ -21,4 +21,4 @@ pt-BR:
         want_to_know_html: " quer saber sobre %{link} "
       dare:
         text: "Sr(a). candidato, você deverá "
-        want_to_know_html: " lançou demanda para %{link} "
+        want_to_know_html: " lançou uma demanda para %{link} "
