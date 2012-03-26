@@ -26,7 +26,7 @@ App.Questions = {
 
   fillFormWithPreviousStoreData: function(){
     if (this.store.get('category') && this.store.get('text')){
-      this.$('[name="question[category_id]"] option[value="'+this.store.get('category')+'"]').attr('selected','selected');
+      this.select.children('option[value='+this.store.get('category')+']').attr('selected','selected');
       this.textarea.html(this.store.get('text'));
       this.role_type.val(this.store.get('role_type'));
       this.showPreview();
