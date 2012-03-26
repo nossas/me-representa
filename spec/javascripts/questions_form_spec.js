@@ -2,6 +2,8 @@ describe("Questions.Form", function(){
   var view;
   var context = describe;
   var storeStub;
+  App.Common.login = { validate: function(){}, showOptions: function(){} };
+
   beforeEach(function(){
     view = new App.Questions.Form({
       el: $('<form id="questions"><div class="preview"><div class="description"></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
@@ -9,10 +11,7 @@ describe("Questions.Form", function(){
 
     storeStub = { get: function(){}, set: function(){}, remove: function(){} };
 
-    App.Common.login = {
-      validate: function(){},
-      showOptions: function(){}
-    };
+
   });
 
   describe("#initialize", function(){
@@ -41,6 +40,10 @@ describe("Questions.Form", function(){
       expect(view.select).toEqual(jasmine.any(Object));
     });
 
+    it("shoud initialize a select element", function(){
+      expect(view.role_type).toEqual(jasmine.any(Object));
+    });
+
     it("should initialize a textarea element", function(){
       expect(view.textarea).toEqual(jasmine.any(Object));
     });
@@ -54,7 +57,7 @@ describe("Questions.Form", function(){
     });
 
     it("should check if there is store data to fill the form and generate the preview", function(){
-      expect(view.fillFormWithStoreData).toEqual(jasmine.any(Function));
+      expect(view.fillFormWithPreviousStoreData).toEqual(jasmine.any(Function));
     });
   });
 
@@ -105,23 +108,31 @@ describe("Questions.Form", function(){
   });
 
 
+  describe("#fillFormWithPreviousStoreData", function(){
+
+    beforeEach(function(){
+
+    });
+
+
+  });
+
   describe("#storeQuestionData", function(){
 
     beforeEach(function(){
       view.store = storeStub;
-      view.id = "truth";
     });
 
     it("should store question[category_id] and question[text]", function(){
       spyOn(view.store, "set");
       spyOn(view.select, "val").andReturn('1')
       spyOn(view.textarea, "val").andReturn('My question text');
-
+      spyOn(view.role_type, "val").andReturn('truth')
       view.storeQuestionData();
 
       expect(view.store.set).toHaveBeenCalledWith('category', '1');
       expect(view.store.set).toHaveBeenCalledWith('text', 'My question text');
-      expect(view.store.set).toHaveBeenCalledWith('id', 'truth');
+      expect(view.store.set).toHaveBeenCalledWith('role_type', 'truth');
     });
   });
 
