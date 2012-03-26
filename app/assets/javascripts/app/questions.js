@@ -14,25 +14,29 @@ App.Questions = {
       this.question = this.$('.question');
       this.select = this.$('select');
       this.textarea = this.$('textarea');
-      this.role_type = this.$('question[role_type]');
+      this.role_type = this.$('[name="question[role_type]"]');
       this.actions = this.$('.action');
-      this.store = new Store(this.id);
+      this.store = this.store || new Store(this.id);
       this.$('select.chosen-select').chosen();
 
       // Checking if there is some store data
       this.fillFormWithPreviousStoreData();
     },
 
+    checkStoreData: function(){
+      if (this.store.get('category') && this.store.get('text') && this.store.get('role_type'))
+        return true
+    },
+
 
     fillFormWithPreviousStoreData: function(){
-      if (this.store.get('category') && this.store.get('text') && this.store.get('role_type')){
+      if (this.checkStoreData()){
         this.select.children('option[value='+this.store.get('category')+']').attr('selected','selected');
         this.textarea.html(this.store.get('text'));
         this.role_type.val(this.store.get('role_type'));
         this.showPreview();
         Store.clear();
       }
-      return false;
     },
 
     returnTextarea: function(){
