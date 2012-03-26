@@ -1,16 +1,17 @@
 describe("Questions.Form", function(){
   var view;
-
+  var context = describe;
   beforeEach(function(){
     view = new App.Questions.Form({
       el: $('<form><div class="preview"><div class="description"></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
     });
     App.Common.login = {
-      validate: function(){}
+      validate: function(){},
+      showOptions: function(){}
     };
   });
 
-  describe("#intitalize", function(){
+  describe("#initialize", function(){
     it("should initialize a preview description element", function(){
       expect(view.previewDescription).toEqual(jasmine.any(Object));
     });
@@ -89,7 +90,7 @@ describe("Questions.Form", function(){
 
     beforeEach(function(){
       spyOn(validator, "valid").andReturn(true);
-      spyOn(App.Common.login, "validate").andReturn(true);
+      spyOn(App.Common.login, "showOptions");
       $ = function(){
         return validator;
       };
@@ -99,40 +100,97 @@ describe("Questions.Form", function(){
       $ = jQuery;
     });
 
-    it("should not require login if form validation is false", function(){
-      validator.valid.andReturn(false);
-      view.showPreview();
-      expect(App.Common.login.validate).wasNotCalled();
-    });
+    context("When the user is logged in", function(){
 
-    it("should require login", function(){
-      view.showPreview();
-      expect(App.Common.login.validate).toHaveBeenCalled();
-    });
+      beforeEach(function(){
+        spyOn(App.Common.login, "validate").andReturn(true);
+      })
 
-    it("should generate the preview", function(){
-      spyOn(view, "generatePreview");
-      view.showPreview();
-      expect(view.generatePreview).toHaveBeenCalled();
-    });
+      it("should not require login if form validation is false", function(){
+        validator.valid.andReturn(false);
+        view.showPreview();
+        expect(App.Common.login.validate).wasNotCalled();
+      });
 
-    it("should validate the form", function(){
-      view.showPreview();
-      expect(validator.valid).toHaveBeenCalled();
-    });
+      it("should require login", function(){
+        view.showPreview();
+        expect(App.Common.login.validate).toHaveBeenCalled();
+      });
 
-    it("should hide question login.validate is true", function(){
-      spyOn(view.question, "hide");
-      view.showPreview();
-      expect(view.question.hide).toHaveBeenCalled();
-    });
+      it("should generate the preview", function(){
+        spyOn(view, "generatePreview");
+        view.showPreview();
+        expect(view.generatePreview).toHaveBeenCalled();
+      });
 
-    it("should show preview if login.validate is true", function(){
-      spyOn(view.preview, "show");
-      view.showPreview();
-      expect(view.preview.show).toHaveBeenCalled();
+      it("should validate the form", function(){
+        view.showPreview();
+        expect(validator.valid).toHaveBeenCalled();
+      });
+
+      it("should hide question login.validate is true", function(){
+        spyOn(view.question, "hide");
+        view.showPreview();
+        expect(view.question.hide).toHaveBeenCalled();
+      });
+
+      it("should show preview if login.validate is true", function(){
+        spyOn(view.preview, "show");
+        view.showPreview();
+        expect(view.preview.show).toHaveBeenCalled();
+      });
     });
-  });
+    // end user-logged-in context
+
+    context("When the user is not logged in", function(){
+
+      beforeEach(function(){
+        spyOn(App.Common.login, "validate").andReturn(false);
+      })
+
+      it("should validate the form", function(){
+        view.showPreview();
+        expect(validator.valid).toHaveBeenCalled();
+      });
+
+      it("should not require login if form validation is false", function(){
+        validator.valid.andReturn(false);
+        view.showPreview();
+        expect(App.Common.login.validate).wasNotCalled();
+      });
+
+      it("should require login", function(){
+        view.showPreview();
+        expect(App.Common.login.validate).toHaveBeenCalled();
+      });
+
+      it("should not generate the preview", function(){
+        spyOn(view, "generatePreview");
+        view.showPreview();
+        expect(view.generatePreview).wasNotCalled();
+      });
+
+      it("should not hide question if login.validate is false", function(){
+        spyOn(view.question, "hide");
+        view.showPreview();
+        expect(view.question.hide).wasNotCalled();
+      });
+
+      it("should not show preview if login.validate is false", function(){
+        spyOn(view.preview, "show");
+        view.showPreview();
+        expect(view.preview.show).wasNotCalled();
+      });
+
+      it("should show the box with login options", function(){
+        view.showPreview();
+        expect(App.Common.login.showOptions).toHaveBeenCalled();
+      })
+
+
+    });
+    // end user-not-logged-in context
+  })
 
 
 });

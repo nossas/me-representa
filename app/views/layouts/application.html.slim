@@ -19,6 +19,10 @@ html
         span apresenta:
 
         section.login
+          .login_options.hidden
+            ul
+              li= link_to "Facebook", "/auth/facebook"
+              li= link_to "MeuRio", "/auth/meurio"
           - if signed_in?
             .logged
               | Olá, #{current_user.name}

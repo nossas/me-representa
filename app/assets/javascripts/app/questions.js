@@ -36,6 +36,8 @@ App.Questions = {
         this.question.hide();
         this.generatePreview();
         this.preview.show();
+      } else {
+        App.Common.login.showOptions();
       }
       return false;
     }
@@ -63,8 +65,8 @@ App.Questions = {
         obj.after('Valeu por votar!');
         obj.remove();
       });
-      
-      $('#questions_truth').bind("ajax:success", function(event, data){ 
+
+      $('#questions_truth').bind("ajax:success", function(event, data){
         $.get('questions?type_role=truth', function(data) { $('#truths').html(data); });
         $(".form.truth").html(data);
       });

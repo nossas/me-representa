@@ -10,7 +10,12 @@ var App = window.App = {
     Login: Backbone.View.extend({
       validate: function(){
         return this.$('.logged').length;
+      },
+      showOptions: function(){
+        if (this.$('.login_options').length)
+          this.$('.login_options').fadeIn();
       }
+
     })
   }
 };

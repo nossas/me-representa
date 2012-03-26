@@ -12,4 +12,19 @@ describe("Common.Login", function(){
       expect(view.validate()).toBeFalsy();
     });
   });
+
+
+  describe("#showOptions", function(){
+    afterEach(function(){
+      $ = jQuery;
+    })
+    it("should fade in a div with login options", function(){
+
+      view = new App.Common.Login({el: $('<section><div class="login_options"></section>')[0]});
+      spyOn($.fn, "fadeIn")
+      view.showOptions();
+      expect($.fn.fadeIn).toHaveBeenCalled();
+    })
+
+  })
 });
