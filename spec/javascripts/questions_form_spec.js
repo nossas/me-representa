@@ -4,7 +4,7 @@ describe("Questions.Form", function(){
   var storeStub;
   beforeEach(function(){
     view = new App.Questions.Form({
-      el: $('<form><div class="preview"><div class="description"></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
+      el: $('<form id="questions"><div class="preview"><div class="description"></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
     });
 
     storeStub = { get: function(){}, set: function(){}, remove: function(){} };
@@ -16,6 +16,11 @@ describe("Questions.Form", function(){
   });
 
   describe("#initialize", function(){
+
+    it("should get the form id", function(){
+      expect(view.id).toEqual(jasmine.any(String));
+    });
+
     it("should initialize a preview description element", function(){
       expect(view.previewDescription).toEqual(jasmine.any(Object));
     });
@@ -46,6 +51,10 @@ describe("Questions.Form", function(){
 
     it("should create a question store", function(){
       expect(view.store).toEqual(jasmine.any(Store));
+    });
+
+    it("should check if there is store data to fill the form and generate the preview", function(){
+      expect(view.fillFormWithStoreData).toEqual(jasmine.any(Function));
     });
   });
 
@@ -100,15 +109,20 @@ describe("Questions.Form", function(){
 
     beforeEach(function(){
       view.store = storeStub;
+      view.id = "truth";
     });
+
     it("should store question[category_id] and question[text]", function(){
       spyOn(view.store, "set");
       spyOn(view.select, "val").andReturn('1')
       spyOn(view.textarea, "val").andReturn('My question text');
+
       view.storeQuestionData();
+
       expect(view.store.set).toHaveBeenCalledWith('category', '1');
       expect(view.store.set).toHaveBeenCalledWith('text', 'My question text');
-    })
+      expect(view.store.set).toHaveBeenCalledWith('id', 'truth');
+    });
   });
 
   describe("#showPreview", function(){

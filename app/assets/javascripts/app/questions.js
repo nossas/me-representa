@@ -15,8 +15,15 @@ App.Questions = {
       this.textarea = this.$('textarea');
       this.actions = this.$('.action');
       this.store = new Store('question');
+      this.id = this.el.id;
       this.$('select.chosen-select').chosen();
+
+      // Checking if there is some store data
+      this.fillFormWithStoreData;
     },
+
+
+    fillFormWithStoreData: function(event){},
 
     returnTextarea: function(){
       this.textarea.animate({ height: "60px" })
@@ -36,6 +43,7 @@ App.Questions = {
     storeQuestionData: function(){
       this.store.set('category', this.select.val());
       this.store.set('text', this.textarea.val());
+      this.store.set('id', this.id);
     },
 
     showPreview: function(){
