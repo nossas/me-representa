@@ -40,7 +40,7 @@ describe("Questions.Form", function(){
       expect(view.select).toEqual(jasmine.any(Object));
     });
 
-    it("shoud initialize a select element", function(){
+    it("shoud initialize a role_type element", function(){
       expect(view.role_type).toEqual(jasmine.any(Object));
     });
 
