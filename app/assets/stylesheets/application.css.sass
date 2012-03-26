@@ -126,20 +126,21 @@ section.questions
       +box-shadow(inset 1px 1px 4px #333)
   section.truth, section.dare
     +grid($grid-half)
-    .form.truth
-      .share
-        text-align: center
-        a.twitter_btn, a.fb_btn
-          padding-top: 128px
-          width: 128px
-          +scale(.9)
-          +transition-duration(.3s)
-          &:hover
-            +scale(1)
-        a.twitter_btn
-          background: url(asset_path('social-twitter-box-white-icon-128.png', 'image'))
-        a.fb_btn
-          background: url(asset_path('social-facebook-box-white-icon-128.png', 'image'))
+    .share
+      text-align: center
+      a.twitter_btn, a.fb_btn
+        padding-top: 128px
+        width: 128px
+        +scale(.9)
+        +transition-duration(.3s)
+        &:hover
+          +scale(1)
+      a.twitter_btn
+        background: url(asset_path('social-twitter-box-white-icon-128.png', 'image'))
+      a.fb_btn
+        background: url(asset_path('social-facebook-box-white-icon-128.png', 'image'))
+      h2
+        border: none
     .form, .questions_list
       +border-radius(6px)
       +box-shadow(4px 4px 0 #00639D)

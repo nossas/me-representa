@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     @truths ||= Question.truth
     @dares ||= Question.dare
     if request.xhr?
-      render @truths and return true
+      render (params[:type_role] == "truth" ? @truths : @dares) and return true
     end
   end
 

@@ -68,7 +68,12 @@ App.Questions = {
 
       $('#questions_truth').bind("ajax:success", function(event, data){
         $.get('questions?type_role=truth', function(data) { $('#truths').html(data); });
-        $(".form.truth").html(data);
+        $(".form.truth fieldset").html(data);
+      });
+      
+      $('#questions_dare').bind("ajax:success", function(event, data){ 
+        $.get('questions?type_role=dare', function(data) { $('#dares').html(data); });
+        $(".form.dare fieldset").html(data);
       });
     },
   })

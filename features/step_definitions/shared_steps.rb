@@ -17,7 +17,7 @@ end
 Given /^I choose "([^"]*)" for "([^"]*)"$/ do |arg1, arg2|
   case arg2
   when "Assunto"
-    page.execute_script("$(\"#select_truth\").val(#{Category.find_by_name(arg1).id})")
+    page.execute_script("$(\"select[name='question[category_id]']\").val(#{Category.find_by_name(arg1).id})")
   else
     select arg1, :from => arg2
   end
@@ -51,9 +51,12 @@ Then /^I should see ([^"]*)$/ do |arg1|
       page.find("li[data-id=\"#{@question.id}\"] a.fb_btn").should be_visible
     when "a Twitter share button for this question"
       page.find("li[data-id=\"#{@question.id}\"] a.twitter_btn").should be_visible
-    when "some share buttons for my question"
+    when "some share buttons for my truth"
       page.find(".form.truth").should have_css("a.twitter_btn")
       page.find(".form.truth").should have_css("a.fb_btn")
+    when "some share buttons for my dare"
+      page.find(".form.dare").should have_css("a.twitter_btn")
+      page.find(".form.dare").should have_css("a.fb_btn")
     else
       page.should have_content(arg1)
   end
