@@ -40,7 +40,7 @@ describe("Questions.Form", function(){
       expect(view.select).toEqual(jasmine.any(Object));
     });
 
-    it("shoud initialize a select element", function(){
+    it("shoud initialize a role_type element", function(){
       expect(view.role_type).toEqual(jasmine.any(Object));
     });
 
@@ -111,7 +111,38 @@ describe("Questions.Form", function(){
   describe("#fillFormWithPreviousStoreData", function(){
 
     beforeEach(function(){
+      view.store = storeStub;
+      spyOn(App.Common.login, "validate").andReturn(true);
+      spyOn(view.store, "get");
+      spyOn(view, "showPreview");
+      spyOn(Store, "clear");
 
+    });
+
+    it("should show the preview if the user wasn't logged in but wrote a question before its login", function(){
+      spyOn(view, "checkStoreData").andReturn(true);
+
+
+      view.fillFormWithPreviousStoreData();
+
+      expect(view.store.get).toHaveBeenCalledWith('category');
+      expect(view.store.get).toHaveBeenCalledWith('role_type');
+      expect(view.store.get).toHaveBeenCalledWith('text');
+      expect(view.showPreview).toHaveBeenCalled();
+      expect(Store.clear).toHaveBeenCalled();
+    });
+
+    it("should NOT show the preview if the user didn't write a question before its login", function(){
+      spyOn(view, "checkStoreData").andReturn(false);
+
+
+      view.fillFormWithPreviousStoreData();
+
+      expect(view.store.get).not.toHaveBeenCalledWith('category');
+      expect(view.store.get).not.toHaveBeenCalledWith('role_type');
+      expect(view.store.get).not.toHaveBeenCalledWith('text');
+      expect(view.showPreview).not.toHaveBeenCalled();
+      expect(Store.clear).not.toHaveBeenCalled();
     });
 
 
