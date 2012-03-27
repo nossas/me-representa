@@ -1,7 +1,5 @@
-span= t "votes", :count => question.votes.count
-- if session[:votes].include? question.id
-  | Valeu por votar!
-- else
+span.votes= t "votes", :count => question.votes.count
+- unless session[:votes].include? question.id
   = simple_form_for [question, Vote.new], :remote => true do |f|
     = f.submit "Votar"
 = link_to "Tweetar", "javascript:window.open('https://twitter.com/share?url=#{question_url(question)}&text=#{t "questions.#{question.user == current_user ? 'my_share' : 'share'}." + question.role_type, :user => question.user.name, :category => question.category.name, :link => question_url(question)}', '', 'width=640, height=400, scrollbars=no');", :class => "twitter_btn", :title => "Tweetar"
