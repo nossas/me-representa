@@ -68,7 +68,7 @@ App.Questions = {
           this.preview.show();
         } else {
           this.storeQuestionData();
-          App.Common.login.showOptions();
+          App.Common.login.showOptions(this.el);
         }
       }
     }
