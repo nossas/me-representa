@@ -19,12 +19,12 @@ describe("Common.Login", function(){
     it("should replace the target with a login box", function(){
       spyOn($.fn, "fadeOut");
       spyOn($.fn, "fadeIn");
-      spyOn($.fn, "clone");
+      spyOn($.fn, "clone").andCallThrough();
 
       view = new App.Common.Login({ el: $('<section><div class="login_options"><ul><li>option</li></ul></div></section>')[0]});
       form = $('<div class="form"><fieldset><form id="questions"></form></fieldset></div>');
 
-      view.showOptions(form);
+      view.showOptions(form.find('form')[0]);
 
       expect($.fn.fadeOut).toHaveBeenCalled();
       expect($.fn.fadeIn).toHaveBeenCalled();
