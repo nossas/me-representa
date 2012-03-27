@@ -65,6 +65,7 @@ App.Questions = {
       this.$('select.chosen-select').trigger('liszt:updated');
       this.preview.hide();
       this.question.show();
+      this.actions.show();
     },
 
     showPreview: function(){

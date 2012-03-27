@@ -173,10 +173,12 @@ describe("Questions.Form", function(){
     it("should hide preview and show the form plus update the chosen select", function(){
       spyOn(view.preview, "hide");
       spyOn(view.question, "show");
+      spyOn(view.actions, "show");
       spyOn($.fn, "trigger")
       view.hidePreview();
 
       expect(view.question.show).toHaveBeenCalled();
+      expect(view.actions.show).toHaveBeenCalled();
       expect(view.preview.hide).toHaveBeenCalled();
       expect($.fn.trigger).toHaveBeenCalledWith('liszt:updated');
 
