@@ -15,11 +15,20 @@ describe("Common.Login", function(){
 
 
   describe("#showOptions", function(){
-    it("should fade in a div with login options", function(){
-      view = new App.Common.Login({el: $('<section><div class="login_options"></section>')[0]});
-      spyOn($.fn, "fadeIn")
-      view.showOptions();
+
+    it("should replace the target with a login box", function(){
+      spyOn($.fn, "fadeOut");
+      spyOn($.fn, "fadeIn");
+      spyOn($.fn, "clone");
+
+      view = new App.Common.Login({ el: $('<section><div class="login_options"><ul><li>option</li></ul></div></section>')[0]});
+      form = $('<div class="form"><fieldset><form id="questions"></form></fieldset></div>');
+
+      view.showOptions(form);
+
+      expect($.fn.fadeOut).toHaveBeenCalled();
       expect($.fn.fadeIn).toHaveBeenCalled();
+      expect($.fn.clone).toHaveBeenCalled();
     })
 
   })

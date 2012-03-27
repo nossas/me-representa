@@ -274,7 +274,7 @@ describe("Questions.Form", function(){
 
       it("should show the box with login options", function(){
         view.showPreview();
-        expect(App.Common.login.showOptions).toHaveBeenCalled();
+        expect(App.Common.login.showOptions).toHaveBeenCalledWith(view.el);
       })
 
 
