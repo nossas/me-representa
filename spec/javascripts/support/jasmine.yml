@@ -11,14 +11,12 @@
 #   - dist/**/*.js
 #
 src_files:
-  - app/assets/javascripts/lib/jquery.js
-  - app/assets/javascripts/lib/underscore.js
-  - app/assets/javascripts/lib/backbone.js
-  - app/assets/javascripts/lib/chosen.js
-  - app/assets/javascripts/lib/jquery.validate.js
-  - app/assets/javascripts/lib/store.js
-  - app/assets/javascripts/app.js
-  - app/assets/javascripts/app/questions.js
+  - public/javascripts/prototype.js
+  - public/javascripts/effects.js
+  - public/javascripts/controls.js
+  - public/javascripts/dragdrop.js
+  - public/javascripts/application.js
+  - public/javascripts/**/*.js
 
 # stylesheets
 #

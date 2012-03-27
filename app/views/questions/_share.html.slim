@@ -1,5 +1,5 @@
 .share
   h4 Agora só falta os seus amigos apoiarem a sua #{@question.truth? ? "pergunta" : "demanda"}...
   h2 Compartilhe!
-  = link_to "Tweetar", "javascript:window.open('https://twitter.com/share?url=#{question_url(@question)}&text=#{@question.headline}', '', 'width=640, height=400, scrollbars=no');", :class => "twitter_btn", :title => "Tweetar"
+  = link_to "Tweetar", "javascript:window.open('https://twitter.com/share?url=#{question_url(@question)}&text=#{t "questions.my_share." + @question.role_type, :category => @question.category.name, :link => question_url(@question)}', '', 'width=640, height=400, scrollbars=no');", :class => "twitter_btn", :title => "Tweetar"
   = link_to "Compartilhar no Facebook", "http://www.facebook.com/dialog/feed?app_id=#{ENV["FB_ID"]}&link=#{question_url(@question)}&redirect_uri=#{request.url}", :class => "fb_btn", :title => "Compartilhar no Facebook"

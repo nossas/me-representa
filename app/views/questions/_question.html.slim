@@ -10,5 +10,5 @@ li data-id=question.id class=question.role_type
   .buttons
     = simple_form_for [question, Vote.new], :remote => true, :format => :json do |f|
       = f.submit "Votar", :disable_with => "carregando..."
-    = link_to "Tweetar", "javascript:window.open('https://twitter.com/share?url=#{question_url(question)}&text=#{question.headline}', '', 'width=640, height=400, scrollbars=no');", :class => "twitter_btn", :title => "Tweetar"
+    = link_to "Tweetar", "javascript:window.open('https://twitter.com/share?url=#{question_url(question)}&text=#{t "questions.share." + question.role_type, :user => question.user.name, :category => question.category.name, :link => question_url(question)}', '', 'width=640, height=400, scrollbars=no');", :class => "twitter_btn", :title => "Tweetar"
     = link_to "Compartilhar no Facebook", "http://www.facebook.com/dialog/feed?app_id=#{ENV["FB_ID"]}&link=#{question_url(question)}&redirect_uri=#{request.url}", :class => "fb_btn", :title => "Compartilhar no Facebook"

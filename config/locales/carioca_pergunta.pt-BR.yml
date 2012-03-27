@@ -22,3 +22,9 @@ pt-BR:
       dare:
         text: "Sr(a). candidato, você deverá "
         want_to_know_html: " lançou uma demanda para %{link} "
+    share:
+      truth: "%{user} fez uma pergunta sobre %{category} aos candidatos a vereador do Rio %{link}"
+      dare: "%{user} fez uma demanda de #{category} aos candidatos a vereador do Rio %{link}"
+    my_share:
+      truth: "Fiz uma pergunta sobre %{category} aos candidatos a vereador do Rio. Preciso do apoio de vocês! %{link}"
+      dare: "Fiz uma demanda de #{category} aos candidatos a vereador do Rio. Preciso do apoio de vocês! %{link}"
