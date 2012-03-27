@@ -4,9 +4,13 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
   respond_to :html, :json
 
+  def more
+    render collection, :layout => false
+  end
+
   def index
-    @truths ||= Question.truth
-    @dares ||= Question.dare
+    @truths ||= Question.truth.limit(5)
+    @dares ||= Question.dare.limit(5)
     if request.xhr?
       render (params[:type_role] == "truth" ? @truths : @dares) and return true
     end
