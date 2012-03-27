@@ -92,7 +92,9 @@ App.Questions = {
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
 
       $('form.new_vote').bind('ajax:success', function(event, data){
-        $(this).parent().html(data); 
+        var buttons = $(this).parent();
+        buttons.html(data);
+        buttons.find("span.votes").effect("highlight", {}, 1000);
       });
 
       $('#questions_truth').bind("ajax:success", function(event, data){

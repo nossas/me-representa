@@ -237,6 +237,7 @@ section.questions
       &:last-child
         border-bottom: none
       .question
+        margin-bottom: 10px
         +clearfix
         img
           float: left
@@ -249,15 +250,35 @@ section.questions
         p.headline
           font-size: .8em
       .buttons
-        text-align: right
+        +clearfix
         a.twitter_btn, a.fb_btn
+          display: block
+          float: right
           opacity: .5
           +transition-property(opacity)
           +transition-duration(.3s)
           &:hover
             opacity: 1
         form
-          display: inline-block
+          display: inline
+          input
+            padding: 0
+            background: none
+            color: $blue
+            border: none
+            font-family: "Akagi-Book", Tahoma, Lucida Grande
+            text-transform: none
+            padding: 5px
+            font-size: 1em
+            margin: 0
+            +box-shadow(none)
+            &:hover
+              text-decoration: underline
+        span.votes
+          background: $blue
+          padding: 5px
+          color: white
+          +border-radius(5px)
     li.truth
       p
         &:last-child
