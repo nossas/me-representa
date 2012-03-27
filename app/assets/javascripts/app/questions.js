@@ -3,6 +3,7 @@ App.Questions = {
     events: {
       'click button.reset' : 'returnTextarea',
       'click button.preview' : 'showPreview',
+      'click button.edit' : 'hidePreview',
       'focus textarea' : 'expandTextarea'
     },
 
@@ -10,7 +11,7 @@ App.Questions = {
       this.id = this.el.id;
       this.preview = this.$('.preview');
       this.previewCategory = this.$('.preview .category');
-      this.previewDescription = this.$('.preview .description');
+      this.previewDescription = this.$('.preview .description .text');
       this.question = this.$('.question');
       this.select = this.$('select');
       this.textarea = this.$('textarea');
@@ -58,6 +59,12 @@ App.Questions = {
       this.store.set('category', this.select.val());
       this.store.set('role_type', this.role_type.val());
       this.store.set('text', this.textarea.val());
+    },
+
+    hidePreview: function(){
+      this.$('select.chosen-select').trigger('liszt:updated');
+      this.preview.hide();
+      this.question.show();
     },
 
     showPreview: function(){

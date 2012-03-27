@@ -6,7 +6,7 @@ describe("Questions.Form", function(){
 
   beforeEach(function(){
     view = new App.Questions.Form({
-      el: $('<form id="questions"><div class="preview"><div class="description"></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
+      el: $('<form id="questions"><div class="preview"><div class="description"><span class="text"></span></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
     });
 
     storeStub = { get: function(){}, set: function(){}, remove: function(){} };
@@ -167,6 +167,22 @@ describe("Questions.Form", function(){
     });
   });
 
+
+  describe("#hidePreview", function(){
+
+    it("should hide preview and show the form plus update the chosen select", function(){
+      spyOn(view.preview, "hide");
+      spyOn(view.question, "show");
+      spyOn($.fn, "trigger")
+      view.hidePreview();
+
+      expect(view.question.show).toHaveBeenCalled();
+      expect(view.preview.hide).toHaveBeenCalled();
+      expect($.fn.trigger).toHaveBeenCalledWith('liszt:updated');
+
+    });
+  });
+
   describe("#showPreview", function(){
     var validator = {
       valid: function(){ return true }
@@ -276,8 +292,6 @@ describe("Questions.Form", function(){
         view.showPreview();
         expect(App.Common.login.showOptions).toHaveBeenCalledWith(view.el);
       })
-
-
     });
     // end user-not-logged-in context
   })

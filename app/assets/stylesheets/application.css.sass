@@ -278,6 +278,26 @@ form[action="/questions"]
   label
     display: none
 
+.preview
+  .category
+    margin: 5px 0
+  .description
+    font-family: "Akagi-Book-Italic"
+    line-height: 1.6em
+    &:after, &:before
+      content: '"'
+    span.truth
+      color: $green
+    span.dare
+      color: $orange
+
+    background: #ededed
+    padding: 15px
+    +border-radius(10px)
+    +box-shadow(inset 0px 1px 3px #cecece)
+
+
+
 a.twitter_btn, a.fb_btn
   display: inline-block
   width: 24px
