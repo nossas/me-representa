@@ -189,8 +189,9 @@ section.questions
         .chzn-container
           width: 100%
           margin: 15px 0
-        input[type=submit]
+        button[type=button], input[type=submit]
           float: right
+          margin-right: 0
         .reset
           background: none
           border: none
@@ -277,6 +278,27 @@ section.questions
 form[action="/questions"]
   label
     display: none
+
+.preview
+  .category
+    margin: 5px 0
+  .description
+    font-family: "Akagi-Book-Italic"
+    line-height: 1.6em
+    &:after, &:before
+      content: '"'
+    span.truth
+      color: $green
+    span.dare
+      color: $orange
+
+    background: #ededed
+    padding: 20px 15px
+    margin: 10px 0 15px 0
+    +border-radius(10px)
+    +box-shadow(inset 0px 1px 3px #cecece)
+
+
 
 a.twitter_btn, a.fb_btn
   display: inline-block

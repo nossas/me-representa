@@ -1,6 +1,7 @@
 App.Questions = {
   Form:  Backbone.View.extend({
     events: {
+      'click button.edit' : 'hidePreview',
       'click button.reset' : 'returnTextarea',
       'click button.preview' : 'showPreview',
       'focus textarea' : 'expandTextarea'
@@ -10,7 +11,7 @@ App.Questions = {
       this.id = this.el.id;
       this.preview = this.$('.preview');
       this.previewCategory = this.$('.preview .category');
-      this.previewDescription = this.$('.preview .description');
+      this.previewDescription = this.$('.preview .description .text');
       this.question = this.$('.question');
       this.select = this.$('select');
       this.textarea = this.$('textarea');
@@ -42,9 +43,11 @@ App.Questions = {
     returnTextarea: function(){
       this.textarea.animate({ height: "60px" });
       this.actions.slideUp('fast');
+      $(this.el).validate().resetForm();
     },
 
     expandTextarea: function(){
+      this.$('select').trigger('liszt:updated');
       this.textarea.animate({ height: "200px" });
       this.actions.slideDown('fast');
     },
@@ -58,6 +61,13 @@ App.Questions = {
       this.store.set('category', this.select.val());
       this.store.set('role_type', this.role_type.val());
       this.store.set('text', this.textarea.val());
+    },
+
+    hidePreview: function(){
+      this.$('select.chosen-select').trigger('liszt:updated');
+      this.preview.hide();
+      this.question.show();
+      this.actions.show();
     },
 
     showPreview: function(){
