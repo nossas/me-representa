@@ -21,6 +21,7 @@ $grid-half: $grid-system * 0.5
 
 // Fonts defaults
 +font-face('Akagi-Book', font-files(asset_path('ttf/style_174436.ttf', 'font'), asset_path('woff/style_174436.woff', 'font'), asset_path('svg/style_174436.svg', 'font')), asset_path('eot/style_174436.eot', 'font'))
++font-face('Akagi-Book-Italic', font-files(asset_path('ttf/Akagi-BookItalic.ttf', 'font')), italic)
 +font-face('Akagi-Book', font-files(asset_path('ttf/Akagi-Ex.ttf', 'font')), asset_path('eot/style_174436.eot', 'font'), bold)
 +font-face('Folk-solid', font-files(asset_path('woff/style_192110.woff', 'font'), asset_path('ttf/style_192110.ttf', 'font'), asset_path('svg/style_192110.svg', 'font')), asset_path('eot/style_192110.eot', 'font'))
 
@@ -64,8 +65,9 @@ input[type=text]
   +box-shadow(inset 1px 1px 2px #999)
   font-size: 14px
 
-input[type=submit],button
+input[type=submit],button[type=button]
   +btn($orange, $pink)
+  margin: 10px
 
 input[disabled]
   +btn(#999, #999)

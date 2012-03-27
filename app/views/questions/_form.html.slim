@@ -15,4 +15,8 @@
   .preview.hidden
     .category
     .description
-    = f.submit "Publicar"
+      span[class=question.role_type]= t("questions.list.#{question.role_type}.text")
+      span.text
+    = f.submit "Confirmar"
+    = f.button :button, "Editar", :type => :button, :class => "edit"
+    = f.button :button, "Cancelar", :type => :reset, :class => "hidden action reset edit"

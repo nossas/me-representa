@@ -6,7 +6,7 @@ describe("Questions.Form", function(){
 
   beforeEach(function(){
     view = new App.Questions.Form({
-      el: $('<form id="questions"><div class="preview"><div class="description"></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
+      el: $('<form id="questions"><div class="preview"><div class="description"><span class="text"></span></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
     });
 
     storeStub = { get: function(){}, set: function(){}, remove: function(){} };
@@ -65,11 +65,13 @@ describe("Questions.Form", function(){
     beforeEach(function(){
       spyOn(view.actions, "slideUp");
       spyOn(view.textarea, "animate");
+      spyOn($.fn, "validate").andCallThrough();
       view.returnTextarea();
     });
 
-    it("should hide actions", function(){
+    it("should hide actions and reset error messages", function(){
       expect(view.actions.slideUp).toHaveBeenCalled();
+      expect($.fn.validate).toHaveBeenCalled();
     });
 
     it("should animate the textarea", function(){
@@ -81,11 +83,13 @@ describe("Questions.Form", function(){
     beforeEach(function(){
       spyOn(view.actions, "slideDown");
       spyOn(view.textarea, "animate");
+      spyOn($.fn, "trigger");
       view.expandTextarea();
     });
 
     it("should show actions", function(){
       expect(view.actions.slideDown).toHaveBeenCalled();
+      expect($.fn.trigger).toHaveBeenCalledWith('liszt:updated');
     });
 
     it("should animate the textarea", function(){
@@ -164,6 +168,24 @@ describe("Questions.Form", function(){
       expect(view.store.set).toHaveBeenCalledWith('category', '1');
       expect(view.store.set).toHaveBeenCalledWith('text', 'My question text');
       expect(view.store.set).toHaveBeenCalledWith('role_type', 'truth');
+    });
+  });
+
+
+  describe("#hidePreview", function(){
+
+    it("should hide preview and show the form plus update the chosen select", function(){
+      spyOn(view.preview, "hide");
+      spyOn(view.question, "show");
+      spyOn(view.actions, "show");
+      spyOn($.fn, "trigger")
+      view.hidePreview();
+
+      expect(view.question.show).toHaveBeenCalled();
+      expect(view.actions.show).toHaveBeenCalled();
+      expect(view.preview.hide).toHaveBeenCalled();
+      expect($.fn.trigger).toHaveBeenCalledWith('liszt:updated');
+
     });
   });
 
@@ -274,10 +296,8 @@ describe("Questions.Form", function(){
 
       it("should show the box with login options", function(){
         view.showPreview();
-        expect(App.Common.login.showOptions).toHaveBeenCalled();
+        expect(App.Common.login.showOptions).toHaveBeenCalledWith(view.el);
       })
-
-
     });
     // end user-not-logged-in context
   })

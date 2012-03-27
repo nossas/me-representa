@@ -11,9 +11,18 @@ var App = window.App = {
       validate: function(){
         return this.$('.logged').length;
       },
-      showOptions: function(){
-        if (this.$('.login_options').length)
-          this.$('.login_options').fadeIn();
+      showOptions: function(target){
+        var obj = $(target)
+        var login = this.$('.login_options');
+
+        if (target){
+          var copy_parent = obj.parents('div.form');
+
+          obj.fadeOut('fast');
+
+          login.clone().appendTo(copy_parent);
+          copy_parent.children('.login_options').fadeIn();
+        }
       }
 
     })
