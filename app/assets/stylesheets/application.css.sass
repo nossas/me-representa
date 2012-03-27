@@ -35,11 +35,13 @@ img
   padding: 20px
 // Due to order of precedence, the !important shit is necessary :/
 .error
-  border: 1px solid red
+  border: 1px solid red !important
+  +box-shadow(1px 1px 6px red)
 label.error
   color: red
   font-size: .7em
   border: none !important
+  +box-shadow(none)
 .header
   header
     +grid($grid-system)
