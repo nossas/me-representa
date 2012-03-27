@@ -40,13 +40,13 @@ App.Questions = {
     },
 
     returnTextarea: function(){
-      this.textarea.animate({ height: "60px" })
-        this.actions.slideUp('fast');
+      this.textarea.animate({ height: "60px" });
+      this.actions.slideUp('fast');
     },
 
     expandTextarea: function(){
-      this.textarea.animate({ height: "200px" })
-        this.actions.slideDown('fast');
+      this.textarea.animate({ height: "200px" });
+      this.actions.slideDown('fast');
     },
 
     generatePreview: function(){
@@ -61,7 +61,7 @@ App.Questions = {
     },
 
     showPreview: function(){
-      if($(this.el).valid()){
+      if ($(this.el).valid()){
         if ( App.Common.login.validate() ){
           this.question.hide();
           this.generatePreview();
