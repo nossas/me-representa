@@ -250,6 +250,7 @@ section.questions
           font-size: .8em
       .buttons
         text-align: right
+        line-height: 24px
         form
           display: inline-block
         input
@@ -262,6 +263,7 @@ section.questions
           padding: 0
           font-size: 1em
         a.twitter_btn, a.fb_btn
+          float: right
           opacity: .5
           +transition-property(opacity)
           +transition-duration(.3s)
@@ -283,7 +285,7 @@ form[action="/questions"]
     display: none
 
 a.twitter_btn, a.fb_btn
-  display: inline-block
+  display: block
   width: 24px
   height: 0
   padding-top: 24px

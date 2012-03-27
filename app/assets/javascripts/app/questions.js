@@ -91,10 +91,8 @@ App.Questions = {
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
 
-      $('form.new_vote').bind('ajax:complete', function(){
-        var obj = $(this);
-        obj.after('Valeu por votar!');
-        obj.remove();
+      $('form.new_vote').bind('ajax:success', function(event, data){
+        $(this).parent().html(data); 
       });
 
       $('#questions_truth').bind("ajax:success", function(event, data){
