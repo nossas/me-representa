@@ -6,6 +6,14 @@ describe("Questions.Index", function(){
   });
 
   describe("#initialize", function(){
+    it("should initialize the truth list", function(){
+      expect(view.truthList).toEqual(jasmine.any(App.Questions.List));
+    });
+
+    it("should initialize the dare list", function(){
+      expect(view.dareList).toEqual(jasmine.any(App.Questions.List));
+    });
+
     it("should initialize the truth form", function(){
       expect(view.truthForm).toEqual(jasmine.any(App.Questions.Form));
     });

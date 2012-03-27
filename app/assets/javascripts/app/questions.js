@@ -74,6 +74,18 @@ App.Questions = {
     }
   }),
 
+  List: Backbone.View.extend({
+    initialize: function(){
+      this.type = $(this.el).data('type');
+    },
+
+    loadList: function(){
+      var that = this;
+      $.get('questions?type_role=' + this.type)
+        .success(function(html){ $(that.el).html(html) });
+    }
+  }),
+
   Index: Backbone.View.extend({
     el: 'body',
 
@@ -88,8 +100,11 @@ App.Questions = {
     },
 
     initialize: function(){
+      var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
+      this.truthList = new App.Questions.List({el: this.$('ol#truths')[0]});
+      this.dareList = new App.Questions.List({el: this.$('ol#dares')[0]});
 
       $('form.new_vote').bind('ajax:complete', function(){
         var obj = $(this);
@@ -98,12 +113,12 @@ App.Questions = {
       });
 
       $('#questions_truth').bind("ajax:success", function(event, data){
-        $.get('questions?type_role=truth', function(data) { $('#truths').html(data); });
+        that.truthList.loadList();
         $(".form.truth fieldset").html(data);
       });
 
       $('#questions_dare').bind("ajax:success", function(event, data){
-        $.get('questions?type_role=dare', function(data) { $('#dares').html(data); });
+        that.dareList.loadList();
         $(".form.dare fieldset").html(data);
       });
     },
