@@ -1,9 +1,9 @@
 App.Questions = {
   Form:  Backbone.View.extend({
     events: {
+      'click button.edit' : 'hidePreview',
       'click button.reset' : 'returnTextarea',
       'click button.preview' : 'showPreview',
-      'click button.edit' : 'hidePreview',
       'focus textarea' : 'expandTextarea'
     },
 
@@ -43,9 +43,11 @@ App.Questions = {
     returnTextarea: function(){
       this.textarea.animate({ height: "60px" });
       this.actions.slideUp('fast');
+      $(this.el).validate().resetForm();
     },
 
     expandTextarea: function(){
+      this.$('select').trigger('liszt:updated');
       this.textarea.animate({ height: "200px" });
       this.actions.slideDown('fast');
     },

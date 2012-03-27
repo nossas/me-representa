@@ -65,11 +65,13 @@ describe("Questions.Form", function(){
     beforeEach(function(){
       spyOn(view.actions, "slideUp");
       spyOn(view.textarea, "animate");
+      spyOn($.fn, "validate").andCallThrough();
       view.returnTextarea();
     });
 
-    it("should hide actions", function(){
+    it("should hide actions and reset error messages", function(){
       expect(view.actions.slideUp).toHaveBeenCalled();
+      expect($.fn.validate).toHaveBeenCalled();
     });
 
     it("should animate the textarea", function(){
@@ -81,11 +83,13 @@ describe("Questions.Form", function(){
     beforeEach(function(){
       spyOn(view.actions, "slideDown");
       spyOn(view.textarea, "animate");
+      spyOn($.fn, "trigger");
       view.expandTextarea();
     });
 
     it("should show actions", function(){
       expect(view.actions.slideDown).toHaveBeenCalled();
+      expect($.fn.trigger).toHaveBeenCalledWith('liszt:updated');
     });
 
     it("should animate the textarea", function(){

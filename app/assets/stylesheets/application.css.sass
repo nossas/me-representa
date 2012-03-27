@@ -189,8 +189,9 @@ section.questions
         .chzn-container
           width: 100%
           margin: 15px 0
-        input[type=submit]
+        button[type=button], input[type=submit]
           float: right
+          margin-right: 0
         .reset
           background: none
           border: none
@@ -292,7 +293,8 @@ form[action="/questions"]
       color: $orange
 
     background: #ededed
-    padding: 15px
+    padding: 20px 15px
+    margin: 10px 0 15px 0
     +border-radius(10px)
     +box-shadow(inset 0px 1px 3px #cecece)
 
