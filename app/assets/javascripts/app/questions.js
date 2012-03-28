@@ -91,7 +91,7 @@ App.Questions = {
 
     loadList: function(){
       var that = this;
-      $.get('questions?type_role=' + this.type)
+      $.get($(this.el).data('url'))
         .success(function(html){ $(that.el).html(html) });
     }
   }),

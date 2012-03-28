@@ -1,7 +1,7 @@
 describe("Questions.List", function(){
   var view;
   beforeEach(function(){
-    view = new App.Questions.List({el: $('<ol data-type="dare"></ol>')[0]});
+    view = new App.Questions.List({el: $('<ol data-url="load_url" data-type="dare"></ol>')[0]});
   });
 
   describe("#loadList", function(){
@@ -11,7 +11,7 @@ describe("Questions.List", function(){
     });
 
     it("should call get to questions passing the type role from type", function(){
-      expect($.get).toHaveBeenCalledWith('questions?type_role=dare');
+      expect($.get).toHaveBeenCalledWith('load_url');
     });
 
     it("should update the el inner HTML", function(){
