@@ -4,14 +4,14 @@ describe("Questions.List", function(){
     view = new App.Questions.List({el: $('<ol data-url="load_url" data-type="dare"></ol>')[0]});
   });
 
-  describe("#loadList", function(){
+  describe("#load", function(){
     beforeEach(function(){
       spyOn($, "get").andReturn({success: function(callback){ callback('html fake'); }});
-      view.loadList();
+      view.load();
     });
 
     it("should call get to questions passing the type role from type", function(){
-      expect($.get).toHaveBeenCalledWith('load_url');
+      expect($.get).toHaveBeenCalledWith('load_url', null, null, 'html');
     });
 
     it("should update the el inner HTML", function(){

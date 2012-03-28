@@ -90,8 +90,9 @@ App.Questions = {
     },
 
     loadList: function(){
+    load: function(){
       var that = this;
-      $.get($(this.el).data('url'))
+      $.get($(this.el).data('url'), null, null, 'html')
         .success(function(html){ $(that.el).html(html) });
     }
   }),
@@ -101,6 +102,9 @@ App.Questions = {
 
     events: {
       'click h4.discover' : 'toggleInfographic',
+      'ajax:success #questions_truth' : 'loadTruths',
+      'ajax:success #questions_dare' : 'loadDares'
+    },
     },
 
     toggleInfographic: function(event){
@@ -109,27 +113,30 @@ App.Questions = {
       obj.toggleClass('active');
     },
 
+    loadDares: function(event, data){
+      this.dareList.load();
+      this.dareFieldset.html(data);
+    },
+
+    loadTruths: function(event, data){
+      this.truthList.load();
+      this.truthFieldset.html(data);
+    },
     initialize: function(){
       var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
       this.truthList = new App.Questions.List({el: this.$('ol#truths')[0]});
       this.dareList = new App.Questions.List({el: this.$('ol#dares')[0]});
+      this.truthFieldset = this.$(".form.truth fieldset");
+      this.dareFieldset = this.$(".form.dare fieldset");
+      this.loadTruths();
+      this.loadDares();
 
       $('form.new_vote').bind('ajax:complete', function(){
         var obj = $(this);
         obj.after('Valeu por votar!');
         obj.remove();
-      });
-
-      $('#questions_truth').bind("ajax:success", function(event, data){
-        that.truthList.loadList();
-        $(".form.truth fieldset").html(data);
-      });
-
-      $('#questions_dare').bind("ajax:success", function(event, data){
-        that.dareList.loadList();
-        $(".form.dare fieldset").html(data);
       });
     },
   })
