@@ -89,7 +89,13 @@ App.Questions = {
       this.type = $(this.el).data('type');
     },
 
-    loadList: function(){
+    lowerLimit: function(){
+      return $(window).scrollTop() + $(window).height();
+    },
+
+    paginate: function(){
+    },
+
     load: function(){
       var that = this;
       $.get($(this.el).data('url'), null, null, 'html')
@@ -105,6 +111,10 @@ App.Questions = {
       'ajax:success #questions_truth' : 'loadTruths',
       'ajax:success #questions_dare' : 'loadDares'
     },
+
+    scroll: function(event){
+      this.truthList.paginate();
+      this.dareList.paginate();
     },
 
     toggleInfographic: function(event){
@@ -122,7 +132,9 @@ App.Questions = {
       this.truthList.load();
       this.truthFieldset.html(data);
     },
+
     initialize: function(){
+      _.bindAll(this);
       var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
@@ -132,6 +144,7 @@ App.Questions = {
       this.dareFieldset = this.$(".form.dare fieldset");
       this.loadTruths();
       this.loadDares();
+      $(window).scroll(this.scroll);
 
       $('form.new_vote').bind('ajax:complete', function(){
         var obj = $(this);
