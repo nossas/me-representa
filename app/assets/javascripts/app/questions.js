@@ -85,6 +85,16 @@ App.Questions = {
   }),
 
   List: Backbone.View.extend({
+    events: {
+     'ajax:success .buttons' : 'updateVote'
+    },
+
+    updateVote: function(event, data){
+      $(event.currentTarget)
+        .html(data)
+        .find("span.votes").effect("highlight", {}, 1000);
+    },
+
     initialize: function(){
       this.type = $(this.el).data('type');
     },
@@ -115,12 +125,6 @@ App.Questions = {
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
       this.truthList = new App.Questions.List({el: this.$('ol#truths')[0]});
       this.dareList = new App.Questions.List({el: this.$('ol#dares')[0]});
-
-      $('form.new_vote').bind('ajax:success', function(event, data){
-        var buttons = $(this).parent();
-        buttons.html(data);
-        buttons.find("span.votes").effect("highlight", {}, 1000);
-      });
 
       $('#questions_truth').bind("ajax:success", function(event, data){
         that.truthList.loadList();
