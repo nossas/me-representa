@@ -89,17 +89,56 @@ App.Questions = {
       this.type = $(this.el).data('type');
     },
 
+    prependQuestion: function(url){
+      var that = this;
+      $.get(url, null, null, 'html')
+        .success(function(html){
+          var item = $(html).hide();
+          $(that.el).prepend(item);
+          item.fadeIn('slow');
+        });
+    },
+
     lowerLimit: function(){
       return $(window).scrollTop() + $(window).height();
     },
 
     paginate: function(){
+      var lastItem = this.$('li:last');
+      var offset = this.$('li').length
+      if(lastItem.length > 0 && this.lowerLimit() > (lastItem.offset().top - 20)){
+        console.log('loading from ', offset);
+      }
     },
 
-    load: function(){
+    load: function(offset){
       var that = this;
-      $.get($(this.el).data('url'), null, null, 'html')
-        .success(function(html){ $(that.el).html(html) });
+      var url = $(this.el).data('url');
+      if(!url){ return; }
+      if(!offset){ offset = 0; }
+
+      url += ((url.indexOf("?") >= 0) ? '&' : '?') + 'offset=' + offset;
+      $.get(url, null, null, 'html')
+        .success(function(html){ 
+          var items = $(html).hide();
+          $(that.el).append(items); 
+          items.fadeIn('slow');
+        });
+    }
+  }),
+
+  Fieldset: Backbone.View.extend({
+    events: {
+      'ajax:success form' : 'afterQuestionCreate'
+    },
+
+    initialize: function(options){
+      this.list = options.list;
+    },
+
+    afterQuestionCreate: function(event, data){
+      $(this.el).html(data);
+      this.list.prependQuestion(this.$('.share').data('question-url'));
     }
   }),
 
@@ -107,9 +146,7 @@ App.Questions = {
     el: 'body',
 
     events: {
-      'click h4.discover' : 'toggleInfographic',
-      'ajax:success #questions_truth' : 'loadTruths',
-      'ajax:success #questions_dare' : 'loadDares'
+      'click h4.discover' : 'toggleInfographic'
     },
 
     scroll: function(event){
@@ -123,16 +160,6 @@ App.Questions = {
       obj.toggleClass('active');
     },
 
-    loadDares: function(event, data){
-      this.dareList.load();
-      this.dareFieldset.html(data);
-    },
-
-    loadTruths: function(event, data){
-      this.truthList.load();
-      this.truthFieldset.html(data);
-    },
-
     initialize: function(){
       _.bindAll(this);
       var that = this;
@@ -140,10 +167,10 @@ App.Questions = {
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
       this.truthList = new App.Questions.List({el: this.$('ol#truths')[0]});
       this.dareList = new App.Questions.List({el: this.$('ol#dares')[0]});
-      this.truthFieldset = this.$(".form.truth fieldset");
-      this.dareFieldset = this.$(".form.dare fieldset");
-      this.loadTruths();
-      this.loadDares();
+      this.truthFieldset = new App.Questions.Fieldset({el: this.$(".form.truth fieldset")[0], list: this.truthList});
+      this.dareFieldset = new App.Questions.Fieldset({el: this.$(".form.dare fieldset")[0], list: this.dareList});
+      this.truthList.load();
+      this.dareList.load();
       $(window).scroll(this.scroll);
 
       $('form.new_vote').bind('ajax:complete', function(){

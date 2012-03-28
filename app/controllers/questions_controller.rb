@@ -6,7 +6,15 @@ class QuestionsController < ApplicationController
   respond_to :html, :json
 
   has_scope :by_type
+  has_scope :offset
+  has_scope :limit, :default => MAX_QUESTIONS
   has_scope :recent_first, :type => :boolean
+
+  def show
+    if request.xhr?
+      render resource, :layout => false and return true
+    end
+  end
 
   def index
     if request.xhr?
@@ -25,10 +33,5 @@ class QuestionsController < ApplicationController
 
   def current_ability
     @current_ability ||= Ability.new(current_user)
-  end
-
-  protected
-  def collection
-    @questions ||= end_of_association_chain.limit(MAX_QUESTIONS)
   end
 end

@@ -21,38 +21,6 @@ describe("Questions.Index", function(){
     });
   });
 
-  describe("#loadDares", function(){
-    beforeEach(function(){
-      spyOn(view.dareList, "load");
-      spyOn(view.dareFieldset, "html");
-      view.loadDares({}, 'test html');
-    });
-
-    it("should call dareList.load", function(){
-      expect(view.dareList.load).toHaveBeenCalled();
-    });
-
-    it("should update the fieldset with a partial received", function(){
-      expect(view.dareFieldset.html).toHaveBeenCalledWith('test html');
-    });
-  });
-
-  describe("#loadTruths", function(){
-    beforeEach(function(){
-      spyOn(view.truthList, "load");
-      spyOn(view.truthFieldset, "html");
-      view.loadTruths({}, 'test html');
-    });
-
-    it("should call truthList.load", function(){
-      expect(view.truthList.load).toHaveBeenCalled();
-    });
-
-    it("should update the fieldset with a partial received", function(){
-      expect(view.truthFieldset.html).toHaveBeenCalledWith('test html');
-    });
-  });
-
   describe("#initialize", function(){
     it("should initialize the truth fieldset", function(){
       expect(view.truthFieldset).toEqual(jasmine.any(Object));
