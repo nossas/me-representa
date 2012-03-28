@@ -9,8 +9,6 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @truths ||= Question.truth.limit(5)
-    @dares ||= Question.dare.limit(5)
     if request.xhr?
       render (params[:type_role] == "truth" ? @truths : @dares) and return true
     end
