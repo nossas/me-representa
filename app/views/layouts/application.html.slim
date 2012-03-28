@@ -22,7 +22,7 @@ html
           .login_options.hidden
             span Conecte-se usando:
             nav
-              | #{link_to "Facebook", "/auth/facebook"} ou #{link_to "MeuRio", "/auth/meurio"}
+              | #{link_to "Facebook", "/auth/facebook", :class => "fb_btn"} ou #{link_to "MeuRio", "/auth/meurio"}
           - if signed_in?
             .logged
               | Olá, #{current_user.name}

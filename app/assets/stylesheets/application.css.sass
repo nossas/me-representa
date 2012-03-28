@@ -231,8 +231,12 @@ section.questions
       margin-bottom: 20px
       text-transform: uppercase
     li
-      padding: 10px 0
-      border-top: 1px dashed gray
+      padding: 15px 6px
+      border-top: 1px dashed #bebebe
+      +clearfix
+      &:hover
+        .buttons
+          display: block
       &:last-child
         border-bottom: none
       .question
@@ -241,13 +245,14 @@ section.questions
           float: left
           margin-right: 10px
         p
-          line-height: 100%
+          line-height: 1.4em
           margin-bottom: 10px
-          width: 370px
+          width: 350px
           float: right
         p.headline
           font-size: .8em
       .buttons
+        display: none
         text-align: right
         form
           display: inline-block
@@ -267,11 +272,15 @@ section.questions
           &:hover
             opacity: 1
     li.truth
+      &:hover
+        background: lighten($green, 45%)
       p
         &:last-child
           span
             color: $green
     li.dare
+      &:hover
+        background: lighten($orange, 40%)
       p
         &:last-child
           span
@@ -303,10 +312,10 @@ form[action="/questions"]
 
 
 a.twitter_btn, a.fb_btn
-  display: inline-block
-  width: 24px
-  height: 0
-  padding-top: 24px
+  display: block
+  float: right
+  width: 48px
+  height: 30px
   color: transparent
   overflow: hidden
   cursor: pointer
@@ -316,7 +325,7 @@ a.twitter_btn, a.fb_btn
     color: transparent
 
 a.twitter_btn
-  background: url(asset_path('social-twitter-box-white-icon.png', 'image'))
+  background: url(asset_path('icons/twitter_x48.png', 'image')) no-repeat 0 -5px
 
 a.fb_btn
-  background: url(asset_path('social-facebook-box-white-icon.png', 'image'))
+  background: url(asset_path('icons/facebook_x48.png', 'image')) no-repeat
