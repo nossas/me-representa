@@ -27,6 +27,24 @@ describe Question do
     end
   end
 
+  describe ".dare" do
+    before do
+      @q = Factory(:question, :role_type => 'dare')
+      Factory(:question, :role_type => 'truth')
+    end
+    subject{ Question.dare }
+    it{ should == [@q] }
+  end
+
+  describe ".truth" do
+    before do
+      @q = Factory(:question, :role_type => 'truth')
+      Factory(:question, :role_type => 'dare')
+    end
+    subject{ Question.truth }
+    it{ should == [@q] }
+  end
+
   describe "#truth?" do
     context "when it's a truth" do
       before { subject.role_type = "truth" }
