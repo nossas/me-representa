@@ -1,16 +1,16 @@
 # coding: utf-8
 class QuestionsController < ApplicationController
+  MAX_QUESTIONS = 5
   inherit_resources
   load_and_authorize_resource
   respond_to :html, :json
 
-  def more
-    render collection, :layout => false
-  end
+  has_scope :by_type
+  has_scope :recent_first, :type => :boolean
 
   def index
     if request.xhr?
-      render (params[:type_role] == "truth" ? @truths : @dares) and return true
+      render collection, :layout => false and return true
     end
   end
 
@@ -23,8 +23,12 @@ class QuestionsController < ApplicationController
     end
   end
 
-
   def current_ability
     @current_ability ||= Ability.new(current_user)
+  end
+
+  protected
+  def collection
+    @questions ||= end_of_association_chain.limit(MAX_QUESTIONS)
   end
 end

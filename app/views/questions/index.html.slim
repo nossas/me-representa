@@ -17,7 +17,7 @@ section.questions
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "truth") }
     .questions_list
       h3 Verdades sugeridas recentemente
-      ol#truths data-type="truth"
+      ol#truths data-type="truth" data-url=questions_path(:by_type => 'truth', :recent_first => true)
 
   section.dare
     .form.dare
@@ -26,4 +26,4 @@ section.questions
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "dare") }
     .questions_list
       h3 Consequências sugeridas recentemente
-      ol#dares data-type="dare"
+      ol#dares data-type="dare" data-url=questions_path(:by_type => 'dare', :recent_first => true)

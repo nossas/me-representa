@@ -27,22 +27,24 @@ describe Question do
     end
   end
 
-  describe ".dare" do
-    before do
-      @q = Factory(:question, :role_type => 'dare')
-      Factory(:question, :role_type => 'truth')
+  describe ".by_type" do
+    context "when we ask for truths" do
+      before do
+        @q = Factory(:question, :role_type => 'truth')
+        Factory(:question, :role_type => 'dare')
+      end
+      subject{ Question.by_type 'truth' }
+      it{ should == [@q] }
     end
-    subject{ Question.dare }
-    it{ should == [@q] }
-  end
 
-  describe ".truth" do
-    before do
-      @q = Factory(:question, :role_type => 'truth')
-      Factory(:question, :role_type => 'dare')
+    context "when we ask for dares" do
+      before do
+        @q = Factory(:question, :role_type => 'dare')
+        Factory(:question, :role_type => 'truth')
+      end
+      subject{ Question.by_type 'dare' }
+      it{ should == [@q] }
     end
-    subject{ Question.truth }
-    it{ should == [@q] }
   end
 
   describe "#truth?" do
