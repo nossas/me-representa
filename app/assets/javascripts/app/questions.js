@@ -87,6 +87,7 @@ App.Questions = {
   List: Backbone.View.extend({
     initialize: function(){
       this.type = $(this.el).data('type');
+      this.disablePagination = false;
     },
 
     prependQuestion: function(url){
@@ -104,10 +105,13 @@ App.Questions = {
     },
 
     paginate: function(){
+      if(this.disablePagination){
+        return;
+      }
       var lastItem = this.$('li:last');
       var offset = this.$('li').length
       if(lastItem.length > 0 && this.lowerLimit() > (lastItem.offset().top - 20)){
-        console.log('loading from ', offset);
+        this.load(offset);
       }
     },
 
@@ -116,13 +120,17 @@ App.Questions = {
       var url = $(this.el).data('url');
       if(!url){ return; }
       if(!offset){ offset = 0; }
+      this.disablePagination = true;
 
       url += ((url.indexOf("?") >= 0) ? '&' : '?') + 'offset=' + offset;
       $.get(url, null, null, 'html')
         .success(function(html){ 
-          var items = $(html).hide();
-          $(that.el).append(items); 
-          items.fadeIn('slow');
+          if($.trim(html) != ''){
+            var items = $(html).hide();
+            $(that.el).append(items); 
+            items.fadeIn('slow');
+            that.disablePagination = false;
+          }
         });
     }
   }),
