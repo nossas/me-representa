@@ -8,5 +8,4 @@ Feature: Vote for a question
     Given there is a question
     And I'm on the questions page
     When I press "Votar"
-    Then I should see Valeu por votar!
-    And I should see 1 voto
+    Then I should see 1 voto
