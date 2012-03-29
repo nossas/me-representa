@@ -18,7 +18,6 @@ App.Questions = {
       this.role_type = this.$('[name="question[role_type]"]');
       this.actions = this.$('.action');
       this.store = this.store || new Store(this.id);
-      this.$('select.chosen-select').chosen();
 
       // Checking if there is some store data
       this.fillFormWithPreviousStoreData();
@@ -115,14 +114,17 @@ App.Questions = {
       }
     },
 
-    load: function(offset){
+    load: function(options){
       var that = this;
       var url = $(this.el).data('url');
       if(!url){ return; }
-      if(!offset){ offset = 0; }
+      var filters = _.map(
+        $.extend({offset: 0, recent_first: true}, options), 
+        function(val, key){ return key + '=' + val; }
+      ).join('&');
       this.disablePagination = true;
 
-      url += ((url.indexOf("?") >= 0) ? '&' : '?') + 'offset=' + offset;
+      url += ((url.indexOf("?") >= 0) ? '&' : '?') + filters;
       $.get(url, null, null, 'html')
         .success(function(html){ 
           if($.trim(html) != ''){
@@ -180,6 +182,7 @@ App.Questions = {
       this.truthList.load();
       this.dareList.load();
       $(window).scroll(this.scroll);
+      this.$('select.chosen-select').chosen();
 
       $('form.new_vote').bind('ajax:complete', function(){
         var obj = $(this);
