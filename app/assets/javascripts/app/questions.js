@@ -134,10 +134,10 @@ App.Questions = {
 
       url += ((url.indexOf("?") >= 0) ? '&' : '?') + 'offset=' + offset;
       $.get(url, null, null, 'html')
-      .success(function(html){ 
+      .success(function(html){
         if($.trim(html) != ''){
           var items = $(html).hide();
-          $(that.el).append(items); 
+          $(that.el).append(items);
           items.fadeIn('slow');
           that.disablePagination = false;
         }
@@ -190,16 +190,6 @@ App.Questions = {
       this.truthList.load();
       this.dareList.load();
       $(window).scroll(this.scroll);
-
-      $('#questions_truth').bind("ajax:success", function(event, data){
-        that.truthList.loadList();
-        $(".form.truth fieldset").html(data);
-      });
-
-      $('#questions_dare').bind("ajax:success", function(event, data){
-        that.dareList.loadList();
-        $(".form.dare fieldset").html(data);
-      });
     }
   })
 };
