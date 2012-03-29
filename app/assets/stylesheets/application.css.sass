@@ -33,6 +33,32 @@ img
 
 .login_options
   padding: 20px
+  text-align: center
+  +clearfix
+  nav
+    margin: 20px auto
+    width: 340px
+  .facebook
+    background: url(asset_path('icons/facebook_x128.png', 'image')) no-repeat
+  .meurio
+    background: url(asset_path('icons/meurio_x128.png', 'image')) no-repeat
+    margin-left: 80px
+  .option
+    text-indent: -9999px
+    display: block
+    float: left
+    width: 130px
+    height: 130px
+    +border-radius(14px)
+    +box-shadow(0 1px 6px #666)
+    &:active
+      position: relative
+      top: 2px
+      background: lighten($green, 10%)
+    &:hover
+      +box-shadow(0px 1px 12px $green)
+
+
 // Due to order of precedence, the !important shit is necessary :/
 .error
   border: 1px solid red !important
