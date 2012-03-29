@@ -6,6 +6,10 @@ Given /^there is a question$/ do
   @question = FactoryGirl.create(:question)
 end
 
+Given /^there is a truth about ([^"]*)$/ do |arg1|
+  @truth = FactoryGirl.create(:question, :role_type => "truth", :category => Category.find_by_name(arg1))
+end
+
 Given /^I'm logged in$/ do
   visit "/auth/facebook"
 end
