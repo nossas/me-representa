@@ -86,23 +86,77 @@ App.Questions = {
 
   List: Backbone.View.extend({
     events: {
-     'ajax:success .buttons' : 'updateVote'
+      'ajax:success .buttons' : 'updateVote'
     },
 
     updateVote: function(event, data){
       $(event.currentTarget)
-        .html(data)
-        .find("span.votes").effect("highlight", {}, 1000);
+      .html(data)
+      .find("span.votes").effect("highlight", {}, 1000);
     },
 
     initialize: function(){
       this.type = $(this.el).data('type');
+      this.disablePagination = false;
     },
 
-    loadList: function(){
+    prependQuestion: function(url){
       var that = this;
-      $.get('questions?type_role=' + this.type)
-        .success(function(html){ $(that.el).html(html) });
+      $.get(url, null, null, 'html')
+      .success(function(html){
+        var item = $(html).hide();
+        $(that.el).prepend(item);
+        item.fadeIn('slow');
+      });
+    },
+
+    lowerLimit: function(){
+      return $(window).scrollTop() + $(window).height();
+    },
+
+    paginate: function(){
+      if(this.disablePagination){
+        return;
+      }
+      var lastItem = this.$('li:last');
+      var offset = this.$('li').length
+      if(lastItem.length > 0 && this.lowerLimit() > (lastItem.offset().top - 20)){
+        this.load(offset);
+      }
+    },
+
+    load: function(offset){
+      var that = this;
+      var url = $(this.el).data('url');
+      if(!url){ return; }
+      if(!offset){ offset = 0; }
+      this.disablePagination = true;
+
+      url += ((url.indexOf("?") >= 0) ? '&' : '?') + 'offset=' + offset;
+      $.get(url, null, null, 'html')
+      .success(function(html){ 
+        if($.trim(html) != ''){
+          var items = $(html).hide();
+          $(that.el).append(items); 
+          items.fadeIn('slow');
+          that.disablePagination = false;
+        }
+      });
+    }
+  }),
+
+  Fieldset: Backbone.View.extend({
+    events: {
+      'ajax:success form' : 'afterQuestionCreate'
+    },
+
+    initialize: function(options){
+      this.list = options.list;
+    },
+
+    afterQuestionCreate: function(event, data){
+      $(this.el).html(data);
+      this.list.prependQuestion(this.$('.share').data('question-url'));
     }
   }),
 
@@ -110,7 +164,12 @@ App.Questions = {
     el: 'body',
 
     events: {
-      'click h4.discover' : 'toggleInfographic',
+      'click h4.discover' : 'toggleInfographic'
+    },
+
+    scroll: function(event){
+      this.truthList.paginate();
+      this.dareList.paginate();
     },
 
     toggleInfographic: function(event){
@@ -120,11 +179,17 @@ App.Questions = {
     },
 
     initialize: function(){
+      _.bindAll(this);
       var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
       this.truthList = new App.Questions.List({el: this.$('ol#truths')[0]});
       this.dareList = new App.Questions.List({el: this.$('ol#dares')[0]});
+      this.truthFieldset = new App.Questions.Fieldset({el: this.$(".form.truth fieldset")[0], list: this.truthList});
+      this.dareFieldset = new App.Questions.Fieldset({el: this.$(".form.dare fieldset")[0], list: this.dareList});
+      this.truthList.load();
+      this.dareList.load();
+      $(window).scroll(this.scroll);
 
       $('#questions_truth').bind("ajax:success", function(event, data){
         that.truthList.loadList();

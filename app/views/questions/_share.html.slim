@@ -1,4 +1,4 @@
-.share
+.share data-question-url=question_url(@question)
   h4 Agora só falta os seus amigos apoiarem a sua #{@question.truth? ? "pergunta" : "demanda"}...
   h2 Compartilhe!
   = link_to "Tweetar", "javascript:window.open('https://twitter.com/share?url=#{question_url(@question)}&text=#{t "questions.my_share." + @question.role_type, :category => @question.category.name, :link => question_url(@question)}', '', 'width=640, height=400, scrollbars=no');", :class => "twitter_btn", :title => "Tweetar"
