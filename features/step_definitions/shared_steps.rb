@@ -7,7 +7,8 @@ Given /^there is a question$/ do
 end
 
 Given /^there is a ([^"]*) about ([^"]*)$/ do |arg1, arg2|
-  @truth = FactoryGirl.create(:question, :role_type => arg1, :category => Category.find_by_name(arg2))
+  @truth = FactoryGirl.create(:question, :role_type => "truth", :category => Category.find_by_name(arg2)) if arg1 == "truth"
+  @dare = FactoryGirl.create(:question, :role_type => "dare", :category => Category.find_by_name(arg2)) if arg1 == "dare"
 end
 
 Given /^I'm logged in$/ do
@@ -41,6 +42,10 @@ When /^I press "([^"]*)"$/ do |arg1|
   click_button arg1
 end
 
+When /^I filter ([^"]*) by "([^"]*)"$/ do |arg1, arg2|
+  page.execute_script("$(\"select#category_id_#{arg1 == 'truths' ? 'truth' : 'dare'}\").val(#{Category.find_by_name(arg2).id})")
+end
+
 When /^I go to the questions page$/ do
   visit questions_path
 end
@@ -48,7 +53,9 @@ end
 Then /^I should not see ([^"]*)$/ do |arg1|
   case arg1
   when "that truth"
-    page.should have_content(@question.text)
+    page.should_not have_content(@truth.text)
+  when "that dare"
+    page.should_not have_content(@dare.text)
   else
     page.should_not have_content(arg1)
   end
@@ -66,6 +73,10 @@ Then /^I should see ([^"]*)$/ do |arg1|
     when "some share buttons for my dare"
       page.find(".form.dare").should have_css("a.twitter_btn")
       page.find(".form.dare").should have_css("a.fb_btn")
+    when "that dare"
+      page.should have_content(@dare.text)
+    when "that truth"
+      page.should have_content(@truth.text)
     else
       page.should have_content(arg1)
   end
