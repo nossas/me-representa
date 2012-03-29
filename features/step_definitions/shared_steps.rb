@@ -48,9 +48,9 @@ end
 Then /^I should see ([^"]*)$/ do |arg1|
   case arg1
     when "a Facebook share button for this question"
-      page.find("li[data-id=\"#{@question.id}\"] a.fb_btn").should be_visible
+      page.should have_css("li[data-id=\"#{@question.id}\"] a.fb_btn")
     when "a Twitter share button for this question"
-      page.find("li[data-id=\"#{@question.id}\"] a.twitter_btn").should be_visible
+      page.should have_css("li[data-id=\"#{@question.id}\"] a.twitter_btn")
     when "some share buttons for my truth"
       page.find(".form.truth").should have_css("a.twitter_btn")
       page.find(".form.truth").should have_css("a.fb_btn")
