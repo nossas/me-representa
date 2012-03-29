@@ -3,8 +3,6 @@ pt-BR:
     text: "Com o pouco tempo que cada candidato a Vereador tem na TV e no rádio, fica difícil saber quem é quem e entender as propostas de cada um.  Já que em todo ano de eleição municipal vamos às urnas com as mesmas questões na cabeça, por que neste ano não fazemos diferente? Nós já giramos a garrafa, agora cabe a você fazer as perguntas para os candidatos."
     candidates:
       text: "Você vai tirar onda de antenado, vai saber exatamente o que os seus eleitores querem e ainda vai poder falar diretamente com eles."
-
-
   questions:
     form:
       truth:
@@ -28,3 +26,7 @@ pt-BR:
     my_share:
       truth: "Fiz uma pergunta sobre %{category} aos candidatos a vereador do Rio %{link}"
       dare: "Fiz uma demanda de %{category} aos candidatos a vereador do Rio %{link}"
+  votes:
+    zero: "nenhum voto"
+    one: "1 voto"
+    other: "%{count} votos"

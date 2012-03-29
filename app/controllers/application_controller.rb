@@ -2,6 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :create_user_question_through_session
+  before_filter { session[:votes] ||= [] }
 
   protected
 

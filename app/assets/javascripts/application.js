@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require ./lib/jquery
+//= require ./lib/jquery.effects.core
 //= require jquery_ujs
 //= require ./lib/underscore.js
 //= require ./lib/backbone.js

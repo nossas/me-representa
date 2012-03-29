@@ -85,6 +85,16 @@ App.Questions = {
   }),
 
   List: Backbone.View.extend({
+    events: {
+     'ajax:success .buttons' : 'updateVote'
+    },
+
+    updateVote: function(event, data){
+      $(event.currentTarget)
+        .html(data)
+        .find("span.votes").effect("highlight", {}, 1000);
+    },
+
     initialize: function(){
       this.type = $(this.el).data('type');
       this.disablePagination = false;
@@ -180,12 +190,6 @@ App.Questions = {
       this.truthList.load();
       this.dareList.load();
       $(window).scroll(this.scroll);
-
-      $('form.new_vote').bind('ajax:complete', function(){
-        var obj = $(this);
-        obj.after('Valeu por votar!');
-        obj.remove();
-      });
-    },
+    }
   })
 };
