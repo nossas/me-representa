@@ -95,7 +95,8 @@ App.Questions = {
     },
 
     initialize: function(){
-      this.type = $(this.el).data('type');
+      this.ol = this.$('ol:first');
+      this.type = this.ol.data('type');
       this.disablePagination = false;
     },
 
@@ -104,7 +105,7 @@ App.Questions = {
       $.get(url, null, null, 'html')
       .success(function(html){
         var item = $(html).hide();
-        $(that.el).prepend(item);
+        that.ol.prepend(item);
         item.fadeIn('slow');
       });
     },
@@ -120,16 +121,16 @@ App.Questions = {
       var lastItem = this.$('li:last');
       var offset = this.$('li').length
       if(lastItem.length > 0 && this.lowerLimit() > (lastItem.offset().top - 20)){
-        this.load(offset);
+        this.load({offset: offset});
       }
     },
 
     load: function(options){
       var that = this;
-      var url = $(this.el).data('url');
+      var url = this.ol.data('url');
       if(!url){ return; }
       var filters = _.map(
-        $.extend({offset: 0, recent_first: true}, options), 
+        $.extend({offset: 0, recent_first: true}, this.ol.data('options'), options), 
         function(val, key){ return key + '=' + val; }
       ).join('&');
       this.disablePagination = true;
@@ -139,7 +140,7 @@ App.Questions = {
       .success(function(html){ 
         if($.trim(html) != ''){
           var items = $(html).hide();
-          $(that.el).append(items); 
+          that.ol.append(items); 
           items.fadeIn('slow');
           that.disablePagination = false;
         }
@@ -185,8 +186,8 @@ App.Questions = {
       var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
-      this.truthList = new App.Questions.List({el: this.$('ol#truths')[0]});
-      this.dareList = new App.Questions.List({el: this.$('ol#dares')[0]});
+      this.truthList = new App.Questions.List({el: this.$('.truth .questions_list')[0]});
+      this.dareList = new App.Questions.List({el: this.$('.dare .questions_list')[0]});
       this.truthFieldset = new App.Questions.Fieldset({el: this.$(".form.truth fieldset")[0], list: this.truthList});
       this.dareFieldset = new App.Questions.Fieldset({el: this.$(".form.dare fieldset")[0], list: this.dareList});
       this.truthList.load();

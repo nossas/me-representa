@@ -1,7 +1,7 @@
 describe("Questions.List", function(){
   var view;
   beforeEach(function(){
-    view = new App.Questions.List({el: $('<ol data-url="/load_url?type=dare" data-type="dare"></ol>')[0]});
+    view = new App.Questions.List({el: $('<div><ol data-url="/load_url?type=dare" data-type="dare"></ol></div>')[0]});
   });
 
   describe("#load", function(){
