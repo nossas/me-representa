@@ -27,6 +27,16 @@ describe Question do
     end
   end
 
+  describe ".by_category_id" do
+    before do
+      @c = Factory(:category)
+      @q = Factory(:question, :category => @c)
+      Factory(:question)
+    end
+    subject{ Question.by_category_id @c.id }
+    it{ should == [@q] }
+  end
+
   describe ".by_type" do
     context "when we ask for truths" do
       before do
