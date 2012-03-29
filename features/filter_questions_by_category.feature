@@ -14,4 +14,17 @@ Feature: Filter questions by category
     And I'm on the questions page
     When I choose "Saúde e Drogas" for "Filtrar verdades por:"
     Then I should not see that truth
-    And I should see Nenhuma verdade sobre Saúde e Drogas
+    And I should see Ah... Não tem verdade sobre Saúde e Drogas
+
+  Scenario: when I filter the dares and something is returned
+    Given there is a dare about Educação
+    And I'm on the questions page
+    When I choose "Educação" for "Filtrar consequências por:"
+    Then I should see that dare
+
+  Scenario: when I filter the truths and nothing returns
+    Given there is a dare about Educação
+    And I'm on the questions page
+    When I choose "Saúde e Drogas" for "Filtrar consequências por:"
+    Then I should not see that dare
+    And I should see Ah... Não tem consequência sobre Saúde e Drogas
