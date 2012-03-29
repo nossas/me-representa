@@ -85,7 +85,21 @@ App.Questions = {
 
   List: Backbone.View.extend({
     events: {
-      'ajax:success .buttons' : 'updateVote'
+      'ajax:success .buttons' : 'updateVote',
+      'change .filter-category' : 'filter',
+      'change .order' : 'order'
+    },
+
+    filter: function(event){
+      var filter = $(event.target);
+      this.ol.data('options', $.extend({}, this.ol.data('options'), {by_category_id: filter.find('option:selected').val()}));
+    },
+
+    order: function(event){
+      var filter = $(event.target);
+      var order = _.reduce(filter.find('option'), function(memo, el){ memo[$(el).val()] = false; return memo; }, {});
+      order[filter.find('option:selected').val()] = true;
+      this.ol.data('options', $.extend({}, this.ol.data('options'), order));
     },
 
     updateVote: function(event, data){

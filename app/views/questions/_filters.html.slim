@@ -1,2 +1,2 @@
 = select_tag "category_id_#{type}", options_from_collection_for_select(Category.order(:name).all, "id", "name"), :class => 'chosen-select filter-category', :prompt => 'Todas'
-= select_tag "order_by_#{type}", options_for_select({'Mais recentes primeiro' => 'recent_first', 'Mais votadas primeiro' => 'voted_first'})
+= select_tag "order_by_#{type}", options_for_select({'Mais recentes primeiro' => 'recent_first', 'Mais votadas primeiro' => 'voted_first'}), :class => 'order'

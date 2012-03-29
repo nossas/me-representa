@@ -25,6 +25,43 @@ describe("Questions.List", function(){
     });
   });
 
+  describe("#order", function(){
+    var select;
+
+    beforeEach(function(){
+      select = $('<select><option value="recent_first">test</option><option value="voted_first">test2</option></select>')[0];
+    });
+
+    it("should copy the selected value as key and true as value to the ol options", function(){
+      $(select).find('option:first').attr('selected', 'selected');
+      view.order({target: select});
+      expect(view.ol.data('options')).toEqual({voted_first: false, recent_first: true});
+      $(select).find('option').removeAttr('selected');
+      $(select).find('option:last').attr('selected', 'selected');
+      view.order({target: select});
+      expect(view.ol.data('options')).toEqual({voted_first: true, recent_first: false});
+    });
+  });
+
+  describe("#filter", function(){
+    var select;
+
+    beforeEach(function(){
+      select = $('<select><option value="1" selected="selected">test</option></select>')[0];
+    });
+
+    it("should copy the value to by_category_id in ol options preserving other options", function(){
+      view.ol.data('options', {other_option: 2});
+      view.filter({target: select});
+      expect(view.ol.data('options')).toEqual({by_category_id: '1', other_option: 2});
+    });
+
+    it("should copy the value to by_category_id in ol options", function(){
+      view.filter({target: select});
+      expect(view.ol.data('options')).toEqual({by_category_id: '1'});
+    });
+  });
+
   describe("#prependQuestion", function(){
     beforeEach(function(){
       spyOn($, "get").andReturn({success: function(callback){ callback('<li>new item</li>'); }});
