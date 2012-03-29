@@ -90,9 +90,16 @@ App.Questions = {
       'change .order' : 'order'
     },
 
+    reload: function(){
+      this.ol.html('');
+      this.disablePagination = false;
+      this.load();
+    },
+
     filter: function(event){
       var filter = $(event.target);
       this.ol.data('options', $.extend({}, this.ol.data('options'), {by_category_id: filter.find('option:selected').val()}));
+      this.reload();
     },
 
     order: function(event){
@@ -100,6 +107,7 @@ App.Questions = {
       var order = _.reduce(filter.find('option'), function(memo, el){ memo[$(el).val()] = false; return memo; }, {});
       order[filter.find('option:selected').val()] = true;
       this.ol.data('options', $.extend({}, this.ol.data('options'), order));
+      this.reload();
     },
 
     updateVote: function(event, data){
