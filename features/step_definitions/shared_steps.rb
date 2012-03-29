@@ -6,6 +6,10 @@ Given /^there is a question$/ do
   @question = FactoryGirl.create(:question)
 end
 
+Given /^there is a ([^"]*) about ([^"]*)$/ do |arg1, arg2|
+  @truth = FactoryGirl.create(:question, :role_type => arg1, :category => Category.find_by_name(arg2))
+end
+
 Given /^I'm logged in$/ do
   visit "/auth/facebook"
 end
@@ -41,8 +45,13 @@ When /^I go to the questions page$/ do
   visit questions_path
 end
 
-Then /^I should not see "([^"]*)"$/ do |arg1|
-  page.should_not have_content(arg1)
+Then /^I should not see ([^"]*)$/ do |arg1|
+  case arg1
+  when "that truth"
+    page.should have_content(@question.text)
+  else
+    page.should_not have_content(arg1)
+  end
 end
 
 Then /^I should see ([^"]*)$/ do |arg1|

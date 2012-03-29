@@ -33,6 +33,32 @@ img
 
 .login_options
   padding: 20px
+  text-align: center
+  +clearfix
+  nav
+    margin: 20px auto
+    width: 340px
+  .facebook
+    background: url(asset_path('icons/facebook_x128.png', 'image')) no-repeat
+  .meurio
+    background: url(asset_path('icons/meurio_x128.png', 'image')) no-repeat
+    margin-left: 80px
+  .option
+    text-indent: -9999px
+    display: block
+    float: left
+    width: 130px
+    height: 130px
+    +border-radius(14px)
+    +box-shadow(0 1px 6px #666)
+    &:active
+      position: relative
+      top: 2px
+      background: lighten($green, 10%)
+    &:hover
+      +box-shadow(0px 1px 12px $green)
+
+
 // Due to order of precedence, the !important shit is necessary :/
 .error
   border: 1px solid red !important
@@ -240,6 +266,7 @@ section.questions
       &:last-child
         border-bottom: none
       .question
+        margin-bottom: 10px
         +clearfix
         img
           float: left
@@ -252,6 +279,7 @@ section.questions
         p.headline
           font-size: .8em
       .buttons
+        +clearfix
         display: none
         text-align: right
         form
@@ -266,11 +294,33 @@ section.questions
           padding: 0
           font-size: 1em
         a.twitter_btn, a.fb_btn
+          display: block
+          float: right
           opacity: .5
           +transition-property(opacity)
           +transition-duration(.3s)
           &:hover
             opacity: 1
+        form
+          display: inline
+          input
+            padding: 0
+            background: none
+            color: $blue
+            border: none
+            font-family: "Akagi-Book", Tahoma, Lucida Grande
+            text-transform: none
+            padding: 5px
+            font-size: 1em
+            margin: 0
+            +box-shadow(none)
+            &:hover
+              text-decoration: underline
+        span.votes
+          background: $blue
+          padding: 5px
+          color: white
+          +border-radius(5px)
     li.truth
       &:hover
         background: lighten($green, 45%)

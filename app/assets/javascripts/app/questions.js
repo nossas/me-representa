@@ -84,6 +84,16 @@ App.Questions = {
   }),
 
   List: Backbone.View.extend({
+    events: {
+      'ajax:success .buttons' : 'updateVote'
+    },
+
+    updateVote: function(event, data){
+      $(event.currentTarget)
+        .html(data)
+        .find("span.votes").effect("highlight", {}, 1000);
+    },
+
     initialize: function(){
       this.type = $(this.el).data('type');
       this.disablePagination = false;
@@ -92,11 +102,11 @@ App.Questions = {
     prependQuestion: function(url){
       var that = this;
       $.get(url, null, null, 'html')
-        .success(function(html){
-          var item = $(html).hide();
-          $(that.el).prepend(item);
-          item.fadeIn('slow');
-        });
+      .success(function(html){
+        var item = $(html).hide();
+        $(that.el).prepend(item);
+        item.fadeIn('slow');
+      });
     },
 
     lowerLimit: function(){
@@ -126,14 +136,14 @@ App.Questions = {
 
       url += ((url.indexOf("?") >= 0) ? '&' : '?') + filters;
       $.get(url, null, null, 'html')
-        .success(function(html){ 
-          if($.trim(html) != ''){
-            var items = $(html).hide();
-            $(that.el).append(items); 
-            items.fadeIn('slow');
-            that.disablePagination = false;
-          }
-        });
+      .success(function(html){ 
+        if($.trim(html) != ''){
+          var items = $(html).hide();
+          $(that.el).append(items); 
+          items.fadeIn('slow');
+          that.disablePagination = false;
+        }
+      });
     }
   }),
 
@@ -184,11 +194,15 @@ App.Questions = {
       $(window).scroll(this.scroll);
       this.$('select.chosen-select').chosen();
 
-      $('form.new_vote').bind('ajax:complete', function(){
-        var obj = $(this);
-        obj.after('Valeu por votar!');
-        obj.remove();
+      $('#questions_truth').bind("ajax:success", function(event, data){
+        that.truthList.loadList();
+        $(".form.truth fieldset").html(data);
       });
-    },
+
+      $('#questions_dare').bind("ajax:success", function(event, data){
+        that.dareList.loadList();
+        $(".form.dare fieldset").html(data);
+      });
+    }
   })
 };
