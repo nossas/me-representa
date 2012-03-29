@@ -20,9 +20,13 @@ html
 
         section.login
           .login_options.hidden
-            span Conecte-se usando:
+            p
+              | Para enviar uma pergunta, você precisa estar logado.
+            p
+              | Utilize um dos canais abaixo! : )
             nav
-              | #{link_to "Facebook", "/auth/facebook", :class => "fb_btn"} ou #{link_to "MeuRio", "/auth/meurio"}
+              | #{link_to "Facebook", "/auth/facebook", :class => "facebook option"}
+              | #{link_to "MeuRio", "/auth/meurio", :class => "meurio option"}
           - if signed_in?
             .logged
               | Olá, #{current_user.name}

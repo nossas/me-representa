@@ -1,18 +1,24 @@
 # coding: utf-8
 class QuestionsController < ApplicationController
+  MAX_QUESTIONS = 5
   inherit_resources
   load_and_authorize_resource
   respond_to :html, :json
 
-  def more
-    render collection, :layout => false
+  has_scope :by_type
+  has_scope :offset
+  has_scope :limit, :default => MAX_QUESTIONS
+  has_scope :recent_first, :type => :boolean
+
+  def show
+    if request.xhr?
+      render resource, :layout => false and return true
+    end
   end
 
   def index
-    @truths ||= Question.truth.limit(5)
-    @dares ||= Question.dare.limit(5)
     if request.xhr?
-      render (params[:type_role] == "truth" ? @truths : @dares) and return true
+      render collection, :layout => false and return true
     end
   end
 
@@ -24,7 +30,6 @@ class QuestionsController < ApplicationController
       failure.html { render :partial => "form", :locals => {:question => @question} }
     end
   end
-
 
   def current_ability
     @current_ability ||= Ability.new(current_user)
