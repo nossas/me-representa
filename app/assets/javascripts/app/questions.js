@@ -86,22 +86,13 @@ App.Questions = {
 
   List: Backbone.View.extend({
     events: {
-      <<<<<<< HEAD
       'ajax:success .buttons' : 'updateVote'
-      =======
-        'ajax:success .buttons' : 'updateVote'
-      >>>>>>> 0d23f5e1acb591fcb3bf8f84a887499715c59ea1
     },
 
     updateVote: function(event, data){
       $(event.currentTarget)
-      <<<<<<< HEAD
-      .html(data)
-      .find("span.votes").effect("highlight", {}, 1000);
-      =======
         .html(data)
-      .find("span.votes").effect("highlight", {}, 1000);
-      >>>>>>> 0d23f5e1acb591fcb3bf8f84a887499715c59ea1
+        .find("span.votes").effect("highlight", {}, 1000);
     },
 
     initialize: function(){
