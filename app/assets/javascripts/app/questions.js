@@ -189,7 +189,19 @@ App.Questions = {
     el: 'body',
 
     events: {
-      'click h4.discover' : 'toggleInfographic'
+      'click h4.discover' : 'toggleInfographic',
+      'ajax:success .form' : 'onQuestionCreate'
+    },
+
+    onQuestionCreate: function(event, data){
+      var target = $(event.currentTarget);
+      target.find('fieldset').html(data);
+      if(target.hasClass('truth')){
+        that.truthList.load();
+      }
+      else{
+        that.dareList.load();
+      }
     },
 
     scroll: function(event){
@@ -216,16 +228,6 @@ App.Questions = {
       this.dareList.load();
       $(window).scroll(this.scroll);
       this.$('select.chosen-select').chosen();
-
-      $('#questions_truth').bind("ajax:success", function(event, data){
-        that.truthList.loadList();
-        $(".form.truth fieldset").html(data);
-      });
-
-      $('#questions_dare').bind("ajax:success", function(event, data){
-        that.dareList.loadList();
-        $(".form.dare fieldset").html(data);
-      });
     }
   })
 };
