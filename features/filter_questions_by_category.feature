@@ -16,7 +16,6 @@ Feature: Filter questions by category
     And I'm on the questions page
     When I filter truths by "Saúde e Drogas"
     Then I should not see that truth
-    And I should see Ah... Não tem verdade sobre Saúde e Drogas
 
   @javascript
   Scenario: when I filter dares and something is returned
@@ -31,4 +30,3 @@ Feature: Filter questions by category
     And I'm on the questions page
     When I filter dares by "Saúde e Drogas"
     Then I should not see that dare
-    And I should see Ah... Não tem consequência sobre Saúde e Drogas

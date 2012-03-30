@@ -44,6 +44,7 @@ end
 
 When /^I filter ([^"]*) by "([^"]*)"$/ do |arg1, arg2|
   page.execute_script("$(\"select#category_id_#{arg1 == 'truths' ? 'truth' : 'dare'}\").val(#{Category.find_by_name(arg2).id})")
+  page.execute_script("$(\".filter-category\").trigger('change')")
 end
 
 When /^I go to the questions page$/ do
