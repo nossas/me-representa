@@ -129,6 +129,8 @@ section.questions
   h1, h2, h3, h4
     color: white
     font-family: "Folk-solid"
+  h4
+    padding: 10px 0 10px 17px
   header
     +grid($grid-system)
     h1, h2, h3, h4
@@ -379,3 +381,12 @@ a.twitter_btn
 
 a.fb_btn
   background: url(asset_path('icons/facebook_x48.png', 'image')) no-repeat
+
+.filter_box
+  +border-radius(6px)
+  +box-shadow( 4px 5px 0px #003366)
+  background-color: #00639d 
+  margin-bottom: 20px
+  
+  .chzn-container.chzn-container-single
+    margin: 15px
