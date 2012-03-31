@@ -38,14 +38,15 @@ html
     .wrapper.content
       = yield
     footer
-      nav.links
-        = link_to "Quem somos", ""
-        span |
-        = link_to "Contate-nos", ""
-      section.questionary
-        span Curioso com o questionário?
-      section.participate
-        span Você é candidato e quer participar? Mande um #{mail_to "contato@meurio.org", "e-mail", :encode => :hex} pra gente!
+      .wrapper
+        nav.links
+          = link_to "Quem somos", ""
+          span |
+          = link_to "Contate-nos", ""
+        section.questionary
+          span Curioso com o questionário?
+        section.participate
+          span Você é candidato e quer participar? Mande um #{mail_to "contato@meurio.org", "e-mail", :encode => :hex} pra gente!
 
     #fb-root
     = javascript_include_tag :application
