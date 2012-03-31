@@ -29,6 +29,7 @@ section.questions
       h2 Consequência
       fieldset
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "dare") }
+
     .filter_box
       h4 filtrar consequencias por
       = render :partial => "filters", :locals => { :type => "dare" }
