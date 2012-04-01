@@ -164,6 +164,9 @@ App.Questions = {
           var items = $(html).hide();
           that.ol.append(items); 
           items.fadeIn('slow');
+          that.ol.find(".buttons").hide();
+          that.ol.find("li").mouseover(function(){ $(this).find(".buttons").show(); })
+          that.ol.find("li").mouseout(function(){ $(this).find(".buttons").hide(); })
           that.disablePagination = false;
         }
       });
