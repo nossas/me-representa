@@ -87,7 +87,7 @@ App.Questions = {
     events: {
       'ajax:success .buttons' : 'updateVote',
       'change .filter-category' : 'filter',
-      'change .order' : 'order'
+      'change .order-category' : 'order'
     },
 
     reload: function(){
