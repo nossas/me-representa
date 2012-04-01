@@ -220,8 +220,8 @@ App.Questions = {
       var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
-      this.truthList = new App.Questions.List({el: this.$('.truth .questions_list')[0]});
-      this.dareList = new App.Questions.List({el: this.$('.dare .questions_list')[0]});
+      this.truthList = new App.Questions.List({el: this.$('.truth')[0]});
+      this.dareList = new App.Questions.List({el: this.$('.dare')[0]});
       this.truthFieldset = new App.Questions.Fieldset({el: this.$(".form.truth fieldset")[0], list: this.truthList});
       this.dareFieldset = new App.Questions.Fieldset({el: this.$(".form.dare fieldset")[0], list: this.dareList});
       this.truthList.load();
