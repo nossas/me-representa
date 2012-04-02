@@ -6,7 +6,8 @@ CariocaPergunta::Application.routes.draw do
     resources :votes, :only => :create
   end
   resources :users,       :only => [:new, :create]
+  resources :subscribers
   resources :sessions,    :only => [:destroy]
 
-  root :to => "questions#index"
+  root :to => "subscribers#index", :defaults => { :is_splash => true }
 end

@@ -40,10 +40,10 @@ html
     footer
       .wrapper
         nav.links
-          = link_to "Quem somos", ""
+          = link_to "Quem somos", "http://meurio.org.br/paginas/sobre_nos"
           span |
-          = link_to "Contate-nos", ""
-        section.questionary
+          = mail_to "contato@meurio.org.br", "Contate-nos"
+        /section.questionary
           span Curioso com o questionário?
         section.participate
           span Você é candidato e quer participar? Mande um #{mail_to "contato@meurio.org", "e-mail", :encode => :hex} pra gente!
