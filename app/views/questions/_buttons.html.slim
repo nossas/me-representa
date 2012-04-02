@@ -1,12 +1,6 @@
-//span.votes= t "votes", :count => question.votes.count
 ul.share_options
   li.facebook
-    = link_to "Compartilhar no Facebook", "http://www.facebook.com/dialog/feed?app_id=#{ENV["FB_ID"]}&link=#{question_url(question)}&redirect_uri=#{request.url}", :class => "fb_btn", :title => "Compartilhar no Facebook"
+    = link_to "Compartilhar no Facebook", "http://www.facebook.com/dialog/feed?app_id=#{ENV["FB_ID"]}&link=#{question_url(question)}&redirect_uri=#{request.url}", :title => "Compartilhar no Facebook"
 
   li.twitter
-    = link_to "Tweetar", "javascript:window.open('https://twitter.com/share?url=#{question_url(question)}&text=#{t "questions.#{question.user == current_user ? 'my_share' : 'share'}." + question.role_type, :user => question.user.name, :category => question.category.name, :link => question_url(question)}', '', 'width=640, height=400, scrollbars=no');", :class => "twitter_btn", :title => "Tweetar"
-
-  li.vote
-    - unless session[:votes].include? question.id
-      = simple_form_for [question, Vote.new], :remote => true do |f|
-        = f.submit "Votar"
+    = link_to "Tweetar", "javascript:window.open('https://twitter.com/share?url=#{question_url(question)}&text=#{t "questions.#{question.user == current_user ? 'my_share' : 'share'}." + question.role_type, :user => question.user.name, :category => question.category.name, :link => question_url(question)}', '', 'width=640, height=400, scrollbars=no');", :title => "Tweetar"
