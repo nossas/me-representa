@@ -5,10 +5,12 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
   respond_to :html, :json
 
+  has_scope :by_category_id
   has_scope :by_type
   has_scope :offset
   has_scope :limit, :default => MAX_QUESTIONS
   has_scope :recent_first, :type => :boolean
+  has_scope :voted_first, :type => :boolean
 
   def show
     if request.xhr?

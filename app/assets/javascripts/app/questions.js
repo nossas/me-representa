@@ -18,7 +18,6 @@ App.Questions = {
       this.role_type = this.$('[name="question[role_type]"]');
       this.actions = this.$('.action');
       this.store = this.store || new Store(this.id);
-      this.$('select.chosen-select').chosen();
 
       // Checking if there is some store data
       this.fillFormWithPreviousStoreData();
@@ -86,7 +85,29 @@ App.Questions = {
 
   List: Backbone.View.extend({
     events: {
-      'ajax:success .buttons' : 'updateVote'
+      'ajax:success .buttons' : 'updateVote',
+      'change .filter-category' : 'filter',
+      'change .order-category' : 'order'
+    },
+
+    reload: function(){
+      this.ol.html('');
+      this.disablePagination = false;
+      this.load();
+    },
+
+    filter: function(event){
+      var filter = $(event.target);
+      this.ol.data('options', $.extend({}, this.ol.data('options'), {by_category_id: filter.find('option:selected').val()}));
+      this.reload();
+    },
+
+    order: function(event){
+      var filter = $(event.target);
+      var order = _.reduce(filter.find('option'), function(memo, el){ memo[$(el).val()] = false; return memo; }, {});
+      order[filter.find('option:selected').val()] = true;
+      this.ol.data('options', $.extend({}, this.ol.data('options'), order));
+      this.reload();
     },
 
     updateVote: function(event, data){
@@ -96,7 +117,8 @@ App.Questions = {
     },
 
     initialize: function(){
-      this.type = $(this.el).data('type');
+      this.ol = this.$('ol:first');
+      this.type = this.ol.data('type');
       this.disablePagination = false;
     },
 
@@ -105,7 +127,7 @@ App.Questions = {
       $.get(url, null, null, 'html')
       .success(function(html){
         var item = $(html).hide();
-        $(that.el).prepend(item);
+        that.ol.prepend(item);
         item.fadeIn('slow');
       });
     },
@@ -121,24 +143,30 @@ App.Questions = {
       var lastItem = this.$('li:last');
       var offset = this.$('li').length
       if(lastItem.length > 0 && this.lowerLimit() > (lastItem.offset().top - 20)){
-        this.load(offset);
+        this.load({offset: offset});
       }
     },
 
-    load: function(offset){
+    load: function(options){
       var that = this;
-      var url = $(this.el).data('url');
+      var url = this.ol.data('url');
       if(!url){ return; }
-      if(!offset){ offset = 0; }
+      var filters = _.map(
+        $.extend({offset: 0, recent_first: true}, this.ol.data('options'), options), 
+        function(val, key){ return key + '=' + val; }
+      ).join('&');
       this.disablePagination = true;
 
-      url += ((url.indexOf("?") >= 0) ? '&' : '?') + 'offset=' + offset;
+      url += ((url.indexOf("?") >= 0) ? '&' : '?') + filters;
       $.get(url, null, null, 'html')
       .success(function(html){ 
         if($.trim(html) != ''){
           var items = $(html).hide();
-          $(that.el).append(items); 
+          that.ol.append(items); 
           items.fadeIn('slow');
+          that.ol.find(".buttons").hide();
+          that.ol.find("li").mouseover(function(){ $(this).find(".buttons").show(); })
+          that.ol.find("li").mouseout(function(){ $(this).find(".buttons").hide(); })
           that.disablePagination = false;
         }
       });
@@ -164,7 +192,19 @@ App.Questions = {
     el: 'body',
 
     events: {
-      'click h4.discover' : 'toggleInfographic'
+      'click h4.discover' : 'toggleInfographic',
+      'ajax:success .form' : 'onQuestionCreate'
+    },
+
+    onQuestionCreate: function(event, data){
+      var target = $(event.currentTarget);
+      target.find('fieldset').html(data);
+      if(target.hasClass('truth')){
+        that.truthList.load();
+      }
+      else{
+        that.dareList.load();
+      }
     },
 
     scroll: function(event){
@@ -183,23 +223,14 @@ App.Questions = {
       var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
-      this.truthList = new App.Questions.List({el: this.$('ol#truths')[0]});
-      this.dareList = new App.Questions.List({el: this.$('ol#dares')[0]});
+      this.truthList = new App.Questions.List({el: this.$('.truth')[0]});
+      this.dareList = new App.Questions.List({el: this.$('.dare')[0]});
       this.truthFieldset = new App.Questions.Fieldset({el: this.$(".form.truth fieldset")[0], list: this.truthList});
       this.dareFieldset = new App.Questions.Fieldset({el: this.$(".form.dare fieldset")[0], list: this.dareList});
       this.truthList.load();
       this.dareList.load();
       $(window).scroll(this.scroll);
-
-      $('#questions_truth').bind("ajax:success", function(event, data){
-        that.truthList.loadList();
-        $(".form.truth fieldset").html(data);
-      });
-
-      $('#questions_dare').bind("ajax:success", function(event, data){
-        that.dareList.loadList();
-        $(".form.dare fieldset").html(data);
-      });
+      this.$('select.chosen-select').chosen();
     }
   })
 };

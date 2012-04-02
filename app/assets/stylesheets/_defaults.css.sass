@@ -30,6 +30,13 @@ body
   font: normal 1em/28px "Akagi-Book", Tahoma, Lucida Grande
   color: $gray
   background: url(asset_path('bg.png', 'image'))
+  margin: 0
+  padding: 0
+  width: 100%
+
+//.content
+  overflow: auto
+  //height: 100%
 
 strong
   font-weight: bold
@@ -95,10 +102,18 @@ input[disabled]
 
 // Footer is repeated in the splash and the application layouts.
 footer
-  +grid-container
+  position: fixed
+  width: 100%
+  bottom: 0
+  background: url(asset_path('bg.png', 'image'))
+  border-top: 3px dashed $green
+  padding-top: 5px
+  margin-top: 2px
+
   nav.links
-    +grid(8)
+    +grid(4)
     text-shadow: 1px 1px 1px white
+    margin-top: 4px
     a
       color: $gray
       text-transform: uppercase
@@ -107,6 +122,23 @@ footer
         border-bottom: 1px solid $gray
     span
       margin: 0 10px
+  .questionary
+    +grid(4)
+    margin-bottom: 10px
+    span
+      background: $green
+      color: white
+      float: right
+      line-height: 100%
+      padding: 5px
+      margin-top: 4px
+      cursor: pointer
+      +border-radius(5px)
+      +box-shadow(3px 3px 0px $blue)
+      +opacity(0.8)
+      &:hover
+        +opacity(1)
+
   .participate
     +grid(8)
     +clearfix

@@ -20,5 +20,5 @@ Feature: Login
     Given I'm logged in
     And I'm on the questions page
     When I click "Sair"
-    Then I should not see "Nícolas Iensen"
+    Then I should not see Nícolas Iensen
     And I should see Entre com a sua conta do Meu Rio ou do Facebook

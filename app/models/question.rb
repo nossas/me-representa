@@ -6,7 +6,9 @@ class Question < ActiveRecord::Base
   validates_inclusion_of :role_type, :in => %Q{truth dare}, :message => "Only truth or dare."
 
   scope :by_type, ->(type){ where(['role_type = ?', type]) }
+  scope :by_category_id, ->(id){ where(['category_id = ?', id]) }
   scope :recent_first, order('created_at DESC')
+  scope :voted_first, order('(SELECT count(*) FROM votes v WHERE v.question_id = questions.id) DESC')
 
   def truth?
     role_type == "truth"

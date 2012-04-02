@@ -15,15 +15,25 @@ section.questions
       h2 Verdade
       fieldset
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "truth") }
+    
+    .filter_box
+      h4 filtrar verdades por
+      = render :partial => "filters", :locals => { :type => "truth" }
+    
     .questions_list
       h3 Verdades sugeridas recentemente
-      ol#truths data-type="truth" data-url=questions_path(:by_type => 'truth', :recent_first => true)
+      ol#truths data-type="truth" data-url=questions_path(:by_type => 'truth')
 
   section.dare
     .form.dare
       h2 Consequência
       fieldset
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "dare") }
+
+    .filter_box
+      h4 filtrar consequencias por
+      = render :partial => "filters", :locals => { :type => "dare" }
+
     .questions_list
       h3 Consequências sugeridas recentemente
-      ol#dares data-type="dare" data-url=questions_path(:by_type => 'dare', :recent_first => true)
+      ol#dares data-type="dare" data-url=questions_path(:by_type => 'dare')
