@@ -140,8 +140,8 @@ App.Questions = {
       if(this.disablePagination){
         return;
       }
-      var lastItem = this.$('li:last');
-      var offset = this.$('li').length
+      var lastItem = this.$('.questions_list ol li:last');
+      var offset = this.$('.questions_list ol li').length
       if(lastItem.length > 0 && this.lowerLimit() > (lastItem.offset().top - 20)){
         this.load({offset: offset});
       }
