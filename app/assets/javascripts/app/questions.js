@@ -168,6 +168,7 @@ App.Questions = {
           that.ol.find(".buttons").hide();
           that.ol.find("li").mouseover(function(){ $(this).find(".buttons").show(); })
           that.ol.find("li").mouseout(function(){ $(this).find(".buttons").hide(); })
+          that.ol.find(".category_link").click(function(){ alert($(this).data("category-id")); })
           that.disablePagination = false;
         }
       });
@@ -224,8 +225,8 @@ App.Questions = {
       var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
-      this.truthList = new App.Questions.List({el: this.$('.truth')[0]});
-      this.dareList = new App.Questions.List({el: this.$('.dare')[0]});
+      this.truthList = new App.Questions.List({el: this.$('section.truth')[0]});
+      this.dareList = new App.Questions.List({el: this.$('section.dare')[0]});
       this.truthFieldset = new App.Questions.Fieldset({el: this.$(".form.truth fieldset")[0], list: this.truthList});
       this.dareFieldset = new App.Questions.Fieldset({el: this.$(".form.dare fieldset")[0], list: this.dareList});
       this.truthList.load();

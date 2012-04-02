@@ -30,3 +30,12 @@ Feature: Filter questions by category
     And I'm on the questions page
     When I filter dares by "Saúde e Drogas"
     Then I should not see that dare
+
+  @javascript
+  Scenario: when I filter clicking on the category's link
+    Given there is a truth about "Educação" saying "testing education"
+    And there is a truth about "Saúde e Drogas" saying "testing drugs :)"
+    And I'm on the questions page
+    When I click "Saúde e Drogas"
+    Then I should not see testing education
+    And I should see testing drugs :)
