@@ -107,13 +107,13 @@ footer
   bottom: 0
   background: url(asset_path('bg.png', 'image'))
   border-top: 3px dashed $green
-  padding-top: 5px
+  padding-top: 10px
+  padding-bottom: 10px
   margin-top: 2px
+  text-shadow: 1px 1px 1px white
 
   nav.links
-    +grid(4)
-    text-shadow: 1px 1px 1px white
-    margin-top: 4px
+    +grid(8)
     a
       color: $gray
       text-transform: uppercase
@@ -141,13 +141,4 @@ footer
 
   .participate
     +grid(8)
-    +clearfix
-    margin-bottom: 10px
-    span
-      background: white
-      float: right
-      line-height: 100%
-      padding: 10px
-      +border-radius(5px)
-
-
+    text-align: right
