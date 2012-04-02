@@ -159,9 +159,10 @@ App.Questions = {
 
       url += ((url.indexOf("?") >= 0) ? '&' : '?') + filters;
       $.get(url, null, null, 'html')
-      .success(function(html){ 
+      .success(function(html){
         if($.trim(html) != ''){
           var items = $(html).hide();
+
           that.ol.append(items); 
           items.fadeIn('slow');
           that.ol.find(".buttons").hide();

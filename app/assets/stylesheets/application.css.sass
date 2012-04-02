@@ -259,10 +259,13 @@ section.questions
       color: gray
       margin-bottom: 20px
       text-transform: uppercase
-    li
+    li.user_question
       padding: 15px 6px
       border-top: 1px dashed #bebebe
       +clearfix
+      &:hover
+        ul.share_options
+          display: block
       &:last-child
         border-bottom: none
       .question
@@ -283,6 +286,7 @@ section.questions
         text-align: right
         form
           display: inline-block
+          margin: 0
         input
           background: none
           font-family: "Akagi-Book"
@@ -291,35 +295,6 @@ section.questions
           text-transform: none
           +box-shadow(none)
           padding: 0
-          font-size: 1em
-        a.twitter_btn, a.fb_btn
-          display: block
-          float: right
-          opacity: .5
-          +transition-property(opacity)
-          +transition-duration(.3s)
-          &:hover
-            opacity: 1
-        form
-          display: inline
-          input
-            padding: 0
-            background: none
-            color: $blue
-            border: none
-            font-family: "Akagi-Book", Tahoma, Lucida Grande
-            text-transform: none
-            padding: 5px
-            font-size: 1em
-            margin: 0
-            +box-shadow(none)
-            &:hover
-              text-decoration: underline
-        span.votes
-          background: $blue
-          padding: 5px
-          color: white
-          +border-radius(5px)
     li.truth
       &:hover
         background: lighten($green, 45%)
@@ -339,26 +314,60 @@ form[action="/questions"]
   label
     display: none
 
+.share_options
+  display: none
+  li
+    a
+      border: 1px bottom $gray
+    float: right
+    margin: 4px 6px
+    padding: 0
+    &.twitter, &.facebook
+
+      font-size: 1.1em
+      color: $blue
+
+    a, span.votes
+      font-size: 0.7em
+      +transition-property(opacity)
+      +transition-duration(.3s)
+      &:hover
+        opacity: 1
+    form
+      display: inline
+      input
+        padding: 0
+        background: none
+        color: $blue
+        border: none
+        font-family: "Akagi-Book", Tahoma, Lucida Grande
+        text-transform: none
+        padding: 5px
+        font-size: 1em
+        margin: 0
+        +box-shadow(none)
+        &:hover
+          text-decoration: underline
 .preview
   .category
     margin: 5px 0
+
   .description
     font-family: "Akagi-Book-Italic"
     line-height: 1.6em
-    &:after, &:before
-      content: '"'
-    span.truth
-      color: $green
-    span.dare
-      color: $orange
-
     background: #ededed
     padding: 20px 15px
     margin: 10px 0 15px 0
     +border-radius(10px)
     +box-shadow(inset 0px 1px 3px #cecece)
 
+    &:after, &:before
+      content: '"'
 
+    span.truth
+      color: $green
+    span.dare
+      color: $orange
 
 a.twitter_btn, a.fb_btn
   display: block
