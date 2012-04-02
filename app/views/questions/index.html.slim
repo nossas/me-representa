@@ -15,11 +15,11 @@ section.questions
       h2 Verdade
       fieldset
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "truth") }
-    
+
     .filter_box
       h4 filtrar verdades por
       = render :partial => "filters", :locals => { :type => "truth" }
-    
+
     .questions_list
       h3 Verdades sugeridas recentemente
       ol#truths data-type="truth" data-url=questions_path(:by_type => 'truth')
