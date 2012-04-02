@@ -140,8 +140,8 @@ App.Questions = {
       if(this.disablePagination){
         return;
       }
-      var lastItem = this.$('.questions_list ol li:last');
-      var offset = this.$('.questions_list ol li').length
+      var lastItem = this.$('.questions_list ol li.user_question:last');
+      var offset = this.$('.questions_list ol li.user_question').length
       if(lastItem.length > 0 && this.lowerLimit() > (lastItem.offset().top - 20)){
         this.load({offset: offset});
       }
@@ -159,9 +159,10 @@ App.Questions = {
 
       url += ((url.indexOf("?") >= 0) ? '&' : '?') + filters;
       $.get(url, null, null, 'html')
-      .success(function(html){ 
+      .success(function(html){
         if($.trim(html) != ''){
           var items = $(html).hide();
+
           that.ol.append(items); 
           items.fadeIn('slow');
           that.ol.find(".buttons").hide();
