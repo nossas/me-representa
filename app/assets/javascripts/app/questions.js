@@ -114,8 +114,8 @@ App.Questions = {
       var result = JSON.parse(data);
       var obj = $(event.currentTarget);
       obj.siblings('.votes')
-        .effect('highlight', {}, 1000)
-        .html(result.votes);
+        .html(result.votes)
+        .effect('highlight', {}, 1000);
       obj.children('input').attr('disabled', 'disabled');
     },
 
