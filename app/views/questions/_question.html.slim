@@ -7,8 +7,5 @@ li.user_question[data-id="#{question.id}" class=question.role_type]
     p.text
       span= t "questions.list.#{question.role_type}.text"
       = link_to question.text, question_path(question)
-    div.vote[class=(session[:votes].include?(question.id) ? 'voted' : 'normal')]
-      span.votes= question.votes.count
-      = simple_form_for [question, Vote.new], :remote => true, :format => :json do |f|
-        = f.submit "Votar", :class => "vote_btn", :disabled => ("disabled" if session[:votes].include?(question.id))
+    = render :partial => "vote", :locals => { :question => question }
   .buttons= render :partial => "buttons", :locals => {:question => question}
