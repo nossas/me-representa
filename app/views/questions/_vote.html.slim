@@ -1,0 +1,5 @@
+div.vote[class=(session[:votes].include?(question.id) ? 'voted' : 'normal')]
+  span.votes= question.votes.count
+  = simple_form_for [question, Vote.new], :remote => true, :format => :json do |f|
+    = f.submit "Votar", :class => "vote_btn", :disabled => ("disabled" if session[:votes].include?(question.id))
+

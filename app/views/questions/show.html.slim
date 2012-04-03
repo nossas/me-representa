@@ -1,10 +1,25 @@
+- q = @question
 - content_for :og do
-  meta property="og:title" content=t("questions.share.#{@question.role_type}", :user => @question.user.name, :category => @question.category.name, :link => question_url(@question))
-  meta property="og:description" content=@question.text
-  meta property="og:url" content=question_url(@question)
+  meta property="og:title" content=t("questions.share.#{q.role_type}", :user => q.user.name, :category => q.category.name, :link => question_url(q))
+  meta property="og:description" content=q.text
+  meta property="og:url" content=question_url(q)
   meta property="og:image" content=(request.protocol + request.host_with_port + image_path("vouc.jpg"))
 
-section.info
-  = @question.text
-  = @question.user.name
+section.info.show
+  h2[class=q.role_type]= t "header.#{q.role_type}"
+  .questions_list
+    .user_question
+      .share
+
+        .option= render :partial => "vote", :locals => { :question => q }
+        .option.fb-like[data-send="false" data-layout="box_count" data-width="60" data-show-faces="false"]
+        .option= link_to "Tweet", "https://twitter.com/share?count=vertical", :class => "twitter-share-button"
+
+      .question
+        = image_tag q.user.picture, :size => "50x50"
+        p.headline
+          strong= q.user.name
+          = t "questions.list.#{q.role_type}.want_to_know_html", :link => link_to(q.category.name, "")
+        p.description
+          = q.text
 section.questions

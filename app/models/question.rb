@@ -31,4 +31,8 @@ class Question < ActiveRecord::Base
       :role_type => self.role_type
     }
   end
+
+  def to_param
+    I18n.t "url.#{role_type}", :user => user.name.parameterize, :id => id
+  end
 end
