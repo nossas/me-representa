@@ -87,7 +87,8 @@ App.Questions = {
     events: {
       'ajax:success .buttons' : 'updateVote',
       'change .filter-category' : 'filter',
-      'change .order-category' : 'order'
+      'change .order-category' : 'order',
+      'click .category-link' : 'filterCategory'
     },
 
     reload: function(){
@@ -100,6 +101,15 @@ App.Questions = {
       var filter = $(event.target);
       this.ol.data('options', $.extend({}, this.ol.data('options'), {by_category_id: filter.find('option:selected').val()}));
       this.reload();
+    },
+
+    filterCategory: function(event){
+      var id = $(event.target).data('category-id');
+      var filter = this.$(".filter-category");
+      filter.find('option').removeProp('selected');
+      filter.find('option[value="' + id + '"]').prop('selected', 'selected');
+      filter.trigger('change').trigger("liszt:updated");
+      return false;
     },
 
     order: function(event){
@@ -166,9 +176,7 @@ App.Questions = {
           that.ol.append(items); 
           items.fadeIn('slow');
           that.ol.find(".buttons").hide();
-          that.ol.find("li").mouseover(function(){ $(this).find(".buttons").show(); })
-          that.ol.find("li").mouseout(function(){ $(this).find(".buttons").hide(); })
-          that.ol.find(".category_link").click(function(){ alert($(this).data("category-id")); })
+          that.ol.find("li").mouseover(function(){ $(this).find(".buttons").show(); }).mouseout(function(){ $(this).find(".buttons").hide(); });
           that.disablePagination = false;
         }
       });
