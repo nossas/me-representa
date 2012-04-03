@@ -95,8 +95,8 @@ Then /^I should see ([^"]*)$/ do |arg1|
     when "that truth"
       page.should have_content(@truth.text)
     when "1 voto"
+      sleep 1
       page.find("li.#{@question.role_type} span.votes").text.should == "1"
-
     else
       page.should have_content(arg1)
   end
