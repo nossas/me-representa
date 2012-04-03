@@ -193,14 +193,18 @@ section.truth, section.dare
     a.twitter_btn, a.fb_btn
       padding-top: 128px
       width: 128px
+      height: 0
+      display: inline-block
+      overflow: hidden
       +scale(.9)
       +transition-duration(.3s)
       &:hover
         +scale(1)
+        border: none
     a.twitter_btn
-      background: url(asset_path('social-twitter-box-white-icon-128.png', 'image'))
+      background: url(asset_path('icons/twitter_x128.png', 'image'))
     a.fb_btn
-      background: url(asset_path('social-facebook-box-white-icon-128.png', 'image'))
+      background: url(asset_path('icons/facebook_x128.png', 'image'))
     h2
       border: none
 
@@ -439,15 +443,6 @@ div.vote
       color: $green
     span.dare
       color: $orange
-
-a.twitter_btn, a.fb_btn
-  display: block
-  float: right
-  overflow: hidden
-  cursor: pointer
-  &:hover
-    text-decoration: none
-    border: none
 
 .filter_box
   +border-radius(6px)
