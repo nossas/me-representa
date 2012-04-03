@@ -17,4 +17,18 @@ class Question < ActiveRecord::Base
   def dare?
     role_type == "dare"
   end
+
+  def as_json(options = {})
+    {
+      :id => self.id,
+      :text => self.text,
+      :user => self.user.id,
+      :votes => self.votes.size,
+      :category => {
+        :id => self.category.id,
+        :name => self.category.name
+      },
+      :role_type => self.role_type
+    }
+  end
 end

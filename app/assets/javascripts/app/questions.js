@@ -85,7 +85,7 @@ App.Questions = {
 
   List: Backbone.View.extend({
     events: {
-      'ajax:success span.votes' : 'updateVote',
+      'ajax:success .new_vote' : 'updateVote',
       'change .filter-category' : 'filter',
       'change .order-category' : 'order'
     },
@@ -111,7 +111,12 @@ App.Questions = {
     },
 
     updateVote: function(event, data){
-      this.$(event.target).html(data);
+      var result = JSON.parse(data);
+      var obj = $(event.currentTarget);
+      obj.siblings('.votes')
+        .effect('highlight', {}, 1000)
+        .html(result.votes);
+      obj.children('input').attr('disabled', 'disabled');
     },
 
     initialize: function(){

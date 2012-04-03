@@ -7,7 +7,7 @@ class VotesController < ApplicationController
     create! do |success, failure|
       success.json do
         session[:votes] << @question.id
-        render :json => @question.votes.count
+        render :json => @question.as_json
       end
     end
   end
