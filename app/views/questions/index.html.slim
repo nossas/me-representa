@@ -1,7 +1,3 @@
-section.info
-  header
-    = image_tag "bg_header_truth_dare2.png", :size => "936x118", :alt => "Jogo da Verdade ou Consequência", :title => "Jogo da Verdade ou Consequência"
-
 section.questions
   header
     h1 O que você quer do candidato?
@@ -12,12 +8,12 @@ section.questions
 
   section.truth
     .form.truth
-      h2 Verdade
+      h2[class="truth"]= t "header.truth"
       fieldset
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "truth") }
 
     .filter_box
-      h4 filtrar verdades por
+      h4= t "filter.truth"
       = render :partial => "filters", :locals => { :type => "truth" }
 
     .questions_list
@@ -26,12 +22,12 @@ section.questions
 
   section.dare
     .form.dare
-      h2 Consequência
+      h2[class="dare"]= t "header.dare"
       fieldset
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "dare") }
 
     .filter_box
-      h4 filtrar consequencias por
+      h4= t "filter.dare"
       = render :partial => "filters", :locals => { :type => "dare" }
 
     .questions_list

@@ -2,7 +2,7 @@ doctype html
 html
   head
     title MeuRio - Verdade ou Consequência?
-    - stylesheet = params[:is_splash] == true ? :splash_page : :application
+    - stylesheet = params[:is_splash] ? :splash_page : :application
     = stylesheet_link_tag stylesheet
     = yield :og
     = favicon_link_tag "http://meurio.org.br/assets/favicon.png", :type => "image/png"
@@ -36,6 +36,8 @@ html
           - else
             | Entre com a sua conta do #{link_to "Meu Rio", "/auth/meurio"} ou do #{link_to "Facebook", "/auth/facebook"}
     .wrapper.content
+      - unless params[:is_splash]
+        = render :partial => "questions_header"
       = yield
     footer
       .wrapper
