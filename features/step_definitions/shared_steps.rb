@@ -33,6 +33,10 @@ Given /^there is a truth with (\d+) votes saying ([^"]*)$/ do |arg1, arg2|
   arg1.to_i.times { |i| FactoryGirl.create(:vote, :question => @truth) }
 end
 
+Given /^there is a truth about "([^"]*)" saying "([^"]*)"$/ do |arg1, arg2|
+  @truth = FactoryGirl.create(:question, :role_type => "truth", :text => arg2, :category => Category.find_by_name(arg1))
+end
+
 When /^I send the subscriber form with my email$/ do
   visit root_path
   fill_in "subscriber[email]", :with => "runeroniek@gmail.com"
@@ -91,8 +95,8 @@ Then /^I should see ([^"]*)$/ do |arg1|
     when "that truth"
       page.should have_content(@truth.text)
     when "1 voto"
+      sleep 1
       page.find("li.#{@question.role_type} span.votes").text.should == "1"
-
     else
       page.should have_content(arg1)
   end

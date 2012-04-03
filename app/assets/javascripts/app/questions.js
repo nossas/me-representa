@@ -87,7 +87,8 @@ App.Questions = {
     events: {
       'ajax:success .new_vote' : 'updateVote',
       'change .filter-category' : 'filter',
-      'change .order-category' : 'order'
+      'change .order-category' : 'order',
+      'click .category-link' : 'filterCategory'
     },
 
     reload: function(){
@@ -97,9 +98,19 @@ App.Questions = {
     },
 
     filter: function(event){
+      window.location = "#truth_filter"
       var filter = $(event.target);
       this.ol.data('options', $.extend({}, this.ol.data('options'), {by_category_id: filter.find('option:selected').val()}));
       this.reload();
+    },
+
+    filterCategory: function(event){
+      var id = $(event.target).data('category-id');
+      var filter = this.$(".filter-category");
+      filter.find('option').removeProp('selected');
+      filter.find('option[value="' + id + '"]').prop('selected', 'selected');
+      filter.trigger('change').trigger("liszt:updated");
+      return false;
     },
 
     order: function(event){
@@ -224,8 +235,8 @@ App.Questions = {
       var that = this;
       this.truthForm = new App.Questions.Form({el: this.$('form#questions_truth')[0]});
       this.dareForm = new App.Questions.Form({el: this.$('form#questions_dare')[0]});
-      this.truthList = new App.Questions.List({el: this.$('.truth')[0]});
-      this.dareList = new App.Questions.List({el: this.$('.dare')[0]});
+      this.truthList = new App.Questions.List({el: this.$('section.truth')[0]});
+      this.dareList = new App.Questions.List({el: this.$('section.dare')[0]});
       this.truthFieldset = new App.Questions.Fieldset({el: this.$(".form.truth fieldset")[0], list: this.truthList});
       this.dareFieldset = new App.Questions.Fieldset({el: this.$(".form.dare fieldset")[0], list: this.dareList});
       this.truthList.load();
