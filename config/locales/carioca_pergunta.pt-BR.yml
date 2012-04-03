@@ -1,4 +1,7 @@
 pt-BR:
+  url:
+    truth: "%{id}-verdade-por-%{user}"
+    dare: "%{id}-consequencia-por-%{user}"
   about:
     text: "Com o pouco tempo que cada candidato a Vereador tem na TV e no rádio, fica difícil saber quem é quem e entender as propostas de cada um.  Já que em todo ano de eleição municipal vamos às urnas com as mesmas questões na cabeça, por que neste ano não fazemos diferente? Nós já giramos a garrafa, agora cabe a você fazer as perguntas para os candidatos."
     candidates:
