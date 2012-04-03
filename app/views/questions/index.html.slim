@@ -16,7 +16,7 @@ section.questions
       fieldset
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "truth") }
 
-    .filter_box
+    #filter_truth.filter_box
       h4 filtrar verdades por
       = render :partial => "filters", :locals => { :type => "truth" }
 
@@ -30,7 +30,7 @@ section.questions
       fieldset
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "dare") }
 
-    .filter_box
+    #filter_dare.filter_box
       h4 filtrar consequencias por
       = render :partial => "filters", :locals => { :type => "dare" }
 

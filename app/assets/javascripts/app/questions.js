@@ -97,6 +97,7 @@ App.Questions = {
     },
 
     filter: function(event){
+      window.location = "#filter_truth"
       var filter = $(event.target);
       this.ol.data('options', $.extend({}, this.ol.data('options'), {by_category_id: filter.find('option:selected').val()}));
       this.reload();
