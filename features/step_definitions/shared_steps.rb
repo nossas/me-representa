@@ -49,7 +49,7 @@ end
 
 When /^I press "([^"]*)"$/ do |arg1|
   page.execute_script("$('.questions_list li').trigger('mouseover')") if arg1 == "Votar"
-  click_button arg1
+  click_on(arg1)
 end
 
 When /^I filter ([^"]*) by "([^"]*)"$/ do |arg1, arg2|
@@ -81,9 +81,9 @@ end
 Then /^I should see ([^"]*)$/ do |arg1|
   case arg1
     when "a Facebook share button for this question"
-      page.should have_css("li[data-id=\"#{@question.id}\"] a.fb_btn")
+      page.should have_css("li[data-id=\"#{@question.id}\"] .share_options li.twitter")
     when "a Twitter share button for this question"
-      page.should have_css("li[data-id=\"#{@question.id}\"] a.twitter_btn")
+      page.should have_css("li[data-id=\"#{@question.id}\"] .share_options li.facebook")
     when "some share buttons for my truth"
       page.find(".form.truth").should have_css("a.twitter_btn")
       page.find(".form.truth").should have_css("a.fb_btn")
@@ -94,6 +94,9 @@ Then /^I should see ([^"]*)$/ do |arg1|
       page.should have_content(@dare.text)
     when "that truth"
       page.should have_content(@truth.text)
+    when "1 voto"
+      page.find("li.#{@question.role_type} span.votes").text.should == "1"
+
     else
       page.should have_content(arg1)
   end

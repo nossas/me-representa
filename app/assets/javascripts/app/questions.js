@@ -85,7 +85,7 @@ App.Questions = {
 
   List: Backbone.View.extend({
     events: {
-      'ajax:success .buttons' : 'updateVote',
+      'ajax:success .new_vote' : 'updateVote',
       'change .filter-category' : 'filter',
       'change .order-category' : 'order',
       'click .category-link' : 'filterCategory'
@@ -121,9 +121,12 @@ App.Questions = {
     },
 
     updateVote: function(event, data){
-      $(event.currentTarget)
-        .html(data)
-        .find("span.votes").effect("highlight", {}, 1000);
+      var result = JSON.parse(data);
+      var obj = $(event.currentTarget);
+      obj.siblings('.votes')
+        .html(result.votes)
+        .effect('highlight', {}, 1000);
+      obj.children('input').attr('disabled', 'disabled');
     },
 
     initialize: function(){
@@ -162,7 +165,7 @@ App.Questions = {
       var url = this.ol.data('url');
       if(!url){ return; }
       var filters = _.map(
-        $.extend({offset: 0, recent_first: true}, this.ol.data('options'), options), 
+        $.extend({offset: 0, recent_first: true}, this.ol.data('options'), options),
         function(val, key){ return key + '=' + val; }
       ).join('&');
       this.disablePagination = true;
@@ -173,10 +176,8 @@ App.Questions = {
         if($.trim(html) != ''){
           var items = $(html).hide();
 
-          that.ol.append(items); 
+          that.ol.append(items);
           items.fadeIn('slow');
-          that.ol.find(".buttons").hide();
-          that.ol.find("li").mouseover(function(){ $(this).find(".buttons").show(); }).mouseout(function(){ $(this).find(".buttons").hide(); });
           that.disablePagination = false;
         }
       });
