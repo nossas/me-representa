@@ -1,4 +1,5 @@
 var App = window.App = {
+  Questions: {},
   Common: {
     init: function(){
       App.Common.login = new App.Common.Login({el: $('section.login')[0]});
@@ -6,7 +7,6 @@ var App = window.App = {
 
     finish: function(){
     },
-
     Login: Backbone.View.extend({
       validate: function(){
         return this.$('.logged').length;
