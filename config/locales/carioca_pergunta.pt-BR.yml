@@ -17,14 +17,14 @@ pt-BR:
       truth:
         header: "Quero que responda com sinceridade"
         headline: "Sobre"
-        placeholder: "Sr(a). candidato(a), é verdade que..."
+        placeholder: "Sim ou Não? Você..."
       dare:
         header: "Quero que se comprometa com algo"
         headline: "Relacionado a"
         placeholder: "Sr(a). candidato(a), você deverá..."
     list:
       truth:
-        text: "Sr(a). candidato(a), é verdade que "
+        text: "Sim ou Não? Você "
         want_to_know_html: " quer saber sobre %{link} "
       dare:
         text: "Sr(a). candidato(a), você deverá "
