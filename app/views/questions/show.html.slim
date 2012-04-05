@@ -14,12 +14,14 @@ section.info.show
         .option= render :partial => "vote", :locals => { :question => q }
         .option.fb-like[data-send="false" data-layout="box_count" data-width="60" data-show-faces="false"]
         .option= link_to "Tweet", "https://twitter.com/share?count=vertical", :class => "twitter-share-button"
-
       .question
-        = image_tag q.user.picture, :size => "50x50"
+        = image_tag q.user.picture, :size => "80x80"
         p.headline
           strong= q.user.name
           = t "questions.list.#{q.role_type}.want_to_know_html", :link => link_to(q.category.name, "")
         p.description
+          span[class=q.role_type]= t "questions.list.#{q.role_type}.text"
           = q.text
-section.questions
+
+  = link_to "Veja mais perguntas!", questions_path, :class => "btn"
+
