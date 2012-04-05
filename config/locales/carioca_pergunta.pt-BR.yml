@@ -17,17 +17,17 @@ pt-BR:
       truth:
         header: "Quero que responda com sinceridade"
         headline: "Sobre"
-        placeholder: "Sr. candidato é verdade que..."
+        placeholder: "Sr(a). candidato(a), é verdade que..."
       dare:
         header: "Quero que se comprometa com algo"
         headline: "Relacionado a"
-        placeholder: "Sr. candidato você deverá..."
+        placeholder: "Sr(a). candidato(a), você deverá..."
     list:
       truth:
-        text: "Sr(a). candidato, é verdade que "
+        text: "Sr(a). candidato(a), é verdade que "
         want_to_know_html: " quer saber sobre %{link} "
       dare:
-        text: "Sr(a). candidato, você deverá "
+        text: "Sr(a). candidato(a), você deverá "
         want_to_know_html: " lançou uma demanda para %{link} "
     share:
       truth: "%{user} fez uma pergunta sobre %{category} aos candidatos a vereador do Rio %{link}"
