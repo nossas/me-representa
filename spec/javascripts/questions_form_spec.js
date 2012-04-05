@@ -111,6 +111,18 @@ describe("Questions.Form", function(){
     });
   });
 
+  describe("backToForm", function(){
+    beforeEach(function(){
+      spyOn($.fn, "trigger");
+      spyOn($.fn, "validate").andCallThrough();
+      spyOn(view, "hidePreview");
+      view.backToForm();
+    });
+
+    it("should hide the preview", function(){
+      expect(view.hidePreview).toHaveBeenCalled();
+    });
+  });
 
   describe("#fillFormWithPreviousStoreData", function(){
 

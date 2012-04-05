@@ -44,6 +44,13 @@ App.Questions.Form = Backbone.View.extend({
     $(this.el).validate().resetForm();
   },
 
+  backToForm: function(){
+    this.el.reset();
+    $(this.el).validate().resetForm();
+    this.hidePreview();
+    $(this.el).show();
+  },
+
   expandTextarea: function(){
     this.$('select').trigger('liszt:updated');
     this.textarea.animate({ height: "200px" });

@@ -10,6 +10,7 @@ section.questions
     .form.truth
       h2[class="truth"]= t "header.truth"
       fieldset
+        .ajax-target
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "truth") }
 
     #truth_filter.filter_box
@@ -24,6 +25,7 @@ section.questions
     .form.dare
       h2[class="dare"]= t "header.dare"
       fieldset
+        .ajax-target
         = render :partial => "form", :locals => { :question => Question.new(:role_type => "dare") }
 
     #dare_filter.filter_box
