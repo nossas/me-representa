@@ -2,7 +2,7 @@ App.Questions.Index =  Backbone.View.extend({
   el: 'body',
 
   events: {
-    'click h4.discover' : 'toggleInfographic',
+    'click a.infographic' : 'toggleInfographic',
     'ajax:success .form' : 'onQuestionCreate'
   },
 
