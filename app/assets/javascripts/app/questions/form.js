@@ -17,6 +17,7 @@ App.Questions.Form = Backbone.View.extend({
     this.role_type = this.$('[name="question[role_type]"]');
     this.actions = this.$('.action');
     this.store = this.store || new Store(this.id);
+    this.textareaView = new App.Questions.Textarea({el: this.textarea[0]});
 
     // Checking if there is some store data
     this.fillFormWithPreviousStoreData();
