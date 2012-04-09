@@ -6,7 +6,7 @@ describe("Questions.Form", function(){
 
   beforeEach(function(){
     view = new App.Questions.Form({
-      el: $('<form id="questions"><div class="preview"><div class="description"><span class="text"></span></div><div class="category"></div></div><textarea>content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
+      el: $('<form id="questions"><div class="preview"><div class="description"><span class="text"></span></div><div class="category"></div></div><textarea placeholder="test placeholder">content</textarea><select name="question[category_id]"><option></option><option selected="selected">selected option</option></select></form>')[0]
     });
 
     storeStub = { get: function(){}, set: function(){}, remove: function(){} };
@@ -111,6 +111,17 @@ describe("Questions.Form", function(){
     });
   });
 
+  describe("onSubmit", function(){
+    beforeEach(function(){
+      view.textarea.val(view.textareaView.placeholder + ' test string');
+      view.onSubmit();
+    });
+
+    it("should clean the placeholder from texareas", function(){
+      expect(view.textarea.val()).toEqual('test string');
+    });
+  });
+
   describe("backToForm", function(){
     beforeEach(function(){
       spyOn($.fn, "trigger");
@@ -212,6 +223,7 @@ describe("Questions.Form", function(){
       $ = function(){
         return validator;
       };
+      $.trim =  jQuery.trim;
     });
 
     afterEach(function(){

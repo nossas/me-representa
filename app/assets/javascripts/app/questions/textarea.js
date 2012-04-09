@@ -30,6 +30,10 @@ App.Questions.Textarea = Backbone.View.extend({
     this.setCaret(this.placeholder.length);
   },
 
+  valWithoutPlaceholder: function(){
+    return $.trim(this.root.val().replace(this.placeholder, ''));
+  },
+
   initialize: function(){
     this.root = $(this.el);
     this.placeholder = $(this.el).prop('placeholder');

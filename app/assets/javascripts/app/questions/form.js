@@ -3,6 +3,7 @@ App.Questions.Form = Backbone.View.extend({
     'click button.edit' : 'hidePreview',
     'click button.reset' : 'returnTextarea',
     'click button.preview' : 'showPreview',
+    'submit' : 'onSubmit',
     'focus textarea' : 'expandTextarea'
   },
 
@@ -21,6 +22,10 @@ App.Questions.Form = Backbone.View.extend({
 
     // Checking if there is some store data
     this.fillFormWithPreviousStoreData();
+  },
+  
+  onSubmit: function(event){
+    this.textarea.val(this.textareaView.valWithoutPlaceholder());
   },
 
   checkStoreData: function(){
@@ -59,7 +64,7 @@ App.Questions.Form = Backbone.View.extend({
   },
 
   generatePreview: function(){
-    this.previewDescription.html(this.textarea.val());
+    this.previewDescription.html(this.textareaView.valWithoutPlaceholder());
     this.previewCategory.html(this.$('[name="question[category_id]"] option:selected').html());
   },
 
