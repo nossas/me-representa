@@ -23,4 +23,5 @@ categories = Category.create!([
   {:name => "Obras Públicas e Infraestrutura"},
   {:name => "Transportes e Trânsito"},
   {:name => "Turismo"},
+  {:name => "Ordem Pública"}
 ])
