@@ -19,7 +19,7 @@ Feature: Post my own question
   Scenario: when I post a dare
     Given I'm logged in
     And I go to the questions page
-    And I fill in "Sr(a). candidato(a), você deverá..." with "instalar 10 novas paradas de onibus na Glória"
+    And I fill in "Sr(a). candidato(a), se você for eleito(a), você se comprometerá a..." with "instalar 10 novas paradas de onibus na Glória"
     And I choose "Saúde e Drogas" for "Assunto"
     And I press "Pré-visualizar"
     When I press "Confirmar"

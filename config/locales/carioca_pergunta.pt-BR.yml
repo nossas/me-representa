@@ -21,7 +21,7 @@ pt-BR:
       dare:
         header: "Quero que se comprometa com algo"
         headline: "Relacionado a"
-        placeholder: "Sr(a). candidato(a), você deverá..."
+        placeholder: "Sr(a). candidato(a), se você for eleito(a), você se comprometerá a..."
     list:
       truth:
         text: "Sim ou Não? Você "
