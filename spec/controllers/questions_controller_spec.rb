@@ -3,7 +3,7 @@ require 'spec_helper'
 describe QuestionsController do
   subject{ response }
 
-  let(:question){ Factory(:question) }
+  let(:question){ FactoryGirl.create(:question) }
 
   describe "GET 'show'" do
     before{ get :show, :id => question.id }

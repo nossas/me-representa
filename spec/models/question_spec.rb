@@ -9,8 +9,8 @@ describe Question do
 
   describe "Truth or Dare questions" do
     before do
-      @user = Factory(:user)
-      @category = Factory(:category)
+      @user = FactoryGirl.create(:user)
+      @category = FactoryGirl.create(:category)
     end
 
     it "should fail when the role type is not Truth or Dare" do
@@ -29,9 +29,9 @@ describe Question do
 
   describe ".by_category_id" do
     before do
-      @c = Factory(:category)
-      @q = Factory(:question, :category => @c)
-      Factory(:question)
+      @c = FactoryGirl.create(:category)
+      @q = FactoryGirl.create(:question, :category => @c)
+      FactoryGirl.create(:question)
     end
     subject{ Question.by_category_id @c.id }
     it{ should == [@q] }
@@ -40,8 +40,8 @@ describe Question do
   describe ".by_type" do
     context "when we ask for truths" do
       before do
-        @q = Factory(:question, :role_type => 'truth')
-        Factory(:question, :role_type => 'dare')
+        @q = FactoryGirl.create(:question, :role_type => 'truth')
+        FactoryGirl.create(:question, :role_type => 'dare')
       end
       subject{ Question.by_type 'truth' }
       it{ should == [@q] }
@@ -49,8 +49,8 @@ describe Question do
 
     context "when we ask for dares" do
       before do
-        @q = Factory(:question, :role_type => 'dare')
-        Factory(:question, :role_type => 'truth')
+        @q = FactoryGirl.create(:question, :role_type => 'dare')
+        FactoryGirl.create(:question, :role_type => 'truth')
       end
       subject{ Question.by_type 'dare' }
       it{ should == [@q] }

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Vote do
   before do
-    Factory(:vote)
+    FactoryGirl.create(:vote)
   end
   describe "Associations/Validations" do
     it { should belong_to :question }

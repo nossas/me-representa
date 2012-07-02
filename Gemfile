@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Last updated version of rails
-gem 'rails', '3.2.2'
+gem 'rails', '~> 3.2.6'
 
 # Back-end stuff
 gem 'inherited_resources'

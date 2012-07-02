@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
   has_scope :voted_first, :type => :boolean
 
   before_filter only: [:index] do
-    unless request.xhr?
+    if request.format.json?
       check_mrdash_token
     end
   end

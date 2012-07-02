@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Authorization do
   before do
-    @user = Factory(:user)
+    @user = FactoryGirl.create(:user)
   end
 
   describe "Validations/Associations" do
@@ -17,7 +17,7 @@ describe Authorization do
     it "Should find the provider and UID when it's already in database" do
 
       mr = MEURIO_HASH
-      authorization = Factory(:authorization, :provider => mr['provider'], :uid => mr['uid'], :user => @user)
+      authorization = FactoryGirl.create(:authorization, :provider => mr['provider'], :uid => mr['uid'], :user => @user)
       Authorization.find_from_hash(mr).should_not be_nil
     end
 
