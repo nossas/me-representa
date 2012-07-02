@@ -41,6 +41,7 @@ group :test do
   gem 'capybara'
   gem "database_cleaner"
   gem 'factory_girl_rails'
+  gem 'selenium-webdriver', '~> 2.22.1'
 end
 
 # Gems used only for assets and not required
