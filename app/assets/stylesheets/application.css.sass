@@ -295,12 +295,17 @@ h2.dare
     padding: 15px 6px
     border-top: 1px dashed #bebebe
     +clearfix
+    small
+      display: none
     .admin_options
       margin-right: 1em
     .destroy
       a
         color: red
     &:hover
+      small
+        display: block
+        color: lighten($gray, 30%)
       .share_options
         opacity: 1
     &:last-child
