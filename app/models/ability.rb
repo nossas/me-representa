@@ -6,7 +6,7 @@ class Ability
     can :create, Question
     can :create, Vote
 
-    if user.admin?
+    if user and user.admin?
       can :manage, :all
     end
   end

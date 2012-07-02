@@ -7,12 +7,18 @@ Given /^there is a question$/ do
 end
 
 Given /^there is a ([^"]*) about ([^"]*)$/ do |arg1, arg2|
-  @truth = FactoryGirl.create(:question, :role_type => "truth", :category => Category.find_by_name(arg2)) if arg1 == "truth"
-  @dare = FactoryGirl.create(:question, :role_type => "dare", :category => Category.find_by_name(arg2)) if arg1 == "dare"
+  @truth = FactoryGirl.create(:question, :role_type => "truth", :category => Category.find_or_create_by_name(arg2)) if arg1 == "truth"
+  @dare = FactoryGirl.create(:question, :role_type => "dare", :category => Category.find_or_create_by_name(arg2)) if arg1 == "dare"
 end
 
 Given /^I'm logged in$/ do
   visit "/auth/facebook"
+end
+
+Given /^I'm logged in as admin$/ do
+  visit "/auth/facebook"
+  user = User.find_by_email("nicolas@engage.is")
+  user.update_attribute(:admin, true)
 end
 
 Given /^I fill in "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
@@ -77,7 +83,6 @@ Then /^I should not see ([^"]*)$/ do |arg1|
     page.should_not have_content(arg1)
   end
 end
-
 Then /^I should see ([^"]*)$/ do |arg1|
   case arg1
     when "a Facebook share button for this question"
@@ -108,4 +113,13 @@ end
 
 Then /^I should see "([^"]*)" above "([^"]*)"$/ do |arg1, arg2|
   page.html.should match(/#{arg1}(.)+#{arg2}/)
+end
+
+Then /^I should not see "(.*?)"$/ do |arg1|
+  page.should_not have_content(arg1) 
+end
+
+
+Then /^I should see "(.*?)"$/ do |arg1|
+  page.should have_content(arg1) 
 end

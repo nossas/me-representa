@@ -295,6 +295,11 @@ h2.dare
     padding: 15px 6px
     border-top: 1px dashed #bebebe
     +clearfix
+    .admin_options
+      margin-right: 1em
+    .destroy
+      a
+        color: red
     &:hover
       .share_options
         opacity: 1
@@ -321,12 +326,14 @@ h2.dare
       +clearfix
 
   li.truth
+    +transition(0.20s)
     &:hover
       background: lighten($green, 45%)
     p.text
       span
         color: $green
   li.dare
+    +transition(0.20s)
     &:hover
       background: lighten($orange, 40%)
     p.text
