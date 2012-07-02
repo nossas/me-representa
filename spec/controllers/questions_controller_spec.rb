@@ -20,7 +20,7 @@ describe QuestionsController do
 
     context "When an invalid token is provided and it is not XHR" do
       before do
-        get :index, token: "TOKEN"
+        get :index, token: "TOKEN", format: "json"
       end
       its(:status) { should == 401 }
     end
