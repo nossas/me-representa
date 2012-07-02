@@ -6,6 +6,7 @@ gem 'rails', '3.2.2'
 # Back-end stuff
 gem 'inherited_resources'
 gem 'has_scope'
+gem 'kaminari'
 gem 'cancan'
 
 # Front-end stuff
@@ -18,6 +19,12 @@ gem 'jasmine'
 gem 'pg'
 gem 'foreigner'
 
+
+group :test, :development do
+  gem 'rspec-rails'
+end
+
+
 # Staging stuff
 group :development, :production do
   gem 'heroku'
@@ -29,8 +36,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
   gem 'shoulda-matchers'
   gem 'capybara'
   gem "database_cleaner"

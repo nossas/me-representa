@@ -6,12 +6,19 @@ class QuestionsController < ApplicationController
   respond_to :html, :json
 
   has_scope :by_category_id
+  has_scope :by_updated_at
+  has_scope :page
   has_scope :by_type
   has_scope :offset
   has_scope :limit, :default => MAX_QUESTIONS
   has_scope :recent_first, :type => :boolean
   has_scope :voted_first, :type => :boolean
 
+  before_filter only: [:index] do
+    unless request.xhr?
+      check_mrdash_token
+    end
+  end
   def show
     if request.xhr?
       render resource, :layout => false and return true
@@ -21,6 +28,10 @@ class QuestionsController < ApplicationController
   def index
     if request.xhr?
       render collection, :layout => false and return true
+    else
+      index! do |format|
+        format.json { render json: collection.includes(:user) }
+      end
     end
   end
 

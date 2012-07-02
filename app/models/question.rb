@@ -9,6 +9,7 @@ class Question < ActiveRecord::Base
   scope :by_category_id, ->(id){ where(['category_id = ?', id]) }
   scope :recent_first, order('created_at DESC')
   scope :voted_first, order('(SELECT count(*) FROM votes v WHERE v.question_id = questions.id) DESC')
+  scope :by_updated_at, ->(updated_at) { where(['questions.updated_at >= ?', updated_at]) }
 
   def truth?
     role_type == "truth"
@@ -23,6 +24,7 @@ class Question < ActiveRecord::Base
       :id => self.id,
       :text => self.text,
       :user => self.user.id,
+      :user_info => self.user,
       :votes => self.votes.size,
       :category => {
         :id => self.category.id,

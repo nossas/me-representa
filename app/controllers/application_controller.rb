@@ -21,6 +21,11 @@ class ApplicationController < ActionController::Base
     session[:user_id] = user.id
   end
 
+  def check_mrdash_token
+    if not params[:token] or params[:token] != ENV["DASH_TOKEN"]
+      render nothing: true, status: :unauthorized and return
+    end
+  end
 
   def create_user_question_through_session
     if session[:question] and current_user
