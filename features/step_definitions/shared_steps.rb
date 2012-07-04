@@ -28,7 +28,7 @@ end
 Given /^I choose "([^"]*)" for "([^"]*)"$/ do |arg1, arg2|
   case arg2
   when "Assunto"
-    page.execute_script("$(\"select[name='question[category_id]']\").val(#{Category.find_by_name(arg1).id})")
+    page.execute_script("$(\"select[name='question[category_id]']\").val(#{Category.find_or_create_by_name(arg1).id})")
   else
     select arg1, :from => arg2
   end
@@ -102,6 +102,13 @@ Then /^I should see ([^"]*)$/ do |arg1|
     when "1 voto"
       sleep 1
       page.find("li.#{@question.role_type} span.votes").text.should == "1"
+    when "question's text field"
+      page.should have_css("textarea[name=\"question[text]\"]")
+    when "question's role_type field"
+      page.should have_css("select[name=\"question[role_type]\"]")
+    when "question's category field"
+      page.should have_css("select[name=\"question[category_id]\"]")
+
     else
       page.should have_content(arg1)
   end
@@ -116,6 +123,7 @@ Then /^I should see "([^"]*)" above "([^"]*)"$/ do |arg1, arg2|
 end
 
 Then /^I should not see "(.*?)"$/ do |arg1|
+  sleep(2)
   page.should_not have_content(arg1) 
 end
 

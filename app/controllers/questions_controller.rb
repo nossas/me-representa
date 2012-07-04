@@ -35,6 +35,10 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def update
+    update! { return redirect_to questions_path }
+  end
+
   def create
     @question = Question.new params[:question]
     @question.user = current_user

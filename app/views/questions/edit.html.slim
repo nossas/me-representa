@@ -1,0 +1,8 @@
+section.info.show.edit
+  h2 Edição
+
+  = simple_form_for @question do |f|
+    = f.association :category, label: false
+    span= t "questions.list.#{@question.role_type}.text"    
+    = f.input :text, label: false
+    = f.button :submit, value: "Atualizar"

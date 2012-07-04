@@ -28,6 +28,5 @@ App.Questions.Index =  Backbone.View.extend({
     this.truthList.load();
     this.dareList.load();
     $(window).scroll(this.scroll);
-    this.$('select.chosen-select').chosen();
   }
 });
