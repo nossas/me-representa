@@ -1,7 +1,8 @@
 class VotesController < ApplicationController
   inherit_resources
-  respond_to :json
   belongs_to :question
+
+  respond_to :json
 
   def create
     create! do |success, failure|

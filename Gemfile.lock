@@ -243,7 +243,7 @@ PLATFORMS
 DEPENDENCIES
   cancan
   capybara
-  coffee-rails (~> 3.2.1)
+  coffee-rails
   compass-960-plugin
   compass-columnal-plugin
   compass-rails
@@ -263,7 +263,7 @@ DEPENDENCIES
   pg
   rails (~> 3.2.6)
   rspec-rails
-  sass-rails (~> 3.2.3)
+  sass-rails
   shoulda-matchers
   simple_form
   slim

@@ -3,6 +3,7 @@ var App = window.App = {
   Common: {
     init: function(){
       App.Common.login = new App.Common.Login({el: $('section.login')[0]});
+      $('select.chosen-select').chosen();
     },
 
     finish: function(){

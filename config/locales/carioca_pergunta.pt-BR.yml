@@ -13,6 +13,13 @@ pt-BR:
     candidates:
       text: "Você vai tirar onda de antenado, vai saber exatamente o que os seus eleitores querem e ainda vai poder falar diretamente com eles."
   questions:
+    send_mail:
+      link_html: "<a href='mailto:%{email}?subject=[MeuRio]%20Verdade%20ou%20Consequência&body=%{body}'>%{email}</a>"
+      text_html: "<p>Olá %{name}!</p>" 
+    edit: "Editar esta pergunta"
+    destroy: 
+      text: "Excluir esta pergunta"
+      confirm: "Tem certeza que deseja excluir esta pergunta? Você não poderá recuperá-la depois."
     form:
       truth:
         header: "Quero que responda com sinceridade"
