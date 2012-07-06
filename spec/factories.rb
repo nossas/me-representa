@@ -30,7 +30,3 @@ FactoryGirl.define do
     v.association :user
   end
 end
-
-
-
-

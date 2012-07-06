@@ -23,12 +23,14 @@ pt-BR:
     form:
       truth:
         header: "Quero que responda com sinceridade"
-        headline: "Sobre"
+        headline: "relacionado a"
         placeholder: "Sim ou Não? Você..."
+        tip: "Envie perguntas objetivas aos candidatos sobre seu posicionamento político"
       dare:
         header: "Quero que se comprometa com algo"
         headline: "Relacionado a"
         placeholder: "Sr(a). candidato(a), se você for eleito(a), você se comprometerá a..."
+        tip: "Exija compromissos dos candidatos que eles poderão cumprir durante seu mandato de vereador"
     list:
       truth:
         text: "Sim ou Não? Você "
