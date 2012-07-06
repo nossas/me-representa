@@ -49,7 +49,9 @@ html
         /section.questionary
           span Curioso com o questionário?
         section.participate
-          span Você é candidato e quer participar? Mande um #{mail_to "contato@meurio.org", "e-mail", :encode => :hex} pra gente!
+          span 
+            | Se você é um candidato e quer participar,  
+            | #{link_to "clique aqui", "https://docs.google.com/spreadsheet/viewform?formkey=dDlmYlZkaHI5M2UtSEo3dUx6YjNuQ1E6MQ#gid=0", target: "_blank" }.
 
     #fb-root
     = javascript_include_tag :application
