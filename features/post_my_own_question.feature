@@ -24,5 +24,5 @@ Feature: Post my own question
     And I press "Pré-visualizar"
     When I press "Confirmar"
     Then I should see Nícolas Iensen lançou uma demanda para Saúde e Drogas
-    And I should see Sr(a). candidato(a), você deverá instalar 10 novas paradas de onibus na Glória
+    And I should see Sr(a). candidato(a), se você for eleito(a), você se comprometerá a instalar 10 novas paradas de onibus na Glória
     And I should see some share buttons for my dare
