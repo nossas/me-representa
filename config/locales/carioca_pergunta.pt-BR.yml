@@ -27,7 +27,7 @@ pt-BR:
         text: "Sim ou Não? Você "
         want_to_know_html: " quer saber sobre %{link} "
       dare:
-        text: "Sr(a). candidato(a), você deverá "
+        text: "Sr(a). candidato(a), se você for eleito(a), você se comprometerá a "
         want_to_know_html: " lançou uma demanda para %{link} "
     share:
       truth: "%{user} fez uma pergunta sobre %{category} aos candidatos a vereador do Rio %{link}"
