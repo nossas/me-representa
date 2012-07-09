@@ -1,6 +1,6 @@
 = simple_form_for question, :remote => true, :html => { :id => "questions_#{question.role_type}" } do |f|
   h4= t("questions.form.#{question.role_type}.tip")
-  h4.hidden.action= t("questions.form.#{question.role_type}.headline")
+  = link_to "Não sabe o que faz um vereador?", "#about_politician", :rel => "facebox[.about_politician]", :class => "icon-info-circle"
 
   .question
     = f.association :category, :input_html => {:id => "select_#{question.role_type}", :class => "chosen-select", :data => {:placeholder => "Escolha um assunto" }}, :wrapper_html => {:class => "action hidden" }
