@@ -2,7 +2,7 @@ App.Questions.Index =  Backbone.View.extend({
   el: 'body',
 
   events: {
-    'click a.infographic' : 'toggleInfographic',
+    'click .infographic' : 'toggleInfographic',
   },
 
   scroll: function(event){
