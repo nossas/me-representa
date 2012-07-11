@@ -9,5 +9,5 @@ CariocaPergunta::Application.routes.draw do
   resources :subscribers
   resources :sessions,    :only => [:destroy]
 
-  root :to => "subscribers#index", :defaults => { :is_splash => true }
+  root :to => "questions#index"
 end
