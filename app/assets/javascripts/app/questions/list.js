@@ -97,5 +97,6 @@ App.Questions.List = Backbone.View.extend({
         that.disablePagination = false;
       }
     });
+    $("form.new_vote").submit(function(){ $(this).find("input[type='submit']").attr("disabled", "disabled") });
   }
 });
