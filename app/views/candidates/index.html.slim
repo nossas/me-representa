@@ -1,5 +1,12 @@
-- @questions.each_with_index do |question, i|
-  p
-    strong= i
-    |  
-    = question.text
+.wrapper
+  .padd
+    h1 Partidos
+
+.wrapper
+  .padd
+    h2 Questionário
+    - @questions.each_with_index do |question, i|
+      p
+        strong= i
+        |  
+        = question.text
