@@ -10,6 +10,7 @@ class Question < ActiveRecord::Base
   scope :recent_first, order('created_at DESC')
   scope :voted_first, order('(SELECT count(*) FROM votes v WHERE v.question_id = questions.id) DESC')
   scope :by_updated_at, ->(updated_at) { where(['questions.updated_at >= ?', updated_at]) }
+  scope :chosen, where(:chosen => true)
 
   def truth?
     role_type == "truth"

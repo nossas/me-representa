@@ -122,3 +122,15 @@ end
 Then /^I should see "([^"]*)" above "([^"]*)"$/ do |arg1, arg2|
   page.html.should match(/#{arg1}(.)+#{arg2}/)
 end
+
+Given /^there is a choosen question saying "(.*?)"$/ do |arg1|
+  @question = FactoryGirl.create(:question, :text => arg1, :chosen => true)
+end
+
+When /^I go to "(.*?)"$/ do |arg1|
+  if arg1 == "the homepage"
+    visit root_path
+  else
+    raise "I don't know #{arg1}"
+  end
+end
