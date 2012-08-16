@@ -38,7 +38,7 @@ html
               | Entre com a sua conta do #{link_to "Meu Rio", meurio_auth_path, class: 'mr'} ou do #{link_to "Facebook", facebook_auth_path, class: 'fb'}
     section.header
       .wrapper
-          = image_tag "bg_header_phase_two.png"
+        = link_to image_tag("bg_header_phase_two.png"), root_path
     section.content= yield
     footer
       .wrapper
