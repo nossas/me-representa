@@ -8,7 +8,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
 
-categories = Category.create!([
+categories = Category.create([
   {:name => "Indústria, Comércio e Emprego"},
   {:name => "Ciência e Tecnologia"},
   {:name => "Direitos Humanos"},
@@ -23,5 +23,6 @@ categories = Category.create!([
   {:name => "Obras Públicas e Infraestrutura"},
   {:name => "Transportes e Trânsito"},
   {:name => "Turismo"},
-  {:name => "Ordem Pública"}
+  {:name => "Ordem Pública"},
+  {:name => "Habitação"}
 ])

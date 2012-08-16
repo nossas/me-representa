@@ -5,9 +5,7 @@ li.user_question[data-id="#{question.id}" class=question.role_type]
       strong= question.user.name
       = t "questions.list.#{question.role_type}.want_to_know_html", :link => link_to(question.category.name, "#", "data-category-id" => question.category.id, :class => "category-link")
       - if can?(:manage, Question) 
-        small
-          | e-mail: 
-          | #{mail_to question.user.email, question.user.email, subject: "Verdade ou Consequência", to: question.user.email, body: question.text}
+        small= t('questions.send_mail.link_html', email: question.user.email, body: t('questions.send_mail.text_html', name: question.user.name))
     p.text
       span= t "questions.list.#{question.role_type}.text"
       = link_to question.text, question_path(question)

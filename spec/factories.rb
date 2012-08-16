@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   sequence(:name) { |s| "User #{s}" }
   sequence(:email) { |s| "user#{s}@email.com" }
   sequence(:uid) { |s| "#{s * 116}" }
@@ -16,7 +15,7 @@ FactoryGirl.define do
   end
 
   factory(:category) do |c|
-    c.name "Name"
+    sequence(:name){|n| "Category #{n}"}
   end
 
   factory(:question) do |q|
@@ -31,7 +30,3 @@ FactoryGirl.define do
     v.association :user
   end
 end
-
-
-
-

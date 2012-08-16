@@ -83,6 +83,7 @@ Then /^I should not see ([^"]*)$/ do |arg1|
     page.should_not have_content(arg1)
   end
 end
+
 Then /^I should see ([^"]*)$/ do |arg1|
   case arg1
     when "a Facebook share button for this question"
@@ -120,14 +121,4 @@ end
 
 Then /^I should see "([^"]*)" above "([^"]*)"$/ do |arg1, arg2|
   page.html.should match(/#{arg1}(.)+#{arg2}/)
-end
-
-Then /^I should not see "(.*?)"$/ do |arg1|
-  sleep(2)
-  page.should_not have_content(arg1) 
-end
-
-
-Then /^I should see "(.*?)"$/ do |arg1|
-  page.should have_content(arg1) 
 end

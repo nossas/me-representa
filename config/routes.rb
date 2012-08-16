@@ -12,5 +12,5 @@ CariocaPergunta::Application.routes.draw do
   get 'auth/meurio', as: :meurio_auth
   get 'auth/facebook', as: :facebook_auth
 
-  root :to => "subscribers#index", :defaults => { :is_splash => true }
+  root :to => "questions#index"
 end

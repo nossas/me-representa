@@ -21,6 +21,9 @@ pt-BR:
     candidates:
       text: "Você vai tirar onda de antenado, vai saber exatamente o que os seus eleitores querem e ainda vai poder falar diretamente com eles."
   questions:
+    send_mail:
+      link_html: "<a href='mailto:%{email}?subject=[MeuRio]%20Verdade%20ou%20Consequência&body=%{body}'>%{email}</a>"
+      text_html: "<p>Olá %{name}!</p>" 
     edit: "Editar esta pergunta"
     destroy: 
       text: "Excluir esta pergunta"
@@ -28,18 +31,20 @@ pt-BR:
     form:
       truth:
         header: "Quero que responda com sinceridade"
-        headline: "Sobre"
+        headline: "relacionado a"
         placeholder: "Sim ou Não? Você..."
+        tip: "AQUELA PERGUNTA IMPORTANTÍSSIMA QUE VOCÊ SEMPRE QUIS FAZER A UM CANDIDATO"
       dare:
         header: "Quero que se comprometa com algo"
         headline: "Relacionado a"
         placeholder: "Sr(a). candidato(a), se você for eleito(a), você se comprometerá a..."
+        tip: "PARA PEDIR QUE O CANDIDATO SE COMPROMETA COM UMA QUESTÃO IMPORTANTE PARA A CIDADE"
     list:
       truth:
         text: "Sim ou Não? Você "
         want_to_know_html: " quer saber sobre %{link} "
       dare:
-        text: "Sr(a). candidato(a), você deverá "
+        text: "Sr(a). candidato(a), se você for eleito(a), você se comprometerá a "
         want_to_know_html: " lançou uma demanda para %{link} "
     share:
       truth: "%{user} fez uma pergunta sobre %{category} aos candidatos a vereador do Rio %{link}"
