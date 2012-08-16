@@ -8,6 +8,9 @@ CariocaPergunta::Application.routes.draw do
   resources :users,       :only => [:new, :create]
   resources :subscribers
   resources :sessions,    :only => [:destroy]
+  
+  get 'auth/meurio', as: :meurio_auth
+  get 'auth/facebook', as: :facebook_auth
 
   root :to => "subscribers#index", :defaults => { :is_splash => true }
 end

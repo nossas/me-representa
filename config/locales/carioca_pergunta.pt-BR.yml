@@ -1,4 +1,12 @@
 pt-BR:
+  site:
+    title: "Verdade ou Consequência? - Meu Rio"
+    description: "Lembra como era bom jogar Verdade ou Consequência? Agora, você pode jogar com os candidatos a vereador!"
+    keywords: "Candidatura, Vereador, Câmara, Rio de Janeiro, Meu Rio"
+    author: "MeuRio - contato@meurio.org"
+  user:
+    logged: 
+      message: "Olá %{user}"
   header:
     truth: "Verdade"
     dare: "Consequência"
