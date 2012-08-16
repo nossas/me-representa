@@ -4,6 +4,44 @@
 @import questions
 @import facebox
 @import icomoon
+@import compass/reset
+@import compass/utilities
+@import 960/grid
+@import mixins/buttons
+@import url('http://fonts.googleapis.com/css?family=Londrina+Solid')
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,700')
+
+
+$green: #7DC241
+$blue: #3399CB
+$pink: #df499a
+$orange: #ef803b
+$gray: #333
+$header: #2BB1E3
+$fb_blue: #3B5998
+
+$grid-system: 16
+$ninesixty-columns: $grid-system
+$grid-half: $grid-system * 0.5
+
+@mixin grid-padded
+  +grid($grid-system)
+
+
+// Main layout style
+body
+  font: normal 1em/28px "Akagi-Book", Tahoma, Lucida Grande
+  color: $gray
+  background: url(asset_path('bg.png', 'image'))
+  margin: 0
+  padding: 0
+  width: 100%
+
+
+
+
+
+
 
 h1
   font-size: 2.3em
