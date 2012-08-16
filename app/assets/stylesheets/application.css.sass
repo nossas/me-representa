@@ -28,14 +28,12 @@ $grid-half: $grid-system * 0.5
 // Main layout style
 body
   font: normal 1em/28px "Open Sans", "Lucida Sans Unicode", "Lucida Sans" 
-  color: $gray
+  color: darken(gray, 30%)
   background: image-url('bg.png')
-  margin: 0
-  padding: 0
-  width: 100%
 
 section.header
   margin: 2em 0
+
 section.login
   line-height: 40px
   +box-shadow(0 -1px 6px darken(gray, 20%))
@@ -57,7 +55,7 @@ a[href="/auth/facebook"]
 @mixin btn($color1, $color2)
   color: white
   border: 1px solid $color1
-  font: normal 1.2em "Folk-solid"
+  font: normal 1.2em "Londrina Solid"
   letter-spacing: 2px
   text-transform: uppercase
   padding: 4px 10px 10px 10px
@@ -140,10 +138,12 @@ strong
   font-weight: bold
 
 h1
-  font-family: "Folk-solid", Arial, Tahoma
-  font-size: 3.5em
+  font-family: "Londrina Solid", Arial, Tahoma
+  font-size: 2.5em
   line-height: 64px
   text-transform: uppercase
+  font-weight: 100
+  letter-spacing: 1px
   color: $header
   text-shadow: 0 -1px 1px #666
 h2
@@ -239,19 +239,7 @@ footer
     text-align: right
 
 
-body[data-controller-name="Questions"][data-action="Index"]
-  .show-form
-    float: none
 
-
-h1
-  font-size: 2.3em
-  letter-spacing: 3px
-  line-height: 40px
-h2
-  font-size: 1.1em
-img
-  +border-radius(6px)
 
 .hidden
   display: none
@@ -267,7 +255,6 @@ img
   padding: 20px
   position: fixed
   z-index: 9999
-
   +border-radius(8px)
   +box-shadow(0px 1px 4px #666)
 
@@ -634,38 +621,6 @@ div.vote
     &:hover
       cursor: default
 
-section.edit
-  h2
-    margin-bottom: 20px
-  span
-    padding-top: 20px
-    font-weight: 400
-    &:after
-      content: "..."
-  textarea
-    +border-radius(6px)
-    +box-shadow(inset 0 0 4px lighten($gray, 50%))
-    background: lighten($gray, 75%)
-    border: 1px solid lighten($gray, 65%)
-    padding: 10px
-    width: 98%
-    height: 100px
-    margin-bottom: 10px
-    font-size: 18px
-.show
-  +clearfix
-  .share
-    float: right
-    .vote
-      width: 90%
-      float: none
-      +clearfix
-      input
-        padding: 5px 8px 5px 8px
-    .option
-      float: left
-      display: block
-      width: 60px
 
 
 
@@ -757,11 +712,62 @@ section.edit
     .right
       margin-left: 20px
 
+
+body.questions
+  &#index 
+    .show-form
+      float: none
+
+  &#show
+    .show
+      +clearfix
+      .share
+        float: right
+        .vote
+          width: 90%
+          float: none
+          +clearfix
+          input
+            padding: 5px 8px 5px 8px
+        .option
+          float: left
+          display: block
+          width: 60px
+
+  &#edit
+    section.edit
+      h2
+        margin-bottom: 20px
+      span
+        padding-top: 20px
+        font-weight: 400
+        &:after
+          content: "..."
+      textarea
+        +border-radius(6px)
+        +box-shadow(inset 0 0 4px lighten($gray, 50%))
+        background: lighten($gray, 75%)
+        border: 1px solid lighten($gray, 65%)
+        padding: 10px
+        width: 98%
+        height: 100px
+        margin-bottom: 10px
+        font-size: 18px
+
 body.candidates
   &#index
+    .padd
+      padding: .6em
     section.content .wrapper
       background: white
       +border-radius(4px)
       +box-shadow(1px 1px 4px darken(gray, 15%))
-    .padd
-      padding: .6em
+    ol.parties
+      li
+        display: inline-block
+        margin: 1em
+        &.inactive
+          opacity: .2
+
+
+
