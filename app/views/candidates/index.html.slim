@@ -1,6 +1,6 @@
 .wrapper
   .padd
-    h1 Partidos
+    h1 Conheça os partidos que estão colaborando
     ol.parties
       li.active= image_tag "parties/01.jpg", title: "DEM"       
       li.active.inactive= image_tag "parties/02.jpg", title: "PCB"
@@ -32,11 +32,19 @@
       li.active= image_tag "parties/28.jpg", title: "PTN"
       li.active= image_tag "parties/29.jpg", title: "PV"
 
-.wrapper
+.wrapper.questionnaire
   .padd
-    h2 Questionário
-    - @questions.each_with_index do |question, i|
-      p
-        strong= i
-        |  
-        = question.text
+    h2 Agora conheça as perguntas que serão feitas aos candidatos
+    .questions
+      .col1
+        - @questions.each_with_index do |question, i|
+          p
+            strong= i
+            |  
+            = question.text
+      .col2
+        - @questions.each_with_index do |question, i|
+          p
+            strong= i
+            |  
+            = question.text

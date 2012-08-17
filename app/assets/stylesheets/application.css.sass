@@ -137,7 +137,7 @@ section.login
 strong
   font-weight: bold
 
-h1
+h1, h2
   font-family: "Londrina Solid", Arial, Tahoma
   font-size: 2.5em
   line-height: 64px
@@ -145,7 +145,9 @@ h1
   font-weight: 100
   letter-spacing: 1px
   color: $header
+  text-align: center
   text-shadow: 0 -1px 1px #666
+
 h2
   font-size: 1.9em
 h3
@@ -195,18 +197,12 @@ input[disabled]
 .notice
   background: $green
 
-// Footer is repeated in the splash and the application layouts.
 footer
-  position: fixed
-  width: 100%
-  bottom: 0
-  background: url(asset_path('bg.png', 'image'))
   border-top: 3px dashed $green
-  padding-top: 10px
-  padding-bottom: 10px
-  margin-top: 2px
   text-shadow: 1px 1px 1px white
-
+  padding: .5em 0
+  margin-top: 1em
+  overflow: hidden
   nav.links
     +grid(8)
     a
@@ -233,13 +229,9 @@ footer
       +opacity(0.8)
       &:hover
         +opacity(1)
-
   .participate
     +grid(8)
     text-align: right
-
-
-
 
 .hidden
   display: none
@@ -762,6 +754,22 @@ body.candidates
       background: white
       +border-radius(4px)
       +box-shadow(1px 1px 4px darken(gray, 15%))
+      &.questionnaire
+        background: #3398cc
+        h2
+          color: white
+          font-size: 2.25em
+          +text-shadow(black 1px 1px 1px)
+          line-height: normal
+          padding: 0 5em
+          border: none
+          margin: .5em 0
+        .questions
+          background: white
+          padding: .5em
+          width: 100%
+          +border-radius(20px)
+          +box-sizing(border-box)
     .padd
       padding: .6em
       margin-bottom: 1em
