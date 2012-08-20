@@ -751,6 +751,8 @@ body.candidates
     .padd
       padding: 2em
     section.content .wrapper
+      h1
+        font-size: 2em
       background: white
       +border-radius(4px)
       +box-shadow(1px 1px 4px darken(gray, 15%))
@@ -758,7 +760,7 @@ body.candidates
         background: #3398cc
         h2
           color: white
-          font-size: 2.25em
+          font-size: 2em
           +text-shadow(black 1px 1px 1px)
           line-height: normal
           padding: 0 5em
@@ -781,6 +783,16 @@ body.candidates
         +border-radius(6px)
         +transition(1s)
         &.inactive
-          +filter(grayscale(100%))
-          opacity: .2
+          img
+            +filter(grayscale(100%))
+            opacity: .2
+          &::before
+            content: "Não colaborou ainda"
+            color: lighten(gray, 25%)
+            display: block
+            position: absolute
+            font-size: .6em
+            padding: .1em .8em
+            margin-top: 13.1em
+            margin-left: 1.1em
         &.active
