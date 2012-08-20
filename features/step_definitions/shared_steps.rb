@@ -54,6 +54,7 @@ When /^I click "([^"]*)"$/ do |arg1|
 end
 
 When /^I press "([^"]*)"$/ do |arg1|
+  sleep(1)
   page.execute_script("$('.questions_list li').trigger('mouseover')") if arg1 == "Votar"
   click_on(arg1)
 end
