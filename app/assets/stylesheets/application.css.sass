@@ -768,17 +768,22 @@ body.candidates
           background: white
           padding: 1em
           width: 100%
+          line-height: normal
           +border-radius(20px)
           +box-sizing(border-box)
-          .truths_title
+          .truths_title, .dares_title
             text-align: center
-            margin-bottom: 1em
+            margin-bottom: 2em
             span
               background: $green
               color: white
               padding: .25em .5em
               +border-radius(30px)
-          p
+          .dares_title
+            margin-top: 2em
+            span
+              background: $orange
+          .question
             margin-bottom: 1em
             padding-bottom: 1em
             border-bottom: lighten(gray, 40%) 2px dashed
@@ -786,7 +791,7 @@ body.candidates
               border: none
               margin-bottom: 0
               padding-bottom: 0
-          strong.number
+          strong.truth_number, strong.dare_number
             background: $green
             padding: .25em .5em
             color: white
@@ -794,8 +799,14 @@ body.candidates
             margin-right: .5em
             +text-shadow(black 1px 1px 1px)
             +border-radius(30px)
+          strong.dare_number
+            background: $orange
           span.truth
             color: $green
+          span.dare
+            color: $orange
+          span.text, span.dare, span.truth, .author
+            font-size: .8em
     .padd
       padding: .6em
       margin-bottom: 1em

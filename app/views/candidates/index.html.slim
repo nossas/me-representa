@@ -39,9 +39,21 @@
       .truths_title
         span Verdades
       - @truths.each_with_index do |truth, i|
-        p
-          strong.number= i + 1
+        .question
+          strong.truth_number= i + 1
           | 
           span.truth= t("questions.form.truth.placeholder")
           |  
-          = truth.text
+          span.text= truth.text
+          .author
+            | por 
+            = truth.user.name
+      .dares_title
+        span Consequências
+      - @dares.each_with_index do |dare, i|
+        .question
+          strong.dare_number= i + 1
+          | 
+          span.dare= t("questions.form.dare.placeholder")
+          |  
+          span.text= dare.text
