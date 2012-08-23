@@ -19,11 +19,10 @@ gem 'jasmine'
 gem 'pg'
 gem 'foreigner'
 
-gem 'taps'
-gem 'sqlite3'
-
 group :test, :development do
   gem 'rspec-rails'
+  gem 'taps'
+  gem 'sqlite3'
 end
 
 
