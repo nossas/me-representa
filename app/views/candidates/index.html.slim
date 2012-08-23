@@ -36,15 +36,12 @@
   .padd
     h2 Agora conheça as perguntas que serão feitas aos candidatos
     .questions
-      .col1
-        - @questions.each_with_index do |question, i|
-          p
-            strong= i
-            |  
-            = question.text
-      .col2
-        - @questions.each_with_index do |question, i|
-          p
-            strong= i
-            |  
-            = question.text
+      .truths_title
+        span Verdades
+      - @truths.each_with_index do |truth, i|
+        p
+          strong.number= i + 1
+          | 
+          span.truth= t("questions.form.truth.placeholder")
+          |  
+          = truth.text
