@@ -1,6 +1,8 @@
 .wrapper
   .padd
-    h1 Conheça os partidos que estão colaborando
+    = image_tag "bg_questions_were_made.jpg"
+    h1= t 'phase2.header'
+    p.description= t 'phase2.description'
     ol.parties
       li.active= image_tag "parties/01.jpg", title: "DEM"       
       li.active.inactive= image_tag "parties/02.jpg", title: "PCB"
@@ -32,9 +34,12 @@
       li.active= image_tag "parties/28.jpg", title: "PTN"
       li.active= image_tag "parties/29.jpg", title: "PV"
 
+  .dont_participate
+    h3= t 'phase2.no_participation'
+    = link_to t('phase2.press_parties'), "#"
 .wrapper.questionnaire
   .padd
-    h2 Agora conheça as perguntas que serão feitas aos candidatos
+    h2= t 'phase2.questionnaire.header'
     .questions
       .col1
         - @questions.each_with_index do |question, i|

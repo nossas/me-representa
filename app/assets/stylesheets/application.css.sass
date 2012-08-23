@@ -751,8 +751,26 @@ body.candidates
     .padd
       padding: 2em
     section.content .wrapper
+      small
+        background: $orange
+        font-size: .7em
+        text-align: center
+        color: white
+        display: inline-block
+        +border-radius(6px)
+        padding: 0 !important
+        margin: 0 auto
+        width: 20%
       h1
         font-size: 2em
+        line-height: 1.4em
+      p.description
+        font-size: .9em
+        color: lighten(gray, 10%)
+        width: 85%
+        text-align: center
+        margin: 0 auto
+        line-height: 1.2em
       background: white
       +border-radius(4px)
       +box-shadow(1px 1px 4px darken(gray, 15%))
@@ -787,3 +805,4 @@ body.candidates
             +filter(grayscale(100%))
             opacity: .2
         &.active
+
