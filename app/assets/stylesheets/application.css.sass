@@ -786,10 +786,36 @@ body.candidates
           margin: .5em 0
         .questions
           background: white
-          padding: .5em
+          padding: 1em
           width: 100%
           +border-radius(20px)
           +box-sizing(border-box)
+          .truths_title
+            text-align: center
+            margin-bottom: 1em
+            span
+              background: $green
+              color: white
+              padding: .25em .5em
+              +border-radius(30px)
+          p
+            margin-bottom: 1em
+            padding-bottom: 1em
+            border-bottom: lighten(gray, 40%) 2px dashed
+            &:last-child
+              border: none
+              margin-bottom: 0
+              padding-bottom: 0
+          strong.number
+            background: $green
+            padding: .25em .5em
+            color: white
+            font-family: "Londrina Solid", Arial, Tahoma
+            margin-right: .5em
+            +text-shadow(black 1px 1px 1px)
+            +border-radius(30px)
+          span.truth
+            color: $green
     .padd
       padding: .6em
       margin-bottom: 1em
