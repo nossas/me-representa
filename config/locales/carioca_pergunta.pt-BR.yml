@@ -52,3 +52,13 @@ pt-BR:
     my_share:
       truth: "Fiz uma pergunta sobre %{category} aos candidatos a vereador do Rio %{link}"
       dare: "Fiz uma demanda de %{category} aos candidatos a vereador do Rio %{link}"
+  phase2:
+    small: "As perguntas já foram feitas"
+    header: "Conheça os partidos que estão colaborando"
+    description: "Agora que as melhores perguntas foram selecionadas, vamos montar o formulário e enviar para todos os candidatos. Mas primeiro precisamos encher o saco dos partidos que não estão colaborando com os cariocas e ainda não enviaram os contatos dos seus candidatos."
+    no_participation: "Os partidos sem cor ainda não estão participando. Vamos pressioná-los"
+    press_parties: "Pressionar partidos"
+    questionnaire:
+      header: "Agora conheça as perguntas que serão feitas aos candidatos"
+    
+
