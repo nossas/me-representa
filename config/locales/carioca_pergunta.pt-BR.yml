@@ -37,7 +37,7 @@ pt-BR:
       dare:
         header: "Quero que se comprometa com algo"
         headline: "Relacionado a"
-        placeholder: "Sr(a). candidato(a), se você for eleito(a), você se comprometerá a..."
+        placeholder: "Você se comprometerá a..."
         tip: "PARA PEDIR QUE O CANDIDATO SE COMPROMETA COM UMA QUESTÃO IMPORTANTE PARA A CIDADE"
     list:
       truth:
