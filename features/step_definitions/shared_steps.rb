@@ -1,3 +1,7 @@
+Given /^I'm in the home page$/ do
+  visit root_path
+end
+
 Given /^I'm on the questions page$/ do
   visit questions_path
 end

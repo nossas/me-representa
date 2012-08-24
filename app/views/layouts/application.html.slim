@@ -30,23 +30,23 @@ html
         = image_tag "bg_meu_rio.png", :size => "48x52", :alt => "MeuRio", :title => "Meu Rio"
         span apresenta:
 
-        section.login
-          .login_options.hidden
-            p
-              | Para enviar uma pergunta, você precisa estar logado.
-            p
-              | Utilize um dos canais abaixo! : )
-            nav
-              | #{link_to "Facebook", "/auth/facebook", :class => "facebook option"}
-              | #{link_to "MeuRio", "/auth/meurio", :class => "meurio option"}
-          - if signed_in?
-            .logged
-              | Olá, #{current_user.name}
-              span |
-              = link_to "Sair", session_path(current_user.id), :method => :delete
-              = image_tag current_user.picture, :size => "30x30"
-          - else
-            | Entre com a sua conta do #{link_to "Meu Rio", "/auth/meurio"} ou do #{link_to "Facebook", "/auth/facebook"}
+      section.login
+        .row
+          .meurio_and_user
+            .meurio
+              = link_to image_tag("seurio_bottom_logo_meurio.jpeg"), "http://meurio.org.br/"
+              | apresenta:
+            .user
+              - if current_user
+                span= image_tag current_user.picture, alt: "avatar"
+                span= current_user.name
+                .icon-triangle
+                  ul.options
+                    li= link_to "Exportar todos os usuários", users_path(:format => :csv), :class => "icon-file-excel" if can?(:manage, :all)
+                    li= link_to "Sair", session_path(current_user.id), :method => :delete, :class => "icon-exit", :title => "Sair"
+              - else
+                | Entre com a sua conta do #{link_to "Meu Rio", meurio_connect_path, class: 'mr'} ou do #{link_to "Facebook", facebook_connect_path, class: 'fb'}
+          .clear    
     .wrapper.content
       - unless params[:is_splash]
         = render :partial => "questions_header"
