@@ -49,7 +49,7 @@ html
           .clear    
     .wrapper.content
       - unless params[:is_splash]
-        = render :partial => "questions_header"
+        = render :file => "layouts/_questions_header"
       = yield
     footer
       .wrapper
