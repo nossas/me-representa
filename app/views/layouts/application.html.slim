@@ -49,7 +49,7 @@ html
             | Entre com a sua conta do #{link_to "Meu Rio", "/auth/meurio"} ou do #{link_to "Facebook", "/auth/facebook"}
     .wrapper.content
       - unless params[:is_splash]
-        = render :partial => "questions_header"
+        = render :file => "layouts/_questions_header"
       = yield
     footer
       .wrapper

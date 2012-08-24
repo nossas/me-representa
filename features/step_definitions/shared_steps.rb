@@ -124,14 +124,24 @@ Then /^I should see "([^"]*)" above "([^"]*)"$/ do |arg1, arg2|
   page.html.should match(/#{arg1}(.)+#{arg2}/)
 end
 
-Given /^there is a choosen question saying "(.*?)"$/ do |arg1|
+Given /^there is a chosen question saying "(.*?)"$/ do |arg1|
   @question = FactoryGirl.create(:question, :text => arg1, :chosen => true)
 end
 
 When /^I go to "(.*?)"$/ do |arg1|
   if arg1 == "the homepage"
     visit root_path
+  elsif arg1 == "this candidate answers page as the candidate"
+    visit new_candidate_answer_path(@candidate, :token => @candidate.token)
   else
     raise "I don't know #{arg1}"
   end
+end
+
+Given /^there is a candidate$/ do
+  @candidate = FactoryGirl.create(:candidate)
+end
+
+Given /^I'm on "(.*?)"$/ do |arg1|
+  step "I go to \"#{arg1}\""
 end

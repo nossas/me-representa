@@ -29,4 +29,23 @@ FactoryGirl.define do
     v.association :question
     v.association :user
   end
+
+  factory(:candidate) do |c|
+    c.name "Nicolas Iensen"
+    c.nickname "Tony"
+    c.number 22
+    c.association :party
+    c.male true
+    c.born_at Date.new(1986, 3, 6)
+  end
+
+  factory(:party) do |p|
+    p.symbol "MR"
+    p.number 22
+    p.association :union
+  end
+
+  factory(:union) do |u|
+    u.name "RJ"
+  end
 end
