@@ -9,7 +9,7 @@ CariocaPergunta::Application.routes.draw do
   resources :questions do
     resources :votes, :only => :create
   end
-  resources :users,       only: [:new, :create]
+  resources :users,       only: [:index, :new, :create]
   resources :subscribers
   resources :sessions,    only: [:destroy]
   
