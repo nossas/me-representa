@@ -145,3 +145,14 @@ end
 Given /^I'm on "(.*?)"$/ do |arg1|
   step "I go to \"#{arg1}\""
 end
+
+Given /^I choose "(.*?)" for the question "(.*?)"$/ do |arg1, arg2|
+  within("form") do
+    choose(arg1)
+    sleep(1)
+  end
+end
+
+Then /^a new answer should be created to this candidate$/ do
+  @candidate.answers.should have(1).answer
+end

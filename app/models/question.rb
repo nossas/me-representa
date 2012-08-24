@@ -40,4 +40,8 @@ class Question < ActiveRecord::Base
   def to_param
     I18n.t "url.#{role_type}", :user => user.name.parameterize, :id => id
   end
+
+  def full_text
+    "#{I18n.t("questions.form.#{self.role_type}.placeholder")} #{self.text}"
+  end
 end
