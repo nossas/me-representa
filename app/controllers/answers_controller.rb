@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  layout 'application_phase_two'
   inherit_resources
   belongs_to :candidate
   before_filter :only => [:new] { @questions = Question.chosen }
