@@ -137,6 +137,8 @@ When /^I go to "(.*?)"$/ do |arg1|
     visit root_path
   elsif arg1 == "this candidate answers page as the candidate"
     visit new_candidate_answer_path(@candidate, :token => @candidate.token)
+  elsif arg1 == "this candidate answers page without token"
+    visit new_candidate_answer_path(@candidate)
   else
     raise "I don't know #{arg1}"
   end
@@ -159,4 +161,12 @@ end
 
 Then /^a new answer should be created to this candidate$/ do
   @candidate.answers.should have(1).answer
+end
+
+Then /^I should be in "(.*?)"$/ do |arg1|
+  if arg1 == "the homepage"
+    current_path.should == root_path
+  else
+    raise "I don't know what '#{arg1}' means :("
+  end
 end
