@@ -6,6 +6,10 @@ var App = window.App = {
       $('select.chosen-select').chosen();
       $('#about_politician').hide();
       $('a[href="#about_politician"]').facebox('some html');
+
+      $("input[type='radio']").change(function(event){
+        $(event.target).closest("form").submit();
+      });
     },
 
     finish: function(){

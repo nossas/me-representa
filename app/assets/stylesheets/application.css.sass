@@ -1,18 +1,237 @@
-@import compass/css3
-@import defaults
+@import compass/reset
+@import compass
 @import chosen
-@import questions
 @import facebox
 @import icomoon
+@import 960/grid
+@import url('http://fonts.googleapis.com/css?family=Londrina+Solid')
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,700')
 
-h1
-  font-size: 2.3em
-  letter-spacing: 3px
+
+$green: #7DC241
+$blue: #3399CB
+$pink: #df499a
+$orange: #ef803b
+$gray: #333
+$header: #2BB1E3
+$fb_blue: #3B5998
+$mr_green: #059146
+
+$grid-system: 16
+$ninesixty-columns: $grid-system
+$grid-half: $grid-system * 0.5
+
+@mixin grid-padded
+  +grid($grid-system)
+
+
+// Main layout style
+body
+  font: normal 1em/28px "Open Sans", "Lucida Sans Unicode", "Lucida Sans" 
+  color: darken(gray, 30%)
+  background: image-url('bg.png')
+
+section.header
+  margin: 2em 0
+
+section.login
   line-height: 40px
+  +box-shadow(0 -1px 6px darken(gray, 20%))
+
+a[href="/auth/facebook"], a[href="/auth/meurio"]
+  text-transform: uppercase
+  font-family: 'Londrina Solid', cursive
+  letter-spacing: 1px
+  color: white !important
+  padding: 4px 15px
+  +border-radius(5px)
+
+a[href="/auth/meurio"]
+  background: $mr_green
+
+a[href="/auth/facebook"]
+  background: $fb_blue
+
+@mixin btn($color1, $color2)
+  color: white
+  border: 1px solid $color1
+  font: normal 1.2em "Londrina Solid"
+  letter-spacing: 2px
+  text-transform: uppercase
+  padding: 4px 10px 10px 10px
+  position: relative
+  top: 4px
+  cursor: pointer
+  +border-radius(10px)
+  +background-image(linear-gradient(lighten($color1, 10%) 50%, $color1 50%))
+  +box-shadow(lighten(gray, 20%) 0 1px 1px)
+  &:hover
+    border: 1px solid $color2
+    +background-image(linear-gradient(lighten($color2, 10%) 50%, $color2 50%))
+
+
+section.login
+  font-size: .8em
+  padding: .2em 0 
+  background: white
+  overflow: hidden
+  .row
+    overflow: visible
+  .meurio
+    text-transform: uppercase
+  a.mr, a.fb
+    font-size: small
+    margin: 0 5px
+  a.fb
+    margin-right: 0
+  a:hover
+    opacity: .8
+  .meurio
+    font-size: .7em
+    float: left
+    img
+      float: left
+      margin-right: .4em
+      height: auto !important 
+  .user
+    float: right
+    line-height: 20px
+    margin-top: 10px
+    position: relative
+    img
+      margin-right: 1em
+      width: 25px
+      height: 25px
+      float: left 
+    .icon-triangle
+      display: inline
+      margin-left: 1em
+      padding: 1em .7em 1em 1em
+      color: gray
+      &:before
+        font-size: 1.5em
+      &:hover
+        background: lighten(gray, 20%)
+        color: white
+        .options
+          display: block
+      .options
+        width: 180px
+        right: 0
+        top: 25px
+        display: none
+        position: absolute
+        background: white
+        padding: 1em
+        z-index: 1000
+        line-height: normal
+        border: 1px solid lighten(gray, 20%)
+        li
+          margin-bottom: .5em
+          &:last-child
+            margin: 0
+        a
+          color: gray
+          display: block
+
+strong
+  font-weight: bold
+
+h1, h2
+  font-family: "Londrina Solid", Arial, Tahoma
+  font-size: 2.5em
+  line-height: 64px
+  text-transform: uppercase
+  font-weight: 100
+  letter-spacing: 1px
+  color: $header
+  text-align: center
+  text-shadow: 0 -1px 1px #666
+
 h2
-  font-size: 1.1em
-img
-  +border-radius(6px)
+  font-size: 1.9em
+h3
+  font-size: 1.4em
+h4
+  font-size: 0.9em
+h5
+  font-size: 0.6em
+h6
+  font-size: 0.4em
+
+a, a:active, a:visited
+  color: $blue
+  text-decoration: none
+
+input[type=text]
+  border: 1px solid #dedede
+  padding: 10px 15px
+  +box-shadow(inset 1px 1px 2px #999)
+  font-size: 14px
+
+input[type=submit],button[type=button], .btn
+  +btn($orange, $pink)
+  margin: 10px
+
+input[disabled]
+  +btn(#999, #999)
+  color: #666!important
+
+.wrapper
+  +grid-container
+
+.message
+  width: 68%
+  margin-left: 15%
+  margin-right: 15%
+  padding: 10px 20px
+  position: fixed
+  border: 1px solid #fff
+  border-top: none
+  color: white
+  opacity: .9
+  +border-radius(0 0 6px 6px)
+  +box-shadow(1px 1px 2px #333)
+.alert
+  background: red
+.notice
+  background: $green
+
+footer
+  border-top: 3px dashed $green
+  text-shadow: 1px 1px 1px white
+  padding: .5em 0
+  margin-top: 1em
+  overflow: hidden
+  nav.links
+    +grid(8)
+    a
+      color: $gray
+      text-transform: uppercase
+      &:hover
+        color: $gray
+        border-bottom: 1px solid $gray
+    span
+      margin: 0 10px
+  .questionary
+    +grid(4)
+    margin-bottom: 10px
+    span
+      background: $green
+      color: white
+      float: right
+      line-height: 100%
+      padding: 5px
+      margin-top: 4px
+      cursor: pointer
+      +border-radius(5px)
+      +box-shadow(3px 3px 0px $blue)
+      +opacity(0.8)
+      &:hover
+        +opacity(1)
+  .participate
+    +grid(8)
+    text-align: right
 
 .hidden
   display: none
@@ -28,7 +247,6 @@ img
   padding: 20px
   position: fixed
   z-index: 9999
-
   +border-radius(8px)
   +box-shadow(0px 1px 4px #666)
 
@@ -157,7 +375,7 @@ section.show
 
 section.show, section.questions
   h1, h2, h3, h4
-    font-family: "Folk-solid"
+    font-family: "Londrina Solid"
 
 section.questions
   background: $blue
@@ -361,7 +579,7 @@ div.vote
     text-align: center
     display: block
     padding: 2px
-    font-family: "Folk-solid"
+    font-family: "Londrina Solid"
     font-size: 1.2em
     +border-radius(350px 350px 350px 1px)
   form
@@ -395,38 +613,6 @@ div.vote
     &:hover
       cursor: default
 
-section.edit
-  h2
-    margin-bottom: 20px
-  span
-    padding-top: 20px
-    font-weight: 400
-    &:after
-      content: "..."
-  textarea
-    +border-radius(6px)
-    +box-shadow(inset 0 0 4px lighten($gray, 50%))
-    background: lighten($gray, 75%)
-    border: 1px solid lighten($gray, 65%)
-    padding: 10px
-    width: 98%
-    height: 100px
-    margin-bottom: 10px
-    font-size: 18px
-.show
-  +clearfix
-  .share
-    float: right
-    .vote
-      width: 90%
-      float: none
-      +clearfix
-      input
-        padding: 5px 8px 5px 8px
-    .option
-      float: left
-      display: block
-      width: 60px
 
 
 
@@ -517,3 +703,164 @@ section.edit
       margin-right: 20px
     .right
       margin-left: 20px
+
+
+body.questions
+  &#index 
+    .show-form
+      float: none
+
+  &#show
+    .show
+      +clearfix
+      .share
+        float: right
+        .vote
+          width: 90%
+          float: none
+          +clearfix
+          input
+            padding: 5px 8px 5px 8px
+        .option
+          float: left
+          display: block
+          width: 60px
+
+  &#edit
+    section.edit
+      h2
+        margin-bottom: 20px
+      span
+        padding-top: 20px
+        font-weight: 400
+        &:after
+          content: "..."
+      textarea
+        +border-radius(6px)
+        +box-shadow(inset 0 0 4px lighten($gray, 50%))
+        background: lighten($gray, 75%)
+        border: 1px solid lighten($gray, 65%)
+        padding: 10px
+        width: 98%
+        height: 100px
+        margin-bottom: 10px
+        font-size: 18px
+
+body.candidates
+  &#index
+    .padd
+      padding: 2em
+    section.content .wrapper
+      img
+        margin-top: 1em
+        margin: 0 auto
+        display: block
+      h1
+        font-size: 2em
+        line-height: 1.4em
+        margin-top: 1em
+      p.description
+        font-size: .9em
+        color: lighten(gray, 10%)
+        width: 85%
+        text-align: center
+        margin: 0 auto
+        line-height: 1.2em
+        margin-bottom: 2em
+      background: white
+      +border-radius(4px)
+      +box-shadow(1px 1px 4px darken(gray, 15%))
+      &.parties
+        margin-bottom: 2em
+        ol.parties
+          margin-bottom: 2em
+        h2
+          color: lighten(gray, 10%)
+          font-size: 1.5em
+          border: none
+          margin-bottom: .5em
+          padding: 0
+          line-height: normal
+        .panela
+          text-align: center
+          overflow: hidden
+          margin-bottom: 2em
+          .btn
+            color: white
+            font-size: 1.5em
+            display: inline-block
+            line-height: normal
+            padding: .5em 1.5em
+        .share
+          text-align: center
+          .fb-like
+            display: inline-block
+      &.questionnaire
+        background: #3398cc
+        h2
+          color: white
+          font-size: 2em
+          +text-shadow(black 1px 1px 1px)
+          line-height: normal
+          padding: 0 5em
+          border: none
+          margin: .5em 0
+        .questions
+          background: white
+          padding: 1em
+          width: 100%
+          line-height: normal
+          +border-radius(20px)
+          +box-sizing(border-box)
+          .truths_title, .dares_title
+            text-align: center
+            margin-bottom: 2em
+            span
+              background: $green
+              color: white
+              padding: .25em .5em
+              +border-radius(30px)
+          .dares_title
+            margin-top: 3em
+            span
+              background: $orange
+          .question
+            margin-bottom: 1em
+            padding-top: 1em
+            border-top: lighten(gray, 40%) 2px dashed
+            &:last-child
+              border: none
+              margin-bottom: 0
+              padding-top: 0
+          strong.truth_number, strong.dare_number
+            background: $green
+            padding: .25em .5em
+            color: white
+            font-family: "Londrina Solid", Arial, Tahoma
+            margin-right: .5em
+            +text-shadow(black 1px 1px 1px)
+            +border-radius(30px)
+          strong.dare_number
+            background: $orange
+          span.truth
+            color: $green
+          span.dare
+            color: $orange
+          span.text, span.dare, span.truth, .author
+            font-size: .8em
+    .padd
+      padding: .6em
+      margin-bottom: 1em
+    ol.parties
+      li
+        display: inline-block
+        margin: 1.5em
+        +box-shadow(0 1px 2px lighten(gray, 36%))
+        +border-radius(6px)
+        +transition(1s)
+        &.inactive
+          img
+            +filter(grayscale(100%))
+            opacity: .2
+        &.active
+

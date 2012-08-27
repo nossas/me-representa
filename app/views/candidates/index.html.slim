@@ -1,0 +1,73 @@
+.wrapper.parties
+  .padd
+    h1= t 'phase2.header'
+    p.description= t 'phase2.description'
+    ol.parties
+      li.active= image_tag "parties/01.jpg", title: "DEM"       
+      li.active.inactive= image_tag "parties/02.jpg", title: "PCB"
+      li.active= image_tag "parties/03.jpg", title: "PCdoB"
+      li.active= image_tag "parties/04.jpg", title: "PCO"
+      li.active= image_tag "parties/05.jpg", title: "PDT"
+      li.active= image_tag "parties/06.jpg", title: "PHS"
+      li.active= image_tag "parties/07.jpg", title: "PMDB"
+      li.active.inactive= image_tag "parties/08.jpg", title: "PMN"
+      li.active= image_tag "parties/09.jpg", title: "PP"
+      li.active= image_tag "parties/10.jpg", title: "PL"
+      li.active= image_tag "parties/11.jpg", title: "PPS"
+      li.active.inactive= image_tag "parties/12.jpg", title: "PR"
+      li.active.inactive= image_tag "parties/13.jpg", title: "PRB"
+      li.active= image_tag "parties/14.jpg", title: "PRP"
+      li.active= image_tag "parties/15.jpg", title: "PRTB"
+      li.active= image_tag "parties/16.jpg", title: "PSB"
+      li.active= image_tag "parties/17.jpg", title: "PSC"
+      li.active= image_tag "parties/18.jpg", title: "PSD"
+      li.active= image_tag "parties/19.jpg", title: "PSDB"
+      li.active.inactive= image_tag "parties/20.jpg", title: "PSDC"
+      li.active.inactive= image_tag "parties/21.jpg", title: "PSL"
+      li.active= image_tag "parties/22.jpg", title: "PSOL"
+      li.active= image_tag "parties/25.jpg", title: "PSTU"
+      li.active= image_tag "parties/23.jpg", title: "PT"
+      li.active.inactive= image_tag "parties/24.jpg", title: "PTB"
+      li.active= image_tag "parties/26.jpg", title: "PTC"
+      li.active= image_tag "parties/27.jpg", title: "PTdoB"
+      li.active= image_tag "parties/28.jpg", title: "PTN"
+      li.active= image_tag "parties/29.jpg", title: "PV"
+    h2= t 'phase2.no_participation'
+    .panela= link_to "Pressionar partidos", "http://paneladepressao.org.br", :class => "btn"
+    .share
+      a href="https://twitter.com/share" class="twitter-share-button" data-url="http://verdadeouconsequencia.org.br/" data-lang="pt" Tweetar
+      .fb-like data-href="http://verdadeouconsequencia.org.br/" data-send="true" data-width="450" data-show-faces="false"
+      #fb-root
+.wrapper.questionnaire
+  .padd
+    h2= t 'phase2.questionnaire.header'
+    .questions
+      .truths_title
+        span Verdades
+      - @truths.each_with_index do |truth, i|
+        .question
+          strong.truth_number= i + 1
+          | 
+          span.truth= t("questions.form.truth.placeholder")
+          |  
+          span.text= truth.text
+      .dares_title
+        span Consequências
+      - @dares.each_with_index do |dare, i|
+        .question
+          strong.dare_number= i + 1
+          | 
+          span.dare= t("questions.form.dare.placeholder")
+          |  
+          span.text= dare.text
+
+javascript:
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=172049326247368";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));

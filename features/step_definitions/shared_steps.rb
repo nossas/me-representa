@@ -1,3 +1,7 @@
+Given /^I'm in the home page$/ do
+  visit root_path
+end
+
 Given /^I'm on the questions page$/ do
   visit questions_path
 end
@@ -54,6 +58,7 @@ When /^I click "([^"]*)"$/ do |arg1|
 end
 
 When /^I press "([^"]*)"$/ do |arg1|
+  sleep(1)
   page.execute_script("$('.questions_list li').trigger('mouseover')") if arg1 == "Votar"
   click_on(arg1)
 end
@@ -121,4 +126,37 @@ end
 
 Then /^I should see "([^"]*)" above "([^"]*)"$/ do |arg1, arg2|
   page.html.should match(/#{arg1}(.)+#{arg2}/)
+end
+
+Given /^there is a chosen question saying "(.*?)"$/ do |arg1|
+  @question = FactoryGirl.create(:question, :text => arg1, :chosen => true)
+end
+
+When /^I go to "(.*?)"$/ do |arg1|
+  if arg1 == "the homepage"
+    visit root_path
+  elsif arg1 == "this candidate answers page as the candidate"
+    visit new_candidate_answer_path(@candidate, :token => @candidate.token)
+  else
+    raise "I don't know #{arg1}"
+  end
+end
+
+Given /^there is a candidate$/ do
+  @candidate = FactoryGirl.create(:candidate)
+end
+
+Given /^I'm on "(.*?)"$/ do |arg1|
+  step "I go to \"#{arg1}\""
+end
+
+Given /^I choose "(.*?)" for the question "(.*?)"$/ do |arg1, arg2|
+  within("form") do
+    choose(arg1)
+    sleep(1)
+  end
+end
+
+Then /^a new answer should be created to this candidate$/ do
+  @candidate.answers.should have(1).answer
 end
