@@ -81,7 +81,7 @@ App.Questions.List = Backbone.View.extend({
     var url = this.ol.data('url');
     if(!url){ return; }
     var filters = _.map(
-      $.extend({offset: 0, recent_first: true}, this.ol.data('options'), options),
+      $.extend({offset: 0, voted_first: true}, this.ol.data('options'), options),
       function(val, key){ return key + '=' + val; }
     ).join('&');
     this.disablePagination = true;
