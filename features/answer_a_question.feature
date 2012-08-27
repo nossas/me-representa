@@ -1,7 +1,7 @@
-Feature: save my answers
-  In order to restore my answering progress
+Feature: answer a question
+  In order to help people choose somebody to vote
   As a candidate
-  I want to save my answers
+  I want to answer a question
 
   @javascript
   Scenario: when I have a valid token to answer the questions
