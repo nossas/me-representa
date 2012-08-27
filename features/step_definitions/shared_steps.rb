@@ -23,6 +23,7 @@ Given /^I'm logged in as admin$/ do
   visit "/auth/facebook"
   user = User.find_by_email("nicolas@engage.is")
   user.update_attribute(:admin, true)
+  visit root_path
 end
 
 Given /^I fill in "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
@@ -169,4 +170,8 @@ Then /^I should be in "(.*?)"$/ do |arg1|
   else
     raise "I don't know what '#{arg1}' means :("
   end
+end
+
+When /^I open the user menu$/ do
+  page.execute_script('$(".options").show();')
 end
