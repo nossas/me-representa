@@ -23,6 +23,7 @@ Given /^I'm logged in as admin$/ do
   visit "/auth/facebook"
   user = User.find_by_email("nicolas@engage.is")
   user.update_attribute(:admin, true)
+  visit root_path
 end
 
 Given /^I fill in "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
@@ -137,6 +138,8 @@ When /^I go to "(.*?)"$/ do |arg1|
     visit root_path
   elsif arg1 == "this candidate answers page as the candidate"
     visit new_candidate_answer_path(@candidate, :token => @candidate.token)
+  elsif arg1 == "this candidate answers page without token"
+    visit new_candidate_answer_path(@candidate)
   else
     raise "I don't know #{arg1}"
   end
@@ -159,4 +162,16 @@ end
 
 Then /^a new answer should be created to this candidate$/ do
   @candidate.answers.should have(1).answer
+end
+
+Then /^I should be in "(.*?)"$/ do |arg1|
+  if arg1 == "the homepage"
+    current_path.should == root_path
+  else
+    raise "I don't know what '#{arg1}' means :("
+  end
+end
+
+When /^I open the user menu$/ do
+  page.execute_script('$(".options").show();')
 end

@@ -7,7 +7,7 @@ var App = window.App = {
       $('#about_politician').hide();
       $('a[href="#about_politician"]').facebox('some html');
 
-      $("input[type='radio']").change(function(event){
+      $("form.edit_answer input[type='radio'], form.new_answer input[type='radio']").change(function(event){
         $(event.target).closest("form").submit();
       });
     },
