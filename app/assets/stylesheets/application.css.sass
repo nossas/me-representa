@@ -805,6 +805,7 @@ body.candidates
           border: none
           margin: .5em 0
         .questions
+          +clearfix
           background: white
           padding: 1em
           width: 100%
@@ -821,12 +822,17 @@ body.candidates
               +border-radius(30px)
           .dares_title
             margin-top: 3em
+            clear: both
             span
               background: $orange
           .question
             margin-bottom: 1em
-            padding-top: 1em
-            border-top: lighten(gray, 40%) 2px dashed
+            padding: 1em
+            border: lighten(gray, 40%) 2px dashed
+            height: 200px
+            width: 42%
+            float: left
+            margin-left: 1.5em
             &:last-child
               border: none
               margin-bottom: 0
