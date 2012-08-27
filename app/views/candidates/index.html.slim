@@ -44,23 +44,10 @@
     .questions
       .truths_title
         span Verdades
-      - @truths.each_with_index do |truth, i|
-        .question
-          strong.truth_number= i + 1
-          | 
-          span.truth= t("questions.form.truth.placeholder")
-          |  
-          span.text= truth.text
+      = render partial: "questions/list_with_index", locals: { questions: @truths }
       .dares_title
         span Consequências
-      - @dares.each_with_index do |dare, i|
-        .question
-          strong.dare_number= i + 1
-          | 
-          span.dare= t("questions.form.dare.placeholder")
-          |  
-          span.text= dare.text
-
+      = render partial: "questions/list_with_index", locals: { questions: @dares } 
 javascript:
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
   

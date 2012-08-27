@@ -1,0 +1,7 @@
+- questions.each_with_index do |question, index|
+  .question
+    strong[class="#{question.role_type}_number"]= index + 1
+    | 
+    span[class=question.role_type]= t("questions.form.#{question.role_type}.placeholder")
+    |  
+    span.text= question.text

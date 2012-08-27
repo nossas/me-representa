@@ -805,6 +805,7 @@ body.candidates
           border: none
           margin: .5em 0
         .questions
+          +clearfix
           background: white
           padding: 1em
           width: 100%
@@ -821,21 +822,30 @@ body.candidates
               +border-radius(30px)
           .dares_title
             margin-top: 3em
+            clear: both
             span
               background: $orange
           .question
-            margin-bottom: 1em
-            padding-top: 1em
-            border-top: lighten(gray, 40%) 2px dashed
-            &:last-child
-              border: none
-              margin-bottom: 0
-              padding-top: 0
+            padding: 1em
+            border: lighten(gray, 40%) 2px dashed
+            height: 200px
+            width: 42%
+            float: left
+            margin: 0 0 1.5em 1.5em
+            +border-radius(6px)
+            &:hover 
+              background: rgba(173,173,173, 0.1)
+              border: 2px solid white
+              +box-shadow(0 0 4px lighten(gray, 25%))
+              +transition(.4s)
+              .text
+                color: black
           strong.truth_number, strong.dare_number
             background: $green
-            padding: .25em .5em
+            padding: .15em .5em
             color: white
             font-family: "Londrina Solid", Arial, Tahoma
+            font-size: 1.2em
             margin-right: .5em
             +text-shadow(black 1px 1px 1px)
             +border-radius(30px)
@@ -845,8 +855,8 @@ body.candidates
             color: $green
           span.dare
             color: $orange
-          span.text, span.dare, span.truth, .author
-            font-size: .8em
+          span.text
+            color: darken(gray, 5%)
     .padd
       padding: .6em
       margin-bottom: 1em
@@ -860,6 +870,6 @@ body.candidates
         &.inactive
           img
             +filter(grayscale(100%))
-            opacity: .2
+            opacity: .1
         &.active
 
