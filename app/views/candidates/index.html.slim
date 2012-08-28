@@ -37,7 +37,6 @@
     .share
       a href="https://twitter.com/share" class="twitter-share-button" data-url="http://verdadeouconsequencia.org.br/" data-lang="pt" Tweetar
       .fb-like data-href="http://verdadeouconsequencia.org.br/" data-send="true" data-width="450" data-show-faces="false"
-      #fb-root
 .wrapper.questionnaire
   .padd
     h2= t 'phase2.questionnaire.header'
@@ -48,13 +47,3 @@
       .dares_title
         span Consequências
       = render partial: "questions/list_with_index", locals: { questions: @dares } 
-javascript:
-  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-  
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=172049326247368";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));

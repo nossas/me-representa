@@ -1,9 +1,9 @@
-- @questions.each do |question|
-  = form_for [@candidate, (@candidate.answers.find_by_question_id(question.id) || Answer.new)], :remote => true, :html => {"data-question" => question.text} do |form|
-    p= question.full_text
-    = hidden_field_tag :token, params[:token]
-    = form.hidden_field :question_id, :value => question.id
-    = form.radio_button :short_answer, :value => "Sim"
-    = form.label :short_answer_valuesim, "Sim"
-    = form.radio_button :short_answer, :value => "Não"
-    = form.label :short_answer_valueno, "Não"
+.wrapper.questionnaire
+  .padd
+    .questions
+      .truths_title
+        span Verdades
+      = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
+      .dares_title
+        span Consequências
+      = render partial: "questions/list_with_index", locals: { questions: @questions.dares }
