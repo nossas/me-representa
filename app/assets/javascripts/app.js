@@ -1,5 +1,7 @@
 var App = window.App = {
   Questions: {},
+  Candidates: {},
+  Answers: {},
   Common: {
     init: function(){
       App.Common.login = new App.Common.Login({el: $('section.login')[0]});
@@ -7,9 +9,7 @@ var App = window.App = {
       $('#about_politician').hide();
       $('a[href="#about_politician"]').facebox('some html');
 
-      $("form.edit_answer input[type='radio'], form.new_answer input[type='radio']").change(function(event){
-        $(event.target).closest("form").submit();
-      });
+
     },
 
     finish: function(){
