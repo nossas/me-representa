@@ -797,7 +797,7 @@ body.candidates, body.answers
       &.questionnaire
         background: #3398cc
         form
-          width: 80%
+          width: 90%
           margin: 0 auto
           top: 20%
           position: relative
@@ -845,14 +845,14 @@ body.candidates, body.answers
             padding: 1em
             border: lighten(gray, 40%) 2px dashed
             height: 200px
-            width: 42%
+            width: 40%
             float: left
-            margin: 0 0 1.5em 1.5em
+            margin: 0 1.9em 3em 1.5em
             +border-radius(6px)
+            background: rgba(173,173,173, 0.1)
+            +box-shadow(0 0 4px lighten(gray, 25%))
+            border: 2px solid white
             &:hover 
-              background: rgba(173,173,173, 0.1)
-              border: 2px solid white
-              +box-shadow(0 0 4px lighten(gray, 25%))
               +transition(.4s)
               .text
                 color: black
