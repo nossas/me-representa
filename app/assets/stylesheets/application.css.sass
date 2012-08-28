@@ -796,6 +796,18 @@ body.candidates, body.answers
             display: inline-block
       &.questionnaire
         background: #3398cc
+        form
+          width: 80%
+          margin: 0 auto
+          top: 20%
+          position: relative
+          text-align: center
+          background: lighten(green, 73%)
+          +border-radius(4px)
+          border: 1px dashed lighten(gray, 40%)
+          label
+            font-size: .8em
+            padding: 0 .5em
         h2
           color: white
           font-size: 2em
@@ -857,6 +869,8 @@ body.candidates, body.answers
             color: $orange
           span.text
             color: darken(gray, 5%)
+            height: 50%
+            display: inline-block
     .padd
       padding: .6em
       margin-bottom: 1em

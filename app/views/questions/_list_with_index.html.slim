@@ -9,7 +9,9 @@
       = form_for [@candidate, (@candidate.answers.find_by_question_id(question.id) || Answer.new)], :remote => true, :html => {"data-question" => question.text} do |form|
         = hidden_field_tag :token, params[:token]
         = form.hidden_field :question_id, :value => question.id
-        = form.radio_button :short_answer, :value => "Sim"
-        = form.label :short_answer_valuesim, "Sim"
-        = form.radio_button :short_answer, :value => "Não"
-        = form.label :short_answer_valueno, "Não"
+        label
+          = form.radio_button :short_answer, :value => t("phase2.questionnaire.form.#{question.role_type}.label.positive")
+          = t "phase2.questionnaire.form.#{question.role_type}.label.positive"
+        label
+          = form.radio_button :short_answer, :value => t("phase2.questionnaire.form.#{question.role_type}.label.negative")
+          = t "phase2.questionnaire.form.#{question.role_type}.label.negative"

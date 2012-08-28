@@ -60,5 +60,13 @@ pt-BR:
     press_parties: "Pressionar partidos"
     questionnaire:
       header: "Agora conheça as perguntas que serão feitas aos candidatos"
-    
-
+      form:
+        dare:
+          label: 
+            positive: "Me comprometo" 
+            negative: "Não me comprometo"
+        truth:
+          label:
+            positive: "Sim"
+            negative: "Não"
+  
