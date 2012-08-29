@@ -17,6 +17,7 @@ end
 
 Given /^I'm logged in$/ do
   visit "/auth/facebook"
+  @current_user = User.find_by_email("nicolas@engage.is")
 end
 
 Given /^I'm logged in as admin$/ do
@@ -140,6 +141,8 @@ When /^I go to "(.*?)"$/ do |arg1|
     visit new_candidate_answer_path(@candidate, :token => @candidate.token)
   elsif arg1 == "this candidate answers page without token"
     visit new_candidate_answer_path(@candidate)
+  elsif arg1 == "the answers page"
+    visit user_answers_path(@current_user)
   else
     raise "I don't know #{arg1}"
   end
