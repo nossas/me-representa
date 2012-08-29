@@ -10,8 +10,8 @@
         = hidden_field_tag :token, params[:token]
         = form.hidden_field :question_id, :value => question.id
         label
-          = form.radio_button :short_answer, :value => t("phase2.questionnaire.form.#{question.role_type}.label.positive")
+          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.positive")
           = t "phase2.questionnaire.form.#{question.role_type}.label.positive"
         label
-          = form.radio_button :short_answer, :value => t("phase2.questionnaire.form.#{question.role_type}.label.negative")
+          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.negative")
           = t "phase2.questionnaire.form.#{question.role_type}.label.negative"

@@ -16,7 +16,7 @@ App.Answers.New = Backbone.View.extend({
 
   showSuccessfulMessage: function(event){
     var object =  $(event.target);
-
+    object.parents('.question').addClass('success');
   },
 
   submitAnswer: function(event) {
