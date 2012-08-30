@@ -837,13 +837,24 @@ body.candidates, body.answers
           margin: .5em 0
         .questions
           +clearfix
-          background: lighten($blue, 50%)
+          background: lighten($blue, 49%)
           padding: 1em
           width: 96%
           margin: 0 auto
+          margin-bottom: 1em
           line-height: normal
           +border-radius(6px)
           +box-sizing(border-box)
+          h3
+            text-align: center
+            color: white
+            background: $orange
+            padding: .4em .8em
+            width: 25%
+            margin: 0 auto
+            font-size: .8em
+            +border-radius(6px)
+            text-transform: uppercase
           .truths_title, .dares_title
             text-align: center
             margin-bottom: 2em
