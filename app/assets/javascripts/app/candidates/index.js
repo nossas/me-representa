@@ -11,7 +11,8 @@ App.Answers.New = Backbone.View.extend({
 
   events: {
     'ajax:complete form' : 'showSuccessfulMessage',
-    'change form input' : 'submitAnswer'
+    'change form input' : 'submitAnswer',
+    'click label.textarea' : 'showTextarea'
   },
 
   showSuccessfulMessage: function(event){
@@ -22,6 +23,12 @@ App.Answers.New = Backbone.View.extend({
   submitAnswer: function(event) {
     var object = $(event.target);
     object.closest("form").submit();
+  },
+
+  showTextarea: function(event) {
+    var object = $(event.target);
+    object.siblings('textarea').slideToggle();
+    object.siblings('input').slideToggle('100');
   }
 
 });
