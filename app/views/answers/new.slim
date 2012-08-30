@@ -1,6 +1,7 @@
 .wrapper.questionnaire
   .padd
     .questions
+      h2 Responda o questionário escolhido pelos cariocas
       .truths_title
         span Verdades
       = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
