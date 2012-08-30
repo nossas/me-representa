@@ -15,3 +15,7 @@
         label
           = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.negative")
           = t "phase2.questionnaire.form.#{question.role_type}.label.negative"
+
+        label.textarea
+          | Adicionar comentário
+          = form.text_area :long_answer, class: 'hidden'

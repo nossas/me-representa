@@ -1,10 +1,13 @@
 .wrapper.questionnaire
   .padd
+    .title
+      h1 Responda o questionário escolhido pelos cariocas
+      p.description= t 'phase2.description'
     .questions
-      h2 Responda o questionário escolhido pelos cariocas
+      h3 Agora vamos às verdades
       .truths_title
-        span Verdades
       = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
+    .questions
+      h3 Agora vamos às consequências 
       .dares_title
-        span Consequências
-      = render partial: "questions/list_with_index", locals: { questions: @questions.dares }
+      = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
