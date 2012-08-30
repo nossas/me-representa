@@ -23,6 +23,7 @@ App.Answers.New = Backbone.View.extend({
   submitAnswer: function(event) {
     var object = $(event.target);
     object.closest("form").submit();
+    object.parents('form').siblings('form').children('label.textarea').fadeIn('fast');
   },
 
   showTextarea: function(event) {

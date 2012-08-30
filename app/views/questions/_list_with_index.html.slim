@@ -17,7 +17,7 @@
           = t "phase2.questionnaire.form.#{question.role_type}.label.negative"
 
       = form_for [@candidate, (@candidate.answers.find_by_question_id(question.id) || Answer.new)], :remote => true, :html => {"data-question" => question.text} do |form|
-        label.textarea
+        label.textarea.hidden
           | Adicionar comentário ›
         = form.text_area :long_answer, class: 'hidden'
         = form.submit 'Salvar', data: { :"disable-with" => "Salvando..." }, class: 'hidden button'
