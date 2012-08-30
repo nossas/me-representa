@@ -746,6 +746,16 @@ body.questions
         font-size: 18px
 
 body.candidates, body.answers
+  &#index
+    .questions
+      .question
+        height: 80px !important
+        background: none !important
+        border-bottom: 2px dashed lighten(gray, 20%) !important
+        overflow: hidden !important
+        margin-top: 0 !important
+        margin-bottom: 0 !important
+        +box-shadow(none !important)
   &#index, &#new
     .padd
       padding: 2em
@@ -894,4 +904,5 @@ body.candidates, body.answers
             +filter(grayscale(100%))
             opacity: .1
         &.active
+
 
