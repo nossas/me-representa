@@ -1,4 +1,11 @@
 .wrapper.questionnaire
+  = content_for :header do
+    .logo= link_to image_tag("bg_header_phase_two_cutted.png"), root_path
+    .candidate
+      span
+        | Bem-vindo
+      .name= @candidate.name
+      .symbol= @candidate.party.symbol
   .padd
     .title
       h1 Responda o questionário escolhido pelos cariocas
@@ -17,3 +24,8 @@
       h3 Agora vamos às consequências 
       .dares_title
       = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
+
+    .send_answers
+      = form_for @candidate do |f|
+        = f.hidden_field :finished_at, value: true
+        = f.submit "Salvar e Enviar questionário", class: 'btn'
