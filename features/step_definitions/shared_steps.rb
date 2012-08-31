@@ -143,6 +143,8 @@ When /^I go to "(.*?)"$/ do |arg1|
     visit new_candidate_answer_path(@candidate)
   elsif arg1 == "the answers page"
     visit user_answers_path(@current_user)
+  elsif arg1 == "this candidate page"
+    visit candidate_path(@candidate)
   else
     raise "I don't know #{arg1}"
   end
@@ -177,4 +179,8 @@ end
 
 When /^I open the user menu$/ do
   page.execute_script('$(".options").show();')
+end
+
+Given /^there is a candidate called "(.*?)"$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, :name => arg1)
 end
