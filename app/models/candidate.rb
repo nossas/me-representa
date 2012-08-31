@@ -1,5 +1,5 @@
 class Candidate < ActiveRecord::Base
-  attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio
+  attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at
   validates :number, :token, :uniqueness => true
   validates :name, :number, :party_id, :presence => true
   belongs_to :party

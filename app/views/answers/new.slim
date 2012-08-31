@@ -27,5 +27,5 @@
 
     .send_answers
       = form_for @candidate do |f|
-        = f.hidden_field :finished_at, value: true
+        = f.hidden_field :finished_at
         = f.submit "Salvar e Enviar questionário", class: 'btn'
