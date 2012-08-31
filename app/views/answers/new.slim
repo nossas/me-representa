@@ -7,7 +7,8 @@
         label 
           | Fale mais sobre seus planos, caso seja eleito
           = f.text_area :bio, placeholder: "Escreva sobre seus planos, carreira etc."
-        = f.submit "Salvar", data: { :"disable-with" => "Salvando..." }, class: 'button'
+        p
+          |&nbsp;
     .questions
       h3 Agora vamos às verdades
       .truths_title
