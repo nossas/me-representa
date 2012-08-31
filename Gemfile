@@ -37,6 +37,7 @@ group :development do
 end
 
 group :test do
+  gem "selenium-webdriver", "~> 2.13.0"
   gem 'cucumber-rails', require: false
   gem 'shoulda-matchers'
   gem 'capybara'

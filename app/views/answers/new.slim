@@ -6,8 +6,9 @@
       = form_for @candidate, remote: true do |f|
         label 
           | Fale mais sobre seus planos, caso seja eleito
-          = f.text_area :bio
-        = f.submit "Salvar", data: { :"disable-with" => "Salvando..." }, class: 'button'
+          = f.text_area :bio, placeholder: "Escreva sobre seus planos, carreira etc."
+        p
+          |&nbsp;
     .questions
       h3 Agora vamos às verdades
       .truths_title

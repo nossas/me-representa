@@ -12,7 +12,22 @@ App.Answers.New = Backbone.View.extend({
   events: {
     'ajax:complete form' : 'showSuccessfulMessage',
     'change form input' : 'submitAnswer',
-    'click label.textarea' : 'showTextarea'
+    'click label.textarea' : 'showTextarea',
+    'ajax:complete form.comment' : 'hideCommentBox',
+    'blur textarea': 'submitTextareaForms'
+  },
+
+  submitTextareaForms: function(event) {
+    var object = $(event.target);
+    object.animate({ opacity: .9});
+    object.parents('form').submit();
+
+  },
+  
+  hideCommentBox: function(event) {
+    var object = $(event.target);
+    object.children('textarea').slideUp('slow');
+    object.children('input').slideUp('fast');
   },
 
   showSuccessfulMessage: function(event){
