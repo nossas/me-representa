@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
   before_filter :only => [:new] { @questions = Question.chosen }
   before_filter :only => [:new, :create] do 
     candidate = Candidate.find(params[:candidate_id])
-    if params[:token] != candidate.token or !candidate.finished_at.nil?
+    if params[:token] != candidate.token
       redirect_to root_path 
     end
   end
