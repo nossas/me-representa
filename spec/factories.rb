@@ -34,6 +34,7 @@ FactoryGirl.define do
     c.name "Nicolas Iensen"
     c.nickname "Tony"
     c.number 22
+    c.bio "I'm good. You know it."
     c.association :party
     c.male true
     c.born_at Date.new(1986, 3, 6)
