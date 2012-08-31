@@ -3,6 +3,11 @@
     .title
       h1 Responda o questionário escolhido pelos cariocas
       p.description= t 'phase2.description'
+      = form_for @candidate, remote: true do |f|
+        label 
+          | Fale mais sobre seus planos, caso seja eleito
+          = f.text_area :bio
+        = f.submit "Salvar", data: { :"disable-with" => "Salvando..." }, class: 'button'
     .questions
       h3 Agora vamos às verdades
       .truths_title
