@@ -3,8 +3,8 @@ require 'csv'
 
 namespace :voc do
   desc "Import candidates from a remote csv file"
-  task :import => :environment do
-    CSV.parse(open("/Users/nicolas/Desktop/candidatos.csv", "r:UTF-8"), :headers => true) do |row|
+  task :import, [:url] => :environment do |t, args|
+    CSV.parse(open(args.url, "r:UTF-8"), :headers => true) do |row|
       c = Candidate.find_or_create_by_number(
         row[2].to_i,
         :name => row[0].titleize, 
