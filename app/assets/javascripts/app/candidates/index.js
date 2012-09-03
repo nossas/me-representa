@@ -1,4 +1,17 @@
 App.Candidates.Index = Backbone.View.extend({
+  el: 'body',
+
+  initialize: function() {},
+
+  events: {
+    'click .link_to_candidates #link_to_form' : 'showFormToCandidates'
+  },
+
+  showFormToCandidates: function(event) {
+    $('.form_to_candidates').slideToggle();
+
+  }
+
 
 });
 
@@ -14,7 +27,7 @@ App.Answers.New = Backbone.View.extend({
     'change form input' : 'submitAnswer',
     'click label.textarea' : 'showTextarea',
     'ajax:complete form.comment' : 'hideCommentBox',
-    'blur textarea': 'submitTextareaForms'
+    'blur textarea': 'submitTextareaForms',
   },
 
   submitTextareaForms: function(event) {

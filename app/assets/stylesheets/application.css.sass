@@ -781,6 +781,67 @@ body.candidates, body.answers
         display: block
         text-align: center
         width: auto 
+    .link_to_candidates
+      background: $orange !important
+      +transition(.5s)
+      +clearfix
+      &:hover
+        background: darken($orange, 10%) !important
+      img
+        +grid(4)
+        +grid-suffix(1)
+        +alpha
+      a
+        +grid(11)
+        +omega
+        font-family: "Londrina solid"
+        font-size: 1.7em
+        color: white
+        text-transform: uppercase
+        letter-spacing: 1px 
+        line-height: 1.6em
+
+    .form_to_candidates
+      fieldset
+      legend
+        +grid-suffix(2)
+        +grid(12)
+        +grid-prefix(2)
+        padding-top: .4em
+      legend, label
+        font-family: "Londrina solid"
+        font-size: 1.6em
+        color: $blue
+        text-transform: uppercase
+        letter-spacing: 1px
+        margin-bottom: .4em
+      form
+        border: 2px dashed lighten(gray, 35%)
+        width: 98%
+        .omega
+          +omega
+        p.submit
+          clear: both
+          width: 20%
+          margin: .4em auto
+          padding: 0 !important
+          input
+            font-size: 1.7em
+
+        label
+          +grid(3)
+          +grid-prefix(1)
+          +grid-suffix(1)
+          font-size: .9em
+          color: lighten($blue, 10%)
+          margin-top: 1em
+        select
+          display: block
+          width: 100%
+        .chzn-single
+          height: 1.8em
+          line-height: 1.8em
+          font-size: 1.6em
     section.content .wrapper
       img
         margin-top: 1em
@@ -828,6 +889,7 @@ body.candidates, body.answers
             display: inline-block
       &.questionnaire
         background: #3398cc
+        margin-top: 2em
         form
           display: block
           top: 10%
