@@ -37,6 +37,7 @@ Given /^I choose "([^"]*)" for "([^"]*)"$/ do |arg1, arg2|
     page.execute_script("$(\"select[name='question[category_id]']\").val(#{Category.find_or_create_by_name(arg1).id})")
   else
     select arg1, :from => arg2
+    sleep(1)
   end
 end
 
@@ -159,9 +160,9 @@ Given /^I'm on "(.*?)"$/ do |arg1|
 end
 
 Given /^I choose "(.*?)" for the question "(.*?)"$/ do |arg1, arg2|
-  within("form") do
+  within(".questions form") do
     choose(arg1)
-    sleep(1)
+    sleep(2)
   end
 end
 

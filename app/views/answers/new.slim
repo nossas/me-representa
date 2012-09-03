@@ -1,9 +1,31 @@
 .wrapper.questionnaire
+  = content_for :header do
+    .logo= link_to image_tag("bg_header_phase_two_cutted.png"), root_path
+    .candidate
+      span
+        | Bem-vindo
+      .name= @candidate.name
+      .symbol= @candidate.party.symbol
   .padd
+    .title
+      h1 Responda o questionário escolhido pelos cariocas
+      p.description= t 'phase2.description'
+      = form_for @candidate, remote: true do |f|
+        label 
+          | Fale mais sobre seus planos, caso seja eleito
+          = f.text_area :bio, placeholder: "Escreva sobre seus planos, carreira etc."
+        p
+          |&nbsp;
     .questions
+      h3 Agora vamos às verdades
       .truths_title
-        span Verdades
       = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
+    .questions
+      h3 Agora vamos às consequências 
       .dares_title
-        span Consequências
-      = render partial: "questions/list_with_index", locals: { questions: @questions.dares }
+      = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
+
+    .send_answers
+      = form_for @candidate do |f|
+        = f.hidden_field :finished_at
+        = f.submit "Salvar e Enviar questionário", class: 'btn'

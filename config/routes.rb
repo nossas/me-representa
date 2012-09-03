@@ -2,8 +2,8 @@ CariocaPergunta::Application.routes.draw do
 
   match '/auth/:provider/callback',   :to => 'sessions#create'
 
-  resources :candidates, :only => [:show] do
-    resources :answers, :only => [:new, :create, :update]
+  resources :candidates do
+    resources :answers, except: [:destroy] 
   end
 
   resources :questions do

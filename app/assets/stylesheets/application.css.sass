@@ -751,9 +751,30 @@ body.questions
         font-size: 18px
 
 body.candidates, body.answers
+  &#index
+    .questions
+      background: white !important
+      .question
+        background: none !important
+        min-height: 100px !important
+        overflow: hidden !important
+        margin-top: 0 !important
+        margin-bottom: 0 !important
+      .text
+        color: black !important
   &#index, &#new
     .padd
       padding: 2em
+    .send_answers
+      border-top: 2px dashed lighten(gray, 35%)
+      padding: 2em 0
+      width: 96%
+      margin: 0 auto
+      .btn 
+        margin: 0 auto 
+        display: block
+        text-align: center
+        width: auto 
     section.content .wrapper
       img
         margin-top: 1em
@@ -802,21 +823,46 @@ body.candidates, body.answers
       &.questionnaire
         background: #3398cc
         form
-          width: 90%
-          margin: 0 auto
-          top: 20%
+          display: block
+          top: 10%
           position: relative
-          text-align: center
-          background: lighten(green, 73%)
-          +border-radius(4px)
-          border: 1px dashed lighten(gray, 40%)
+          margin-top: .8em
+          input
+            padding-right: .4em
           label
-            font-size: .8em
-            padding: 0 .5em
+            font-size: .7em
             +transition(1s)
+            display: block
+            padding: .3em 0
+            text-transform: uppercase
+            &.textarea
+              color: lighten($orange, 10%)
+              text-decoration: underline
+              text-transform: capitalize
+              font-size: .6em
+              margin-top: 1em
+              display: none
             &:hover 
               cursor: pointer
               font-weight: bold
+          textarea
+            height: 90px
+            margin-top: .4em
+            outline: none
+            width: 97%
+            margin-bottom: 1em
+            padding: .4em
+            border: 1px solid lighten(gray, 45%)
+            +box-shadow(inset 0 1px 8px gray)
+            +border-radius(4px)
+            font-size: 1em !important
+          .button
+            font-size: 1em
+            text-transform: uppercase
+            padding: .4em
+            float: right
+            margin-bottom: 1em
+
         h2
           color: white
           font-size: 2em
@@ -827,12 +873,24 @@ body.candidates, body.answers
           margin: .5em 0
         .questions
           +clearfix
-          background: white
+          background: lighten($blue, 48%)
           padding: 1em
-          width: 100%
+          width: 96%
+          margin: 0 auto
+          margin-bottom: 1em
           line-height: normal
-          +border-radius(20px)
+          +border-radius(6px)
           +box-sizing(border-box)
+          h3
+            text-align: center
+            color: white
+            background: $orange
+            padding: .4em .8em
+            width: 25%
+            margin: 0 auto
+            font-size: .8em
+            +border-radius(6px)
+            text-transform: uppercase
           .truths_title, .dares_title
             text-align: center
             margin-bottom: 2em
@@ -847,30 +905,35 @@ body.candidates, body.answers
             span
               background: $orange
           .question
-            padding: 1em
-            border: lighten(gray, 40%) 2px dashed
-            height: 200px
-            width: 40%
+            padding: .4em
+            border-top: 2px dashed lighten(gray, 20%) !important
+            width: 42%
+            min-height: 130px
             float: left
-            margin: 0 1.9em 3em 1.5em
+            margin: 0 1em 1em 2em
+            background: lighten(blue, 48%)
             +border-radius(6px)
-            background: rgba(173,173,173, 0.1)
-            +box-shadow(0 0 4px lighten(gray, 25%))
-            border: 2px solid white
             &:hover 
               +transition(.4s)
               .text
                 color: black
+          .success
+            background: rgba(173,173,173,0.1) image-url('checkmark.png') no-repeat 95% 94%
           strong.truth_number, strong.dare_number
             background: $green
             padding: .15em .5em
             color: white
             font-family: "Londrina Solid", Arial, Tahoma
-            font-size: 1.2em
             margin-right: .5em
             +text-shadow(black 1px 1px 1px)
             +border-radius(30px)
             float: left
+          span.truth, span.dare, span.text, strong.dare_number, strong.truth_number
+            font-size: .7em
+            line-height: 1.4em
+            text-transform: uppercase
+          .truth_number, .dare_number
+            font-size: .8em !important
           strong.dare_number
             background: $orange
           span.truth
@@ -878,10 +941,7 @@ body.candidates, body.answers
           span.dare
             color: $orange
           span.text
-            color: darken(gray, 5%)
-            height: 50%
-            display: inline-block
-            font-size: .9em
+            color: darken($blue, 10%)
     .padd
       padding: .6em
       margin-bottom: 1em
@@ -897,4 +957,43 @@ body.candidates, body.answers
             +filter(grayscale(100%))
             opacity: .1
         &.active
+body.answers
+  &#new
+    .header
+      margin: 1em 0 .4em 0 !important
+      .wrapper
+        +clearfix
+      .logo 
+        +grid(4)
+        +alpha
+      .candidate
+        +grid(12)
+        +omega
+        text-align: right
+        color: darken(gray, 8%)
+        span
+          padding-top: 1em
+          display: block
+        .name, .symbol
+          font-family: "Londrina solid"
+          text-transform: uppercase
+          font-size: 1.4em
+          line-height: 1em
+        .name
+          color: $blue
+          letter-spacing: 1px
+        .symbol
+          color: $orange
 
+    .questionnaire
+      background: white !important
+    .title
+      color: $blue
+      width: 90%
+      margin: 1em auto
+      padding-bottom: 1em
+      border-bottom: 2px dashed lighten(gray, 30%)
+      h1
+        font-weight: none !important 
+        margin-top: 0 !important
+        letter-spacing: 1px

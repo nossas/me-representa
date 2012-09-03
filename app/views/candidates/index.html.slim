@@ -41,9 +41,4 @@
   .padd
     h2= t 'phase2.questionnaire.header'
     .questions
-      .truths_title
-        span Verdades
-      = render partial: "questions/list_with_index", locals: { questions: @truths }
-      .dares_title
-        span Consequências
-      = render partial: "questions/list_with_index", locals: { questions: @dares } 
+      = render partial: "questions/list_with_index", locals: { questions: @truths + @dares }

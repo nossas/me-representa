@@ -5,4 +5,8 @@ class AnswersController < ApplicationController
   belongs_to :user, :polymorphic => true
   before_filter :only => [:new, :index] { @questions = Question.chosen }
   before_filter :only => [:new, :create] { redirect_to root_path if params[:token] != Candidate.find(params[:candidate_id]).token }
+
+  def show
+    show! { return render layout: false }
+  end
 end
