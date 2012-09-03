@@ -23,11 +23,14 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
+.candidate_answers
+  +grid(16)
+
 .candidate_bio
-  +grid(8)
+  +grid(10)
 
 .candidate_info
-  +grid(4)
+  +grid(6)
 
 // Main layout style
 body
@@ -180,6 +183,9 @@ input[type=submit],button[type=button], .btn
 input[disabled]
   +btn(#999, #999)
   color: #666!important
+
+.content
+  overflow: hidden
 
 .wrapper
   +grid-container
@@ -360,10 +366,6 @@ section.show
   p.description
     font-size: 1.2em
     padding: 6px
-  span.truth
-    color: $green
-  span.dare
-    color: $orange
   .questions_list
     +box-shadow(none)
   .question
@@ -550,6 +552,10 @@ h2.dare
           color: black
       p.headline
         font-size: .8em
+      span.truth
+        color: $green
+      span.dare
+        color: $orange
     .buttons
       +clearfix
 
@@ -891,22 +897,6 @@ body.candidates, body.answers
           margin-top: .8em
           input
             padding-right: .4em
-          label
-            font-size: .7em
-            +transition(1s)
-            display: block
-            padding: .3em 0
-            text-transform: uppercase
-            &.textarea
-              color: lighten($orange, 10%)
-              text-decoration: underline
-              text-transform: capitalize
-              font-size: .6em
-              margin-top: 1em
-              display: none
-            &:hover 
-              cursor: pointer
-              font-weight: bold
           textarea
             height: 90px
             margin-top: .4em
@@ -933,77 +923,6 @@ body.candidates, body.answers
           padding: 0 5em
           border: none
           margin: .5em 0
-        .questions
-          +clearfix
-          background: lighten($blue, 48%)
-          padding: 1em
-          width: 96%
-          margin: 0 auto
-          margin-bottom: 1em
-          line-height: normal
-          +border-radius(6px)
-          +box-sizing(border-box)
-          h3
-            text-align: center
-            color: white
-            background: $orange
-            padding: .4em .8em
-            width: 25%
-            margin: 0 auto
-            font-size: .8em
-            +border-radius(6px)
-            text-transform: uppercase
-          .truths_title, .dares_title
-            text-align: center
-            margin-bottom: 2em
-            span
-              background: $green
-              color: white
-              padding: .25em .5em
-              +border-radius(30px)
-          .dares_title
-            margin-top: 3em
-            clear: both
-            span
-              background: $orange
-          .question
-            padding: .4em
-            border-top: 2px dashed lighten(gray, 20%) !important
-            width: 42%
-            min-height: 130px
-            float: left
-            margin: 0 1em 1em 2em
-            background: lighten(blue, 48%)
-            +border-radius(6px)
-            &:hover 
-              +transition(.4s)
-              .text
-                color: black
-          .success
-            background: rgba(173,173,173,0.1) image-url('checkmark.png') no-repeat 95% 94%
-          strong.truth_number, strong.dare_number
-            background: $green
-            padding: .15em .5em
-            color: white
-            font-family: "Londrina Solid", Arial, Tahoma
-            margin-right: .5em
-            +text-shadow(black 1px 1px 1px)
-            +border-radius(30px)
-            float: left
-          span.truth, span.dare, span.text, strong.dare_number, strong.truth_number
-            font-size: .7em
-            line-height: 1.4em
-            text-transform: uppercase
-          .truth_number, .dare_number
-            font-size: .8em !important
-          strong.dare_number
-            background: $orange
-          span.truth
-            color: $green
-          span.dare
-            color: $orange
-          span.text
-            color: darken($blue, 10%)
     .padd
       padding: .6em
       margin-bottom: 1em
@@ -1019,6 +938,98 @@ body.candidates, body.answers
             +filter(grayscale(100%))
             opacity: .1
         &.active
+
+.questions
+  +clearfix
+  background: lighten($blue, 48%)
+  padding: 1em
+  width: 96%
+  margin: 0 auto
+  margin-bottom: 1em
+  line-height: normal
+  +border-radius(6px)
+  +box-sizing(border-box)
+  h3
+    text-align: center
+    color: white
+    background: $orange
+    padding: .4em .8em
+    width: 25%
+    margin: 0 auto
+    font-size: .8em
+    +border-radius(6px)
+    text-transform: uppercase
+  .truths_title, .dares_title
+    text-align: center
+    margin-bottom: 2em
+    span
+      background: $green
+      color: white
+      padding: .25em .5em
+      +border-radius(30px)
+  .dares_title
+    margin-top: 3em
+    clear: both
+    span
+      background: $orange
+  .question
+    padding: .4em
+    border-top: 2px dashed lighten(gray, 20%) !important
+    width: 42%
+    min-height: 130px
+    float: left
+    margin: 0 1em 1em 2em
+    background: lighten(blue, 48%)
+    +border-radius(6px)
+    &:hover 
+      +transition(.4s)
+      .text
+        color: black
+    label
+      font-size: .7em
+      +transition(1s)
+      display: block
+      padding: .3em 0
+      text-transform: uppercase
+      &.textarea
+        color: lighten($orange, 10%)
+        text-decoration: underline
+        text-transform: capitalize
+        font-size: .6em
+        margin-top: 1em
+        display: none
+      &:hover 
+        cursor: pointer
+        font-weight: bold
+
+
+  .success
+    background: rgba(173,173,173,0.1) image-url('checkmark.png') no-repeat 95% 94%
+  strong.truth_number, strong.dare_number
+    background: $green
+    padding: .15em .5em
+    color: white
+    font-family: "Londrina Solid", Arial, Tahoma
+    margin-right: .5em
+    +text-shadow(black 1px 1px 1px)
+    +border-radius(30px)
+    float: left
+  span.truth, span.dare, span.text, strong.dare_number, strong.truth_number
+    font-size: .7em
+    line-height: 1.4em
+    text-transform: uppercase
+  .truth_number, .dare_number
+    font-size: .8em !important
+  strong.dare_number
+    background: $orange
+  span.truth
+    color: $green
+  span.dare
+    color: $orange
+  span.text
+    color: darken($blue, 10%)
+
+
 body.answers
   &#new
     .header
@@ -1059,3 +1070,53 @@ body.answers
         font-weight: none !important 
         margin-top: 0 !important
         letter-spacing: 1px
+
+body.candidates#show
+  line-height: normal
+  .candidate_bio, .candidate_info
+    font-size: .8em
+    span
+      color: $blue
+  .box
+    background: white
+    padding: 1.5em
+    +border-radius(10px)
+    h1
+      font-size: 2em
+      text-align: left
+      margin-bottom: .5em
+      line-height: normal
+    h2
+      color: gray
+      border: none
+      text-align: left
+      line-height: normal
+      padding: 0
+      font-size: 2em
+      margin-bottom: .5em
+    small
+      color: gray
+      font-style: italic
+  .candidate_answers
+    margin-top: 1.5em
+    .box
+      background: $blue
+      .box
+        background: white
+    h2
+      color: white
+      text-align: center
+      +text-shadow(black 1px 1px 1px)
+    .questions
+      background: none
+      width: auto
+      padding: 0
+      form
+        margin-top: .5em
+        input
+          top: 0
+      .long_answer
+        margin-top: 1em
+        font-size: .8em
+        color: gray
+        font-style: italic

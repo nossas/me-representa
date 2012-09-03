@@ -1,6 +1,19 @@
 .wrapper
   .candidate_info
-    h1= @candidate.name
+    .box
+      h1= @candidate.name
+      .party Partido: #{content_tag :span, @candidate.party.symbol}
+      .age Idade: #{content_tag :span , distance_of_time_in_words(Date.today, @candidate.born_at)}
+      .male Sexo: #{content_tag :span, @candidate.male? ? "Masculino" : "Feminino"} 
 
   .candidate_bio
-    h2 Quais são seus planos?
+    .box
+      h2 Quais são meus planos?
+      .bio= @candidate.bio.blank? ? content_tag(:small, "#{@candidate.name} ainda não disse quais são seus planos, que feio...") : simple_format(@candidate.bio)
+
+  .candidate_answers
+    .box
+      h2 O que eu respondi
+      .box
+        .questions
+          = render :partial => "questions/list_with_index", :locals => {:questions => Question.chosen}

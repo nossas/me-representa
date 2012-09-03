@@ -10,15 +10,18 @@
         = hidden_field_tag :token, params[:token]
         = form.hidden_field :question_id, :value => question.id
         label
-          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.positive")
+          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.positive"), :disabled => params[:token].nil? ? "disabled" : nil
           = t "phase2.questionnaire.form.#{question.role_type}.label.positive"
         label
-          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.negative")
+          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.negative"), :disabled => params[:token].nil? ? "disabled" : nil
           = t "phase2.questionnaire.form.#{question.role_type}.label.negative"
 
-      = form_for [@candidate, (@candidate.answers.find_by_question_id(question.id) || Answer.new)], :remote => true, :html => {class: 'comment', "data-question" => question.text} do |form|
-        label.textarea.hidden
-          | Adicionar comentário ›
-        = form.text_area :long_answer, class: 'hidden'
-        p
-        = form.submit 'Salvar', data: { :"disable-with" => "Salvando..." }, class: 'hidden button'
+      - if params[:token].nil?
+        .long_answer= simple_format @candidate.answers.find_by_question_id(question.id).try(:long_answer)
+      - else
+        = form_for [@candidate, (@candidate.answers.find_by_question_id(question.id) || Answer.new)], :remote => true, :html => {class: 'comment', "data-question" => question.text} do |form|
+          label.textarea.hidden
+            | Adicionar comentário ›
+          = form.text_area :long_answer, class: 'hidden'
+          p
+          = form.submit 'Salvar', data: { :"disable-with" => "Salvando..." }, class: 'hidden button'
