@@ -58,6 +58,7 @@ pt-BR:
     description: "Agora que as melhores perguntas foram selecionadas, vamos montar o formulário e enviar para todos os candidatos. Mas primeiro precisamos encher o saco dos partidos que não estão colaborando com os cariocas e ainda não enviaram os contatos dos seus candidatos."
     no_participation: "Os partidos sem cor ainda não estão participando. Vamos pressioná-los"
     press_parties: "Pressionar partidos"
+    link_to_candidates: "Quer participar? Não recebeu seu questionário? Clique aqui para solicitar o reenvio!"
     questionnaire:
       header: "Agora conheça as perguntas que serão feitas aos candidatos"
       form:
