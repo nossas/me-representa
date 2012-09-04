@@ -1,4 +1,29 @@
 pt-BR:
+  email:  
+    resend_unique_url:
+      subject: "Obrigado por participar do Verdade ou Consequência!" 
+      body_html: "<p>Olá <span class='name'> %{name} </span>,</p> 
+      <p> Muito obrigado por entrar em contato conosco!</p>
+      <br/>
+      <p> 
+        Para acessar o questionário e poder responder as perguntas feitas pelos cidadãos, por favor clique no link abaixo: <br/> 
+        <a href='%{link}'>%{link}</a>
+      </p>
+      <br/>
+      <p> Se tiver ainda algum problema para acessar o questionário, por favor, entre em contato conosco pelo email 
+      <a href='mailto:leonardo@meurio.org.br'>leonardo@meurio.org.br</a>.</p>
+      <br/>
+      <p> 
+        Usaremos esse email para enviar novidades sobre o <strong>Verdade ou Consequência</strong>. 
+        <br/>
+        Fique de olho nas redes sociais e
+        acompanhe o Verdade ou Consequência em nosso <a href='http://facebook.com/meurio'>Facebook</a> e <a href='http://twitter.com/meu_rio'>Twitter</a>.
+      </p>
+      <br/><br/>
+      <strong>Meu Rio</strong>
+      <br/>
+      <a href='http://meurio.org.br/'>meurio.org.br</a>
+      "
   site:
     title: "Verdade ou Consequência? - Meu Rio"
     description: "Lembra como era bom jogar Verdade ou Consequência? Agora, você pode jogar com os candidatos a vereador!"

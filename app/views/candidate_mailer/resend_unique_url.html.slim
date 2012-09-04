@@ -1,0 +1,8 @@
+doctype
+  html
+    head
+      meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
+      style
+        | body { font-family: Arial; font-size: 13px; }
+    body
+      = t 'email.resend_unique_url.body_html', name: @candidate.name, link: new_candidate_answer_url(@candidate, token: @candidate.token, host: 'http://verdadeouconsequencia.org.br/') 
