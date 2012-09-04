@@ -8,13 +8,13 @@ p
     fieldset
       legend 
         | Insira seus dados para solicitar o reenvio de sua url única
-      = form_for :candidate, url: candidates_check_path(format: :json), remote: true, format: :json, method: :get do |f|
+      = form_for :candidate, url: candidates_check_path(format: :json), remote: true, format: :json, method: :post do |f|
         label
           | Insira seu e-mail
           = f.email_field :email
         label 
           | Insira seu telefone
-          = f.phone_field :phone
+          = f.phone_field :mobile_phone
         label.omega 
           | Partido
           p= f.select :party, Party.all.collect { |p| [p.symbol, p.id] }, {}, class: 'chosen-select'

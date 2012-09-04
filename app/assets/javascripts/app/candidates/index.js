@@ -14,10 +14,20 @@ App.Candidates.Index = Backbone.View.extend({
   },
   
    verifyCandidate: function(event, data) {
-    if (data.responseText === "{}") {
+    var response = jQuery.parseJSON(data.responseText);
+    if (response == null) {
       this.form.hide();
       this.unsuccessful_message.fadeIn(); 
     }
+    else if (response.email == true && response.mobile_phone == false) {
+      this.form.hide();
+      this.match_email_message.fadeIn();
+    }
+    else if (response.email == false && response.mobile_phone == true) {
+      this.form.hide();
+      this.match_mobile_message.fadeIn();
+    }
+
   },
 
   showFormToCandidates: function(event) {
