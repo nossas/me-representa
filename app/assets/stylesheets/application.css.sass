@@ -170,7 +170,7 @@ a, a:active, a:visited
   color: $blue
   text-decoration: none
 
-input[type=text]
+input[type=text], input[type=email], input[type=tel]
   border: 1px solid #dedede
   padding: 10px 15px
   +box-shadow(inset 1px 1px 2px #999)
@@ -817,7 +817,7 @@ body.candidates, body.answers
         margin-bottom: .4em
       form
         border: 2px dashed lighten(gray, 35%)
-        width: 98%
+        width: 97.5%
         .omega
           +omega
         p.submit
@@ -836,7 +836,6 @@ body.candidates, body.answers
           color: lighten($blue, 10%)
           margin-top: 1em
         select
-          display: block
           width: 100%
         .chzn-single
           height: 1.8em

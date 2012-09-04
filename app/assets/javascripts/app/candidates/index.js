@@ -4,7 +4,13 @@ App.Candidates.Index = Backbone.View.extend({
   initialize: function() {},
 
   events: {
-    'click .link_to_candidates #link_to_form' : 'showFormToCandidates'
+    'click .link_to_candidates a' : 'showFormToCandidates',
+    'ajax:complete .form_to_candidates form'  : 'verifyCandidate'
+  },
+  
+  verifyCandidate: function(event, data) {
+    var object = jQuery(event);
+    console.log(data);
   },
 
   showFormToCandidates: function(event) {

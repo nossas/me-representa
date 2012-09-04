@@ -1,3 +1,27 @@
+.wrapper.link_to_candidates
+  .padd
+    = image_tag "candidates_link_to.gif"
+    = link_to t('phase2.link_to_candidates'), "#/", title: "Clique para expandir/recolher o formulário"
+p
+.wrapper.form_to_candidates.hidden
+  .padd
+    fieldset
+      legend 
+        | Insira seus dados para solicitar o reenvio de sua url única
+      = form_for :candidate, url: candidates_check_path(format: :json), remote: true, format: :json, method: :get do |f|
+        label
+          | Insira seu e-mail
+          = f.email_field :email
+        label 
+          | Insira seu telefone
+          = f.phone_field :phone
+        label.omega 
+          | Partido
+          p= f.select :party, Party.all.collect { |p| [p.symbol, p.id] }, {}, class: 'chosen-select'
+        p.submit= f.submit "Enviar Dados", data: { :"disable-with" => "Enviando..." }
+
+
+
 .wrapper.parties
   .padd
     h1= t 'phase2.header'
@@ -37,25 +61,6 @@
     .share
       a href="https://twitter.com/share" class="twitter-share-button" data-url="http://verdadeouconsequencia.org.br/" data-lang="pt" Tweetar
       .fb-like data-href="http://verdadeouconsequencia.org.br/" data-send="true" data-width="450" data-show-faces="false"
-.wrapper.link_to_candidates
-  .padd
-    = image_tag "candidates_link_to.gif"
-    = link_to t('phase2.link_to_candidates'), "#/", id: "link_to_form", title: "Clique para expandir/recolher o formulário"
-.wrapper.form_to_candidates.hidden
-  .padd
-    fieldset
-      legend Insira seus dados para solicitar o reenvio de sua url única
-      = form_for :candidate, url: candidates_check_path, format: :json do |f|
-        label
-          | Insira seu e-mail
-          = f.text_field :email
-        label 
-          | Insira seu telefone
-          = f.text_field :phone
-        label.omega 
-          | Partido
-          p= f.select :party, Party.all.collect { |p| [p.symbol, p.id] }, {}, class: 'chosen-select'
-        p.submit= f.submit "Enviar Dados", data: { :"disable-with" => "Enviando..." }
 .wrapper.questionnaire
   .padd
     h2= t 'phase2.questionnaire.header'
