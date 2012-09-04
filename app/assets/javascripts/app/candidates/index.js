@@ -1,16 +1,23 @@
 App.Candidates.Index = Backbone.View.extend({
   el: 'body',
 
-  initialize: function() {},
+  initialize: function() {
+    this.form                 = $('.form_to_candidates fieldset');
+    this.unsuccessful_message = $('.form_to_candidates .unsuccessful');
+    this.match_mobile_message = $('.form_to_candidates .match_mobile');
+    this.match_email_message  = $('.form_to_candidates .match_email');
+  },
 
   events: {
     'click .link_to_candidates a' : 'showFormToCandidates',
     'ajax:complete .form_to_candidates form'  : 'verifyCandidate'
   },
   
-  verifyCandidate: function(event, data) {
-    var object = jQuery(event);
-    console.log(data);
+   verifyCandidate: function(event, data) {
+    if (data.responseText === "{}") {
+      this.form.hide();
+      this.unsuccessful_message.fadeIn(); 
+    }
   },
 
   showFormToCandidates: function(event) {

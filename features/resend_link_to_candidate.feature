@@ -10,5 +10,4 @@ Feature: Receive link to participate
     And I should see Insira seus dados para solicitar o reenvio de sua url única
     And I fill in "Insira seu e-mail" with "tester@tester.com"
     And I fill in "Insira seu telefone" with "5555555555"
-    And I choose "PT" for "Partido"
     Then I should see Infelizmente, seu cadastro não consta em nossa base de dados

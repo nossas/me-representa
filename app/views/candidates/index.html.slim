@@ -19,7 +19,16 @@ p
           | Partido
           p= f.select :party, Party.all.collect { |p| [p.symbol, p.id] }, {}, class: 'chosen-select'
         p.submit= f.submit "Enviar Dados", data: { :"disable-with" => "Enviando..." }
-
+    .unsuccessful.hidden
+      h3 Infelizmente, seu cadastro não consta em nossa base de dados.
+      p Entre em contato com o responsável do seu partido e solicite o envio dos seus dados para o Verdade ou Consequência.
+      span.party email@email.com
+    .match_mobile.hidden
+      h3 Muito bem! Em breve você receberá sua URL única por SMS.
+      p Caso não receba em até em 24 horas, por favor entre em contato conosco.
+    .match_email.hidden
+      h3 Sucesso! Sua URL única foi enviada ao seu e-mail cadastrado
+      p Caso não esteja em sua Caixa de Entrada, não esqueça de checar os SPAMs. Se encontrar qualquer problema, entre em contato conosco.
 
 
 .wrapper.parties
