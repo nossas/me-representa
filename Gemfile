@@ -64,3 +64,5 @@ end
 gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
+gem 'mailcatcher'
+gem 'googl'

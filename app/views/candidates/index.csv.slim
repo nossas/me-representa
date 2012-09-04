@@ -1,0 +1,2 @@
+- Candidate.where("mobile_phone IS NOT NULL").each do |c|
+  = "#{c.name.split(" ").first}, 21#{c.mobile_phone}, #{c.party.symbol}, #{c.name.split(" ").first} o #{c.party.symbol} nos forneceu seu contato para convidar você a participar de um questionário público. Responda em #{Googl.client('nicolas.iensen@gmail.com', ENV['GOOGL_PASSWORD']).shorten(new_candidate_answer_url(c, :token => c.token)).short_url}\n"

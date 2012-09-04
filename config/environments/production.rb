@@ -50,6 +50,7 @@ CariocaPergunta::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  default_url_options[:host] = "verdadeouconsequencia.org.br"
 
   # Enable threaded mode
   # config.threadsafe!

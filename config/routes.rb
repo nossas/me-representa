@@ -4,6 +4,7 @@ CariocaPergunta::Application.routes.draw do
 
   resources :candidates do
     resources :answers, except: [:destroy] 
+    put :finish
   end
 
   resources :questions do

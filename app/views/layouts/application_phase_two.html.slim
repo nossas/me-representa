@@ -13,10 +13,6 @@ html
     = yield :og
 
   body[class=controller.controller_name id=controller.action_name data-controller-class=controller.class.name data-controller-name=controller.controller_name.camelize data-action=controller.action_name.camelize]
-    - if notice
-      section.notice.hidden
-        .row
-          .message.icon-checkmark= notice
     - if alert
       section.alert.hidden
         .row
@@ -34,6 +30,7 @@ html
               .icon-triangle
                 ul.options
                   li= link_to "Exportar todos os usuários", users_path(:format => :csv), :class => "icon-file-excel" if can?(:export, User)
+                  li= link_to "Exportar candidatos", candidates_path(:format => :csv), :class => "icon-file-excel" if can?(:export, User)
                   li= link_to "Sair", session_path(current_user.id), :method => :delete, :class => "icon-exit", :title => "Sair"
             - else
               | Entre com a sua conta do #{link_to "Meu Rio", meurio_auth_path, class: 'mr'} ou do #{link_to "Facebook", facebook_auth_path, class: 'fb'}
@@ -43,6 +40,11 @@ html
           = yield :header
         - else
           = link_to image_tag("bg_header_phase_two.png"), root_path
+    - if notice
+      section.notice
+        .row
+          .message
+            span= alert || notice || ""
     section.content= yield
     footer
       .wrapper

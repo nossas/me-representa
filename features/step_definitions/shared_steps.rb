@@ -168,6 +168,8 @@ end
 Then /^I should be in "(.*?)"$/ do |arg1|
   if arg1 == "the homepage"
     current_path.should == root_path
+  elsif arg1 == "this candidate page"
+    current_path.should == candidate_path(@candidate)
   else
     raise "I don't know what '#{arg1}' means :("
   end
@@ -179,4 +181,12 @@ end
 
 Then /^I should be assigned to the group (\d+)$/ do |arg1|
   @candidate.reload.group_id.should be_== arg1.to_i
+end
+
+Given /^there is a candidate with email "(.*?)"$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, :email => arg1)
+end
+
+Then /^an email should be sent to "(.*?)"$/ do |arg1|
+  ActionMailer::Base.deliveries.select{|e| e.to.include? arg1}.should have(1).email
 end

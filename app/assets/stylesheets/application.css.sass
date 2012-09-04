@@ -23,12 +23,31 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
+.notice
+  +grid-container
+  .row
+    overflow: hidden
+
+.message
+  +grid(16)
 
 // Main layout style
 body
   font: normal 1em/28px "Open Sans", "Lucida Sans Unicode", "Lucida Sans" 
   color: darken(gray, 30%)
   background: image-url('bg.png')
+
+.notice
+  margin-bottom: 1em
+  .message
+    span
+      background: darken($green, 10%)
+      color: white
+      display: block
+      padding: .5em
+      line-height: normal
+      text-align: center
+      +border-radius(10px)
 
 section.header
   margin: 2em 0
@@ -178,23 +197,6 @@ input[disabled]
 
 .wrapper
   +grid-container
-
-.message
-  width: 68%
-  margin-left: 15%
-  margin-right: 15%
-  padding: 10px 20px
-  position: fixed
-  border: 1px solid #fff
-  border-top: none
-  color: white
-  opacity: .9
-  +border-radius(0 0 6px 6px)
-  +box-shadow(1px 1px 2px #333)
-.alert
-  background: red
-.notice
-  background: $green
 
 footer
   border-top: 3px dashed $green

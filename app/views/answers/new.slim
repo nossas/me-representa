@@ -38,6 +38,5 @@
       = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
 
     .send_answers
-      = form_for @candidate do |f|
-        = f.hidden_field :finished_at
+      = form_for @candidate, :url => candidate_finish_path(@candidate), :method => :put do |f|
         = f.submit "Salvar e Enviar questionário", class: 'btn'
