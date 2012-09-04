@@ -23,6 +23,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'taps'
   gem 'sqlite3'
+  gem 'mailcatcher'
 end
 
 

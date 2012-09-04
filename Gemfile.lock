@@ -89,6 +89,7 @@ GEM
     fssm (0.2.9)
     gherkin (2.11.2)
       json (>= 1.4.6)
+    haml (3.1.6)
     has_scope (0.5.1)
     hashie (1.2.0)
     heroku (2.31.1)
@@ -130,6 +131,16 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailcatcher (0.2.4)
+      eventmachine
+      haml
+      i18n
+      json
+      mail
+      sinatra
+      skinny (>= 0.1.2)
+      sqlite3-ruby
+      thin
     mime-types (1.19)
     multi_json (1.3.6)
     multipart-post (1.1.5)
@@ -212,6 +223,9 @@ GEM
       activemodel (~> 3.0)
     sinatra (1.0)
       rack (>= 1.0)
+    skinny (0.2.1)
+      eventmachine (~> 0.12)
+      thin (~> 1.2)
     slim (1.2.2)
       temple (~> 0.4.0)
       tilt (~> 1.3.3)
@@ -220,6 +234,8 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
+    sqlite3-ruby (1.3.3)
+      sqlite3 (>= 1.3.3)
     taps (0.3.24)
       rack (>= 1.0.1)
       rest-client (>= 1.4.0, < 1.7.0)
@@ -262,6 +278,7 @@ DEPENDENCIES
   jasmine
   jquery-rails
   kaminari
+  mailcatcher
   omniauth
   omniauth-facebook
   omniauth-oauth2
