@@ -176,3 +176,7 @@ end
 When /^I open the user menu$/ do
   page.execute_script('$(".options").show();')
 end
+
+Then /^I should be assigned to the group (\d+)$/ do |arg1|
+  @candidate.reload.group_id.should be_== arg1.to_i
+end

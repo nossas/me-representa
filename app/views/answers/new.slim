@@ -9,7 +9,19 @@
   .padd
     .title
       h1 Responda o questionário escolhido pelos cariocas
-      p.description= t 'phase2.description'
+      .description
+        - if @candidate.group_id == 1
+          p 
+            strong Senhor candidato, 
+          p Aqui está o questionário com as verdades e consequências escolhidas pelos cariocas. Leva só 5 minutos para responder. 
+          p O Meu Rio utilizará suas respostas para auxiliar eleitores no processo de escolha de seu candidato. 
+          p Agora vamos às perguntas! 
+        - else
+          p 
+            strong Senhor candidato, 
+          p Aqui está o questionário com as verdades e consequências escolhidas pelos cariocas. Leva só 5 minutos para responder. 
+          p O Meu Rio divulgará todas as suas respostas ao eleitorado carioca através das redes sociais e de nossos parceiros nos principais jornais e outros veículos de mídia da cidade. 
+          p Agora vamos às perguntas!
       = form_for @candidate, remote: true do |f|
         label 
           | Fale mais sobre seus planos, caso seja eleito
