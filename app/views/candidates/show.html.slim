@@ -16,4 +16,9 @@
       h2 O que eu respondi
       .box
         .questions
-          = render :partial => "questions/list_with_index", :locals => {:questions => Question.chosen}
+          .title
+            span.truths Verdades
+          = render :partial => "questions/list_with_index", :locals => {:questions => Question.chosen.truths}
+          .title
+            span.dares Consequências
+          = render :partial => "questions/list_with_index", :locals => {:questions => Question.chosen.dares}
