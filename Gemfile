@@ -34,6 +34,7 @@ end
 
 group :development do
   gem 'taps'
+  gem 'mailcatcher'
 end
 
 group :test do
@@ -64,5 +65,4 @@ end
 gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
-gem 'mailcatcher'
 gem 'googl'
