@@ -2,6 +2,11 @@
 class CandidateMailer < ActionMailer::Base
   default from: "equipe@verdadeouconsequencia.org.br"
 
+  def welcome candidate
+    @candidate = candidate
+    mail(:to => @candidate.email, :subject => "Bem vindo!")
+  end
+
   def finished candidate
     @candidate = candidate
     if @candidate.email
