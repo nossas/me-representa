@@ -13,8 +13,8 @@ p
           | Insira seu e-mail
           = f.email_field :email
         label 
-          | Insira seu telefone
-          = f.phone_field :mobile_phone
+          | Insira seu celular 
+          = f.phone_field :mobile_phone, placeholder: 'Ex.: 99999999, sem espaços, DDD ou "-"'
         label.omega 
           | Partido
           p= f.select :party, Party.all.collect { |p| [p.symbol, p.id] }, {}, class: 'chosen-select'

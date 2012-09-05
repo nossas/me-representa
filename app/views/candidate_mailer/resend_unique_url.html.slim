@@ -5,4 +5,27 @@ doctype
       style
         | body { font-family: Arial; font-size: 13px; }
     body
-      = t 'email.resend_unique_url.body_html', name: @candidate.name, link: new_candidate_answer_url(@candidate, token: @candidate.token, host: 'http://verdadeouconsequencia.org.br/') 
+      p 
+        | Olá #{@candidate.name},  
+      p
+        | Muito obrigado por entrar em contato conosco!
+      br
+      p
+        | Para acessar o questionário e poder responder as perguntas feitas pelos cidadãos, por favor clique no link abaixo: 
+      br 
+      = link_to new_candidate_url(@candidate, token: @candidate.token), new_candidate_answer_url(@candidate, token: @candidate.token)
+      p
+        | Se tiver ainda algum problema para acessar o questionário, por favor, entre em contato conosco pelo email 
+      = mail_to "bernardo@meurio.org.br"
+      br
+      p
+        | Usaremos esse email para enviar novidades sobre o <strong>Verdade ou Consequência</strong>. 
+      br
+      p
+        | Fique de olho nas redes sociais e acompanhe o Verdade ou Consequência em nosso <a href='http://facebook.com/meurio'>Facebook</a> e <a href='http://twitter.com/meu_rio'>Twitter</a>.
+      br
+      br
+      strong 
+        | Meu Rio
+      br
+      = link_to 'http://meurio.org.br/', 'meurio.org.br'
