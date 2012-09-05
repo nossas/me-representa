@@ -20,7 +20,7 @@
         .long_answer= simple_format @candidate.answers.find_by_question_id(question.id).try(:long_answer)
       - else
         = form_for [@candidate, (@candidate.answers.find_by_question_id(question.id) || Answer.new)], :remote => true, :html => {class: 'comment', "data-question" => question.text} do |form|
-          label.textarea.hidden
+          label.textarea
             | Adicionar comentário ›
           = form.text_area :long_answer, class: 'hidden'
           p
