@@ -231,6 +231,7 @@ GEM
     sinatra (1.0)
       rack (>= 1.0)
     skinny (0.2.0)
+    skinny (0.2.1)
       eventmachine (~> 0.12)
       thin (~> 1.2)
     slim (1.2.2)

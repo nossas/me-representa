@@ -17,6 +17,7 @@ end
 
 Given /^I'm logged in$/ do
   visit "/auth/facebook"
+  @current_user = User.find_by_email("nicolas@engage.is")
 end
 
 Given /^I'm logged in as admin$/ do
@@ -141,6 +142,10 @@ When /^I go to "(.*?)"$/ do |arg1|
     visit new_candidate_answer_path(@candidate, :token => @candidate.token)
   elsif arg1 == "this candidate answers page without token"
     visit new_candidate_answer_path(@candidate)
+  elsif arg1 == "the answers page"
+    visit user_answers_path(@current_user)
+  elsif arg1 == "this candidate page"
+    visit candidate_path(@candidate)
   else
     raise "I don't know #{arg1}"
   end
@@ -189,4 +194,8 @@ end
 
 Then /^an email should be sent to "(.*?)"$/ do |arg1|
   ActionMailer::Base.deliveries.select{|e| e.to.include? arg1}.should have(1).email
+end
+
+Given /^there is a candidate called "(.*?)"$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, :name => arg1)
 end

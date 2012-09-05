@@ -10,4 +10,9 @@ class CandidateMailer < ActionMailer::Base
       mail(:to => "equipe@verdadeouconsequencia.org.br", :subject => "Obrigado por responder o questionário do Verdade ou Consequencia")
     end
   end
+
+  def resend_unique_url(candidate)
+    @candidate = candidate
+    mail(to: candidate.email, subject: t('email.resend_unique_url.subject'))
+  end
 end
