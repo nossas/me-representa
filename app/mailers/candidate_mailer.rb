@@ -16,7 +16,7 @@ class CandidateMailer < ActionMailer::Base
 
   def resend_unique_url(candidate)
     @candidate = candidate
-    mail(to: candidate.email, subject: "Obrigado por participar do Verdade ou Consequência!")
+    mail(to: [candidate.email, MR], subject: "Obrigado por participar do Verdade ou Consequência!")
   end
 
   def notify_meurio(candidate)

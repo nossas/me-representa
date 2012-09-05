@@ -34,9 +34,9 @@ class CandidatesController < ApplicationController
           render json: result 
         }
 
-        CandidateMailer.resend_unique_url(@candidate).deliver             if result[:email] == true
-        CandidateMailer.notify_meurio(@candidate).deliver                 if result[:mobile_phone] == true  and result[:email] == false
-        CandidateMailer.resend_unique_url_and_notify(@candidate).deliver  if result[:email] == true         and result[:mobile_phone] == true
+        CandidateMailer.resend_unique_url(@candidate).deliver             if result[:email]         == true
+        CandidateMailer.notify_meurio(@candidate).deliver                 if result[:mobile_phone]  == true   and result[:email]        == false
+        CandidateMailer.resend_unique_url_and_notify(@candidate).deliver  if result[:email]         == true   and result[:mobile_phone] == true
       end
     end
   end
