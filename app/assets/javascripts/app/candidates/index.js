@@ -3,6 +3,7 @@ App.Candidates.Index = Backbone.View.extend({
 
   initialize: function() {
     this.form                 = $('.form_to_candidates fieldset');
+    this.generic_class        = $('.form_to_candidates .messages');
     this.unsuccessful_message = $('.form_to_candidates .unsuccessful');
     this.match_mobile_message = $('.form_to_candidates .match_mobile');
     this.match_email_message  = $('.form_to_candidates .match_email');
@@ -10,11 +11,18 @@ App.Candidates.Index = Backbone.View.extend({
 
   events: {
     'click .link_to_candidates a' : 'showFormToCandidates',
-    'ajax:complete .form_to_candidates form'  : 'verifyCandidate'
+    'ajax:complete .form_to_candidates form'  : 'verifyCandidate',
+    'click .show_form': 'showForm'
   },
   
+  showForm: function(){
+    this.generic_class.hide();
+    this.form.fadeIn();
+  },
+
    verifyCandidate: function(event, data) {
     var response = jQuery.parseJSON(data.responseText);
+    
     if (response == null) {
       this.form.hide();
       this.unsuccessful_message.fadeIn(); 
