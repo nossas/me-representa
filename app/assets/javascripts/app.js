@@ -1,11 +1,15 @@
 var App = window.App = {
   Questions: {},
+  Candidates: {},
+  Answers: {},
   Common: {
     init: function(){
       App.Common.login = new App.Common.Login({el: $('section.login')[0]});
       $('select.chosen-select').chosen();
       $('#about_politician').hide();
       $('a[href="#about_politician"]').facebox('some html');
+
+
     },
 
     finish: function(){

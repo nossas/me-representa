@@ -1,0 +1,23 @@
+doctype
+  html
+    head
+      meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
+      style
+        | body { font-family: Arial; font-size: 13px; }
+    body
+      p 
+        | Olá Equipe!  
+      br
+      p
+        | O candidato #{@candidate.name} quer receber sua URL única. Ele fez a requisição utilizando o número <strong>#{@candidate.mobile_phone}</strong>.
+      p
+        | A URL única do candidato é a seguinte: 
+        br 
+        = link_to new_candidate_url(@candidate, token: @candidate.token), new_candidate_answer_url(@candidate, token: @candidate.token)
+      br
+      br
+      strong 
+        | Meu Rio
+      br
+      = link_to 'http://meurio.org.br/', 'meurio.org.br'
+

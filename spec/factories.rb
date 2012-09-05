@@ -2,6 +2,7 @@ FactoryGirl.define do
   sequence(:name) { |s| "User #{s}" }
   sequence(:email) { |s| "user#{s}@email.com" }
   sequence(:uid) { |s| "#{s * 116}" }
+  sequence(:number) { |s| s * 116 }
 
   factory(:user) do |user|
     user.name FactoryGirl.generate(:name)
@@ -28,5 +29,25 @@ FactoryGirl.define do
   factory(:vote) do |v|
     v.association :question
     v.association :user
+  end
+
+  factory(:candidate) do |c|
+    c.name "Nicolas Iensen"
+    c.nickname "Tony"
+    c.number { generate(:number) }
+    c.bio "I'm good. You know it."
+    c.association :party
+    c.male true
+    c.born_at Date.new(1986, 3, 6)
+  end
+
+  factory(:party) do |p|
+    p.symbol { generate(:name) }
+    p.number 22
+    p.association :union
+  end
+
+  factory(:union) do |u|
+    u.name { generate(:name) }
   end
 end

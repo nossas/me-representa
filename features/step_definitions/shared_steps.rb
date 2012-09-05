@@ -1,3 +1,7 @@
+Given /^I'm in the home page$/ do
+  visit root_path
+end
+
 Given /^I'm on the questions page$/ do
   visit questions_path
 end
@@ -13,12 +17,14 @@ end
 
 Given /^I'm logged in$/ do
   visit "/auth/facebook"
+  @current_user = User.find_by_email("nicolas@engage.is")
 end
 
 Given /^I'm logged in as admin$/ do
   visit "/auth/facebook"
   user = User.find_by_email("nicolas@engage.is")
   user.update_attribute(:admin, true)
+  visit root_path
 end
 
 Given /^I fill in "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
@@ -31,6 +37,7 @@ Given /^I choose "([^"]*)" for "([^"]*)"$/ do |arg1, arg2|
     page.execute_script("$(\"select[name='question[category_id]']\").val(#{Category.find_or_create_by_name(arg1).id})")
   else
     select arg1, :from => arg2
+    sleep(1)
   end
 end
 
@@ -54,6 +61,7 @@ When /^I click "([^"]*)"$/ do |arg1|
 end
 
 When /^I press "([^"]*)"$/ do |arg1|
+  sleep(1)
   page.execute_script("$('.questions_list li').trigger('mouseover')") if arg1 == "Votar"
   click_on(arg1)
 end
@@ -121,4 +129,87 @@ end
 
 Then /^I should see "([^"]*)" above "([^"]*)"$/ do |arg1, arg2|
   page.html.should match(/#{arg1}(.)+#{arg2}/)
+end
+
+Given /^there is a chosen question saying "(.*?)"$/ do |arg1|
+  @question = FactoryGirl.create(:question, :text => arg1, :chosen => true)
+end
+
+When /^I go to "(.*?)"$/ do |arg1|
+  if arg1 == "the homepage"
+    visit root_path
+  elsif arg1 == "this candidate answers page as the candidate"
+    visit new_candidate_answer_path(@candidate, :token => @candidate.token)
+  elsif arg1 == "this candidate answers page without token"
+    visit new_candidate_answer_path(@candidate)
+  elsif arg1 == "the answers page"
+    visit user_answers_path(@current_user)
+  elsif arg1 == "this candidate page"
+    visit candidate_path(@candidate)
+  else
+    raise "I don't know #{arg1}"
+  end
+end
+
+Given /^there is a candidate$/ do
+  @candidate = FactoryGirl.create(:candidate)
+end
+
+Given /^I'm on "(.*?)"$/ do |arg1|
+  step "I go to \"#{arg1}\""
+end
+
+Given /^I choose "(.*?)" for the question "(.*?)"$/ do |arg1, arg2|
+  within(".questions form") do
+    choose(arg1)
+    sleep(2)
+  end
+end
+
+Then /^a new answer should be created to this candidate$/ do
+  @candidate.answers.should have(1).answer
+end
+
+Then /^I should be in "(.*?)"$/ do |arg1|
+  if arg1 == "the homepage"
+    current_path.should == root_path
+  elsif arg1 == "this candidate page"
+    current_path.should == candidate_path(@candidate)
+  else
+    raise "I don't know what '#{arg1}' means :("
+  end
+end
+
+When /^I open the user menu$/ do
+  page.execute_script('$(".options").show();')
+end
+
+Then /^I should be assigned to the group (\d+)$/ do |arg1|
+  @candidate.reload.group_id.should be_== arg1.to_i
+end
+
+Given /^there is a candidate with email "(.*?)"$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, :email => arg1)
+end
+
+Then /^an email should be sent to "(.*?)"$/ do |arg1|
+  ActionMailer::Base.deliveries.select{|e| e.to.include? arg1}.should have(1).email
+end
+
+Given /^there is a candidate called "(.*?)"$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, :name => arg1)
+end
+
+
+When /^I focus out of the field$/ do
+  page.execute_script('$("textarea").trigger("blur");')
+  sleep(2)
+end
+
+When /^I reload the page$/ do
+  visit page.driver.browser.current_url
+end
+
+Then /^the field "(.*?)" should have content "(.*?)"$/ do |arg1, arg2|
+  page.find('textarea').should have_content(arg2) 
 end

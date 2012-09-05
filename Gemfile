@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Last updated version of rails
-gem 'rails', '~> 3.2.6'
+gem 'rails', '~> 3.2.8'
 
 # Back-end stuff
 gem 'inherited_resources'
@@ -19,9 +19,11 @@ gem 'jasmine'
 gem 'pg'
 gem 'foreigner'
 
-
 group :test, :development do
   gem 'rspec-rails'
+  gem 'taps'
+  gem 'sqlite3'
+  gem 'mailcatcher'
 end
 
 
@@ -33,6 +35,7 @@ end
 
 group :development do
   gem 'taps'
+  gem 'mailcatcher'
 end
 
 group :test do
@@ -63,3 +66,4 @@ end
 gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
+gem 'googl'

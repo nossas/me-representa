@@ -1,4 +1,12 @@
 pt-BR:
+  site:
+    title: "Verdade ou Consequência? - Meu Rio"
+    description: "Lembra como era bom jogar Verdade ou Consequência? Agora, você pode jogar com os candidatos a vereador!"
+    keywords: "Candidatura, Vereador, Câmara, Rio de Janeiro, Meu Rio"
+    author: "MeuRio - contato@meurio.org"
+  user:
+    logged: 
+      message: "Olá %{user}"
   header:
     truth: "Verdade"
     dare: "Consequência"
@@ -29,7 +37,7 @@ pt-BR:
       dare:
         header: "Quero que se comprometa com algo"
         headline: "Relacionado a"
-        placeholder: "Sr(a). candidato(a), se você for eleito(a), você se comprometerá a..."
+        placeholder: "Você se comprometerá a..."
         tip: "PARA PEDIR QUE O CANDIDATO SE COMPROMETA COM UMA QUESTÃO IMPORTANTE PARA A CIDADE"
     list:
       truth:
@@ -44,3 +52,21 @@ pt-BR:
     my_share:
       truth: "Fiz uma pergunta sobre %{category} aos candidatos a vereador do Rio %{link}"
       dare: "Fiz uma demanda de %{category} aos candidatos a vereador do Rio %{link}"
+  phase2:
+    small: "As perguntas já foram feitas"
+    header: "Conheça os partidos que estão colaborando"
+    no_participation: "Os partidos sem cor ainda não estão participando. Vamos pressioná-los"
+    press_parties: "Pressionar partidos"
+    link_to_candidates: "Quer participar? Não recebeu seu questionário? Clique aqui para solicitar o reenvio!"
+    questionnaire:
+      header: "Agora conheça as perguntas que serão feitas aos candidatos"
+      form:
+        dare:
+          label: 
+            positive: "Me comprometo" 
+            negative: "Não me comprometo"
+        truth:
+          label:
+            positive: "Sim"
+            negative: "Não"
+  

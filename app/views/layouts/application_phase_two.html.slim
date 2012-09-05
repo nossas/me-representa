@@ -1,0 +1,66 @@
+doctype html
+html
+  head
+    title= t 'site.title'
+    = stylesheet_link_tag :application 
+    = favicon_link_tag "http://meurio.org.br/assets/favicon.png", :type => "image/png"
+    meta charset="utf-8"
+    meta name="description"               content=t('site.description')
+    meta name="keywords"                  content=t('site.keywords')
+    meta name="author"                    content=t('site.author')
+    meta name="google-site-verification"  content="i-eg0QQSi80L8LggmQ5T6qlBEL-8fbyk16pzKJOXkOI"
+    = csrf_meta_tag
+    = yield :og
+
+  body[class=controller.controller_name id=controller.action_name data-controller-class=controller.class.name data-controller-name=controller.controller_name.camelize data-action=controller.action_name.camelize]
+    - if alert
+      section.alert.hidden
+        .row
+          .message.icon-warning= alert
+    section.login
+      .row.wrapper
+        .meurio_and_user
+          .meurio
+            = link_to image_tag("meurio_logo.jpg"), "http://meurio.org.br/"
+            | apresenta:
+          .user
+            - if current_user
+              span= image_tag current_user.picture, class: "avatar" 
+              span= current_user.name
+              .icon-triangle
+                ul.options
+                  li= link_to "Exportar todos os usuários", users_path(:format => :csv), :class => "icon-file-excel" if can?(:export, User)
+                  li= link_to "Exportar candidatos", candidates_path(:format => :csv), :class => "icon-file-excel" if can?(:export, User)
+                  li= link_to "Sair", session_path(current_user.id), :method => :delete, :class => "icon-exit", :title => "Sair"
+            - else
+              | Entre com a sua conta do #{link_to "Meu Rio", meurio_auth_path, class: 'mr'} ou do #{link_to "Facebook", facebook_auth_path, class: 'fb'}
+    section.header
+      .wrapper
+        - if content_for? :header 
+          = yield :header
+        - else
+          = link_to image_tag("bg_header_phase_two.png"), root_path
+    - if notice
+      section.notice
+        .row
+          .message
+            span= alert || notice || ""
+    section.content= yield
+    footer
+      .wrapper
+        nav.links
+          = link_to "Quem somos", "http://meurio.org.br/paginas/sobre_nos"
+          span |
+          = mail_to "cadastro@verdadeouconsequencia.org.br", "Contate-nos"
+    #fb-root
+    = javascript_include_tag :application
+    javascript:
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=172049326247368";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));

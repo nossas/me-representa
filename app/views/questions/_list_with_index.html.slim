@@ -1,0 +1,27 @@
+- questions.each_with_index do |question, index|
+  .question
+    strong[class="#{question.role_type}_number"]= index + 1
+    | 
+    span[class=question.role_type]= t("questions.form.#{question.role_type}.placeholder")
+    |  
+    span.text= question.text
+    - if @candidate.present?
+      = form_for [@candidate, (@candidate.answers.find_by_question_id(question.id) || Answer.new)], :remote => true, :html => {"data-question" => question.text} do |form|
+        = hidden_field_tag :token, params[:token]
+        = form.hidden_field :question_id, :value => question.id
+        label
+          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.positive"), :disabled => params[:token].nil? ? "disabled" : nil
+          = t "phase2.questionnaire.form.#{question.role_type}.label.positive"
+        label
+          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.negative"), :disabled => params[:token].nil? ? "disabled" : nil
+          = t "phase2.questionnaire.form.#{question.role_type}.label.negative"
+
+      - if params[:token].nil?
+        .long_answer= simple_format @candidate.answers.find_by_question_id(question.id).try(:long_answer)
+      - else
+        = form_for [@candidate, (@candidate.answers.find_by_question_id(question.id) || Answer.new)], :remote => true, :html => {class: 'comment', "data-question" => question.text} do |form|
+          label.textarea
+            | Adicionar comentário ›
+          = form.text_area :long_answer, class: 'hidden'
+          p
+          = form.submit 'Salvar', data: { :"disable-with" => "Salvando..." }, class: 'hidden button'
