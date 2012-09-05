@@ -757,6 +757,27 @@ body.questions
         font-size: 18px
 
 body.candidates, body.answers
+  .unsuccessful, .match_mobile, .match_email
+    width: 80%
+    margin: .8em auto
+    text-align: center
+    p
+      margin: .4em
+      font-size: .9em
+      line-height: 1.2em
+    h3
+      font-family: "Londrina solid"
+      text-transform: uppercase
+      font-size: 1.8em
+  .unsuccessful
+    h3
+      color: red 
+  .match_email
+    h3
+      color: $blue
+  .match_mobile
+    h3
+      color: lighten($orange, 8%)
   &#index
     .questions
       background: white !important
