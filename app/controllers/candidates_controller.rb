@@ -1,7 +1,10 @@
 # coding: utf-8
 class CandidatesController < ApplicationController
-  inherit_resources
   layout "application_phase_two"
+  
+
+  inherit_resources
+  respond_to :csv
   load_and_authorize_resource
   skip_authorize_resource :only => :check  
 
