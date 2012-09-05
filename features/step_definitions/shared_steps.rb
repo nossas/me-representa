@@ -199,3 +199,17 @@ end
 Given /^there is a candidate called "(.*?)"$/ do |arg1|
   @candidate = FactoryGirl.create(:candidate, :name => arg1)
 end
+
+
+When /^I focus out of the field$/ do
+  page.execute_script('$("textarea").trigger("blur");')
+  sleep(2)
+end
+
+When /^I reload the page$/ do
+  visit page.driver.browser.current_url
+end
+
+Then /^the field "(.*?)" should have content "(.*?)"$/ do |arg1, arg2|
+  page.find('textarea').should have_content(arg2) 
+end

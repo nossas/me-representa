@@ -6,7 +6,7 @@ class Ability
     can :create, Question
     can :create, Vote
     can :finish, Candidate
-
+    can :update, Candidate
     if request.format == "csv"
       cannot :read, Candidate
     end
