@@ -42,6 +42,8 @@ p
 .wrapper.parties
   .padd
     h1= t 'phase2.header'
+    h2= t 'phase2.no_participation'
+
     ol.parties
       li.active= image_tag "parties/01.jpg", title: "DEM"       
       li.active= image_tag "parties/02.jpg", title: "PCB"
@@ -71,7 +73,8 @@ p
       li.active.inactive= image_tag "parties/26.jpg", title: "PTC"
       li.active.inactive= image_tag "parties/28.jpg", title: "PTN"
       li.active= image_tag "parties/29.jpg", title: "PV"
-    h2= t 'phase2.no_participation'
+
+    h2 Clique para pressionar os partidos a enviarem seus contatos
     .panela= link_to "Pressionar partidos", "http://paneladepressao.org.br/campaigns/91", target: "_blank", :class => "btn"
     .share
       a href="https://twitter.com/share" class="twitter-share-button" data-url="http://verdadeouconsequencia.org.br/" data-lang="pt" Tweetar

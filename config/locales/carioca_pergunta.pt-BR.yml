@@ -55,7 +55,7 @@ pt-BR:
   phase2:
     small: "As perguntas já foram feitas"
     header: "Conheça os partidos que estão colaborando"
-    no_participation: "Os partidos sem cor ainda não estão participando. Vamos pressioná-los"
+    no_participation: "Os partidos sem cor ainda não forneceram os contatos de seus candidatos"
     press_parties: "Pressionar partidos"
     link_to_candidates: "Quer participar? Não recebeu seu questionário? Clique aqui para solicitar o reenvio!"
     questionnaire:
