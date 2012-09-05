@@ -23,6 +23,15 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
+
+.show_form
+  font-family: "Londrina solid"
+  font-size: 1.4em
+  text-transform: uppercase
+  letter-spacing: 1px
+  text-decoration: underline
+  &:hover
+    color: $orange
 .notice
   +grid-container
   .row
@@ -1027,7 +1036,6 @@ body.candidates, body.answers
         text-transform: capitalize
         font-size: .6em
         margin-top: 1em
-        display: none
       &:hover 
         cursor: pointer
         font-weight: bold

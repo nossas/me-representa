@@ -7,12 +7,11 @@ doctype
     body
       p 
         | Olá Equipe!  
-      br
       p
         | O candidato #{@candidate.name} quer receber sua URL única. Ele fez a requisição utilizando o número <strong>#{@candidate.mobile_phone}</strong>.
       p
         | A URL única do candidato é a seguinte: 
-        br 
+      p
         = link_to new_candidate_url(@candidate, token: @candidate.token), new_candidate_answer_url(@candidate, token: @candidate.token)
       br
       br
