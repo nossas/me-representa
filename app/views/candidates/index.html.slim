@@ -19,23 +19,25 @@ p
           | Partido
           p= f.select :party, Party.all.collect { |p| [p.symbol, p.id] }, {}, class: 'chosen-select'
         p.submit= f.submit "Enviar Dados", data: { :"disable-with" => "Enviando..." }
-    .unsuccessful.hidden
+    .unsuccessful.hidden.messages
       h3 Infelizmente, seu cadastro não consta em nossa base de dados.
       p.description
         | Isso acontece porque o seu partido não quis fornecer seus dados ou enviou dados desatualizados. 
         | Entre em contato com o seu partido e solicite que ele nos envie o seu email 
         | e celular para #{mail_to "cadastro@verdadeouconsequencia.org.br"}
-    .match_mobile.hidden
+      = link_to "Tentar novamente com outro email/celular", "#/", class: 'show_form'
+    .match_mobile.hidden.messages
       h3 Muito bem! Em breve você receberá sua URL única por SMS.
       p.description
         | Um SMS com um link para você responder o questionário será enviado para o número de celular cadastrado em até 24 horas.
         | Caso você não receba essa mensagem, entre em contato com #{mail_to "leonardo@meurio.org.br"}
-    .match_email.hidden
+    .match_email.hidden.messages
       h3 Sucesso! Sua URL única foi enviada ao seu e-mail cadastrado
       p.description
         | Um email com um link para você responder o questionário foi enviado para o endereço de email cadastrado. 
         | Caso você não encontre esse email na sua caixa de entrada, procure na caixa de spam ou na sua lixeira. 
         | Se tiver algum problema para acessar o questionário, entre em contato com #{mail_to "bernardo@meurio.org.br"}
+
 
 .wrapper.parties
   .padd
