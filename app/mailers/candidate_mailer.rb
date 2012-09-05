@@ -28,8 +28,4 @@ class CandidateMailer < ActionMailer::Base
     mail(to: MR, subject: "[VOC] Um candidato acabou de requisitar sua URL única")
   end
 
-  def resend_unique_url_and_notify(candidate)
-    self.resend_unique_url(candidate)
-    self.notify_meurio(candidate)
-  end
 end

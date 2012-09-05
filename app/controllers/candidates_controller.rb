@@ -35,8 +35,12 @@ class CandidatesController < ApplicationController
         }
 
         CandidateMailer.resend_unique_url(@candidate).deliver             if result[:email]         == true
-        CandidateMailer.notify_meurio(@candidate).deliver                 if result[:mobile_phone]  == true   and result[:email]        == false
-        CandidateMailer.resend_unique_url_and_notify(@candidate).deliver  if result[:email]         == true   and result[:mobile_phone] == true
+        CandidateMailer.notify_meurio(@candidate).deliver                 if result[:mobile_phone]  == true and result[:email] == false
+        
+        if result[:email] == true and result[:mobile_phone] == true
+          CandidateMailer.resend_unique_url(@candidate).deliver
+          CandidateMailer.notify_meurio(@candidate).deliver
+        end
       end
     end
   end
