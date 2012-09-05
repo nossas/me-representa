@@ -50,7 +50,7 @@ CariocaPergunta::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  default_url_options[:host] = "http://vouc-staging.herokuapp.com"
+  default_url_options[:host] = "vouc-staging.herokuapp.com"
 
   # Enable threaded mode
   # config.threadsafe!
