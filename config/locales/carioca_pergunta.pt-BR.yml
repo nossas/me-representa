@@ -57,7 +57,7 @@ pt-BR:
     header: "Conheça os partidos que estão colaborando"
     no_participation: "Os partidos sem cor ainda não forneceram os contatos de seus candidatos"
     press_parties: "Pressionar partidos"
-    link_to_candidates: "Quer participar? Não recebeu seu questionário? Clique aqui para solicitar o reenvio!"
+    link_to_candidates: "É candidato a vereador do Rio e ainda não recebeu o questionário? Clique aqui para solicitar o reenvio!"
     questionnaire:
       header: "Agora conheça as perguntas que serão feitas aos candidatos"
       form:
