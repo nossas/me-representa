@@ -1,10 +1,25 @@
+= content_for :header do
+  .logo= link_to image_tag("bg_header_phase_two_cutted.png"), root_path
+  .discover_your_candidate
+    = link_to "Descubra agora seu candidato ideal!"
+  .make_the_test
+    = link_to "Faça o teste", ""
+
 .wrapper
   .candidate_info
+    .link_to_back= link_to "Voltar à página inicial", root_path
     .box
       h1= @candidate.name
-      .party Partido: #{content_tag :span, @candidate.party.symbol}
-      .age Idade: #{content_tag :span , distance_of_time_in_words(Date.today, @candidate.born_at)}
-      .male Sexo: #{content_tag :span, @candidate.male? ? "Masculino" : "Feminino"} 
+      table
+        tr.party
+          td Partido
+          td= @candidate.party.symbol
+        tr.age
+          td Idade
+          td= distance_of_time_in_words(Date.today, @candidate.born_at) if @candidate.born_at
+        tr.sex 
+          td Sexo
+          td= @candidate.male? ? "Masculino" : "Feminino"
 
   .candidate_bio
     .box
@@ -19,6 +34,7 @@
           .title
             span.truths Verdades
           = render :partial => "questions/list_with_index", :locals => {:questions => Question.chosen.truths}
+        .questions
           .title
             span.dares Consequências
           = render :partial => "questions/list_with_index", :locals => {:questions => Question.chosen.dares}

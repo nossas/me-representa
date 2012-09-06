@@ -41,10 +41,21 @@ $grid-half: $grid-system * 0.5
   +grid(16)
 
 .candidate_bio
-  +grid(10)
+  +grid(11)
 
+section.header
+  +clearfix
+
+.logo 
+  +grid(5)
+  +alpha
 .candidate_info
-  +grid(6)
+  +grid(5)
+.discover_your_candidate
+  +grid(7)
+.make_the_test
+  +grid(4)
+  +omega
 
 // Main layout style
 body
@@ -1074,9 +1085,6 @@ body.answers
       margin: 1em 0 .4em 0 !important
       .wrapper
         +clearfix
-      .logo 
-        +grid(4)
-        +alpha
       .candidate
         +grid(12)
         +omega
@@ -1110,7 +1118,34 @@ body.answers
         letter-spacing: 1px
 
 body.candidates#show
-  line-height: normal
+  .discover_your_candidate, .make_the_test
+    padding: 1em 0
+    text-align: center
+  .link_to_back, .discover_your_candidate, .make_the_test
+    background: lighten($blue, 8%)
+    font-family: "Londrina solid"
+    +text-shadow(1px 1px 1px #333)
+    +border-radius(6px)
+    +box-shadow(0 1px 1px #999)
+    a
+      color: white
+      text-transform: uppercase
+      font-family: "Londrina solid"
+      font-size: 1.4em
+      letter-spacing: 1px
+      padding: .6em
+  .make_the_test
+    background: lighten($orange, 5%)
+  .link_to_back
+    background: $orange
+    text-align: center
+    margin-bottom: .8em
+    &:hover
+      background: $pink
+    a
+      &::before
+        content: "‹ " 
+
   .candidate_bio, .candidate_info
     font-size: .8em
     span
@@ -1118,12 +1153,13 @@ body.candidates#show
   .box
     background: white
     padding: 1.5em
-    +border-radius(10px)
+    +border-radius(6px)
     h1
       font-size: 2em
       text-align: left
       margin-bottom: .5em
       line-height: normal
+      +text-shadow(none)
     h2
       color: gray
       border: none
