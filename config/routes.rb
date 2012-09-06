@@ -23,5 +23,5 @@ CariocaPergunta::Application.routes.draw do
   get 'auth/meurio',      as: :meurio_auth
   get 'auth/facebook',    as: :facebook_auth
 
-  root :to => "candidates#index"
+  root :to => "questions#index"
 end
