@@ -61,7 +61,7 @@ App.Answers.New = Backbone.View.extend({
   },
 
   events: {
-    'ajax:complete form' : 'showSuccessfulMessage',
+    'ajax:success form' : 'showSuccessfulMessage',
     'change form input' : 'submitAnswer',
     'click label.textarea' : 'showTextarea',
     'ajax:complete form.comment' : 'hideCommentBox',
@@ -81,9 +81,10 @@ App.Answers.New = Backbone.View.extend({
     object.children('input').slideUp('fast');
   },
 
-  showSuccessfulMessage: function(event){
-    var object =  $(event.target);
-    object.parents('.question').addClass('success');
+  showSuccessfulMessage: function(xhr, data, status){
+    var question = $(xhr.target).parent();
+    question.html($(data).html());
+    question.addClass('success');
   },
 
   submitAnswer: function(event) {
