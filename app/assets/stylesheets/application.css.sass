@@ -56,6 +56,9 @@ section.header
 .make_the_test
   +grid(4)
   +omega
+.big_discover
+  +grid(12)
+  +alpha
 
 // Main layout style
 body
@@ -1208,7 +1211,7 @@ body.candidates#show
       color: gray
       font-style: italic
   .candidate_answers
-    margin-top: 1.5em
+    margin: 1.5em 0
     .box
       background: $blue
       .box
@@ -1242,3 +1245,32 @@ body.candidates#show
       background: $green
     span.dares
       background: $orange
+  .big_discover
+    background: white
+    padding: .4em 0
+    font-size: .8em !important
+    font-family: "Open Sans"
+    font-weight: 100 
+    text-shadow: none
+    text-align: left
+    h3
+      a 
+        padding: 0 !important
+    img
+      margin-right: 20px
+
+    a
+      color: $blue
+    span
+      a
+        font-family: "Open Sans" !important
+        font-size: .8em !important
+        color: $orange
+        text-decoration: underline
+        text-transform: none 
+        letter-spacing: 0px
+  .bottom
+    .make_the_test
+      padding: 2.3em 0
+      span
+        display: block

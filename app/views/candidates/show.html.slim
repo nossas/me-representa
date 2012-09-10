@@ -46,3 +46,13 @@
           .title
             span.dares Consequências
           = render :partial => "questions/list_with_index", :locals => {:questions => Question.chosen.dares}
+  .bottom
+    .discover_your_candidate.big_discover
+      = image_tag "bg_big_discover_your_candidate.gif"
+      h3= link_to "Descubra agora seu candidato ideal!"
+      span 
+        | Responda o questionário, compare os resultados e descubra quais são os candidatos 
+        | que combinam mais com você e com o que você deseja para o Rio.
+        = link_to "Veja como funciona"
+    .make_the_test
+      = link_to "Faça o teste", ""
