@@ -14,7 +14,7 @@ class CandidateMailer < ActionMailer::Base
     if @candidate.email
       mail(:to => [@candidate.email, MR], :subject => "Obrigado por responder o questionário do Verdade ou Consequencia")
     else
-      mail(:to => "", :subject => "Obrigado por responder o questionário do Verdade ou Consequencia")
+      mail(:to => MR, :subject => "Obrigado por responder o questionário do Verdade ou Consequencia")
     end
   end
 

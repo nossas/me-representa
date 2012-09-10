@@ -10,4 +10,12 @@ class AnswersController < ApplicationController
   def show
     show! { return render layout: false }
   end
+
+  def create
+    create! { return render :file => "answers/show", layout: false }
+  end
+  
+  def update
+    update! { return render :file => "answers/show", layout: false }
+  end
 end
