@@ -1,18 +1,31 @@
-p Prezado(a) candidato(a),
+p Olá #{@candidate.name.split(" ").first},
 
 p Que tal aumentar as suas chances de ser eleito? Gostou da ideia? Então presta atenção:
 
 p Nós do Meu Rio sabemos que a vida não é fácil para quem quer uma vaga na Câmara dos Vereadores. 
 
-p O espaço na televisão é muito curto, não deixando tempo suficiente para que o candidato apresente as suas visões e propostas. Além disso, percorrer toda a cidade para a tradicional campanha corpo a corpo, é uma tarefa impossível. 
+p 
+  strong O espaço na televisão é muito curto, não deixando tempo suficiente para que o candidato apresente as suas visões e propostas. 
+  | Além disso, percorrer toda a cidade para a tradicional campanha corpo a corpo, é uma tarefa impossível. 
 
-p Por essas e outras é que o Meu Rio -uma organização apartidária focada em aproximar o carioca da política através de novas tecnologias- criou a ferramenta #{link_to "Verdade ou Consequência", new_candidate_answer_url(@candidate, :token => @candidate.token)}.
+p 
+  strong Por essas e outras é que o Meu Rio - uma organização apartidária focada em aproximar o carioca da política através de novas tecnologias - criou a ferramenta #{link_to "Verdade ou Consequência", new_candidate_answer_url(@candidate, :token => @candidate.token)}.
 
-p Nessa ferramenta o eleitor pergunta verdades (perguntas objetivas) e pede consequências (compromissos) acerca de temas importantes para a cidade. Os eleitores votam nas questões mais relevantes e o candidato responde às mais votadas. Numa próxima fase, os próprios eleitores responderão ao questionário e o Verdade ou Consequência indica qual o candidato que se aproxima mais das respostas deles.
+p 
+  | Nessa ferramenta o eleitor pergunta verdades (perguntas objetivas) e pede consequências (compromissos) acerca de temas importantes para a cidade. Os eleitores votam nas questões mais relevantes e o candidato responde às mais votadas. Numa próxima fase, os próprios eleitores responderão ao questionário e 
+  strong o Verdade ou Consequência indica qual o candidato que se aproxima mais das respostas deles.
 
-p O Meu Rio não traz a pessoa amada em três dias mas a nossa rede, que hoje já supera os 30000 membros, pode trazer votos e divulgação para a sua campanha. Isso sem falar da oportunidade de dialogar com um público que não assiste ao horário eleitoral e que cada vez menos se convence com propagandas tradicionais.
+p 
+  | O Meu Rio não traz a pessoa amada em três dias mas a nossa rede, que hoje já supera os 
+  strong 30000 membros
+  | , pode 
+  strong trazer votos e divulgação para a sua campanha. 
+  | Isso sem falar da oportunidade de dialogar com um público que não assiste ao horário eleitoral e que cada vez menos se convence com propagandas tradicionais.
 
-p Respondendo às nossas 29 perguntas você vai ajudar os eleitores a tomar melhores decisões e vai também aumentar em muito a sua chance de ser eleito. O questionário possui apenas perguntas de multipla escolha que não tomarão muito do seu tempo, além de um espaço onde o candidato poderá se apresentar livremente.
+p 
+  | Respondendo às nossas 29 perguntas você vai ajudar os eleitores a tomar melhores decisões e vai também aumentar em muito a sua chance de ser eleito. 
+  strong O questionário possui apenas perguntas de multipla escolha que não tomarão muito do seu tempo, além de um espaço onde o candidato poderá se apresentar livremente.
+
 
 p Para participar, acesse #{link_to "este link", new_candidate_answer_url(@candidate, :token => @candidate.token)} e cadastre-se.
 
