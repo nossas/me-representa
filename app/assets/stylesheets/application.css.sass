@@ -15,7 +15,7 @@ $gray: #333
 $header: #2BB1E3
 $fb_blue: #3B5998
 $mr_green: #059146
-
+$new_blue: #28b4e5
 $grid-system: 16
 $ninesixty-columns: $grid-system
 $grid-half: $grid-system * 0.5
@@ -1118,9 +1118,13 @@ body.answers
         letter-spacing: 1px
 
 body.candidates#show
+
   .discover_your_candidate, .make_the_test
-    padding: 1em 0
+    padding: .4em  0 0 0
     text-align: center
+    +transition(.2s)
+  .make_the_test
+    padding: 1.3em 0
   .link_to_back, .discover_your_candidate, .make_the_test
     background: lighten($blue, 8%)
     font-family: "Londrina solid"
@@ -1134,8 +1138,24 @@ body.candidates#show
       font-size: 1.4em
       letter-spacing: 1px
       padding: .6em
+  .discover_your_candidate
+    background: darken($new_blue, 1%)
+    a
+      &:hover
+        opacity: .9
+
+      
+    img
+      float: left
+      margin-right: -20px
   .make_the_test
     background: lighten($orange, 5%)
+    &:hover
+      background: $pink 
+    a
+      font-size: 1.8em
+      &::after
+        content: " ›" 
   .link_to_back
     background: $orange
     text-align: center
@@ -1145,7 +1165,23 @@ body.candidates#show
     a
       &::before
         content: "‹ " 
-
+  .candidate_info
+    table
+      width: 100%
+    tr
+      td
+        &:first-child
+          width: 40% 
+        &:last-child
+          color: $blue
+    td
+      border-left: 1px dashed lighten(gray, 45%)
+      border-bottom: 1px dashed lighten(gray, 45%)
+      padding-left: .5em
+  .candidate_bio
+    .box
+      height: 230px 
+      overflow: auto
   .candidate_bio, .candidate_info
     font-size: .8em
     span

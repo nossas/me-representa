@@ -1,25 +1,33 @@
 = content_for :header do
   .logo= link_to image_tag("bg_header_phase_two_cutted.png"), root_path
   .discover_your_candidate
+    = image_tag "bg_discover_your_candidate.gif"
     = link_to "Descubra agora seu candidato ideal!"
   .make_the_test
     = link_to "Faça o teste", ""
 
 .wrapper
   .candidate_info
-    .link_to_back= link_to "Voltar à página inicial", root_path
+    .link_to_back= link_to "Voltar aos candidatos", root_path
     .box
       h1= @candidate.name
       table
         tr.party
-          td Partido
+          td Partido:
           td= @candidate.party.symbol
         tr.age
-          td Idade
+          td Idade:
           td= distance_of_time_in_words(Date.today, @candidate.born_at) if @candidate.born_at
         tr.sex 
-          td Sexo
+          td Sexo:
           td= @candidate.male? ? "Masculino" : "Feminino"
+        tr.reelection 
+          td Reeleição:
+          td= @candidate.politician? ? "Sim" : "Não"
+        tr.scholarity
+          td Escolaridade:
+          td= @candidate.scholarity
+
 
   .candidate_bio
     .box
