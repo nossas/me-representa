@@ -5,7 +5,7 @@ class CandidateMailer < ActionMailer::Base
 
   def welcome candidate
     @candidate = candidate
-    mail(:to => @candidate.email, :subject => "Bem vindo!")
+    mail(:to => @candidate.email, :subject => "O novo jeito de conseguir mais votos.")
   end
 
 
