@@ -1015,9 +1015,9 @@ body.candidates, body.answers
     padding: .4em
     border-top: 2px dashed lighten(gray, 20%) !important
     width: 42%
-    min-height: 130px
+    min-height: 200px
     float: left
-    margin: 0 1em 1em 2em
+    margin: .2em 1em 1.5em 2em
     background: lighten(blue, 48%)
     +border-radius(6px)
     &:hover 
@@ -1070,6 +1070,11 @@ body.candidates, body.answers
 
 body.answers
   &#new
+    .questions
+      .headline
+        text-align: center
+        color: lighten(gray, 15%)
+        font-size: .9em
     .header
       margin: 1em 0 .4em 0 !important
       .wrapper

@@ -30,10 +30,17 @@
           |&nbsp;
     .questions
       h3 Agora vamos às verdades
+      p.headline 
+        em
+          | (São perguntas objetivas de cunho político-ideológico)
+
       .truths_title
       = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
     .questions
       h3 Agora vamos às consequências 
+      p.headline
+        em
+          | (Compromissos públicos assumidos pelo(a) candidato(a) caso seja eleito(a))
       .dares_title
       = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
 
