@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :questions
   has_many :authorizations
-  has_many :answers
+  has_many :answers, :as => :responder
 
   validates_presence_of :email, :name
 

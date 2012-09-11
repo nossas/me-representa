@@ -1,11 +1,11 @@
 # coding: utf-8
 class CandidateMailer < ActionMailer::Base
-  default from: "equipe@verdadeouconsequencia.org.br"
+  default from: "Bernardo Castro - Meu Rio <bernardo@verdadeouconsequencia.org.br>"
   MR = "equipe@verdadeouconsequencia.org.br"
 
   def welcome candidate
     @candidate = candidate
-    mail(:to => @candidate.email, :subject => "Bem vindo!")
+    mail(:to => @candidate.email, :subject => "O novo jeito de conseguir mais votos.")
   end
 
 
