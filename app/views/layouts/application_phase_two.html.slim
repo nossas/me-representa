@@ -10,7 +10,12 @@ html
     meta name="author"                    content=t('site.author')
     meta name="google-site-verification"  content="i-eg0QQSi80L8LggmQ5T6qlBEL-8fbyk16pzKJOXkOI"
     = csrf_meta_tag
-    = yield :og
+    - if content_for? :og
+      = yield :og
+    - else
+      meta property="og:title" content="Verdade ou Consequência"
+      meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
+      meta property="og:description" content=t('site.description')
 
   body[class=controller.controller_name id=controller.action_name data-controller-class=controller.class.name data-controller-name=controller.controller_name.camelize data-action=controller.action_name.camelize]
     - if alert
