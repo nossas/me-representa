@@ -32,7 +32,7 @@ FactoryGirl.define do
   end
 
   factory(:candidate) do |c|
-    c.name "Nicolas Iensen"
+    c.name { generate(:name) }
     c.nickname "Tony"
     c.number { generate(:number) }
     c.bio "I'm good. You know it."
@@ -49,5 +49,17 @@ FactoryGirl.define do
 
   factory(:union) do |u|
     u.name { generate(:name) }
+  end
+  
+  factory(:candidate_answer, :class => Answer) do |a|
+    a.association :responder, :factory => :candidate
+    a.association :question
+    a.short_answer "Sim"
+  end
+  
+  factory(:user_answer, :class => Answer) do |a|
+    a.association :responder, :factory => :user
+    a.association :question
+    a.short_answer "Sim"
   end
 end
