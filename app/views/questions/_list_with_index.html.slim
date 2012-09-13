@@ -1,7 +1,5 @@
-- questions.each_with_index do |question, index|
+- questions.each do |question|
   .question
-    /strong[class="#{question.role_type}_number"]= index + 1
-    /| 
     span[class=question.role_type]= t("questions.form.#{question.role_type}.placeholder")
     |  
     span.text= question.text
@@ -26,3 +24,13 @@
           = form.text_area :long_answer, class: 'hidden'
           p
           = form.submit 'Salvar', data: { :"disable-with" => "Salvando..." }, class: 'hidden button'
+
+    - elsif current_user && @user == current_user
+      = form_for [current_user, (current_user.answers.find_by_question_id(question.id) || Answer.new)], :remote => true do |form|
+        = form.hidden_field :question_id, :value => question.id
+        label
+          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.positive")
+          = t "phase2.questionnaire.form.#{question.role_type}.label.positive"
+        label
+          = form.radio_button :short_answer, t("phase2.questionnaire.form.#{question.role_type}.label.negative")
+          = t "phase2.questionnaire.form.#{question.role_type}.label.negative"

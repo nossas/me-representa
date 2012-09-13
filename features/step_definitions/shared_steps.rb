@@ -160,7 +160,7 @@ Given /^I'm on "(.*?)"$/ do |arg1|
 end
 
 Given /^I choose "(.*?)" for the question "(.*?)"$/ do |arg1, arg2|
-  within(".questions form") do
+  within(".question form") do
     choose(arg1)
     sleep(2)
   end
@@ -212,4 +212,8 @@ end
 
 Then /^the field "(.*?)" should have content "(.*?)"$/ do |arg1, arg2|
   page.find('textarea').should have_content(arg2) 
+end
+
+Then /^a new answer should be created to me$/ do
+  @current_user.answers.should_not be_empty
 end

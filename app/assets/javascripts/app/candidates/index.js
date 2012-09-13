@@ -62,7 +62,6 @@ App.Answers.New = Backbone.View.extend({
 
   events: {
     'ajax:success form' : 'showSuccessfulMessage',
-    'change form input' : 'submitAnswer',
     'click label.textarea' : 'showTextarea',
     'ajax:complete form.comment' : 'hideCommentBox',
     'blur textarea': 'submitTextareaForms',
@@ -85,12 +84,6 @@ App.Answers.New = Backbone.View.extend({
     var question = $(xhr.target).parent();
     question.html($(data).html());
     question.addClass('success');
-  },
-
-  submitAnswer: function(event) {
-    var object = $(event.target);
-    object.closest("form").submit();
-    object.parents('form').siblings('form').children('label.textarea').fadeIn('fast');
   },
 
   showTextarea: function(event) {
