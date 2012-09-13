@@ -49,6 +49,4 @@ App.Candidates.Index = Backbone.View.extend({
     $('.form_to_candidates').slideToggle();
 
   }
-
-
 });

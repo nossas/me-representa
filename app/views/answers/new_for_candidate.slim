@@ -1,0 +1,49 @@
+.wrapper.questionnaire
+  = content_for :header do
+    .logo= link_to image_tag("bg_header_phase_two_cutted.png"), root_path
+    .candidate
+      span
+        | Bem-vindo
+      .name= @candidate.name
+      .symbol= @candidate.party.symbol
+  .padd
+    .title
+      h1 Responda o questionário escolhido pelos cariocas
+      .description
+        - if @candidate.group_id == 1
+          p 
+            strong Senhor candidato, 
+          p Aqui está o questionário com as verdades e consequências escolhidas pelos cariocas. Leva só 5 minutos para responder. 
+          p O Meu Rio utilizará suas respostas para auxiliar eleitores no processo de escolha de seu candidato. 
+          p Agora vamos às perguntas! 
+        - else
+          p 
+            strong Senhor candidato, 
+          p Aqui está o questionário com as verdades e consequências escolhidas pelos cariocas. Leva só 5 minutos para responder. 
+          p O Meu Rio divulgará todas as suas respostas ao eleitorado carioca através das redes sociais e de nossos parceiros nos principais jornais e outros veículos de mídia da cidade. 
+          p Agora vamos às perguntas!
+      = form_for @candidate, remote: true do |f|
+        label 
+          | Fale mais sobre seus planos, caso seja eleito
+          = f.text_area :bio, placeholder: "Escreva sobre seus planos, carreira etc."
+        p
+          |&nbsp;
+    .questions
+      h3 Agora vamos às verdades
+      p.headline 
+        em
+          | (São perguntas objetivas de cunho político-ideológico)
+
+      .truths_title
+      = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
+    .questions
+      h3 Agora vamos às consequências 
+      p.headline
+        em
+          | (Compromissos públicos assumidos pelo(a) candidato(a) caso seja eleito(a))
+      .dares_title
+      = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
+
+    .send_answers
+      = form_for @candidate, :url => candidate_finish_path(@candidate), :method => :put do |f|
+        = f.submit "Salvar e Enviar questionário", class: 'btn'

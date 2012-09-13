@@ -14,7 +14,7 @@ CariocaPergunta::Application.routes.draw do
   end
 
   resources :users, only: [:index, :new, :create] do
-    resources :answers, :only => [:index, :create, :update]
+    resources :answers, :only => [:new, :create, :update]
   end
 
   resources :subscribers
