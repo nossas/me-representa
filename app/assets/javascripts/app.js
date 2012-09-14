@@ -9,11 +9,6 @@ var App = window.App = {
       $('select.chosen-select').chosen();
       $('#about_politician').hide();
       $('a[href="#about_politician"]').facebox('some html');
-      $("form.new_answer input[type=radio]").change(function(event){
-        var object = $(event.target);
-        object.closest("form").submit();
-        object.parents('form').siblings('form').children('label.textarea').fadeIn('fast');
-      });
     },
 
     finish: function(){

@@ -1,0 +1,5 @@
+.wrapper.questionnaire
+  .padd
+    .questions
+      = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
+      = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
