@@ -6,7 +6,7 @@ App.Answers.New = Backbone.View.extend({
   },
 
   events: {
-    'ajax:success form' : 'showSuccessfulMessage',
+    '.questions ajax:success form' : 'showSuccessfulMessage',
     'change form input' : 'submitAnswer',
     'click label.textarea' : 'showTextarea',
     'ajax:complete form.comment' : 'hideCommentBox',
