@@ -12,7 +12,13 @@ App.Candidates.Index = Backbone.View.extend({
   events: {
     'click .link_to_candidates a' : 'showFormToCandidates',
     'ajax:complete .form_to_candidates form'  : 'verifyCandidate',
-    'click .show_form': 'showForm'
+    'click .show_form': 'showForm',
+    'click .infographic' : 'showInfographic'
+  },
+
+
+  showInfographic: function(){
+    jQuery('div.infographic').slideToggle();
   },
   
   showForm: function(){
