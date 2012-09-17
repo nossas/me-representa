@@ -1,0 +1,22 @@
+p Prezado(a) #{@candidate.name},
+
+p 
+  | Você ainda não respondeu ao questionário do site Verdade ou Consequência. 
+  strong Gostaríamos de lembrar que essa é uma ótima oportunidade para você ganhar votos, apenas respondendo a perguntas de acordo com seus ideais. 
+  | Não tem erro: seja você mesmo, responda às perguntas e conquiste eleitores!
+
+p 
+  | Depois de você, será a vez dos eleitores responderem ao questionário. 
+  strong No final, o Verdade ou Consequência indicará o candidato que mais combina com cada eleitor.
+
+p 
+  strong Além disso, os cariocas que gostarem das suas respostas receberão um SMS com o seu nome e número de urna no dia das eleições!
+
+p
+  strong Não perca essa oportunidade de dar um gás na sua campanha!
+
+p #{link_to "Clique aqui", new_candidate_answer_url(@candidate, :token => @candidate.token)} para responder ao questionário e participar do Verdade ou Consequência: a grande oportunidade da sua campanha.
+
+p Por um Rio de Janeiro cada vez mais lindo,
+
+p Bernardo e toda equipe Meu Rio.

@@ -28,4 +28,9 @@ class CandidateMailer < ActionMailer::Base
     mail(to: MR, subject: "[VOC] Um candidato acabou de requisitar sua URL única")
   end
 
+  def welcome_again candidate
+    @candidate = candidate
+    mail(:to => @candidate.email, :subject => "Não perca a chance de conseguir mais votos")
+  end
+
 end
