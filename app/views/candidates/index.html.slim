@@ -44,6 +44,9 @@ p
     h1= t 'phase2.header'
     h2= t 'phase2.no_participation'
 
+    p= link_to "Quer saber como o jogo funciona?", "#/", class: 'infographic btn'
+    .infographic.hidden= image_tag "bg_infographic_phase2.jpg"
+
     ol.parties
       li.active= image_tag "parties/01.jpg", title: "DEM"       
       li.active= image_tag "parties/02.jpg", title: "PCB"
