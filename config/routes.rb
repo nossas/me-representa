@@ -8,19 +8,22 @@ CariocaPergunta::Application.routes.draw do
     put :finish
   end
 
-  resources :parties, only: [:show]
-  resources :unions, only: [:show]
+  resources :unions, :parties, only: [:show] do 
+    resources :candidates, only: [:index, :show]
+  end
 
   resources :questions do
     resources :votes, :only => :create
   end
 
   resources :users, only: [:index, :new, :create] do
-    resources :answers, :only => [:new, :create, :update]
+    resources :answers, except: [:destroy] 
     resources :parties, only: [:index]
   end
 
-  resources :subscribers
+  # Used only in phase 1
+  # resources :subscribers
+  
   resources :sessions,    only: [:destroy]
   
   get 'auth/meurio',      as: :meurio_auth
