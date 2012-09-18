@@ -16,11 +16,17 @@ class Candidate < ActiveRecord::Base
     end
   end
 
-  def self.match_for_user user_id
-    connection.select_all(Candidate.select("name, round(avg((CASE WHEN answers.short_answer = ua.short_answer THEN 100 WHEN ua.short_answer IS NULL THEN NULL ELSE 0 END)::numeric)) as score").
-                          joins(:answers).
-                          joins("LEFT JOIN answers ua ON ua.question_id = answers.question_id AND ua.responder_type = 'User'").
-                          where("ua.responder_id = ?", user_id).group("candidates.name"))
+  def self.match_for_user user_id, options = {:party_id => nil, :union_id => nil}
+    candidates = 
+      Candidate.
+      select("name, round(avg((CASE WHEN answers.short_answer = ua.short_answer THEN 100 WHEN ua.short_answer IS NULL THEN NULL ELSE 0 END)::numeric)) as score").
+      joins(:answers).
+      joins(:party).
+      joins("LEFT JOIN answers ua ON ua.question_id = answers.question_id AND ua.responder_type = 'User'").
+      where("ua.responder_id = ?", user_id)
+    if options[:party_id] then candidates = candidates.where(:party_id => options[:party_id]) end
+    if options[:union_id] then candidates = candidates.where("parties.union_id = ?", options[:union_id]) end
+    connection.select_all(candidates.order("score DESC").group("candidates.name"))
   end
 
 end

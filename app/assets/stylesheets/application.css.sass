@@ -1282,3 +1282,32 @@ body.candidates#show
       padding: 2.3em 0
       span
         display: block
+
+body.parties#index
+  .parties
+    background: white
+    padding: 3em
+    +border-radius(10px)
+    h1
+      font-size: 1.5em
+      line-height: normal
+      margin-bottom: .5em
+      +text-shadow(none)
+    p
+      color: gray
+      text-align: center
+      font-size: .9em
+      line-height: normal
+      margin-bottom: 2em
+    table
+      width: 100%
+      tr
+        background: lighten(gray, 47%)
+        border-bottom: .5em solid white
+      td
+        padding: .5em
+        font-family: "Londrina solid"
+        font-size: 1.5em
+      td.match
+        text-align: right
+        color: $orange

@@ -175,6 +175,8 @@ Then /^I should be in "(.*?)"$/ do |arg1|
     current_path.should == root_path
   elsif arg1 == "this candidate page"
     current_path.should == candidate_path(@candidate)
+  elsif arg1 == "the parties page"
+    current_path.should == parties_path
   else
     raise "I don't know what '#{arg1}' means :("
   end
@@ -216,4 +218,25 @@ end
 
 Then /^a new answer should be created to me$/ do
   @current_user.answers.should_not be_empty
+end
+
+Given /^there is a candidate of "(.*?)"$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, :party => FactoryGirl.create(:party, :symbol => arg1))
+end
+
+Given /^this candidate answered "(.*?)" for this question$/ do |arg1|
+  FactoryGirl.create(:candidate_answer, :question => @question, :responder => @candidate, :short_answer => arg1)
+end
+
+Given /^there is a party called "(.*?)" united to "(.*?)"$/ do |arg1, arg2|
+  @union = FactoryGirl.create(:union, :name => arg2)
+  @party = FactoryGirl.create(:party, :symbol => arg1, :union => @union)
+end
+
+Given /^there is a candidate for this party$/ do
+  @candidate = FactoryGirl.create(:candidate, :party => @party)
+end
+
+Given /^there is an unrelated party called "(.*?)"$/ do |arg1|
+  @party = FactoryGirl.create(:party, :symbol => arg1, :union => nil)
 end

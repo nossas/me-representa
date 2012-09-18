@@ -1,0 +1,9 @@
+.wrapper
+  .parties
+    h1 Muito bem! Agora é hora de conferir os partidos que mais têm a ver com você. Clique em cada partido para conhecer seus candidatos.
+    p Nós chegamos a esses resultados comparando as suas respostas com as dos candidatos. O ideal é você votar no candidato mais bacana, do partido que mais tem a ver com você. Lembre-se que o seu voto pode levar outros candidatos do mesmo partido a serem eleitos.
+    table
+      - @matching.each do |match|
+        tr
+          td= link_to match["name"], match[:type] == "Party" ? party_path(match["id"]) : union_path(match["id"])
+          td.match #{match["score"]}%
