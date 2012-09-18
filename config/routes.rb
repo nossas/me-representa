@@ -21,8 +21,7 @@ CariocaPergunta::Application.routes.draw do
     resources :parties, only: [:index]
   end
 
-  # Used only in phase 1
-  # resources :subscribers
+   resources :subscribers
   
   resources :sessions,    only: [:destroy]
   
