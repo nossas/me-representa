@@ -176,7 +176,7 @@ Then /^I should be in "(.*?)"$/ do |arg1|
   elsif arg1 == "this candidate page"
     current_path.should == candidate_path(@candidate)
   elsif arg1 == "the parties page"
-    current_path.should == parties_path
+    current_path.should == user_parties_path(@current_user)
   else
     raise "I don't know what '#{arg1}' means :("
   end

@@ -3,13 +3,13 @@ CariocaPergunta::Application.routes.draw do
 
   post '/candidates/check', to: 'candidates#check', as: :candidates_check
 
-  resources :parties, only: [:index, :show]
-  resources :unions, only: [:show]
-
   resources :candidates do
     resources :answers, except: [:destroy] 
     put :finish
   end
+
+  resources :parties, only: [:show]
+  resources :unions, only: [:show]
 
   resources :questions do
     resources :votes, :only => :create
@@ -17,6 +17,7 @@ CariocaPergunta::Application.routes.draw do
 
   resources :users, only: [:index, :new, :create] do
     resources :answers, :only => [:new, :create, :update]
+    resources :parties, only: [:index]
   end
 
   resources :subscribers
