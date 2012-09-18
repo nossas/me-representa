@@ -6,6 +6,7 @@
       - @matching.each do |match|
         tr
           td
-            = link_to match["name"], party_path(match["id"]) if match["type"] == "Party"
-            = link_to "#{match["name"]} (coligação)", union_path(match["id"]) if match["type"] == "Union"
-          td.match #{match["score"]}%
+            = link_to match["name"], party_candidates_path(match["id"]) if match["type"] == "Party"
+            = link_to "#{match["name"]} (coligação)", union_candidates_path(match["id"]) if match["type"] == "Union"
+          td.match
+            = number_to_percentage(match["score"], precision: 0)
