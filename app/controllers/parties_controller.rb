@@ -4,6 +4,6 @@ class PartiesController < ApplicationController
   before_filter :only => [:index] do 
     @matching = Party.unrelated.match_for_user(current_user.id)
     @matching = @matching.concat Union.match_for_user(current_user.id)
-    @matching = @matching.sort{|x, y| x["score"].to_i <=> y["score"].to_i}
+    @matching = @matching.sort{|x, y| y["score"].to_i <=> x["score"].to_i}
   end
 end
