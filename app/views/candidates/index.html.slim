@@ -1,89 +1,28 @@
-.wrapper.link_to_candidates
-  .padd
-    = image_tag "candidates_link_to.gif"
-    = link_to t('phase2.link_to_candidates'), "#/", title: "Clique para expandir/recolher o formulário"
-p
-.wrapper.form_to_candidates.hidden
-  .padd
-    fieldset
-      legend 
-        | Insira seus dados para solicitar o reenvio de sua url única
-      = form_for :candidate, url: candidates_check_path(format: :json), remote: true, format: :json, method: :post do |f|
-        label
-          | Insira seu e-mail
-          = f.email_field :email
-        label 
-          | Insira seu celular 
-          = f.phone_field :mobile_phone, placeholder: 'Ex.: 99999999, sem espaços, DDD ou "-"'
-        label.omega 
-          | Partido
-          p= f.select :party, Party.all.collect { |p| [p.symbol, p.id] }, {}, class: 'chosen-select'
-        p.submit= f.submit "Enviar Dados", data: { :"disable-with" => "Enviando..." }
-    .unsuccessful.hidden.messages
-      h3 Infelizmente, seu cadastro não consta em nossa base de dados.
+.wrapper
+  .candidate_info
+    .link_to_back= link_to "Voltar aos partidos", parties_path
+    .box
+      h1= @party.symbol
+      h2= @party.number
+
+  .candidate_bio
+    .box
+      h2 Estes são os candidatos do partido que mais combinam com você.
+
       p.description
-        | Isso acontece porque o seu partido não quis fornecer seus dados ou enviou dados desatualizados. 
-        | Entre em contato com o seu partido e solicite que ele nos envie o seu email 
-        | e celular para #{mail_to "cadastro@verdadeouconsequencia.org.br"}
-      = link_to "Tentar novamente com outro email/celular", "#/", class: 'show_form'
-    .match_mobile.hidden.messages
-      h3 Muito bem! Em breve você receberá sua URL única por SMS.
-      p.description
-        | Um SMS com um link para você responder o questionário será enviado para o número de celular cadastrado em até 24 horas.
-        | Caso você não receba essa mensagem, entre em contato com #{mail_to "leonardo@meurio.org.br"}
-    .match_email.hidden.messages
-      h3 Sucesso! Sua URL única foi enviada ao seu e-mail cadastrado
-      p.description
-        | Um email com um link para você responder o questionário foi enviado para o endereço de email cadastrado. 
-        | Caso você não encontre esse email na sua caixa de entrada, procure na caixa de spam ou na sua lixeira. 
-        | Se tiver algum problema para acessar o questionário, entre em contato com #{mail_to "bernardo@meurio.org.br"}
+        | Clique no nome do candidato para ver seu perfil e saber quais outros candidatos do partido 
+        | ele pode levar para a Câmara se for eleito. Depois disso, marque uma estrela no candidato 
+        | que melhor te representa. Assim, no dia das eleições, caso queira, o Meu Rio vai te enviar 
+        | um SMS para você não dar branco na frente da urna.
+   
+  .candidate_info
+    .box
+      h3 Filtre os candidatos
 
-
-.wrapper.parties
-  .padd
-    h1= t 'phase2.header'
-    h2= t 'phase2.no_participation'
-
-    p= link_to "Quer saber como o jogo funciona?", "#/", class: 'infographic btn'
-    .infographic.hidden= image_tag "bg_infographic_phase2.jpg"
-
-    ol.parties
-      li.active= image_tag "parties/01.jpg", title: "DEM"       
-      li.active= image_tag "parties/02.jpg", title: "PCB"
-      li.active.inactive= image_tag "parties/03.jpg", title: "PCdoB"
-      li.active= image_tag "parties/05.jpg", title: "PDT"
-      li.active.inactive= image_tag "parties/06.jpg", title: "PHS"
-      li.active= image_tag "parties/07.jpg", title: "PMDB"
-      li.active.inactive= image_tag "parties/08.jpg", title: "PMN"
-      li.active.inactive= image_tag "parties/09.jpg", title: "PP"
-      li.active= image_tag "parties/10.jpg", title: "PPL"
-      li.active.inactive= image_tag "parties/11.jpg", title: "PPS"
-      li.active.inactive= image_tag "parties/12.jpg", title: "PR"
-      li.active.inactive= image_tag "parties/13.jpg", title: "PRB"
-      li.active= image_tag "parties/14.jpg", title: "PRP"
-      li.active= image_tag "parties/15.jpg", title: "PRTB"
-      li.active.inactive= image_tag "parties/16.jpg", title: "PSB"
-      li.active= image_tag "parties/17.jpg", title: "PSC"
-      li.active.inactive= image_tag "parties/18.jpg", title: "PSD"
-      li.active= image_tag "parties/19.jpg", title: "PSDB"
-      li.active.inactive= image_tag "parties/20.jpg", title: "PSDC"
-      li.active.inactive= image_tag "parties/21.jpg", title: "PSL"
-      li.active= image_tag "parties/22.jpg", title: "PSOL"
-      li.active= image_tag "parties/25.jpg", title: "PSTU"
-      li.active= image_tag "parties/23.jpg", title: "PT"
-      li.active.inactive= image_tag "parties/27.jpg", title: "PTdoB"
-      li.active.inactive= image_tag "parties/24.jpg", title: "PTB"
-      li.active.inactive= image_tag "parties/26.jpg", title: "PTC"
-      li.active.inactive= image_tag "parties/28.jpg", title: "PTN"
-      li.active= image_tag "parties/29.jpg", title: "PV"
-
-    h2 Clique para pressionar os partidos a enviarem seus contatos
-    .panela= link_to "Pressionar partidos", "http://paneladepressao.org.br/campaigns/91", target: "_blank", :class => "btn"
-    .share
-      a href="https://twitter.com/share" class="twitter-share-button" data-url="http://verdadeouconsequencia.org.br/" data-lang="pt" Tweetar
-      .fb-like data-href="http://verdadeouconsequencia.org.br/" data-send="true" data-width="450" data-show-faces="false"
-.wrapper.questionnaire
-  .padd
-    h2= t 'phase2.questionnaire.header'
-    .questions
-      = render partial: "questions/list_with_index", locals: { questions: @truths + @dares }
+  .candidate_bio
+    .box.parties
+      table
+        - @candidates.each do |candidate|
+          tr
+            td= link_to candidate["name"], candidate_path(candidate['id']) or candidate.name
+            td= number_to_percentage(candidate["score"], precision: 0) or nil

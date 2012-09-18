@@ -4,12 +4,14 @@ class CandidatesController < ApplicationController
   
 
   inherit_resources
+  
   respond_to :csv
   load_and_authorize_resource
   skip_authorize_resource :only => :check  
+  optional_belongs_to :party
+  
+  before_filter only: [:index] { @candidates = signed_in? ? Candidate.match_for_user(current_user, { party_id: @party.id }) : @party.candidates if @party }
 
-  before_filter :only => [:index] {@truths = Question.truths.chosen}
-  before_filter :only => [:index] {@dares = Question.dares.chosen}
   before_filter :only => [:check] { render json: nil if params[:candidate][:email] == "" and params[:candidate][:mobile_phone] == "" }
 
   def finish

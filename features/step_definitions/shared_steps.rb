@@ -237,6 +237,10 @@ Given /^there is a candidate for this party$/ do
   @candidate = FactoryGirl.create(:candidate, :party => @party)
 end
 
+Given /^there is a candidate called "(.*?)" for this party$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, name: arg1, :party => @party)
+end
+
 Given /^there is an unrelated party called "(.*?)"$/ do |arg1|
   @party = FactoryGirl.create(:party, :symbol => arg1, :union => nil)
 end
