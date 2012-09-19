@@ -87,9 +87,16 @@
 
 
   .candidate_bio
-    .box.parties
+    .parties
       table.candidates_list
-        - @candidates.each do |candidate|
+        thead
+          td Eu voto
+          td Candidatos
+          td
+        - @candidates.each_with_index do |candidate, index|
           tr
-            td= link_to candidate["name"], candidate_path(candidate['id']) or candidate.name
-            td= number_to_percentage(candidate["score"], precision: 0) or nil
+            td
+            td
+              = link_to candidate["name"], candidate_path(candidate['id'])
+              span= candidate["symbol"]
+            td.match= number_to_percentage(candidate["score"], precision: 0)

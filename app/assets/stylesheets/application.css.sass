@@ -1320,7 +1320,6 @@ body.parties#index, body.candidates#index
         +transition(.3s)
         a
           +transition(.5s)
-          padding-right: 45%
           &:hover
             color: black
         &:hover
@@ -1335,6 +1334,8 @@ body.parties#index, body.candidates#index
         text-align: right
         color: $orange
 body.candidates#index
+  .parties
+    padding: 1.4em
   .candidate_info .box, .candidate_bio .box
     height: auto !important
     max-height: none !important
@@ -1366,6 +1367,25 @@ body.candidates#index
     input
       margin-right: .7em
   table.candidates_list
+    width: 100% !important
+    tr
+      margin-bottom: .8em
+    td
+      border-right: 4px solid white
+      +border-radius(6px)
+    thead
+      td
+        background: lighten(gray, 5%)
+        color: white
     a
       color: $orange
       font-size: 1.1em
+    span
+      padding-left: .3em
+      color: lighten(gray, 15%)
+      font-size: .8em
+      text-shadow: none
+      letter-spacing: 1px
+    td.match  
+      color: $blue
+
