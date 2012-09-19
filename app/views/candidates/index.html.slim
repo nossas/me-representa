@@ -3,14 +3,14 @@
     .link_to_back= link_to "Voltar aos partidos", "" 
     .box
       - if @union
-        - @union.parties.each do |p|
-          p
-            h2= p.symbol
-            h2= p.number
+        .union_head= raw @union.parties.map { |p| t('phase3.union.header_html', symbol: p.symbol) }.to_sentence
+        .answered
+          = raw t('phase3.candidates_answered_html', current: @union.parties.map { |p| p.candidates.finished.count }.sum, total: @union.parties.map { |p| p.candidates.count}.sum)
       - elsif @party
-        h1= @party.symbol
-        h2= @party.number
-
+        .union_head
+          h2.symbol= @party.symbol
+        .answered
+          = raw t('phase3.candidates_answered_html', current: @party.candidates.finished.count, total: @party.candidates.count)
   .candidate_bio
     .box
       h2 Estes são os candidatos do partido que mais combinam com você.

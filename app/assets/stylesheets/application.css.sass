@@ -1334,6 +1334,10 @@ body.parties#index, body.candidates#index
         text-align: right
         color: $orange
 body.candidates#index
+  .union_head
+    color: black
+    font-family: "Londrina solid"
+    font-size: 1.4em
   .parties
     padding: 1.4em
   .candidate_info .box, .candidate_bio .box
@@ -1341,6 +1345,24 @@ body.candidates#index
     max-height: none !important
   .candidate_bio, .candidate_info
     margin-bottom: 1em
+  .candidate_info 
+    h2.symbol
+      color: $orange
+      font-size: 2em !important
+      &.union
+        display: inline-block
+
+  .candidate_info .answered
+    line-height: 1.1em
+    text-transform: uppercase
+    .number
+      font-family: "Londrina solid"
+      color: lighten($blue, 10%)
+      font-size: 1.4em
+    .didit
+      color: lighten(gray, 10%)
+      font-size: .8em
+      font-weight: bold
   .filters_box
     h2
       background: lighten($blue, 5%)
@@ -1381,8 +1403,8 @@ body.candidates#index
       color: $orange
       font-size: 1.1em
     span
-      padding-left: .3em
-      color: lighten(gray, 15%)
+      padding-left: .5em
+      color: lighten(black, 45%)
       font-size: .8em
       text-shadow: none
       letter-spacing: 1px
