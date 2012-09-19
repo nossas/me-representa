@@ -1,6 +1,6 @@
 .wrapper
   .candidate_info
-    .link_to_back= link_to "Voltar aos partidos", parties_path
+    .link_to_back= link_to "Voltar aos partidos", "" 
     .box
       - if @union
         - @union.parties.each do |p|
@@ -21,13 +21,74 @@
         | que melhor te representa. Assim, no dia das eleições, caso queira, o Meu Rio vai te enviar 
         | um SMS para você não dar branco na frente da urna.
    
-  .candidate_info
+  .candidate_info.filters_box
+    h2 Filtre os candidatos
     .box
-      h3 Filtre os candidatos
+      = form_for "", method: :get, html: { class: 'filter' } do |f|
+        h3 Idade
+        label
+          = f.check_box :age
+          | de 18 a 25 anos
+        label
+          = f.check_box :age
+          | de 26 a 35 anos
+        label
+          = f.check_box :age
+          | de 36 a 55 anos
+        label
+          = f.check_box :age
+          | acima de 45 anos 
+        h3 Escolaridade
+        label
+          = f.check_box :scholarity
+          | Fund. Incompleto 
+        label
+          = f.check_box :scholarity
+          | Fund. Completo 
+        label
+          = f.check_box :scholarity
+          | Médio Incompleto 
+        label
+          = f.check_box :scholarity
+          | Médio Completo 
+        label
+          = f.check_box :scholarity
+          | Superior Incompleto 
+        label
+          = f.check_box :scholarity
+          | Superior Completo 
+        label
+          = f.check_box :scholarity
+          | Mestre 
+        label
+          = f.check_box :scholarity
+          | Doutor
+        label
+          = f.check_box :scholarity
+          | Pós-Doutor
+
+        h3 Reeleição
+        label
+          = f.check_box :reelection
+          | Sim
+        label
+          = f.check_box :reelection
+          | Não 
+
+        h3 Sexo
+        label
+          = f.check_box :gender
+          | Masculino
+        label
+          = f.check_box :reelection
+          | Feminino
+
+
+
 
   .candidate_bio
     .box.parties
-      table
+      table.candidates_list
         - @candidates.each do |candidate|
           tr
             td= link_to candidate["name"], candidate_path(candidate['id']) or candidate.name
