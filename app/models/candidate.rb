@@ -26,7 +26,7 @@ class Candidate < ActiveRecord::Base
       where("ua.responder_id = ?", user_id)
     if options[:party_id] then candidates = candidates.where(:party_id => options[:party_id]) end
     if options[:union_id] then candidates = candidates.where("parties.union_id = ?", options[:union_id]) end
-    connection.select_all(candidates.order("score DESC").group("candidates.name"))
+    connection.select_all(candidates.order("score DESC").group("candidates.name, candidates.id"))
   end
 
 end
