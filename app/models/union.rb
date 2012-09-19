@@ -8,7 +8,7 @@ class Union < ActiveRecord::Base
   def self.match_for_user user_id
     connection.select_all(
       Union.
-      select("unions.name, unions.id, round(avg((CASE WHEN answers.short_answer = ua.short_answer THEN 100 WHEN ua.short_answer IS NULL THEN NULL ELSE 0 END)::numeric)) as score, 'Union' as type").
+      select("unions.name, unions.id, round(sum((CASE WHEN answers.short_answer = ua.short_answer THEN 100 WHEN ua.short_answer IS NULL THEN NULL ELSE 0 END)::numeric * ua.weight)::numeric / sum(ua.weight)) as score, 'Union' as type").
       joins(:answers).
       joins(:candidates).
       joins("LEFT JOIN answers ua ON ua.question_id = answers.question_id AND ua.responder_type = 'User'").
