@@ -1,4 +1,4 @@
-App.Candidates.Index = Backbone.View.extend({
+App.Candidates.Home = Backbone.View.extend({
   el: 'body',
 
   initialize: function() {
