@@ -14,10 +14,10 @@ class CandidatesController < ApplicationController
   before_filter only: [:index] do
     if params[:user_id] and params[:party]
       @candidates = Candidate.match_for_user(params[:user_id], { party_id: @party.id })
-    elsif params[:party]
+    elsif params[:party] and !params[:user_id]
       @candidates = @party.candidates
     else
-      @candidates = Candidate.match_for_user(current_user, { party_id: params[:union_id] || params[:party_id] }) if current_user
+      @candidates = Candidate.match_for_user(current_user, { party_id: (params[:union_id] || params[:party_id]) }) if current_user
     end
   end
 
