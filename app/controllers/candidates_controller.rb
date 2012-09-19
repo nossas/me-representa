@@ -9,10 +9,19 @@ class CandidatesController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => :check  
   optional_belongs_to :party
+  optional_belongs_to :union
   
-  before_filter only: [:index] { @candidates = signed_in? ? Candidate.match_for_user(current_user, { party_id: @party.id }) : @party.candidates if @party }
+  before_filter only: [:index] do
+    if params[:user_id] and params[:party]
+      @candidates = Candidate.match_for_user(params[:user_id], { party_id: @party.id })
+    elsif params[:party]
+      @candidates = @party.candidates
+    else
+      @candidates = Candidate.match_for_user(current_user, { party_id: params[:union_id] || params[:party_id] }) if current_user
+    end
+  end
 
-  before_filter :only => [:check] { render json: nil if params[:candidate][:email] == "" and params[:candidate][:mobile_phone] == "" }
+  before_filter :only => [:check] { render json: nil if params[:candidate][:email].blank? and params[:candidate][:mobile_phone].blank? }
 
   def finish
     @candidate = Candidate.find(params[:candidate_id])

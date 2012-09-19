@@ -2,8 +2,14 @@
   .candidate_info
     .link_to_back= link_to "Voltar aos partidos", parties_path
     .box
-      h1= @party.symbol
-      h2= @party.number
+      - if @union
+        - @union.parties.each do |p|
+          p
+            h2= p.symbol
+            h2= p.number
+      - else
+        h1= @party.symbol
+        h2= @party.number
 
   .candidate_bio
     .box
