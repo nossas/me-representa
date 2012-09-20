@@ -25,32 +25,32 @@
       = form_for :candidate, url: "", method: :get, html: { class: 'filter' } do |f|
         h3 Idade
         label
-          = f.check_box :age
+          = f.radio_button "", "1", name: "by_age"
           | de 18 a 25 anos
         label
-          = f.check_box :age
+          = f.radio_button "", "2", name: "by_age"
           | de 26 a 35 anos
         label
-          = f.check_box :age
+          = f.radio_button "", "3", name: "by_age"
           | de 36 a 45 anos
         label
-          = f.check_box :age
+          = f.radio_button "", "4", name: "by_age"
           | acima de 45 anos 
         h3 Escolaridade
         label
-          = f.check_box "", {name: 'scholarity[]'},'Ensino Fundamental incompleto', ''
+          = f.check_box "", {name: 'by_scholarity[]'},'Ensino Fundamental incompleto', ''
           | Fundamental Incompleto 
         label
-          = f.check_box "", {name: 'scholarity[]'},'Ensino Fundamental completo', ''
+          = f.check_box "", {name: 'by_scholarity[]'},'Ensino Fundamental completo', ''
           | Fundamental Completo 
         label
-          = f.check_box "", {name: 'scholarity[]'},'Ensino Médio incompleto', ''
+          = f.check_box "", {name: 'by_scholarity[]'},'Ensino Médio incompleto', ''
           | Médio Incompleto 
         label
-          = f.check_box "", {name: 'scholarity[]'},'Ensino Médio completo', ''
+          = f.check_box "", {name: 'by_scholarity[]'},'Ensino Médio completo', ''
           | Médio Completo 
         label
-          = f.check_box "", {name: 'scholarity[]'},'Superior incompleto', ''
+          = f.check_box "", {name: 'by_scholarity[]'},'Superior incompleto', ''
           | Superior Incompleto 
         label
           = f.check_box "", {name: 'scholarity[]'}, 'Superior completo', '' 
@@ -58,18 +58,18 @@
 
         h3 Reeleição
         label
-          = f.check_box "", {name: 'reelection[]'}, "true", ""
+          = f.check_box "", {name: 'by_reelection[]'}, "true", ""
           | Sim
         label
-          = f.check_box "", {name: 'reelection[]'}, "false", ""
+          = f.check_box "", {name: 'by_reelection[]'}, "false", ""
           | Não 
 
         h3 Sexo
         label
-          = f.check_box "", {name: 'gender[]'}, "true", ""
+          = f.check_box "", {name: 'by_gender[]'}, "true", ""
           | Masculino
         label
-          = f.check_box "", {name: 'gender[]'}, "false", ""
+          = f.check_box "", {name: 'by_gender[]'}, "false", ""
           | Feminino
 
 

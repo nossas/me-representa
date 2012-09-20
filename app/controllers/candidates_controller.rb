@@ -2,24 +2,34 @@
 class CandidatesController < ApplicationController
   layout "application_phase_two"
   
-
   inherit_resources
-  
   respond_to :csv
+
   load_and_authorize_resource
   skip_authorize_resource :only => [:check, :home]
   optional_belongs_to :party
   optional_belongs_to :union
 
-
-  has_scope :scholarity,  type: :array do |controller, scope, value|
-    scope.scholarity(value.delete_if(&:blank?))
+  has_scope :by_age do |controller, scope, value|
+    case value.to_i
+    when 1
+      scope.by_age(18,25)
+    when 2
+      scope.by_age(26,35)
+    when 3
+      scope.by_age(36,45)
+    when 4
+      scope.by_age(45,100)
+    end
   end
-  has_scope :reelection,  type: :array do |controller, scope, value|
-    scope.reelection(value.delete_if(&:blank?))
+  has_scope :by_scholarity,  type: :array do |controller, scope, value|
+    scope.by_scholarity(value.delete_if(&:blank?))
   end
-  has_scope :gender, type: :array do |controller, scope, value|
-    scope.gender(value.delete_if(&:blank?))
+  has_scope :by_reelection,  type: :array do |controller, scope, value|
+    scope.by_reelection(value.delete_if(&:blank?))
+  end
+  has_scope :by_gender, type: :array do |controller, scope, value|
+    scope.by_gender(value.delete_if(&:blank?))
   end
 
 

@@ -6,10 +6,11 @@ class Candidate < ActiveRecord::Base
   has_many :answers, :as => :responder
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
  
-
-  scope :gender,      ->(*genders)      { where(male: genders)            } 
-  scope :scholarity,  ->(*scholarities) { where(scholarity: scholarities) }
-  scope :reelection,  ->(*politicians)  { where(politician: politicians)  }
+  scope :by_age,          ->(start, end_at)         { where(['EXTRACT(year from current_date) - EXTRACT(year from born_at) 
+                                                     BETWEEN ? AND ?', start, end_at]) }
+  scope :by_gender,       ->(*genders)      { where(male: genders)            } 
+  scope :by_scholarity,   ->(*scholarities) { where(scholarity: scholarities) }
+  scope :by_reelection,   ->(*politicians)  { where(politician: politicians)  }
 
   scope :finished, where('finished_at IS NOT NULL')
 
