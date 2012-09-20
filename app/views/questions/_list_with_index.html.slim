@@ -36,6 +36,9 @@
           = t "phase2.questionnaire.form.#{question.role_type}.label.negative"
         p.weight Você considera essa pergunta
         label
+          = form.radio_button :weight, 2
+          | muito relevante 
+        label
           = form.radio_button :weight, 1
           | relevante 
         label
