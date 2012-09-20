@@ -15,6 +15,9 @@
         tr.party
           td Partido:
           td= @candidate.party.symbol
+        tr.number
+          td Número:
+          td= @candidate.party.number
         tr.age
           td Idade:
           td= distance_of_time_in_words(Date.today, @candidate.born_at) if @candidate.born_at
