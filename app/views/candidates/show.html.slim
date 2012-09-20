@@ -17,10 +17,10 @@
           td= @candidate.party.symbol
         tr.number
           td Número:
-          td= @candidate.party.number
+          td= @candidate.number
         tr.age
           td Idade:
-          td= distance_of_time_in_words(Date.today, @candidate.born_at) if @candidate.born_at
+          td= ((Date.today - @candidate.born_at)/365).to_i if @candidate.born_at
         tr.sex 
           td Sexo:
           td= @candidate.male? ? "Masculino" : "Feminino"
