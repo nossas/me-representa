@@ -10,14 +10,20 @@ class CandidatesController < ApplicationController
   skip_authorize_resource :only => [:check, :home]
   optional_belongs_to :party
   optional_belongs_to :union
- 
+
+
+  has_scope :reelection,  type: :array
+  has_scope :gender,      type: :array
+  has_scope :scholarity,  type: :array
+
+
   before_filter only: [:home] { @truths = Question.truths.chosen; @dares = Question.dares.chosen }
 
   before_filter only: [:index] do
     if params[:user_id] and params[:party_id]
-      @candidates = Candidate.match_for_user(params[:user_id], { party_id: @party.id })
+      @candidates = apply_scopes(Candidate).match_for_user(params[:user_id], { party_id: @party.id })
     elsif params[:user_id] and params[:union_id]
-      @candidates = Candidate.match_for_user(params[:user_id], { union_id: @union.id })
+      @candidates = apply_scopes(Candidate).match_for_user(params[:user_id], { union_id: @union.id })
     elsif params[:party] and !params[:user_id]
       @candidates = @party.candidates
     end

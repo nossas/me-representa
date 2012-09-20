@@ -4,13 +4,11 @@
     .box
       - if @union
         .union_head= raw @union.parties.map { |p| t('phase3.union.header_html', symbol: p.symbol) }.to_sentence
-        .answered
-          = raw t('phase3.candidates_answered_html', current: @union.parties.map { |p| p.candidates.finished.count }.sum, total: @union.parties.map { |p| p.candidates.count}.sum)
       - elsif @party
         .union_head
           h2.symbol= @party.symbol
-        .answered
-          = raw t('phase3.candidates_answered_html', current: @party.candidates.finished.count, total: @party.candidates.count)
+      .answered
+        = raw t('phase3.candidates_answered_html', current: @candidates.count, total: @party.candidates.count)
   .candidate_bio
     .box
       h2 Estes são os candidatos do partido que mais combinam com você.
@@ -24,7 +22,7 @@
   .candidate_info.filters_box
     h2 Filtre os candidatos
     .box
-      = form_for "", method: :get, html: { class: 'filter' } do |f|
+      = form_for :candidate, url: "", method: :get, html: { class: 'filter' } do |f|
         h3 Idade
         label
           = f.check_box :age
@@ -34,53 +32,44 @@
           | de 26 a 35 anos
         label
           = f.check_box :age
-          | de 36 a 55 anos
+          | de 36 a 45 anos
         label
           = f.check_box :age
           | acima de 45 anos 
         h3 Escolaridade
         label
-          = f.check_box :scholarity
+          = f.check_box "", {name: 'scholarity[]'},'Ensino Fundamental incompleto', ''
           | Fund. Incompleto 
         label
-          = f.check_box :scholarity
+          = f.check_box "", {name: 'scholarity[]'},'Ensino Fundamental completo', ''
           | Fund. Completo 
         label
-          = f.check_box :scholarity
+          = f.check_box "", {name: 'scholarity[]'},'Ensino Médio incompleto', ''
           | Médio Incompleto 
         label
-          = f.check_box :scholarity
+          = f.check_box "", {name: 'scholarity[]'},'Ensino Médio completo', ''
           | Médio Completo 
         label
-          = f.check_box :scholarity
+          = f.check_box "", {name: 'scholarity[]'},'Superior incompleto', ''
           | Superior Incompleto 
         label
-          = f.check_box :scholarity
+          = f.check_box "", {name: 'scholarity[]'}, 'Superior completo', '' 
           | Superior Completo 
-        label
-          = f.check_box :scholarity
-          | Mestre 
-        label
-          = f.check_box :scholarity
-          | Doutor
-        label
-          = f.check_box :scholarity
-          | Pós-Doutor
 
         h3 Reeleição
         label
-          = f.check_box :reelection
+          = f.check_box "", {name: 'reelection[]'}, true, false 
           | Sim
         label
-          = f.check_box :reelection
+          = f.check_box "", {name: 'reelection[]'}, true, false
           | Não 
 
         h3 Sexo
         label
-          = f.check_box :gender
+          = f.check_box "", {name: 'gender[]'}, true, false
           | Masculino
         label
-          = f.check_box :reelection
+          = f.check_box "", {name: 'gender[]'}, true, false
           | Feminino
 
 

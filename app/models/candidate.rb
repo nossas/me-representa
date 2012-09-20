@@ -5,7 +5,12 @@ class Candidate < ActiveRecord::Base
   belongs_to :party
   has_many :answers, :as => :responder
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
-  
+ 
+
+  scope :gender,      ->(*genders)      { where(male: genders)            } 
+  scope :scholarity,  ->(*scholarities) { where(scholarity: scholarities) }
+  scope :reelection,  ->(*politicians)  { where(politician: politicians)  }
+
   scope :finished, where('finished_at IS NOT NULL')
 
   def self.assign_next_group candidate
