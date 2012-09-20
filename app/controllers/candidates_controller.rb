@@ -13,13 +13,13 @@ class CandidatesController < ApplicationController
 
 
   has_scope :scholarity,  type: :array do |controller, scope, value|
-    scope.scholarity(value.delete_if { |v| v == "" })
+    scope.scholarity(value.delete_if(&:blank?))
   end
   has_scope :reelection,  type: :array do |controller, scope, value|
-    scope.reelection(value.delete_if { |v| v == "" })
+    scope.reelection(value.delete_if(&:blank?))
   end
   has_scope :gender, type: :array do |controller, scope, value|
-    scope.gender(value.delete_if { |v| v == "" })
+    scope.gender(value.delete_if(&:blank?))
   end
 
 
