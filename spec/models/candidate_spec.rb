@@ -43,9 +43,8 @@ describe Candidate do
       end
       
       it{ should == [{"name" => candidate1.name, "score" => "67"}, {"name" => candidate2.name, "score" => "33"}] }
-
-    end
-    
+    end 
   end
+
 end
 

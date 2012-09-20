@@ -69,4 +69,8 @@ pt-BR:
           label:
             positive: "Sim"
             negative: "Não"
-  
+  phase3:
+    candidates_answered_html: "<p class='number'>%{current} de %{total}</p> <p class='didit'>candidatos responderam</p>"
+    union:
+      header_html: "<h2 class='symbol union'>%{symbol}</h2>"
+
