@@ -32,19 +32,19 @@ describe Candidate do
       end
     end
     
-#    context "when I have different weights for questions" do
-#      before do
-#        FactoryGirl.create(:candidate_answer, :question => question1, :short_answer => "Sim", :responder => candidate1)
-#        FactoryGirl.create(:candidate_answer, :question => question2, :short_answer => "Sim", :responder => candidate1)
-#        FactoryGirl.create(:candidate_answer, :question => question1, :short_answer => "Não", :responder => candidate2)
-#        FactoryGirl.create(:candidate_answer, :question => question2, :short_answer => "Não", :responder => candidate2)
-#        FactoryGirl.create(:user_answer, :question => question1, :short_answer => "Sim", :responder => user, :weight => 2)
-#        FactoryGirl.create(:user_answer, :question => question2, :short_answer => "Não", :responder => user, :weight => 1)
-#      end
-#      
-#      it{ should == [{"name" => candidate1.name, "score" => "67"}, {"name" => candidate2.name, "score" => "33"}] }
-#
-#    end
+    context "when I have different weights for questions" do
+      before do
+        FactoryGirl.create(:candidate_answer, :question => question1, :short_answer => "Sim", :responder => candidate1)
+        FactoryGirl.create(:candidate_answer, :question => question2, :short_answer => "Sim", :responder => candidate1)
+        FactoryGirl.create(:candidate_answer, :question => question1, :short_answer => "Não", :responder => candidate2)
+        FactoryGirl.create(:candidate_answer, :question => question2, :short_answer => "Não", :responder => candidate2)
+        FactoryGirl.create(:user_answer, :question => question1, :short_answer => "Sim", :responder => user, :weight => 2)
+        FactoryGirl.create(:user_answer, :question => question2, :short_answer => "Não", :responder => user, :weight => 1)
+      end
+      
+      it{ should == [{"name" => candidate1.name, "score" => "67"}, {"name" => candidate2.name, "score" => "33"}] }
+
+    end
     
   end
 end

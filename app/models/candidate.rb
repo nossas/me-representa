@@ -19,7 +19,7 @@ class Candidate < ActiveRecord::Base
   def self.match_for_user user_id, options = {:party_id => nil, :union_id => nil}
     candidates = 
       Candidate.
-      select("name, round(avg((CASE WHEN answers.short_answer = ua.short_answer THEN 100 WHEN ua.short_answer IS NULL THEN NULL ELSE 0 END)::numeric)) as score").
+      select("name, round(sum((CASE WHEN answers.short_answer = ua.short_answer THEN 100 WHEN ua.short_answer IS NULL THEN NULL ELSE 0 END)::numeric * ua.weight)::numeric / sum(ua.weight)) as score").
       joins(:answers).
       joins(:party).
       joins("LEFT JOIN answers ua ON ua.question_id = answers.question_id AND ua.responder_type = 'User'").
