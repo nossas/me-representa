@@ -30,7 +30,7 @@ class CandidateMailer < ActionMailer::Base
 
   def welcome_again candidate
     @candidate = candidate
-    mail(:to => @candidate.email, :subject => "4 dias para divulgar sua candidatura gratuitamente.")
+    mail(:to => @candidate.email, :subject => "2 dias para divulgar a sua candidatura.")
   end
 
 end
