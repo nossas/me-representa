@@ -815,7 +815,7 @@ body.candidates, body.answers
   .match_mobile
     h3
       color: lighten($orange, 8%)
-  &#index
+  &#index, &#home
     .questions
       background: white !important
       .question
@@ -826,7 +826,7 @@ body.candidates, body.answers
         margin-bottom: 0 !important
       .text
         color: black !important
-  &#index, &#new
+  &#index, &#new, &#home
     .padd
       padding: 2em
     .send_answers
@@ -1144,8 +1144,7 @@ body.answers
         color: white
         display: inline-block
 
-body.candidates#show
-
+body.candidates#show, body.candidates#index, body.candidates#home
   .discover_your_candidate, .make_the_test
     padding: .4em  0 0 0
     text-align: center
@@ -1170,8 +1169,6 @@ body.candidates#show
     a
       &:hover
         opacity: .9
-
-      
     img
       float: left
       margin-right: -20px
@@ -1299,7 +1296,7 @@ body.candidates#show
       span
         display: block
 
-body.parties#index
+body.parties#index, body.candidates#index
   .parties
     background: white
     padding: 3em
@@ -1320,10 +1317,97 @@ body.parties#index
       tr
         background: lighten(gray, 47%)
         border-bottom: .5em solid white
+        +transition(.3s)
+        a
+          +transition(.5s)
+          &:hover
+            color: black
+        &:hover
+          background: lighten($orange, 36%)
+        
       td
         padding: .5em
         font-family: "Londrina solid"
         font-size: 1.5em
+        text-transform: uppercase
       td.match
         text-align: right
         color: $orange
+body.candidates#index
+  .union_head
+    color: black
+    font-family: "Londrina solid"
+    font-size: 1.4em
+  .parties
+    padding: 1.4em
+  .candidate_info .box, .candidate_bio .box
+    height: auto !important
+    max-height: none !important
+  .candidate_bio, .candidate_info
+    margin-bottom: 1em
+  .candidate_info 
+    h2.symbol
+      color: $orange
+      font-size: 2em !important
+      &.union
+        display: inline-block
+
+  .candidate_info .answered
+    line-height: 1.1em
+    text-transform: uppercase
+    .number
+      font-family: "Londrina solid"
+      color: lighten($blue, 10%)
+      font-size: 1.4em
+    .didit
+      color: lighten(gray, 10%)
+      font-size: .8em
+      font-weight: bold
+  .filters_box
+    h2
+      background: lighten($blue, 5%)
+      color: white
+      font-size: 1.4em
+      padding: 0
+      text-shadow: none
+      line-height: 2.5em
+  .filter
+    h3
+      color: $orange
+      font-family: "Londrina solid"
+      text-transform: uppercase
+      margin: .8em 0 .2em 0
+    label 
+      display: block
+      font-size: .9em
+      +transition(.5s)
+      color: lighten(gray, 15%)
+      &:hover
+        cursor: pointer
+        font-weight: 600
+        color: black
+    input
+      margin-right: .7em
+  table.candidates_list
+    width: 100% !important
+    tr
+      margin-bottom: .8em
+    td
+      border-right: 4px solid white
+      +border-radius(6px)
+    thead
+      td
+        background: lighten(gray, 5%)
+        color: white
+    a
+      color: $orange
+      font-size: 1.1em
+    span
+      padding-left: .5em
+      color: lighten(black, 45%)
+      font-size: .8em
+      text-shadow: none
+      letter-spacing: 1px
+    td.match  
+      color: $blue
+
