@@ -12,9 +12,15 @@ class CandidatesController < ApplicationController
   optional_belongs_to :union
 
 
-  has_scope :reelection,  type: :array
-  has_scope :gender,      type: :array
-  has_scope :scholarity,  type: :array
+  has_scope :scholarity,  type: :array do |controller, scope, value|
+    scope.scholarity(value.delete_if { |v| v == "" })
+  end
+  has_scope :reelection,  type: :array do |controller, scope, value|
+    scope.reelection(value.delete_if { |v| v == "" })
+  end
+  has_scope :gender, type: :array do |controller, scope, value|
+    scope.gender(value.delete_if { |v| v == "" })
+  end
 
 
   before_filter only: [:home] { @truths = Question.truths.chosen; @dares = Question.dares.chosen }
@@ -24,8 +30,10 @@ class CandidatesController < ApplicationController
       @candidates = apply_scopes(Candidate).match_for_user(params[:user_id], { party_id: @party.id })
     elsif params[:user_id] and params[:union_id]
       @candidates = apply_scopes(Candidate).match_for_user(params[:user_id], { union_id: @union.id })
-    elsif params[:party] and !params[:user_id]
+    elsif params[:party_id] and !params[:user_id]
       @candidates = @party.candidates
+    elsif params[:union_id] and !params[:user_id]
+      @candidates = @union.candidates
     end
   end
 
