@@ -8,7 +8,7 @@
         .union_head
           h2.symbol= @party.symbol
       .answered
-        = raw t('phase3.candidates_answered_html', current: @candidates.count, total: @party.candidates.count)
+        = raw t('phase3.candidates_answered_html', current: @candidates.count, total: (@party ? @party.candidates.count : @union.parties.map { |p| p.candidates.count }.sum))
   .candidate_bio
     .box
       h2 Estes são os candidatos do partido que mais combinam com você.
