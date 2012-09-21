@@ -47,8 +47,8 @@ class CandidatesController < ApplicationController
     end
   end
 
+  before_filter :only => [:index] { render partial: 'candidates/list', locals: { candidates: @candidates } if request.xhr? }
   before_filter :only => [:check] { render json: nil if params[:candidate][:email].blank? and params[:candidate][:mobile_phone].blank? }
-
 
   def home;end
 
