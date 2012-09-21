@@ -1318,7 +1318,13 @@ body.parties#index, body.candidates#index
         background: lighten(gray, 47%)
         border-bottom: .5em solid white
         +transition(.3s)
+        &:hover
+          height: 80px
+          a 
+            padding: .4em 0
         a
+          display: block  
+          width: 100%
           +transition(.5s)
           &:hover
             color: black
