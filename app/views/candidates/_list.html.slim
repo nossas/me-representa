@@ -1,0 +1,13 @@
+table.candidates_list
+  thead
+
+    td Eu voto
+    td Candidatos
+    td
+  - candidates.each_with_index do |candidate, index|
+    tr
+      td
+      td
+        = link_to candidate["nickname"], candidate_path(candidate['id'])
+        span= candidate["symbol"]
+      td.match= number_to_percentage(candidate["score"], precision: 0)
