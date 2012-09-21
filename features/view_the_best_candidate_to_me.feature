@@ -30,6 +30,6 @@ Feature: View the best candidate to me
     And I choose "Sim" for the question "tem animais de estimação?"
     And I press "Ver os partidos mais semelhantes comigo"
     And I should be in "the parties page"
-    When I click "Por um Rio Melhor (coligação)"
+    When I click "Por um Rio Melhor"
     Then I should see Leonardo Eloi
     And I should see 100%

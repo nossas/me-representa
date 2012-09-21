@@ -28,6 +28,6 @@ Feature: View the best party to me
     And I choose "Sim" for the question "tem animais de estimação?"
     When I press "Ver os partidos mais semelhantes comigo"
     Then I should be in "the parties page"
-    And I should see Por um Rio Melhor (coligação)
+    And I should see Por um Rio Melhor
     And I should see 100%
     And I should not see MR
