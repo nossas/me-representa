@@ -22,7 +22,7 @@
   .candidate_info.filters_box
     h2 Filtre os candidatos
     .box
-      = form_for :candidate, url: "", method: :get, html: { class: 'filter' } do |f|
+      = form_for :candidate, url: "", remote: true, method: :get, html: { class: 'filter' } do |f|
         h3 Idade
         label
           = f.radio_button "", "1", name: "by_age"
@@ -53,7 +53,7 @@
           = f.check_box "", {name: 'by_scholarity[]'},'Superior incompleto', ''
           | Superior Incompleto 
         label
-          = f.check_box "", {name: 'scholarity[]'}, 'Superior completo', '' 
+          = f.check_box "", {name: 'by_scholarity[]'}, 'Superior completo', '' 
           | Superior Completo 
 
         h3 Reeleição
@@ -75,17 +75,7 @@
 
 
 
-  .candidate_bio
+  .candidate_bio.list_of_candidates
     .parties
-      table.candidates_list
-        thead
-          td Eu voto
-          td Candidatos
-          td
-        - @candidates.each_with_index do |candidate, index|
-          tr
-            td
-            td
-              = link_to candidate["name"], candidate_path(candidate['id'])
-              span= candidate["symbol"]
-            td.match= number_to_percentage(candidate["score"], precision: 0)
+      = render partial: 'candidates/list', locals: { candidates: @candidates }
+

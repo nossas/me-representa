@@ -94,32 +94,32 @@ end
 
 Then /^I should see ([^"]*)$/ do |arg1|
   case arg1
-    when "a Facebook share button for this question"
-      page.should have_css("li[data-id=\"#{@question.id}\"] .share_options li.twitter")
-    when "a Twitter share button for this question"
-      page.should have_css("li[data-id=\"#{@question.id}\"] .share_options li.facebook")
-    when "some share buttons for my truth"
-      page.find(".form.truth").should have_css("a.twitter_btn")
-      page.find(".form.truth").should have_css("a.fb_btn")
-    when "some share buttons for my dare"
-      page.find(".form.dare").should have_css("a.twitter_btn")
-      page.find(".form.dare").should have_css("a.fb_btn")
-    when "that dare"
-      page.should have_content(@dare.text)
-    when "that truth"
-      page.should have_content(@truth.text)
-    when "1 voto"
-      sleep 1
-      page.find("li.#{@question.role_type} span.votes").text.should == "1"
-    when "question's text field"
-      page.should have_css("textarea[name=\"question[text]\"]")
-    when "question's role_type field"
-      page.should have_css("select[name=\"question[role_type]\"]")
-    when "question's category field"
-      page.should have_css("select[name=\"question[category_id]\"]")
+  when "a Facebook share button for this question"
+    page.should have_css("li[data-id=\"#{@question.id}\"] .share_options li.twitter")
+  when "a Twitter share button for this question"
+    page.should have_css("li[data-id=\"#{@question.id}\"] .share_options li.facebook")
+  when "some share buttons for my truth"
+    page.find(".form.truth").should have_css("a.twitter_btn")
+    page.find(".form.truth").should have_css("a.fb_btn")
+  when "some share buttons for my dare"
+    page.find(".form.dare").should have_css("a.twitter_btn")
+    page.find(".form.dare").should have_css("a.fb_btn")
+  when "that dare"
+    page.should have_content(@dare.text)
+  when "that truth"
+    page.should have_content(@truth.text)
+  when "1 voto"
+    sleep 1
+    page.find("li.#{@question.role_type} span.votes").text.should == "1"
+  when "question's text field"
+    page.should have_css("textarea[name=\"question[text]\"]")
+  when "question's role_type field"
+    page.should have_css("select[name=\"question[role_type]\"]")
+  when "question's category field"
+    page.should have_css("select[name=\"question[category_id]\"]")
 
-    else
-      page.should have_content(arg1)
+  else
+    page.should have_content(arg1)
   end
 end
 
@@ -199,7 +199,7 @@ Then /^an email should be sent to "(.*?)"$/ do |arg1|
 end
 
 Given /^there is a candidate called "(.*?)"$/ do |arg1|
-  @candidate = FactoryGirl.create(:candidate, :name => arg1)
+  @candidate = FactoryGirl.create(:candidate, :name => arg1, nickname: arg1)
 end
 
 
@@ -238,9 +238,48 @@ Given /^there is a candidate for this party$/ do
 end
 
 Given /^there is a candidate called "(.*?)" for this party$/ do |arg1|
-  @candidate = FactoryGirl.create(:candidate, name: arg1, :party => @party)
+  @candidate = FactoryGirl.create(:candidate, name: arg1, :party => @party, nickname: arg1)
 end
 
 Given /^there is an unrelated party called "(.*?)"$/ do |arg1|
   @party = FactoryGirl.create(:party, :symbol => arg1, :union => nil)
+end
+
+
+Given /^there is a candidate called "(.*?)" and (\d+) years old for this party$/ do |arg1, arg2|
+  @candidate = FactoryGirl.create(:candidate, name: arg1, nickname: arg1, born_at: Time.now - arg2.to_i.years, party: @party) 
+end
+
+Given /^the candidate "(.*?)" answered "(.*?)" for this question$/ do |arg1, arg2|
+  FactoryGirl.create(:candidate_answer, question: @question, responder: Candidate.find_by_nickname(arg1), short_answer: arg2)
+end
+
+
+Given /^I choose "(.*?)" from the filter form$/ do |arg1|
+  choose(arg1)
+end
+
+Given /^there is a candidate "(.*?)" with scholarity "(.*?)"$/ do |arg1, arg2| 
+  @candidate = FactoryGirl.create(:candidate, name: arg1, nickname: arg1, scholarity: arg2, party: @party) 
+end
+
+Given /^there is a candidate "(.*?)" that is not a politician$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, name: arg1, nickname: arg1, politician: false, party: @party) 
+end
+
+Given /^there is a candidate "(.*?)" that is a politician$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, name: arg1, nickname: arg1, politician: true,  party: @party) 
+end
+
+Given /^there is a candidate "(.*?)" that is male$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, name: arg1, nickname: arg1, male: true,  party: @party) 
+end
+
+Given /^there is a candidate "(.*?)" that is female$/ do |arg1|
+  @candidate = FactoryGirl.create(:candidate, name: arg1, nickname: arg1, male: false, party: @party) 
+end
+
+
+When /^I check "(.*?)" from the filter form$/ do |arg1|
+  check(arg1) 
 end
