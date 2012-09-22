@@ -23,7 +23,14 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
-
+.loading
+  background: lighten($orange, 35%)
+  +border-radius(200px)
+  border: 1px dashed lighten(gray, 15%)
+  position: absolute
+  width:  9%
+  margin-left: 23%
+  margin-top: 5%
 .show_form
   font-family: "Londrina solid"
   font-size: 1.4em
@@ -1346,6 +1353,7 @@ body.candidates#index
     font-size: 1.4em
   .parties
     padding: 1.4em
+    min-height: 150px
   .candidate_info .box, .candidate_bio .box
     height: auto !important
     max-height: none !important
@@ -1415,5 +1423,7 @@ body.candidates#index
       text-shadow: none
       letter-spacing: 1px
     td.match  
+      text-align: center
+      font-size: 2.2em
       color: $blue
 

@@ -76,6 +76,7 @@
 
 
   .candidate_bio.list_of_candidates
+    .loading.hidden= image_tag 'spinning_bottle.gif'
     .parties
       = render partial: 'candidates/list', locals: { candidates: @candidates }
 
