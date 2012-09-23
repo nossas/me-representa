@@ -1,8 +1,20 @@
+.wrapper.matching
+  .padd
+    h1 Chegou a hora da verdade!
+    h2 Faça o teste e descubra agora quais candidatos combinam mais com você e com o que deseja para o Rio.
+    = image_tag "Home-Fase3.jpg"
+    p E aí, vamos lá?
+    .buttons
+      - if current_user.nil?
+        = link_to "Entrar com o Facebook", "/auth/facebook", :class => "btn"
+      - else
+        = link_to "Começar o teste", new_user_answer_path(current_user), :class => "btn"
+
 .wrapper.link_to_candidates
   .padd
     = image_tag "candidates_link_to.gif"
     = link_to t('phase2.link_to_candidates'), "#/", title: "Clique para expandir/recolher o formulário"
-p
+  
 .wrapper.form_to_candidates.hidden
   .padd
     fieldset
