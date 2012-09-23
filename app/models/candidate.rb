@@ -5,6 +5,7 @@ class Candidate < ActiveRecord::Base
 
   belongs_to :party
   has_many :answers, :as => :responder
+  has_many :likes
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
  
   scope :by_age,          ->(start, end_at) { where(['EXTRACT(year from current_date) - EXTRACT(year from born_at) 
