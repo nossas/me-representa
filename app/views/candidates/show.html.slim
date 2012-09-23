@@ -44,7 +44,7 @@
       .allies
         - @candidate.allies.each_with_index do |candidate, index|
           .ally[class="#{cycle('odd', 'even')} #{(index > 7 ? ' hidden' : '')}"]
-            = link_to candidate.name, candidate_path(candidate)
+            = link_to candidate.nickname, candidate_path(candidate)
             span= candidate.party.symbol
         .more= link_to "Ver mais candidatos", "#/", id: "show_more_candidates" if @candidate.allies.count > 5
   .candidate_answers
