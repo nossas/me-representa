@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_one :like
   has_many :questions
   has_many :authorizations
   has_many :answers, :as => :responder
