@@ -43,8 +43,6 @@ $grid-half: $grid-system * 0.5
   +grid-container
   .row
     overflow: hidden
-.hidden
-  display: none !important
 .message, .candidate_answers
   +grid(16)
 
@@ -1258,6 +1256,8 @@ body.candidates#show, body.candidates#index, body.candidates#home
       padding: .4em 0
       margin-bottom: .4em
       font-size: .6em
+      &.hidden
+        display: none
       &.odd
         margin-right: 7em
       a
