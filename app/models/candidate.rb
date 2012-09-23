@@ -2,6 +2,7 @@ class Candidate < ActiveRecord::Base
   attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity
   validates :number, :token, :uniqueness => true
   validates :name, :number, :party_id, :presence => true
+
   belongs_to :party
   has_many :answers, :as => :responder
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
@@ -42,4 +43,10 @@ class Candidate < ActiveRecord::Base
     connection.select_all(candidates.order("score DESC").group("candidates.name, candidates.nickname, candidates.id, symbol"))
   end
 
+
+  def allies
+    a = Party.find(self.party).candidates 
+    a << Union.find(self.party.union.id).candidates if self.party.union
+    a.uniq
+  end
 end

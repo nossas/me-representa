@@ -43,7 +43,8 @@ $grid-half: $grid-system * 0.5
   +grid-container
   .row
     overflow: hidden
-
+.hidden
+  display: none !important
 .message, .candidate_answers
   +grid(16)
 
@@ -56,6 +57,8 @@ section.header
 .logo 
   +grid(4)
   +alpha
+.candidate_allies
+  +grid(16)
 .candidate_info
   +grid(5)
 .discover_your_candidate
@@ -1209,10 +1212,18 @@ body.candidates#show, body.candidates#index, body.candidates#home
       border-left: 1px dashed lighten(gray, 45%)
       border-bottom: 1px dashed lighten(gray, 45%)
       padding-left: .5em
+  .candidate_info
+    h1
+      line-height: 1em
+      margin-bottom: 0 !important
+    h2.number_of
+      color: $orange !important
+
   .candidate_bio
     .box
-      height: 230px 
+      height: 285px 
       overflow: auto
+    .bio
   .candidate_bio, .candidate_info
     font-size: .8em
     span
@@ -1238,6 +1249,21 @@ body.candidates#show, body.candidates#index, body.candidates#home
     small
       color: gray
       font-style: italic
+  .candidate_allies
+    margin-top: 1em
+    .allies .ally
+      display: inline-block
+      width: 46%
+      border-bottom: 1px solid lighten(gray, 40%)
+      padding: .4em 0
+      margin-bottom: .4em
+      font-size: .6em
+      &.odd
+        margin-right: 7em
+      a
+        color: $orange
+        text-transform: uppercase
+        padding-right: .4em
   .candidate_answers
     margin: 1.5em 0
     .box
@@ -1352,8 +1378,17 @@ body.candidates#index
     font-family: "Londrina solid"
     font-size: 1.4em
   .parties
-    padding: 1.4em
+    padding: 0
     min-height: 150px
+    border-bottom: 1px solid lighten(gray, 40%)
+  .candidate_bio
+    h2
+      color: lighten($blue, 5%)
+      font-size: 1.6em
+      text-align: center
+    .description
+      line-height: 1.6em !important
+      font-size: 1em !important
   .candidate_info .box, .candidate_bio .box
     height: auto !important
     max-height: none !important
@@ -1408,17 +1443,21 @@ body.candidates#index
       margin-bottom: .8em
     td
       border-right: 4px solid white
+      letter-spacing: 1px
+      +text-shadow(0 1px 1px white)
       +border-radius(6px)
     thead
       td
-        background: lighten(gray, 5%)
+        background: lighten(gray, 25%)
+        letter-spacing: 1px
         color: white
     a
       color: $orange
       font-size: 1.1em
+      line-height: 1em
     span
-      padding-left: .5em
       color: lighten(black, 45%)
+      line-height: .8em
       font-size: .8em
       text-shadow: none
       letter-spacing: 1px
@@ -1427,3 +1466,23 @@ body.candidates#index
       font-size: 2.2em
       color: $blue
 
+  .more
+    margin: 1em 0
+    text-align: center
+    a
+      color: $orange
+      border-bottom: 1px solid $orange
+      &:hover
+        color: $blue
+        border: none
+      &::after
+        content: " ▾"
+  .liked_it
+    margin: 1.2em 0
+    h3
+      font-family: "Londrina solid"
+      text-transform: uppercase 
+      color: darken(gray, 15%)
+      text-align: center
+      letter-spacing: 1px
+      font-size: 1.5em

@@ -15,8 +15,13 @@
 
       p.description
         | Clique no nome do candidato para ver seu perfil e saber quais outros candidatos do partido 
-        | ele pode levar para a Câmara se for eleito. Depois disso, marque uma estrela no candidato 
-        | que melhor te representa. Assim, no dia das eleições, caso queira, o Meu Rio vai te enviar 
+        | ele pode levar para a Câmara se for eleito. 
+        br
+        br
+        | Depois disso, marque uma estrela no candidato 
+        | que melhor te representa.
+        br
+        | Assim, no dia das eleições, caso queira, o Meu Rio vai te enviar 
         | um SMS para você não dar branco na frente da urna.
    
   .candidate_info.filters_box
@@ -24,6 +29,9 @@
     .box
       = form_for :candidate, url: "", remote: true, method: :get, html: { class: 'filter' } do |f|
         h3 Idade
+        label
+          = f.radio_button "", "", name: "by_age"
+          | Todas
         label
           = f.radio_button "", "1", name: "by_age"
           | de 18 a 25 anos
@@ -77,6 +85,12 @@
 
   .candidate_bio.list_of_candidates
     .loading.hidden= image_tag 'spinning_bottle.gif'
-    .parties
-      = render partial: 'candidates/list', locals: { candidates: @candidates }
+    .box
+      .parties
+        = render partial: 'candidates/list', locals: { candidates: @candidates }
+      .liked_it
+        h3 Curtiu? Compartilhe seu resultado com seus amigos!
+      
+      
+
 

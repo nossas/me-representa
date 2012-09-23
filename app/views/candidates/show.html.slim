@@ -11,13 +11,11 @@
     .link_to_back= link_to "Voltar aos candidatos", root_path
     .box
       h1= @candidate.nickname
+      h2.number_of= @candidate.number
       table
         tr.party
           td Partido:
           td= @candidate.party.symbol
-        tr.number
-          td Número:
-          td= @candidate.number
         tr.age
           td Idade:
           td= ((Date.today - @candidate.born_at)/365).to_i if @candidate.born_at
@@ -34,9 +32,21 @@
 
   .candidate_bio
     .box
-      h2 Quais são meus planos?
+      h2 Um pouco mais sobre mim 
       .bio= @candidate.bio.blank? ? content_tag(:small, "#{@candidate.name} ainda não disse quais são seus planos, que feio...") : simple_format(@candidate.bio)
 
+
+
+  .candidate_allies
+    .box
+      h2 Quem eu posso puxar
+      span Veja quais candidates podem vir a tomar posse se você votar em mim.
+      .allies
+        - @candidate.allies.each_with_index do |candidate, index|
+          .ally[class="#{cycle('odd', 'even')} #{(index > 7 ? ' hidden' : '')}"]
+            = link_to candidate.name, candidate_path(candidate)
+            span= candidate.party.symbol
+        .more= link_to "Ver mais candidatos", "#/", id: "show_more_candidates" if @candidate.allies.count > 5
   .candidate_answers
     .box
       h2 O que eu respondi
