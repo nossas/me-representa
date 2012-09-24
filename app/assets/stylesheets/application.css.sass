@@ -99,13 +99,20 @@ a[href="/auth/facebook"], a[href="/auth/meurio"]
   letter-spacing: 1px
   color: white !important
   padding: 4px 15px
+  border: none
   +border-radius(5px)
+  &:hover
+    border: none
 
 a[href="/auth/meurio"]
   background: $mr_green
+  &:hover
+    background: lighten($mr_green, 10%)
 
 a[href="/auth/facebook"]
   background: $fb_blue
+  &:hover
+    background: lighten($fb_blue, 10%)
 
 @mixin btn($color1, $color2)
   color: white
@@ -1136,6 +1143,8 @@ body.answers
 
     .questionnaire
       background: white !important
+      h1
+        padding: 0 1em 1em 1em
     .title
       color: $blue
       width: 90%
@@ -1486,3 +1495,26 @@ body.candidates#index
       text-align: center
       letter-spacing: 1px
       font-size: 1.5em
+
+.wrapper.matching
+  margin-bottom: 2em
+  h1, h2
+    line-height: normal
+  h2
+    font-size: 2em
+    color: darken($blue, 10%)
+    padding-top: 0
+    border: none
+  p
+    color: lighten(gray, 10%)
+    font-size: 1.5em
+    font-family: "Londrina solid"
+    text-align: center
+    text-transform: uppercase
+    margin-top: 1em
+  .buttons
+    text-align: center
+    margin: 1em 0
+    font-size: 1.5em
+    a
+      color: white

@@ -12,7 +12,7 @@ Feature: View the best party to me
     And this candidate answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    When I press "Ver os partidos mais semelhantes comigo"
+    When I press "Ver resultado"
     Then I should be in "the parties page"
     And I should see MR
     And I should see 100%
@@ -26,7 +26,7 @@ Feature: View the best party to me
     And this candidate answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    When I press "Ver os partidos mais semelhantes comigo"
+    When I press "Ver resultado"
     Then I should be in "the parties page"
     And I should see Por um Rio Melhor
     And I should see 100%

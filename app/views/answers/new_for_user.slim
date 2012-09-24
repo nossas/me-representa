@@ -1,7 +1,8 @@
 .wrapper.questionnaire
   .padd
+    h1 Responda às verdades e consequências e depois faça a comparação.
     .questions
       = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
       = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
     .finish_button
-      = link_to "Ver os partidos mais semelhantes comigo", user_parties_path(current_user), :class => "btn" if current_user
+      = link_to "Ver resultado", user_parties_path(current_user), :class => "btn" if current_user
