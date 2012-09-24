@@ -16,7 +16,7 @@ Feature: Filter candidates
     And the candidate "Ainbinder" answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    And I press "Ver os partidos mais semelhantes comigo"
+    And I press "Ver resultado"
     And I should be in "the parties page"
     And I click "MR"
     And I should see Leonardo Eloi
@@ -41,7 +41,7 @@ Feature: Filter candidates
     And the candidate "Ainbinder" answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    And I press "Ver os partidos mais semelhantes comigo"
+    And I press "Ver resultado"
     And I should be in "the parties page"
     And I click "MR"
     And I should see Leonardo Eloi
@@ -65,7 +65,7 @@ Feature: Filter candidates
     And the candidate "Ainbinder" answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    And I press "Ver os partidos mais semelhantes comigo"
+    And I press "Ver resultado"
     And I should be in "the parties page"
     And I click "MR"
     And I should see Leonardo Eloi
@@ -89,7 +89,7 @@ Feature: Filter candidates
     And the candidate "Ainbinder" answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    And I press "Ver os partidos mais semelhantes comigo"
+    And I press "Ver resultado"
     And I should be in "the parties page"
     And I click "MR"
     And I should see Leonardo Eloi

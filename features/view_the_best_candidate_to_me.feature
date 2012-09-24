@@ -13,7 +13,7 @@ Feature: View the best candidate to me
     And this candidate answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    And I press "Ver os partidos mais semelhantes comigo"
+    And I press "Ver resultado"
     Then I should be in "the parties page"
     When I click "MR"
     Then I should see Leonardo Eloi
@@ -28,7 +28,7 @@ Feature: View the best candidate to me
     And this candidate answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    And I press "Ver os partidos mais semelhantes comigo"
+    And I press "Ver resultado"
     And I should be in "the parties page"
     When I click "Por um Rio Melhor"
     Then I should see Leonardo Eloi
