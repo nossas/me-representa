@@ -7,6 +7,9 @@ table.candidates_list
   - candidates.each_with_index do |candidate, index|
     tr[class=(index > 4 ? "hidden": "")]
       td
+        - if can? :create, Like
+          = form_for @like, html: { class: 'like' } do |f|
+            = f.radio_button :candidate_id, candidate["id"]
       td
         = link_to candidate["nickname"], candidate_path(candidate['id'])
         span= candidate["symbol"]

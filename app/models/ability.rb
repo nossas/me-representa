@@ -7,9 +7,18 @@ class Ability
     can :create, Vote
     can :finish, Candidate
     can :update, Candidate
+
     if request.format == "csv"
       cannot :read, Candidate
     end
+
+    if user
+      can :create, Like
+      can :update, Like do |like|
+        like.user == user
+      end
+    end
+
 
     if user and user.admin?
       can :manage, :all

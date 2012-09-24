@@ -32,7 +32,6 @@ class CandidatesController < ApplicationController
     scope.by_gender(value.delete_if(&:blank?))
   end
 
-
   before_filter only: [:home] { @truths = Question.truths.chosen; @dares = Question.dares.chosen }
 
   before_filter only: [:index] do
@@ -45,6 +44,7 @@ class CandidatesController < ApplicationController
     elsif params[:union_id] and !params[:user_id]
       @candidates = @union.candidates
     end
+    @like = Like.find_by_user_id(current_user.id) || current_user.build_like if current_user
   end
 
   before_filter :only => [:index] { render partial: 'candidates/list', locals: { candidates: @candidates } if request.xhr? }
