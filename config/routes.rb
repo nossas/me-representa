@@ -3,6 +3,9 @@ CariocaPergunta::Application.routes.draw do
 
   post '/candidates/check', to: 'candidates#check', as: :candidates_check
 
+
+  resources :likes, only: [:create, :update]
+
   resources :candidates do
     resources :answers, except: [:destroy] 
     put :finish
@@ -23,7 +26,7 @@ CariocaPergunta::Application.routes.draw do
     end
   end
 
-   resources :subscribers
+  resources :subscribers
   
   resources :sessions,    only: [:destroy]
   

@@ -7,6 +7,7 @@ App.Candidates.Index = Backbone.View.extend({
   },
 
   events: {
+    'change form.like input' : 'submitFilter',
     'change .filters_box' : 'submitFilter',
     'ajax:before'         : 'showSpinningBottle',
     'ajax:success'       : 'loadCandidates',
