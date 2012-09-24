@@ -1,14 +1,14 @@
-.wrapper.matching
-  .padd
-    h1 Chegou a hora da verdade!
-    h2 Responda ao questionário e descubra agora quais candidatos combinam mais com você e com o que você deseja para o Rio.
-    = image_tag "Home-Fase3.jpg"
-    p E aí, vamos lá?
-    .buttons
-      - if current_user.nil?
-        = link_to "Entrar com o Facebook", "/auth/facebook", :class => "btn"
-      - else
-        = link_to "Começar o teste", new_user_answer_path(current_user), :class => "btn"
+/.wrapper.matching
+/  .padd
+/    h1 Chegou a hora da verdade!
+/    h2 Responda ao questionário e descubra agora quais candidatos combinam mais com você e com o que você deseja para o Rio.
+/    = image_tag "Home-Fase3.jpg"
+/    p E aí, vamos lá?
+/    .buttons
+/      - if current_user.nil?
+/        = link_to "Entrar com o Facebook", "/auth/facebook", :class => "btn"
+/      - else
+/        = link_to "Começar o teste", new_user_answer_path(current_user), :class => "btn"
 
 .wrapper.link_to_candidates
   .padd
