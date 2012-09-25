@@ -5,7 +5,7 @@ class Candidate < ActiveRecord::Base
 
   belongs_to :party
   has_many :answers, :as => :responder
-  has_many :likes
+  has_many :users
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
  
   scope :by_age,          ->(start, end_at) { where(['EXTRACT(year from current_date) - EXTRACT(year from born_at) 
@@ -45,9 +45,4 @@ class Candidate < ActiveRecord::Base
   end
 
 
-  def allies
-    a = Party.find(self.party).candidates 
-    a << Union.find(self.party.union.id).candidates if self.party.union
-    a.uniq
-  end
 end

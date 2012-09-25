@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
-  has_one :like
   has_many :questions
   has_many :authorizations
   has_many :answers, :as => :responder
+
+  belongs_to :candidate
+
   validates_presence_of :email, :name
+
+  attr_accessible :candidate_id, :email, :name, :picture
 
   def self.create_from_hash!(hash)
     create(

@@ -17,10 +17,6 @@ class Ability
       can :update, Answer do |a|
         a.user == user
       end
-      can :create, Like
-      can :update, Like do |like|
-        like.user == user
-      end
     end
 
 

@@ -42,11 +42,7 @@
       h2 Quem eu posso puxar
       span Veja quais candidates podem vir a tomar posse se você votar em mim.
       .allies
-        - @candidate.allies.each_with_index do |candidate, index|
-          .ally[class="#{cycle('odd', 'even')} #{(index > 7 ? ' hidden' : '')}"]
-            = link_to candidate.nickname, candidate_path(candidate)
-            span= candidate.party.symbol
-        .more= link_to "Ver mais candidatos", "#/", id: "show_more_candidates" if @candidate.allies.count > 5
+      .more= link_to "Ver mais candidatos", "#/", id: "show_more_candidates" if @candidate.allies.count > 5
   .candidate_answers
     .box
       h2 O que eu respondi
