@@ -7,6 +7,7 @@ FactoryGirl.define do
   factory(:user) do |user|
     user.name FactoryGirl.generate(:name)
     user.email FactoryGirl.generate(:email)
+    user.association :candidate
   end
 
   factory(:authorization) do |service|
@@ -61,10 +62,5 @@ FactoryGirl.define do
     a.association :responder, :factory => :user
     a.association :question
     a.short_answer "Sim"
-  end
-
-  factory(:like) do |like|
-    like.association :candidate
-    like.association :user
   end
 end

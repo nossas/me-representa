@@ -17,6 +17,7 @@ class Ability
       can :update, Answer do |a|
         a.user == user
       end
+      can :update, User
     end
 
 

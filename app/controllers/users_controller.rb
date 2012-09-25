@@ -10,5 +10,7 @@ class UsersController < ApplicationController
     end
   end
 
-
+  def update
+    update! { redirect_to :back and return }
+  end
 end

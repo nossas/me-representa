@@ -1223,18 +1223,26 @@ body.answers
         display: inline-block
 
 
-table.candidates_list
-  tbody
-    td.liked label 
-      background: image-url('star_off.png') no-repeat bottom center
-      display: block
-      text-indent: -9999px
-      +transition(.2s)
-      &:active, &.selected
-        background: image-url('star_on.png') no-repeat bottom center
-      &:hover
-        background: image-url('star_on.png') no-repeat bottom center
-        cursor: pointer
+table.candidates_list, .candidate_info .likes
+  td.liked label, .edit_user label
+    background: image-url('star_off.png') no-repeat bottom 
+    display: block
+    text-indent: -9999px
+    +transition(.2s)
+    &:active, &.selected
+      background: image-url('star_on.png') no-repeat bottom center
+    &:hover
+      background: image-url('star_on.png') no-repeat bottom center
+      cursor: pointer
+  .edit_user label
+    float: left
+    width: 24px
+    height: 24px
+    line-height: 24px
+    margin-right: 1em
+  .candidate_info .likes
+    margin-bottom: 1em
+    color: gray
 
 body.candidates#show, body.candidates#index, body.candidates#home
   .discover_your_candidate, .make_the_test

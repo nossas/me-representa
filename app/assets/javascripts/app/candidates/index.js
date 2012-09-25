@@ -8,6 +8,7 @@ App.Candidates.Index = Backbone.View.extend({
 
   events: {
     'change form.like input' : 'submitFilter',
+    'change form.edit_user input' : 'submitFilter',
     'change .filters_box' : 'submitFilter',
     'ajax:before'         : 'showSpinningBottle',
     'ajax:success'       : 'loadCandidates',
@@ -28,7 +29,9 @@ App.Candidates.Index = Backbone.View.extend({
   },
 
   submitFilter: function(event){
-    jQuery(event.target).parents('form').submit();
+    $(event.target).closest('form').trigger('submit');
   }
 
 });
+
+App.Candidates.Show = App.Candidates.Index.extend();

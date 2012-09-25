@@ -11,9 +11,10 @@
     .link_to_back= link_to "Voltar aos candidatos", root_path
     .box
       .likes
-        = form_for Like.new do |form|
-          =
-        = t("activerecord.attributes.candidate.like", :count => @candidate.likes.count)
+        - if current_user
+          = form_for current_user do |form|
+            label[class="#{'selected' if @candidate.id == current_user.candidate_id}"]= form.check_box :candidate_id, {}, @candidate.id, ''
+        = t("activerecord.attributes.candidate.users", :count => @candidate.users.count)
       h1= @candidate.nickname
       h2.number_of= @candidate.number
       table
@@ -46,7 +47,7 @@
       h2 Quem eu posso puxar
       span Veja quais candidates podem vir a tomar posse se você votar em mim.
       .allies
-      .more= link_to "Ver mais candidatos", "#/", id: "show_more_candidates" if @candidate.allies.count > 5
+      /.more= link_to "Ver mais candidatos", "#/", id: "show_more_candidates" if @candidate.allies.count > 5
   .candidate_answers
     .box
       h2 O que eu respondi

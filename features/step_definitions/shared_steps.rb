@@ -118,7 +118,7 @@ Then /^I should see ([^"]*)$/ do |arg1|
   when "question's category field"
     page.should have_css("select[name=\"question[category_id]\"]")
   when "like button"
-    page.should have_css("form[class=\"new_like\"]")
+    page.should have_css("form[class=\"edit_user\"]")
   else
     page.should have_content(arg1)
   end
@@ -285,5 +285,5 @@ When /^I check "(.*?)" from the filter form$/ do |arg1|
 end
 
 Given /^this candidate have (\d+) likes$/ do |arg1|
-  arg1.to_i.times { FactoryGirl.create(:like, :candidate => @candidate) }
+  arg1.to_i.times { FactoryGirl.create(:user, :candidate => @candidate) }
 end

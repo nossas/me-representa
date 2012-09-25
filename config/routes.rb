@@ -19,7 +19,7 @@ CariocaPergunta::Application.routes.draw do
     resources :votes, :only => :create
   end
 
-  resources :users, only: [:index, :new, :create] do
+  resources :users, only: [:index, :new, :create, :update] do
     resources :answers, except: [:index, :new, :destroy]
     resources :parties, :unions, only: [:index] do
       resources :candidates
