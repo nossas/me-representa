@@ -62,4 +62,9 @@ FactoryGirl.define do
     a.association :question
     a.short_answer "Sim"
   end
+
+  factory(:like) do |like|
+    like.association :candidate
+    like.association :user
+  end
 end

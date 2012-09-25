@@ -202,3 +202,8 @@ pt-BR:
     attributes:
       question:
         category: "Assunto"
+      candidate:
+        like:
+          zero: "nenhuma intenção de voto"
+          one: "1 intenção de voto"
+          other: "%{count} intenções de voto"

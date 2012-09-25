@@ -117,7 +117,8 @@ Then /^I should see ([^"]*)$/ do |arg1|
     page.should have_css("select[name=\"question[role_type]\"]")
   when "question's category field"
     page.should have_css("select[name=\"question[category_id]\"]")
-
+  when "like button"
+    page.should have_css("form[class=\"new_like\"]")
   else
     page.should have_content(arg1)
   end
@@ -279,7 +280,10 @@ Given /^there is a candidate "(.*?)" that is female$/ do |arg1|
   @candidate = FactoryGirl.create(:candidate, name: arg1, nickname: arg1, male: false, party: @party) 
 end
 
-
 When /^I check "(.*?)" from the filter form$/ do |arg1|
   check(arg1) 
+end
+
+Given /^this candidate have (\d+) likes$/ do |arg1|
+  arg1.to_i.times { FactoryGirl.create(:like, :candidate => @candidate) }
 end

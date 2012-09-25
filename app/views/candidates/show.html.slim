@@ -10,6 +10,10 @@
   .candidate_info
     .link_to_back= link_to "Voltar aos candidatos", root_path
     .box
+      .likes
+        = form_for Like.new do |form|
+          =
+        = t("activerecord.attributes.candidate.like", :count => @candidate.likes.count)
       h1= @candidate.nickname
       h2.number_of= @candidate.number
       table
