@@ -13,6 +13,10 @@ class Ability
     end
 
     if user
+      can :create, Answer
+      can :update, Answer do |a|
+        a.user == user
+      end
       can :create, Like
       can :update, Like do |like|
         like.user == user

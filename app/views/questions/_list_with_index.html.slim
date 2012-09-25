@@ -25,7 +25,7 @@
           p
           = form.submit 'Salvar', data: { :"disable-with" => "Salvando..." }, class: 'hidden button'
 
-    - elsif current_user && @user == current_user
+    - elsif current_user.present? 
       = form_for [current_user, (current_user.answers.find_by_question_id(question.id) || Answer.new)], :remote => true do |form|
         = form.hidden_field :question_id, :value => question.id
         label

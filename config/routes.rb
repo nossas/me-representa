@@ -20,7 +20,7 @@ CariocaPergunta::Application.routes.draw do
   end
 
   resources :users, only: [:index, :new, :create] do
-    resources :answers, except: [:destroy] 
+    resources :answers, except: [:index, :new, :destroy]
     resources :parties, :unions, only: [:index] do
       resources :candidates
     end
@@ -33,5 +33,6 @@ CariocaPergunta::Application.routes.draw do
   get 'auth/meurio',      as: :meurio_auth
   get 'auth/facebook',    as: :facebook_auth
 
+  resources :answers, except: [:destroy]
   root :to => "candidates#home"
 end

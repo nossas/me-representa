@@ -143,7 +143,7 @@ When /^I go to "(.*?)"$/ do |arg1|
   elsif arg1 == "this candidate answers page without token"
     visit new_candidate_answer_path(@candidate)
   elsif arg1 == "the answers page"
-    visit new_user_answer_path(@current_user)
+    visit new_answer_path
   elsif arg1 == "this candidate page"
     visit candidate_path(@candidate)
   else
