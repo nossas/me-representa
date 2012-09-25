@@ -4,7 +4,6 @@ require 'spec_helper'
 describe Candidate do
   describe "Validations & Associations" do
     it { should have_many :answers }
-    it { should have_many :likes }
     it { should belong_to :party }
   end
 

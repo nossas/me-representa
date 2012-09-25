@@ -7,12 +7,6 @@ table.candidates_list
   - candidates.each_with_index do |candidate, index|
     tr[class=(index > 4 ? "hidden": "")]
       td.liked
-        - if can? :create, Like
-          = form_for @like, html: { class: 'like' } do |f|
-            label[class=(@like.candidate_id == candidate['id'].to_i ? 'selected' : 'not_selected')]= f.radio_button :candidate_id, candidate["id"]
-        - else
-          = form_for :like, url: "#{request.url}#login", method: :get, html: { class: 'like' } do |f|
-            label.not_selected= f.radio_button :candidate_id, "false"
       td
         = link_to candidate["nickname"], candidate_path(candidate['id'])
         span= candidate["symbol"]
