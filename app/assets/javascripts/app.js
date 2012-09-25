@@ -1,4 +1,13 @@
 var App = window.App = {
+  Router: Backbone.Router.extend({
+    routes: {
+      'login' : 'showLoginBox'
+    },
+
+    showLoginBox: function(){
+      jQuery.facebox({ div: "#meurio_login_box"}, 'my-style');
+    }
+  }),
   Questions: {},
   Candidates: {},
   Answers: {
@@ -6,6 +15,8 @@ var App = window.App = {
   Common: {
     init: function(){
       App.Common.login = new App.Common.Login({el: $('section.login')[0]});
+      new App.Router();
+      Backbone.history.start();
       $('select.chosen-select').chosen();
       $('#about_politician').hide();
       $('a[href="#about_politician"]').facebox('some html');

@@ -4,8 +4,14 @@ class ApplicationController < ActionController::Base
   before_filter :create_user_question_through_session
   before_filter { session[:votes] ||= [] }
 
-  protected
 
+
+  rescue_from CanCan::AccessDenied do |exception|
+    session[:redirect_url] = request.url
+    redirect_to "#{root_path}#login", :flash => {:login_alert => exception.message}
+  end
+
+  protected
   def current_user
     @current_user ||= User.find_by_id(session[:user_id])
   end

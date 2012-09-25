@@ -18,6 +18,14 @@ html
       meta property="og:description" content=t('site.description')
 
   body[class=controller.controller_name id=controller.action_name data-controller-class=controller.class.name data-controller-name=controller.controller_name.camelize data-action=controller.action_name.camelize]
+    #meurio_login_box.hidden
+      h2 Login com meu rio
+      | Entre com a sua conta do 
+      p= link_to "Facebook", facebook_auth_path, class: 'fb'
+      | --- ou --- 
+      p= link_to "Meu Rio", meurio_auth_path, class: 'mr' 
+
+
     - if alert
       section.alert.hidden
         .row

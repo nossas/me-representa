@@ -23,6 +23,22 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
+#facebox
+  position: fixed !important
+  left: 35% !important
+#facebox .popup
+  width: auto !important
+
+#facebox .my-style
+  h2
+    text-transform: uppercase
+    font-size: 1.4em !important
+    margin: 0
+    padding: 0
+#meurio_login_box
+
+
+
 .loading
   background: lighten($orange, 35%)
   +border-radius(200px)
@@ -1501,7 +1517,7 @@ body.candidates#index
   h1, h2
     line-height: normal
   h2
-    font-size: 2em
+    font-size: 1.4em
     color: darken($blue, 10%)
     padding-top: 0
     border: none
