@@ -5,7 +5,7 @@ var App = window.App = {
     },
 
     showLoginBox: function(){
-      jQuery.facebox({ div: "#meurio_login_box"}, 'my-style');
+      jQuery.facebox({ div: "#meurio_login_box"}, 'meurio_login_box');
     }
   }),
   Questions: {},
