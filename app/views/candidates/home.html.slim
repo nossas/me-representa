@@ -1,54 +1,11 @@
-/.wrapper.matching
-/  .padd
-/    h1 Chegou a hora da verdade!
-/    h2 Responda ao questionário e descubra agora quais candidatos combinam mais com você e com o que você deseja para o Rio.
-/    = image_tag "Home-Fase3.jpg"
-/    p E aí, vamos lá?
-/    .buttons
-/      - if current_user.nil?
-/        = link_to "Entrar com o Facebook", "/auth/facebook", :class => "btn"
-/      - else
-/        = link_to "Começar o teste", new_user_answer_path(current_user), :class => "btn"
-
-.wrapper.link_to_candidates
+.wrapper.matching
   .padd
-    = image_tag "candidates_link_to.gif"
-    = link_to t('phase2.link_to_candidates'), "#/", title: "Clique para expandir/recolher o formulário"
-  
-.wrapper.form_to_candidates.hidden
-  .padd
-    fieldset
-      legend 
-        | Insira seus dados para solicitar o reenvio de sua url única
-      = form_for :candidate, url: candidates_check_path(format: :json), remote: true, format: :json, method: :post do |f|
-        label
-          | Insira seu e-mail
-          = f.email_field :email
-        label 
-          | Insira seu celular 
-          = f.phone_field :mobile_phone, placeholder: 'Ex.: 99999999, sem espaços, DDD ou "-"'
-        label.omega 
-          | Partido
-          p= f.select :party, Party.all.collect { |p| [p.symbol, p.id] }, {}, class: 'chosen-select'
-        p.submit= f.submit "Enviar Dados", data: { :"disable-with" => "Enviando..." }
-    .unsuccessful.hidden.messages
-      h3 Infelizmente, seu cadastro não consta em nossa base de dados.
-      p.description
-        | Isso acontece porque o seu partido não quis fornecer seus dados ou enviou dados desatualizados. 
-        | Entre em contato com o seu partido e solicite que ele nos envie o seu email 
-        | e celular para #{mail_to "cadastro@verdadeouconsequencia.org.br"}
-      = link_to "Tentar novamente com outro email/celular", "#/", class: 'show_form'
-    .match_mobile.hidden.messages
-      h3 Muito bem! Em breve você receberá sua URL única por SMS.
-      p.description
-        | Um SMS com um link para você responder o questionário será enviado para o número de celular cadastrado em até 24 horas.
-        | Caso você não receba essa mensagem, entre em contato com #{mail_to "leonardo@meurio.org.br"}
-    .match_email.hidden.messages
-      h3 Sucesso! Sua URL única foi enviada ao seu e-mail cadastrado
-      p.description
-        | Um email com um link para você responder o questionário foi enviado para o endereço de email cadastrado. 
-        | Caso você não encontre esse email na sua caixa de entrada, procure na caixa de spam ou na sua lixeira. 
-        | Se tiver algum problema para acessar o questionário, entre em contato com #{mail_to "bernardo@meurio.org.br"}
+    h1 Chegou a hora da verdade!
+    h2 Responda ao questionário e descubra agora quais candidatos combinam mais com você e com o que você deseja para o Rio.
+    = image_tag "Home-Fase3.jpg"
+    p E aí, vamos lá?
+    .buttons
+      = link_to "Começar o teste", new_answer_path, :class => "btn #{'not_logged' if current_user.nil?}"
 
 
 .wrapper.parties
