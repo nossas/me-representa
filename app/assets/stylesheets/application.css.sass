@@ -1222,6 +1222,20 @@ body.answers
         color: white
         display: inline-block
 
+
+table.candidates_list
+  tbody
+    td.liked label 
+      background: image-url('star_off.png') no-repeat bottom center
+      display: block
+      text-indent: -9999px
+      +transition(.2s)
+      &:active, &.selected
+        background: image-url('star_on.png') no-repeat bottom center
+      &:hover
+        background: image-url('star_on.png') no-repeat bottom center
+        cursor: pointer
+
 body.candidates#show, body.candidates#index, body.candidates#home
   .discover_your_candidate, .make_the_test
     padding: .4em  0 0 0
@@ -1442,6 +1456,12 @@ body.parties#index, body.candidates#index
       td.match
         text-align: right
         color: $orange
+      td.liked
+        text-align: center !important
+        width: 12%
+      thead
+        td
+          padding: .4em
 body.candidates#index
   .union_head
     color: black
