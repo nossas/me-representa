@@ -46,11 +46,7 @@ class Candidate < ActiveRecord::Base
   end
 
   def gang
-    if self.party.union
-      self.party.candidates.where("id <> ?", self.id).concat(self.union.candidates.where("candidates.id <> ?", self.id))
-    else
-      self.party.candidates.where("id <> ?", self.id)
-    end
+    Candidate.joins(:party).where("(candidates.party_id = ? OR parties.union_id = ?) AND candidates.id <> ?", self.party_id, self.party.union_id, self.id)
   end
 
 end
