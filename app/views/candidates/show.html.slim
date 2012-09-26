@@ -1,5 +1,5 @@
 = content_for :og do
-  meta property="og:title" content=@candidate.nickname
+  meta property="og:title" content="Já escolheu seu candidato a vereador? Conheça o perfil de #{@candidate.nickname}"
   meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
   meta property="og:description" content=@candidate.bio
 
@@ -53,8 +53,8 @@
 
   .candidate_share
     h2 Curtiu? Agora compartilhe esse perfil com seus amigos!
-    = link_to "Compartilhe no Facebook", "http://www.facebook.com/dialog/feed?link=#{request.url}&redirect_uri=#{request.url}", :class => "btn facebook icon-facebook"
-    = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Já escolheu seu candidato a vereador? Conheça o perfil do(a) " + @candidate.nickname).encode}", :class => "btn twitter icon-twitter"
+    = link_to "Compartilhe no Facebook", "http://www.facebook.com/dialog/feed?app_id=#{ENV["FB_ID"]}&link=#{request.url}&redirect_uri=#{request.url}", :class => "btn facebook icon-facebook"
+    = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Já escolheu seu candidato a vereador? Conheça o perfil de " + @candidate.nickname).encode}", :class => "btn twitter icon-twitter", :target => "_blank"
 
   .candidate_answers
     .box
