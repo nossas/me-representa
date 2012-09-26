@@ -48,8 +48,8 @@
     .box
       h2 
         | Quem eu posso puxar?
-        small Veja quais candidatos podem vir a tomar posse se você votar em mim.
-      - @candidate.gang.each do |brother|
+        small Veja alguns candidatos que podem vir a tomar posse se você votar em mim.
+      - @candidate.gang.order("random()").limit(15).each do |brother|
         .brother
           = link_to brother.nickname, brother
           |  - #{brother.party.symbol}
