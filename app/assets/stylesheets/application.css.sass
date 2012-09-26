@@ -15,6 +15,7 @@ $gray: #333
 $header: #2BB1E3
 $fb_blue: #3B5998
 $mr_green: #059146
+$twitter_blue: #82bbce
 $new_blue: #28b4e5
 $grid-system: 16
 $ninesixty-columns: $grid-system
@@ -1356,6 +1357,37 @@ body.candidates#show, body.candidates#index, body.candidates#home
         color: $orange
         text-transform: uppercase
         padding-right: .4em
+  .candidate_share
+    +grid(16)
+    text-align: center
+    margin: 1em 0
+    h2
+      color: white
+      font-size: 1.5em
+      border: none
+      padding: 0
+      +text-shadow(black 1px 1px 1px)
+    .btn
+      color: white
+      padding: .7em
+      font-size: 1em
+      letter-spacing: 1px
+      +transition(.5s)
+      +border-radius(5px)
+      +text-shadow(black 1px 1px 1px)
+      &.facebook
+        background: $fb_blue
+        border-color: darken($fb_blue, 10%)
+        &:hover
+          background: lighten($fb_blue, 10%)
+      &.twitter
+        background: $twitter_blue
+        border-color: darken($twitter_blue, 5%)
+        &:hover
+          background: lighten($twitter_blue, 5%)
+      &:before
+        padding-right: .5em
+        +text-shadow(none)
   .candidate_answers
     margin: 1.5em 0
     .box

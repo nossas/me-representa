@@ -1,3 +1,8 @@
+= content_for :og do
+  meta property="og:title" content=@candidate.nickname
+  meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
+  meta property="og:description" content=@candidate.bio
+
 = content_for :header do
   .logo= link_to image_tag("bg_header_phase_two_cutted.png"), root_path
   .discover_your_candidate
@@ -34,13 +39,10 @@
           td Escolaridade:
           td= @candidate.scholarity
 
-
   .candidate_bio
     .box
       h2 Um pouco mais sobre mim 
       .bio= @candidate.bio.blank? ? content_tag(:small, "#{@candidate.name} ainda não disse quais são seus planos, que feio...") : simple_format(@candidate.bio)
-
-
 
   .candidate_allies
     .box
@@ -48,6 +50,12 @@
       span Veja quais candidates podem vir a tomar posse se você votar em mim.
       .allies
       /.more= link_to "Ver mais candidatos", "#/", id: "show_more_candidates" if @candidate.allies.count > 5
+
+  .candidate_share
+    h2 Curtiu? Agora compartilhe esse perfil com seus amigos!
+    = link_to "Compartilhe no Facebook", "http://www.facebook.com/dialog/feed?link=#{request.url}&redirect_uri=#{request.url}", :class => "btn facebook icon-facebook"
+    = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Já escolheu seu candidato a vereador? Conheça o perfil do(a) " + @candidate.nickname).encode}", :class => "btn twitter icon-twitter"
+
   .candidate_answers
     .box
       h2 O que eu respondi
