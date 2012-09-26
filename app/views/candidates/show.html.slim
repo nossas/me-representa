@@ -46,10 +46,13 @@
 
   .candidate_allies
     .box
-      h2 Quem eu posso puxar
-      span Veja quais candidates podem vir a tomar posse se você votar em mim.
-      .allies
-      /.more= link_to "Ver mais candidatos", "#/", id: "show_more_candidates" if @candidate.allies.count > 5
+      h2 
+        | Quem eu posso puxar?
+        small Veja alguns candidatos que podem vir a tomar posse se você votar em mim.
+      - @candidate.gang.order("random()").limit(15).each do |brother|
+        .brother
+          = link_to brother.nickname, brother
+          |  - #{brother.party.symbol}
 
   .candidate_share
     h2 Curtiu? Agora compartilhe esse perfil com seus amigos!

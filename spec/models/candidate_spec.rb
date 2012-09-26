@@ -57,4 +57,25 @@ describe Candidate do
     end 
   end
 
+  describe "#gang" do
+    let(:union) { FactoryGirl.create :union }
+    let(:party1) { FactoryGirl.create :party, :union => union }
+    let(:party2) { FactoryGirl.create :party, :union => union }
+    subject { FactoryGirl.create :candidate, :party => party1 }
+    
+    context "when the candidate have no brother" do
+      its(:gang){ should be_empty }
+    end
+    
+    context "when the candidate have a brother in his party" do
+      let(:the_brother) { FactoryGirl.create(:candidate, :party => party1) }
+      its(:gang){ should include the_brother }
+    end
+    
+    context "when the candidate have a brother in his union" do
+      let(:the_brother) { FactoryGirl.create(:candidate, :party => party2) }
+      its(:gang){ should include the_brother }
+    end
+  end
+
 end
