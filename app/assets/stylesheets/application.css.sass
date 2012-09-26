@@ -1510,7 +1510,6 @@ body.candidates#index
   .parties
     padding: 0
     min-height: 150px
-    border-bottom: 1px solid lighten(gray, 40%)
   .candidate_bio
     h2
       color: lighten($blue, 5%)
@@ -1609,6 +1608,10 @@ body.candidates#index
         content: " ▾"
   .liked_it
     margin: 1.2em 0
+    padding: 3em 0
+    border-top: 1px solid lighten(gray, 45%)
+    border-bottom: 1px solid lighten(gray, 45%)
+    +clearfix
     h3
       font-family: "Londrina solid"
       text-transform: uppercase 
@@ -1616,6 +1619,7 @@ body.candidates#index
       text-align: center
       letter-spacing: 1px
       font-size: 1.5em
+      margin-bottom: 1em
 
 .wrapper.matching
   margin-bottom: 2em
@@ -1639,3 +1643,8 @@ body.candidates#index
     font-size: 1.5em
     a
       color: white
+body.candidates#index
+  .candidate_share
+    +grid(10)
+    a
+      font-size: 1.4em !important
