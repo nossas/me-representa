@@ -31,7 +31,7 @@ class CandidatesController < ApplicationController
   has_scope :by_gender, type: :array do |controller, scope, value|
     scope.by_gender(value.delete_if(&:blank?))
   end
-
+  before_filter { @user = User.find(params[:user_id]) if params[:user_id] }
   before_filter only: [:home] { @truths = Question.truths.chosen; @dares = Question.dares.chosen }
 
   before_filter only: [:index] do
