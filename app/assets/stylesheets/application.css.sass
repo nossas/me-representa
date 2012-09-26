@@ -1342,21 +1342,17 @@ body.candidates#show, body.candidates#index, body.candidates#home
       font-style: italic
   .candidate_allies
     margin-top: 1em
-    .allies .ally
+    h2
+      small
+        font-size: .5em
+        margin-left: 1em
+    .brother
       display: inline-block
-      width: 46%
+      font-size: .8em
+      width: 32%
+      margin-right: 1%
       border-bottom: 1px solid lighten(gray, 40%)
-      padding: .4em 0
-      margin-bottom: .4em
-      font-size: .6em
-      &.hidden
-        display: none
-      &.odd
-        margin-right: 7em
-      a
-        color: $orange
-        text-transform: uppercase
-        padding-right: .4em
+
   .candidate_share
     +grid(16)
     text-align: center

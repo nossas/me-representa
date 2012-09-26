@@ -4,6 +4,7 @@ class Candidate < ActiveRecord::Base
   validates :name, :number, :party_id, :presence => true
 
   belongs_to :party
+  has_one :union, :through => :party
   has_many :answers, :as => :responder
   has_many :users
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
@@ -44,5 +45,12 @@ class Candidate < ActiveRecord::Base
     connection.select_all(candidates.order("score DESC").group("candidates.name, candidates.nickname, candidates.id, symbol"))
   end
 
+  def gang
+    if self.party.union
+      self.party.candidates.where("id <> ?", self.id).concat(self.union.candidates.where("candidates.id <> ?", self.id))
+    else
+      self.party.candidates.where("id <> ?", self.id)
+    end
+  end
 
 end
