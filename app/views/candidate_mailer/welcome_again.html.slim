@@ -1,9 +1,13 @@
 p Prezado(a) #{@candidate.name},
 
-p Faltam 48h para você também participar da ferramenta "Verdade ou Consequência" da ONG Meu Rio. A ferramenta é gratuita e simples, e terá um alcance de cerca de 50 mil eleitores cariocas.
+p Vimos que você abriu o questionário do Verdade ou Consequência mas ainda não salvou suas perguntas no sistema. Temos apenas até a noite de hoje para coletar as respostas pois amanhã cedo abriremos a plataforma para nossos 50.000 membros. Se suas perguntas não estiverem salvas na nossa base de dados, seu perfil aparecerá vazio para os eleitores.
 
-p Participe em: #{link_to "Clique aqui", new_candidate_answer_url(@candidate, :token => @candidate.token)}
+p O link de seu questionário é #{link_to new_candidate_answer_url(@candidate, :token => @candidate.token), new_candidate_answer_url(@candidate, :token => @candidate.token)}
 
-p Att,
+p Se estiver encontrando qualquer problema ou ainda tiver alguma dúvida, pode entrar em contato comigo via este email.
+
+p Boa sorte na campanha!
+
+p Atenciosamente,
 
 p Bernardo Castro
