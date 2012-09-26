@@ -7,9 +7,14 @@ table.candidates_list
   - candidates.each_with_index do |candidate, index|
     tr[class=(index > 4 ? "hidden": "")]
       td.liked
-        = form_for current_user, html: {class: "like", id: "user_#{candidate['id']}"} do |form|
-          label[class="#{'selected' if candidate['id'].to_i == current_user.candidate_id}"]
-            input[type='checkbox' name='user[candidate_id]' value="#{current_user.candidate_id == candidate['id'].to_i ? '' : candidate['id']}"]
+        - if current_user
+          = form_for current_user, html: {class: "like", id: "user_#{candidate['id']}"} do |form|
+            label[class="#{'selected' if candidate['id'].to_i == current_user.candidate_id}"]
+              input[type='checkbox' name='user[candidate_id]' value="#{current_user.candidate_id == candidate['id'].to_i ? '' : candidate['id']}"]
+        - else 
+          = form_for :like, url: "#{request.url}#login", method: :get, html: { class: 'like' } do |f|
+            label
+              input[type='checkbox' name='candidate' value="0"]
       td
         = link_to candidate["nickname"], candidate_path(candidate['id'])
         span= candidate["symbol"]

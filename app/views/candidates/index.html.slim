@@ -1,4 +1,4 @@
-- if current_user.id == params[:user_id]
+- if current_user and current_user.id == params[:user_id]
   = content_for :og do
     meta property="og:title" content="Jogue Verdade ou Consequência e descubra quais são os candidatos a vereador quem mais combina com você"
     meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
@@ -107,7 +107,7 @@
       
         .candidate_share
           = link_to "Compartilhe no Facebook", "http://www.facebook.com/dialog/feed?link=#{request.url}&redirect_uri=#{request.url}", :class => "btn facebook icon-facebook"
-          - if current_user == @user
+          - if current_user and current_user == @user
             = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Jogue Verdade ou Consequência e descubra quais são os candidatos a vereador quem mais combina com você").encode}", :class => "btn twitter icon-twitter"
           - else
             = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Curti a lista de candidatos do #{@user.name}. Compare os candidatos e veja quem mais combina com você").encode}", :class => "btn twitter icon-twitter"
