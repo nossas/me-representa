@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :candidate_id, :email, :name, :picture, :mobile_phone
 
   def self.create_from_hash!(hash)
-    create(
+    create!(
           :email => hash['info']['email'],
           :name => "#{hash['info']['first_name']} #{hash['info']['last_name']}",
           :picture => hash['info']['image_url'] || hash['info']['image']
