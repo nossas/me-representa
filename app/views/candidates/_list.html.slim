@@ -3,7 +3,7 @@ table.candidates_list
 
     td.liked Eu voto
     td Candidatos
-    td
+    td.matched Afinidade
   - candidates.each_with_index do |candidate, index|
     tr[class=(index > 4 ? "hidden": "")]
       td.liked

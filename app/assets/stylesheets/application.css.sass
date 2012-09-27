@@ -1451,6 +1451,22 @@ body.candidates#show, body.candidates#index, body.candidates#home
         display: block
 
 body.parties#index, body.candidates#index
+  .description
+    font-size: .8em !important
+    text-align: center
+    margin: 0 auto
+    margin-top: 1.5em
+    line-height: 1.2em
+    margin-bottom: 2em
+    text-align: left
+    width: 96%
+    padding: 2%
+    background: lighten(yellow, 45%)
+    border: 1px dashed gray
+    color: darken(gray, 5%)
+    p
+      margin-bottom: .5em
+
   .parties
     background: white
     padding: 3em
@@ -1498,7 +1514,9 @@ body.parties#index, body.candidates#index
         width: 12%
       thead
         td
-          padding: .4em
+          padding: .2em .8em
+        td.matched
+          text-align: center
 body.candidates#index
   .union_head
     color: black
@@ -1698,3 +1716,6 @@ body.candidates#index
   .remember_me
     form
       width: 60%
+  .description
+    strong
+      font-size: .9em

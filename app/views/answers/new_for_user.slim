@@ -1,6 +1,6 @@
 .wrapper.questionnaire
   .padd
-    h1 Responda às verdades e consequências e depois faça a comparação.
+    h1 Responda às verdades e consequências como seu candidato ideal responderia
     .questions
       = render partial: "questions/list_with_index", locals: { questions: @questions.truths }
       = render partial: "questions/list_with_index", locals: { questions: @questions.dares}
