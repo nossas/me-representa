@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :answers, :as => :responder
 
   belongs_to :candidate
-  validates :mobile_phone, length: { in: 8..10 }, numericality: { only_integer: true }
+  validates :mobile_phone, length: { in: 8..10 }, numericality: { only_integer: true }, allow_blank: true
   validates_presence_of :email, :name
 
   attr_accessible :candidate_id, :email, :name, :picture, :mobile_phone
