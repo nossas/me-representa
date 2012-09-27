@@ -18,7 +18,9 @@
       .likes
         - if current_user
           = form_for current_user do |form|
-            label[class="#{'selected' if @candidate.id == current_user.candidate_id}"]= form.check_box :candidate_id, {}, @candidate.id, ''
+            label[class="#{'selected' if @candidate.id == current_user.candidate_id}"]
+              input[type='checkbox' name='user[candidate_id]' value="#{current_user.candidate_id == @candidate.id ? '' : @candidate.id}"]
+
         = t("activerecord.attributes.candidate.users", :count => @candidate.users.count)
       h1= @candidate.nickname
       h2.number_of= @candidate.number
