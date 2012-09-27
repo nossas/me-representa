@@ -12,14 +12,20 @@
     = link_to "Faça o teste", new_answer_path
 
 .wrapper
+
   .candidate_info
-    .link_to_back= link_to "Voltar aos candidatos", user_party_candidates_path(current_user, @candidate.party) if current_user
+    - if current_user
+      .link_to_back= link_to "Voltar aos candidatos", user_party_candidates_path(current_user, @candidate.party)
     .box
       .likes
         - if current_user
           = form_for current_user do |form|
             label[class="#{'selected' if @candidate.id == current_user.candidate_id}"]
               input[type='checkbox' name='user[candidate_id]' value="#{current_user.candidate_id == @candidate.id ? '' : @candidate.id}"]
+        - else 
+          = form_for :like, url: "#{request.url}#login", method: :get, html: { class: 'edit_user' } do |f|
+            label
+              input[type='checkbox' name='candidate' value="0"]
 
         = t("activerecord.attributes.candidate.users", :count => @candidate.users.count)
       h1= @candidate.nickname
