@@ -995,7 +995,7 @@ body.candidates, body.answers
         padding: 2%
         background: lighten(yellow, 45%)
         border: 1px dashed gray
-        color: gray
+        color: darken(gray, 5%)
         p
           margin-bottom: .5em
       background: white
@@ -1641,8 +1641,32 @@ body.candidates#index
     a
       color: white
 body.candidates#index
+  .user_name
+    width: 50%
+    margin: 0 auto
+    background: lighten(gray, 45%)
+    overflow: hidden
+    img
+      line-height: 1.4em
+      padding: .4em
+      float: left
+    h1.user
+      color: lighten(black, 10%) !important
+      line-height: 1.8em !important
+      margin-top: 0 !important
+      padding: 0 !important
+      display: inline
+      margin-left: .4em
+      font-size: 1.8em !important
+      text-align: center
+  .candidate_share
+    +grid(10)
+    a
+      font-size: 1.4em !important
+body.candidates#index, body.candidates#show
   .remember_me
-    margin-top: 3em
+    margin: 1em 0 2em 0
+    width: 100%
     background: lighten(gray, 45%)
     h3
       background: lighten($blue, 5%)
@@ -1661,7 +1685,7 @@ body.candidates#index
     p
       text-align: center
     form
-      width: 60%
+      width: 40%
       margin: .8em auto
       input[type='tel']
         +border-radius(4px)
@@ -1670,7 +1694,7 @@ body.candidates#index
         top: .4em
       input.btn
         top: 0
-  .candidate_share
-    +grid(10)
-    a
-      font-size: 1.4em !important
+body.candidates#index
+  .remember_me
+    form
+      width: 60%

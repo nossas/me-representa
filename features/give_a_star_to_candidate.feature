@@ -32,6 +32,7 @@ Feature: Give a star to a candidate
     And I should be in "the parties page"
     And I click "Por um Rio Melhor"
     And I should see Leonardo Eloi
+    And I should not see Quer que o meu rio refresque sua memória no dia da eleição?
     When I check "user[candidate_id]" from the like form
     And I should see Quer que o meu rio refresque sua memória no dia da eleição?
     Then I should have a favorite candidate

@@ -7,13 +7,13 @@
   .logo= link_to image_tag("bg_header_phase_two_cutted.png"), root_path
   .discover_your_candidate
     = image_tag "bg_discover_your_candidate.gif"
-    = link_to "Descubra agora seu candidato ideal!"
+    = link_to "Descubra agora seu candidato ideal!", new_answer_path
   .make_the_test
-    = link_to "Faça o teste", ""
+    = link_to "Faça o teste", new_answer_path
 
 .wrapper
   .candidate_info
-    .link_to_back= link_to "Voltar aos candidatos", root_path
+    .link_to_back= link_to "Voltar aos candidatos", user_party_candidates_path(current_user, @candidate.party) if current_user
     .box
       .likes
         - if current_user
@@ -43,7 +43,9 @@
     .box
       h2 Um pouco mais sobre mim 
       .bio= @candidate.bio.blank? ? content_tag(:small, "#{@candidate.name} ainda não disse quais são seus planos, que feio...") : simple_format(@candidate.bio)
-
+  
+  .candidate_allies
+    = render partial: 'users/new_mobile_phone'
   .candidate_allies
     .box
       h2 
@@ -74,10 +76,10 @@
   .bottom
     .discover_your_candidate.big_discover
       = image_tag "bg_big_discover_your_candidate.gif"
-      h3= link_to "Descubra agora seu candidato ideal!"
+      h3= link_to "Descubra agora seu candidato ideal!", new_answer_path
       span 
         | Responda o questionário, compare os resultados e descubra quais são os candidatos 
         | que combinam mais com você e com o que você deseja para o Rio.
         = link_to "Veja como funciona"
     .make_the_test
-      = link_to "Faça o teste", ""
+      = link_to "Faça o teste", new_answer_path

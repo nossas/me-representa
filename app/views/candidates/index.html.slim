@@ -14,7 +14,7 @@
 
 .wrapper
   .candidate_info
-    .link_to_back= link_to "Voltar aos partidos", "" 
+    .link_to_back= link_to "Voltar aos partidos", user_parties_path(@user) 
     .box
       - if @union
         .union_head= raw @union.parties.map { |p| t('phase3.union.header_html', symbol: p.symbol) }.to_sentence
@@ -25,7 +25,14 @@
         = raw t('phase3.candidates_answered_html', current: @candidates.count, total: (@party ? @party.candidates.count : @union.parties.map { |p| p.candidates.count }.sum))
   .candidate_bio
     .box
-      h2 Estes são os candidatos do partido que mais combinam com você.
+      - if current_user and current_user == @user
+        h2 Estes são os candidatos do partido que mais combinam com você.
+      - else
+        h2
+          | Estes são os candidatos do partido que mais combinam com 
+        .user_name
+          = image_tag @user.picture, size: '30x30'
+          h1.user= @user.name
 
       p.description
         | Clique no nome do candidato para ver seu perfil e saber quais outros candidatos do partido 
@@ -100,6 +107,7 @@
   .candidate_bio.list_of_candidates
     .loading.hidden= image_tag 'spinning_bottle.gif'
     .box
+      = render partial: 'users/new_mobile_phone'    
       .parties
         = render partial: 'candidates/list', locals: { candidates: @candidates }
       .liked_it
@@ -112,15 +120,4 @@
           - else
             = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Curti a lista de candidatos do #{@user.name}. Compare os candidatos e veja quem mais combina com você").encode}", :class => "btn twitter icon-twitter"
    
-      - if can? :update, User 
-        .remember_me
-          h3 
-            | Quer que o meu rio refresque sua memória no dia da eleição?
-          p 
-            | É só inserir seu telefone (
-            strong sem DDD
-            |) e enviaremos o número do candidato escolhido por você para o seu celular, via SMS, no dia da eleição.
-          
-          = form_for current_user do |f|
-            label= f.phone_field :mobile_phone, placeholder: "Digite seu telefone"
-            = f.submit "Lembre-me", class: "btn"
+

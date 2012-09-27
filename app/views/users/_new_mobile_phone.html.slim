@@ -1,0 +1,14 @@
+- if can?(:update, User)
+  - if current_user.candidate_id.present? and current_user.mobile_phone.nil?
+    .remember_me
+      h3 
+        | Quer que o meu rio refresque sua memória no dia da eleição?
+      p 
+        | É só inserir seu telefone (
+        strong sem DDD
+        |) e enviaremos o número do candidato escolhido por você para o seu celular, via SMS, no dia da eleição.
+      
+      = form_for current_user do |f|
+        label= f.phone_field :mobile_phone, placeholder: "Digite seu telefone"
+        = f.submit "Lembre-me", class: "btn"
+
