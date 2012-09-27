@@ -112,5 +112,15 @@
           - else
             = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Curti a lista de candidatos do #{@user.name}. Compare os candidatos e veja quem mais combina com você").encode}", :class => "btn twitter icon-twitter"
    
-
-
+      - if can? :update, User 
+        .remember_me
+          h3 
+            | Quer que o meu rio refresque sua memória no dia da eleição?
+          p 
+            | É só inserir seu telefone (
+            strong sem DDD
+            |) e enviaremos o número do candidato escolhido por você para o seu celular, via SMS, no dia da eleição.
+          
+          = form_for current_user do |f|
+            label= f.phone_field :mobile_phone, placeholder: "Digite seu telefone"
+            = f.submit "Lembre-me", class: "btn"

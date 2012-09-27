@@ -4,6 +4,8 @@ App.Candidates.Index = Backbone.View.extend({
   initialize: function() {
     this.parties    = $('.list_of_candidates .parties');
     this.bottle     = $('.list_of_candidates .loading');
+    this.input_tel  = $('input[type="tel"]')
+    this.input_tel.mask('99999999');
   },
 
   events: {

@@ -1638,6 +1638,35 @@ body.candidates#index
     a
       color: white
 body.candidates#index
+  .remember_me
+    margin-top: 3em
+    background: lighten(gray, 45%)
+    h3
+      background: lighten($blue, 5%)
+      color: white
+      font-family: "Londrina solid"
+      font-size: 1.3em
+      text-transform: uppercase
+      padding: .6em
+      text-align: center
+      letter-spacing: 1px
+      +text-shadow(0 1px 1px #333)
+      +border-radius(6px 6px 0 0)
+    p, form
+      color: darken(gray, 10%)
+      padding: 1em
+    p
+      text-align: center
+    form
+      width: 60%
+      margin: .8em auto
+      input[type='tel']
+        +border-radius(4px)
+        border: 1px solid lighten(gray, 15%)
+        padding: .4em
+        top: .4em
+      input.btn
+        top: 0
   .candidate_share
     +grid(10)
     a
