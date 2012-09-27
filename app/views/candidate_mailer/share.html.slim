@@ -10,7 +10,7 @@ doctype
       p
         | Agora que você já respondeu ao questionário do Verdade ou Consequência e atualizou o seu perfil no site, é hora de mostrar para os eleitores como você pensa e quais são suas propostas e compromissos com a cidade, caso seja eleito.
       p
-        | Compartilhe agora #{link_to "o seu perfil", candidate_path(@candidate)} para todos os seus eleitores, por email, Facebook e Twitter, e convide todo mundo a participar do Verdade ou Consequência.
+        | Compartilhe agora #{link_to "o seu perfil", candidate_url(@candidate)} para todos os seus eleitores, por email, Facebook e Twitter, e convide todo mundo a participar do Verdade ou Consequência.
       p
         | Quanto mais eleitores tiverem acesso às suas ideias e propostas, mais chances você terá de representá-los na Câmara dos Vereadores.
       p
@@ -29,4 +29,4 @@ doctype
         br
         br
         small 
-          | Este é o link direto para o seu perfil: #{link_to candidate_path(@candidate)}
+          | Este é o link direto para o seu perfil: #{link_to candidate_url(@candidate)}
