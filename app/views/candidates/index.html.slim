@@ -1,13 +1,13 @@
 - if current_user and current_user.id == params[:user_id]
   = content_for :og do
-    meta property="og:title" content="Jogue Verdade ou Consequência e descubra quais são os candidatos a vereador quem mais combina com você"
+    meta property="og:title" content="Acabei de descobrir o vereador que combina mais comigo. Clique e descubra o seu no Verdade ou Consequência"
     meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
-    meta property="og:description" content="Jogue Verdade ou Consequência e descubra quais são os candidatos a vereador quem mais combina com você"
+    meta property="og:description" content=t('site.description')
 - else
   = content_for :og do
-    meta property="og:title" content="Curti a lista de candidatos do #{@user.name}. Compare os candidatos e veja quem mais combina com você"
+    meta property="og:title" content="Curti a lista de candidatos de #{@user.name}. Compare os candidatos e veja quem mais combina com você"
     meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
-    meta property="og:description" content="Curti a lista de candidatos do #{@user.name}. Compare os candidatos e veja quem mais combina com você"
+    meta property="og:description" content=t('site.description')
 
 
 

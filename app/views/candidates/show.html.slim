@@ -1,7 +1,7 @@
 = content_for :og do
-  meta property="og:title" content="Já escolheu seu candidato a vereador? Conheça o perfil de #{@candidate.nickname}"
+  meta property="og:title" content="Já escolheu seu candidato a vereador? Conheça o perfil de #{@candidate.nickname} no Verdade ou Consequência"
   meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
-  meta property="og:description" content=@candidate.bio
+  meta property="og:description" content=truncate(@candidate.bio, length: 180)
 
 = content_for :header do
   .logo= link_to image_tag("bg_header_phase_two_cutted.png"), root_path

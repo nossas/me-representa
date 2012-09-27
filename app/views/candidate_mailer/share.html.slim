@@ -1,0 +1,32 @@
+doctype
+  html
+    head
+      meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
+      style
+        | body { font-family: Arial; font-size: 13px; }
+    body
+      p 
+        | Alô #{@candidate.name},  
+      p
+        | Agora que você já respondeu ao questionário do Verdade ou Consequência e atualizou o seu perfil no site, é hora de mostrar para os eleitores como você pensa e quais são suas propostas e compromissos com a cidade, caso seja eleito.
+      p
+        | Compartilhe agora #{link_to "o seu perfil", candidate_path(@candidate)} para todos os seus eleitores, por email, Facebook e Twitter, e convide todo mundo a participar do Verdade ou Consequência.
+      p
+        | Quanto mais eleitores tiverem acesso às suas ideias e propostas, mais chances você terá de representá-los na Câmara dos Vereadores.
+      p
+        | Falta muito pouco para o dia das urnas e essa é uma oportunidade única para dialogar com o eleitorado e fazer dessa eleição a mais democrática e participativa que o Rio já viu.
+      p
+        | Contamos com a sua participação!
+        br
+        | Obrigado e boa sorte.
+      p
+        | Por um Rio de Janeiro cada vez mais lindo,
+        br
+        | Bernardo, Leonardo, Luiz, Nicolas, Dudu e toda a equipe do Meu Rio. 
+      p
+        br
+        br
+        br
+        br
+        small 
+          | Este é o link direto para o seu perfil: #{link_to candidate_path(@candidate)}
