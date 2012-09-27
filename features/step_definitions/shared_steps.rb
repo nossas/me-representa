@@ -280,6 +280,16 @@ Given /^there is a candidate "(.*?)" that is female$/ do |arg1|
   @candidate = FactoryGirl.create(:candidate, name: arg1, nickname: arg1, male: false, party: @party) 
 end
 
+
+When /^I check "(.*?)" from the like form$/ do |arg1|
+  sleep(2)
+  page.execute_script("$('form.like label').first().css({ 'text-indent' : '0px'});")
+  sleep(2)
+  check(arg1)
+  sleep(3)
+end
+
+
 When /^I check "(.*?)" from the filter form$/ do |arg1|
   check(arg1) 
 end
@@ -287,3 +297,9 @@ end
 Given /^this candidate have (\d+) likes$/ do |arg1|
   arg1.to_i.times { FactoryGirl.create(:user, :candidate => @candidate) }
 end
+
+
+Then /^I should have a favorite candidate$/ do
+  @current_user.reload.candidate_id.should_not be_nil
+end
+

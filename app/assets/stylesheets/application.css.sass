@@ -110,8 +110,6 @@ $grid-half: $grid-system * 0.5
 .candidate_bio
   +grid(11)
 
-section.header
-  +clearfix
 
 .logo 
   +grid(5)
@@ -995,7 +993,7 @@ body.candidates, body.answers
         padding: 2%
         background: lighten(yellow, 45%)
         border: 1px dashed gray
-        color: gray
+        color: darken(gray, 5%)
         p
           margin-bottom: .5em
       background: white
@@ -1451,6 +1449,22 @@ body.candidates#show, body.candidates#index, body.candidates#home
         display: block
 
 body.parties#index, body.candidates#index
+  .description
+    font-size: .8em !important
+    text-align: center
+    margin: 0 auto
+    margin-top: 1.5em
+    line-height: 1.2em
+    margin-bottom: 2em
+    text-align: left
+    width: 96%
+    padding: 2%
+    background: lighten(yellow, 45%)
+    border: 1px dashed gray
+    color: darken(gray, 5%)
+    p
+      margin-bottom: .5em
+
   .parties
     background: white
     padding: 3em
@@ -1498,7 +1512,9 @@ body.parties#index, body.candidates#index
         width: 12%
       thead
         td
-          padding: .4em
+          padding: .2em .8em
+        td.matched
+          text-align: center
 body.candidates#index
   .union_head
     color: black
@@ -1641,7 +1657,69 @@ body.candidates#index
     a
       color: white
 body.candidates#index
+  .user_name
+    width: 50%
+    margin: 0 auto
+    background: lighten(gray, 45%)
+    overflow: hidden
+    img
+      line-height: 1.4em
+      padding: .4em
+      float: left
+    h1.user
+      color: lighten(black, 10%) !important
+      line-height: 1.8em !important
+      margin-top: 0 !important
+      padding: 0 !important
+      display: inline
+      margin-left: .4em
+      font-size: 1.8em !important
+      text-align: center
   .candidate_share
     +grid(10)
     a
       font-size: 1.4em !important
+body.candidates#index, body.candidates#show
+  .remember_me
+    margin: 1em 0 2em 0
+    width: 100%
+    background: lighten(gray, 45%)
+    h3
+      background: lighten($blue, 5%)
+      color: white
+      font-family: "Londrina solid"
+      font-size: 1.3em
+      text-transform: uppercase
+      padding: .6em
+      text-align: center
+      letter-spacing: 1px
+      +text-shadow(0 1px 1px #333)
+      +border-radius(6px 6px 0 0)
+    p, form
+      color: darken(gray, 10%)
+      padding: 1em
+    p
+      text-align: center
+    form
+      width: 40%
+      margin: .8em auto
+      input[type='tel']
+        +border-radius(4px)
+        border: 1px solid lighten(gray, 15%)
+        padding: .4em
+        top: .4em
+      input.btn
+        top: 0
+body.candidates#index
+  .remember_me
+    form
+      width: 60%
+  .description
+    strong
+      font-size: .9em
+body.candidates#show
+  section.header
+    +clearfix
+body.answers#new
+  section.header
+    clear: both

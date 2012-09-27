@@ -33,4 +33,8 @@ class CandidateMailer < ActionMailer::Base
     mail(:to => @candidate.email, :subject => "12 horas para salvar sua campanha")
   end
 
+  def share candidate
+    @candidate = candidate
+    mail(to: @candidate.email, subject: "Compartilhe o seu perfil no Verdade ou Consequência!")
+  end
 end

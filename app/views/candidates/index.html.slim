@@ -1,20 +1,20 @@
 - if current_user and current_user.id == params[:user_id]
   = content_for :og do
-    meta property="og:title" content="Jogue Verdade ou Consequência e descubra quais são os candidatos a vereador quem mais combina com você"
+    meta property="og:title" content="Acabei de descobrir o vereador que combina mais comigo. Clique e descubra o seu no Verdade ou Consequência"
     meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
-    meta property="og:description" content="Jogue Verdade ou Consequência e descubra quais são os candidatos a vereador quem mais combina com você"
+    meta property="og:description" content=t('site.description')
 - else
   = content_for :og do
-    meta property="og:title" content="Curti a lista de candidatos do #{@user.name}. Compare os candidatos e veja quem mais combina com você"
+    meta property="og:title" content="Curti a lista de candidatos de #{@user.name}. Compare os candidatos e veja quem mais combina com você"
     meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
-    meta property="og:description" content="Curti a lista de candidatos do #{@user.name}. Compare os candidatos e veja quem mais combina com você"
+    meta property="og:description" content=t('site.description')
 
 
 
 
 .wrapper
   .candidate_info
-    .link_to_back= link_to "Voltar aos partidos", "" 
+    .link_to_back= link_to "Voltar aos partidos", user_parties_path(@user) 
     .box
       - if @union
         .union_head= raw @union.parties.map { |p| t('phase3.union.header_html', symbol: p.symbol) }.to_sentence
@@ -25,18 +25,26 @@
         = raw t('phase3.candidates_answered_html', current: @candidates.count, total: (@party ? @party.candidates.count : @union.parties.map { |p| p.candidates.count }.sum))
   .candidate_bio
     .box
-      h2 Estes são os candidatos do partido que mais combinam com você.
+      - if current_user and current_user == @user
+        h2 Estes são os candidatos do partido que mais combinam com você.
+      - else
+        h2
+          | Estes são os candidatos do partido que mais combinam com 
+        .user_name
+          = image_tag @user.picture, size: '30x30'
+          h1.user= @user.name
 
       p.description
-        | Clique no nome do candidato para ver seu perfil e saber quais outros candidatos do partido 
-        | ele pode levar para a Câmara se for eleito. 
+        | Clique no nome do candidato para ver seu perfil, suas respostas e conhecer seus companheiros de partido.
         br
         br
-        | Depois disso, marque uma estrela no candidato 
-        | que melhor te representa.
+        strong
+          | Lembre-se que ao votar num candidato você pode estar ajudando outros a serem eleitos.
         br
-        | Assim, no dia das eleições, caso queira, o Meu Rio vai te enviar 
-        | um SMS para você não dar branco na frente da urna.
+        br
+        | Curtiu o candidato? Marque a estrelinha e, se quiser, no dias das eleições o <strong><u>Meu Rio</u></strong> manda 
+        | um <strong>SMS</strong> pra você não esquecer do número dele quando estiver na frente da urna.
+        br
    
   .candidate_info.filters_box
     h2 Filtre os candidatos
@@ -100,6 +108,7 @@
   .candidate_bio.list_of_candidates
     .loading.hidden= image_tag 'spinning_bottle.gif'
     .box
+      = render partial: 'users/new_mobile_phone'    
       .parties
         = render partial: 'candidates/list', locals: { candidates: @candidates }
       .liked_it
@@ -112,5 +121,4 @@
           - else
             = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Curti a lista de candidatos do #{@user.name}. Compare os candidatos e veja quem mais combina com você").encode}", :class => "btn twitter icon-twitter"
    
-
 

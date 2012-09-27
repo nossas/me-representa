@@ -35,7 +35,7 @@ class Candidate < ActiveRecord::Base
              WHEN answers.short_answer = ua.short_answer 
               THEN 100 
              WHEN ua.short_answer IS NULL 
-              THEN NULL ELSE 0 END)::numeric * ua.weight)::numeric / sum(ua.weight)) as score").
+              THEN NULL ELSE 0 END)::numeric * ua.weight)::numeric / (CASE sum(ua.weight) WHEN 0 THEN 1 ELSE sum(ua.weight) END)) as score").
       joins(:answers).
       joins(:party).
       joins("LEFT JOIN answers ua ON ua.question_id = answers.question_id AND ua.responder_type = 'User'").
