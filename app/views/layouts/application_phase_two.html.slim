@@ -64,13 +64,10 @@ html
       span.or
         | ou
 
-      = form_for :member do |f|
-        label= f.text_field :email, placeholder: "Digite seu e-mail"
-        label= f.text_field :password, placeholder: "Digite sua senha"
       p= link_to "Fazer login pelo Meu Rio", meurio_auth_path, class: 'mr' 
       p.create_acc
         | Ainda não tem uma conta?  
-        = link_to "Crie a sua →", "http://meurio.org.br/members/sign_in"
+        = link_to "Crie a sua →", "http://meurio.org.br/auth/meurio"
 
 
     = javascript_include_tag :application
