@@ -1,16 +1,7 @@
-- if current_user and current_user.id == params[:user_id]
-  = content_for :og do
-    meta property="og:title" content="Acabei de descobrir o vereador que combina mais comigo. Clique e descubra o seu no Verdade ou Consequência"
-    meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
-    meta property="og:description" content=t('site.description')
-- else
-  = content_for :og do
-    meta property="og:title" content="Curti a lista de candidatos de #{@user.name}. Compare os candidatos e veja quem mais combina com você"
-    meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
-    meta property="og:description" content=t('site.description')
-
-
-
+= content_for :og do
+  meta property="og:title" content="Confira os candidatos do #{@union ? @union.name : @party.symbol} que tem mais afinidade com #{@user.name}"
+  meta property="og:image" content="http://i.imgur.com/SN0e1.gif"
+  meta property="og:description" content=t('site.description')
 
 .wrapper
   .candidate_info
