@@ -1,5 +1,5 @@
 - if can?(:update, User)
-  - if current_user.candidate_id.present? and current_user.mobile_phone.nil?
+  - if current_user.candidate_id.present? and current_user.mobile_phone.blank?
     .remember_me
       h3 
         | Quer que o meu rio refresque sua memória no dia da eleição?
