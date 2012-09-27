@@ -18,21 +18,6 @@ html
       meta property="og:description" content=t('site.description')
 
   body[class=controller.controller_name id=controller.action_name data-controller-class=controller.class.name data-controller-name=controller.controller_name.camelize data-action=controller.action_name.camelize]
-    #meurio_login_box.hidden
-      h2 Faça login no meu rio 
-      p= link_to "Fazer login pelo Facebook", facebook_auth_path, class: 'fb'
-      span.or
-        | ou
-
-      = form_for :member do |f|
-        label= f.text_field :email, placeholder: "Digite seu e-mail"
-        label= f.text_field :password, placeholder: "Digite sua senha"
-      p= link_to "Fazer login pelo Meu Rio", meurio_auth_path, class: 'mr' 
-      p.create_acc
-        | Ainda não tem uma conta?  
-        = link_to "Crie a sua →", "http://meurio.org.br/members/sign_in"
-
-
     - if alert
       section.alert.hidden
         .row
@@ -73,6 +58,21 @@ html
           span |
           = mail_to "cadastro@verdadeouconsequencia.org.br", "Contate-nos"
     #fb-root
+    #meurio_login_box.hidden
+      h2 Faça login no meu rio 
+      p= link_to "Fazer login pelo Facebook", facebook_auth_path, class: 'fb'
+      span.or
+        | ou
+
+      = form_for :member do |f|
+        label= f.text_field :email, placeholder: "Digite seu e-mail"
+        label= f.text_field :password, placeholder: "Digite sua senha"
+      p= link_to "Fazer login pelo Meu Rio", meurio_auth_path, class: 'mr' 
+      p.create_acc
+        | Ainda não tem uma conta?  
+        = link_to "Crie a sua →", "http://meurio.org.br/members/sign_in"
+
+
     = javascript_include_tag :application
     javascript:
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
