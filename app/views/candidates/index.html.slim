@@ -107,6 +107,6 @@
       
         .candidate_share
           = link_to "Compartilhe no Facebook", "http://www.facebook.com/dialog/feed?app_id=#{ENV["FB_ID"]}&link=#{request.url}&redirect_uri=#{request.url}", :class => "btn facebook icon-facebook"
-          = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Confira os candidatos do #{@union ? @union.name : @party.symbol} que tem mais afinidade com #{@user.name} #{request.url}").encode}", :class => "btn twitter icon-twitter"
+          = link_to "Compartilhe no Twitter", "https://twitter.com/share?url=#{request.url}&text=#{("Confira os candidatos do #{@union ? @union.name : @party.symbol} que tem mais afinidade com #{@user.name}").encode}", :class => "btn twitter icon-twitter"
    
 
