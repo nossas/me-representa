@@ -1491,7 +1491,6 @@ body.parties#index, body.candidates#index
           a 
             padding: .4em 0
         a
-          display: block  
           width: 100%
           +transition(.5s)
           &:hover
@@ -1501,12 +1500,21 @@ body.parties#index, body.candidates#index
         
       td
         padding: .5em
-        font-family: "Londrina solid"
-        font-size: 1.5em
-        text-transform: uppercase
+        line-height: normal
+        a
+          font-family: "Londrina solid"
+          font-size: 1.5em
+          text-transform: uppercase
+          color: $orange
+          margin-right: 1em
+        small
+          font-size: .8em
+          color: lighten(gray, 20%)
       td.match
+        font-size: 1.5em
+        font-family: "Londrina solid"
         text-align: right
-        color: $orange
+        color: $blue
       td.liked
         text-align: center !important
         width: 12%

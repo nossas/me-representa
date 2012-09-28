@@ -13,7 +13,11 @@
         tr
           td
             - if params[:user_id]
-              = link_to match["name"], user_party_candidates_path(params[:user_id], match["id"]) if match["type"] == "Party"
-              = link_to match["name"], user_union_candidates_path(params[:user_id], match["id"]) if match["type"] == "Union"
+              - if match["type"] == "Party"
+                = link_to match["name"], user_party_candidates_path(params[:user_id], match["id"])
+                small #{Party.find(match["id"]).candidates.where("finished_at IS NOT NULL").count} de #{Party.find(match["id"]).candidates.count} candidatos responderam
+              - else
+                = link_to match["name"], user_union_candidates_path(params[:user_id], match["id"])
+                small #{Union.find(match["id"]).candidates.where("finished_at IS NOT NULL").count} de #{Union.find(match["id"]).candidates.count} candidatos responderam
           td.match
             = number_to_percentage(match["score"], precision: 0)
