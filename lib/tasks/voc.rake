@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'open-uri'
 require 'csv'
 
@@ -34,5 +35,11 @@ namespace :voc do
       )
       puts c.persisted? ? "OK   #{c.name}" : "FAIL #{c.name} - #{c.errors.full_messages}"
     end
+  end
+
+  desc "Export statistics table"
+  task :export => :environment do
+    puts "\"Email\", \"Ação\", \"Objeto\", \"ID do Objeto\", \"ID do Tema\", \"Data da Ação\", \"Plataforma\""
+    Question.all.each {|question| puts "\"#{question.user.email}\", \"Criou\", \"Pergunta\", \"#{question.id}\", \"#{question.category.id}\", \"#{question.created_at}\", \"VoC\""}
   end
 end
