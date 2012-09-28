@@ -3,7 +3,7 @@
     - if current_user == @user
       h1 Boa! Agora é hora de conferir os partidos que mais têm a ver com você.
     - else
-      h1 Confera os partidos que mais têm a ver com
+      h1 Confira os partidos que mais têm a ver com
       .user_name
         = image_tag @user.picture, size: '30x30'
         h1.user= @user.name
