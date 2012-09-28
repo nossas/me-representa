@@ -1,6 +1,12 @@
 .wrapper
   .parties
-    h1 Boa! Agora é hora de conferir os partidos que mais têm a ver com você. 
+    - if current_user == @user
+      h1 Boa! Agora é hora de conferir os partidos que mais têm a ver com você.
+    - else
+      h1 Confera os partidos que mais têm a ver com
+      .user_name
+        = image_tag @user.picture, size: '30x30'
+        h1.user= @user.name
     p.description Clicando nos partidos ou coligações, você vai encontrar os candidatos em ordem de afinidade e de acordo com as suas respostas. 
     table
       - @matching.each do |match|

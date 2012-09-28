@@ -1657,6 +1657,12 @@ body.candidates#index
     a
       color: white
 body.candidates#index
+  .candidate_share
+    +grid(10)
+    a
+      font-size: 1.4em !important
+
+body.candidates#index, body.parties#index
   .user_name
     width: 50%
     margin: 0 auto
@@ -1673,12 +1679,9 @@ body.candidates#index
       padding: 0 !important
       display: inline
       margin-left: .4em
-      font-size: 1.8em !important
+      font-size: 24px !important
       text-align: center
-  .candidate_share
-    +grid(10)
-    a
-      font-size: 1.4em !important
+
 body.candidates#index, body.candidates#show
   .remember_me
     margin: 1em 0 2em 0
