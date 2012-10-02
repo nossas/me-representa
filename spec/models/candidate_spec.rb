@@ -15,7 +15,8 @@ describe Candidate do
     let(:question2) { FactoryGirl.create(:question) }
     let(:candidate1) { FactoryGirl.create(:candidate, :party => party1) }
     let(:candidate2) { FactoryGirl.create(:candidate) }
-    let(:candidate3)  { FactoryGirl.create(:candidate) }
+    let(:candidate3) { FactoryGirl.create(:candidate) }
+    let(:candidate4) { FactoryGirl.create(:candidate, party: party1) }
     let(:user) { FactoryGirl.create(:user) }
     subject { Candidate.match_for_user(user.id) }
 
@@ -58,8 +59,23 @@ describe Candidate do
         {"id" => candidate1.id.to_s, "symbol" => candidate1.party.symbol, "name" => candidate1.name, "nickname" => candidate1.nickname, "score" => "67"}, 
         {"id" => candidate2.id.to_s, "symbol" => candidate2.party.symbol, "name" => candidate2.name, "nickname" => candidate2.nickname, "score" => "33"},
         {"id" => candidate3.id.to_s, "symbol" => candidate3.party.symbol, "name" => candidate3.name, "nickname" => candidate3.nickname, "score" => "0"}
-      ]}
+         ]}
     end 
+
+    context "When the candidate answered one question of two that the user answered" do
+      before do
+        FactoryGirl.create(:candidate_answer, :question => question1, :short_answer => "Sim", :responder => candidate4)
+
+        FactoryGirl.create(:user_answer, :question => question1, :short_answer => "Sim", :responder => user, :weight => 1)
+        FactoryGirl.create(:user_answer, :question => question2, :short_answer => "Não", :responder => user, :weight => 2)
+      end
+
+      it "should return 33% (1/3) when the user answered 1 question against 2 the user answered with weight 1 and 2. " do
+        subject.should == [
+          {"id" => candidate4.id.to_s, "symbol" => candidate4.party.symbol, "name" => candidate4.name, "nickname" => candidate4.nickname, "score" => "33"}
+        ]  
+      end
+    end
   end
 
   describe "#gang" do
