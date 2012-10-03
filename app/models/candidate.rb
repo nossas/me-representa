@@ -30,18 +30,14 @@ class Candidate < ActiveRecord::Base
   def self.match_for_user user_id, options = {:party_id => nil, :union_id => nil}
     candidates = 
       Candidate.
-      select("candidates.id, parties.symbol as symbol, name, 
-            nickname, 
-            round(sum((
+      select("candidates.id, parties.symbol as symbol, name, nickname, round(sum((
              CASE 
              WHEN answers.short_answer = ua.short_answer 
               THEN 100 
              WHEN ua.short_answer IS NULL 
               THEN NULL
              WHEN answers.short_answer IS NULL
-              THEN NULL ELSE 0 END)::numeric * ua.weight)::numeric / 
-              NULLIF((SELECT sum(answers.weight) as sum FROM answers WHERE answers.responder_id = #{user_id} AND answers.responder_type = 'User'), 0)
-            ) as score").
+              THEN NULL ELSE 0 END)::numeric * ua.weight)::numeric / (CASE sum(ua.weight) WHEN 0 THEN 1 ELSE sum(ua.weight) END)) as score").
       joins(:answers).
       joins(:party).
       joins("LEFT JOIN answers ua ON ua.question_id = answers.question_id AND ua.responder_type = 'User'").
