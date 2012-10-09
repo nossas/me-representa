@@ -34,9 +34,7 @@ html
     section.login
       .row.wrapper
         .meurio_and_user
-          .meurio
-            = link_to image_tag("meurio_logo.jpg"), "http://meurio.org.br/"
-            | apresenta:
+          .meurio= link_to image_tag("meurio_logo.jpg"), "http://meurio.org.br/"
           .user
             - if current_user
               span= image_tag current_user.picture, class: "avatar" 
@@ -48,24 +46,12 @@ html
                   li= link_to "Sair", session_path(current_user.id), :method => :delete, :class => "icon-exit", :title => "Sair"
             - else
               | Entre com a sua conta do #{link_to "Meu Rio", meurio_auth_path, class: 'mr'} ou do #{link_to "Facebook", facebook_auth_path, class: 'fb'}
-    section.header
-      .wrapper
-        - if content_for? :header 
-          = yield :header
-        - else
-          = link_to image_tag("bg_header_phase_two.png"), root_path
     - if notice
       section.notice
         .row
           .message
             span= alert || notice || ""
     section.content= yield
-    footer
-      .wrapper
-        nav.links
-          = link_to "Quem somos", "http://meurio.org.br/paginas/sobre_nos"
-          span |
-          = mail_to "cadastro@verdadeouconsequencia.org.br", "Contate-nos"
     #fb-root
     #meurio_login_box.hidden
       h2 Faça login no meu rio 

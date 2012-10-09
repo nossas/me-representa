@@ -24,6 +24,9 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
+body.candidates#home h1, body.candidates#home p
+  +grid(16)
+
 #facebox
   position: fixed !important
   left: 35% !important
@@ -130,7 +133,7 @@ $grid-half: $grid-system * 0.5
 body
   font: normal 1em/28px "Open Sans", "Lucida Sans Unicode", "Lucida Sans" 
   color: darken(gray, 30%)
-  background: image-url('bg.png')
+  background: image-url('bg2.jpg')
 
 .notice
   margin-bottom: 1em
@@ -150,6 +153,7 @@ section.header
 section.login
   line-height: 40px
   +box-shadow(0 -1px 6px darken(gray, 20%))
+  margin-bottom: 3em
 
 a[href="/auth/facebook"], a[href="/auth/meurio"]
   text-transform: uppercase
@@ -174,20 +178,31 @@ a[href="/auth/facebook"]
 
 @mixin btn($color1, $color2)
   color: white
-  border: 1px solid $color1
-  font: normal 1.2em "Londrina Solid"
+  font: normal 1.5em "Londrina Solid"
   letter-spacing: 2px
   text-transform: uppercase
-  padding: 4px 10px 4px 10px
-  position: relative
-  top: 4px
   cursor: pointer
-  +border-radius(10px)
-  +background-image(linear-gradient(lighten($color1, 10%) 50%, $color1 50%))
-  +box-shadow(lighten(gray, 20%) 0 1px 1px)
+  background: $color1
+  padding: .7em 1em
+  +border-radius(5px)
+  +box-shadow(rgba(0, 0, 0, .5) 1px 1px 1px)
+  +text-shadow(black 1px 1px 1px)
   &:hover
-    border: 1px solid $color2
-    +background-image(linear-gradient(lighten($color2, 10%) 50%, $color2 50%))
+    background: lighten($color1, 10%)
+  &.facebook
+    background: $fb_blue
+    border-color: darken($fb_blue, 10%)
+    &:hover
+      background: lighten($fb_blue, 10%)
+  &.twitter
+    background: $twitter_blue
+    border-color: darken($twitter_blue, 5%)
+    &:hover
+      background: lighten($twitter_blue, 5%)
+  &:before
+    padding-right: .5em
+    +text-shadow(none)
+
 
 
 section.login
@@ -888,7 +903,7 @@ body.candidates, body.answers
   .match_mobile
     h3
       color: lighten($orange, 8%)
-  &#index, &#home
+  &#index
     .questions
       background: white !important
       .question
@@ -899,7 +914,7 @@ body.candidates, body.answers
         margin-bottom: 0 !important
       .text
         color: black !important
-  &#index, &#new, &#home
+  &#index, &#new
     .padd
       padding: 2em
     .send_answers
@@ -1244,7 +1259,7 @@ table.candidates_list, .candidate_info .likes
   background: lighten(gray, 45%)
   padding: .5em
 
-body.candidates#show, body.candidates#index, body.candidates#home
+body.candidates#show, body.candidates#index
   .discover_your_candidate, .make_the_test
     padding: .4em  0 0 0
     text-align: center
@@ -1370,19 +1385,6 @@ body.candidates#show, body.candidates#index, body.candidates#home
       +transition(.5s)
       +border-radius(5px)
       +text-shadow(black 1px 1px 1px)
-      &.facebook
-        background: $fb_blue
-        border-color: darken($fb_blue, 10%)
-        &:hover
-          background: lighten($fb_blue, 10%)
-      &.twitter
-        background: $twitter_blue
-        border-color: darken($twitter_blue, 5%)
-        &:hover
-          background: lighten($twitter_blue, 5%)
-      &:before
-        padding-right: .5em
-        +text-shadow(none)
   .candidate_answers
     margin: 1.5em 0
     .box
@@ -1734,3 +1736,26 @@ body.candidates#show
 body.answers#new
   section.header
     clear: both
+
+body.candidates#home
+  h1, p, h2
+    color: white
+  h1, h2
+    +text-shadow(1px 1px 1px black)
+  p
+    font-size: .8em
+    text-align: center
+    margin-bottom: 3em
+    &.keep_using
+      padding-bottom: 3em
+      +box-shadow(inset 0 -15px 20px -20px black)
+  a
+    color: lighten($orange, 10%)
+    text-decoration: underline
+  .btn
+    color: white
+    text-decoration: none
+  h2
+    font-size: 1.5em
+    border: none
+    +box-shadow(inset 0 15px 20px -20px black)
