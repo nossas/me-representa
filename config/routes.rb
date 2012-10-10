@@ -28,11 +28,12 @@ CariocaPergunta::Application.routes.draw do
 
   resources :subscribers
   
-  resources :sessions,    only: [:destroy]
+  resources :sessions,    only: [:destroy, :new]
   
   get 'auth/meurio',      as: :meurio_auth
   get 'auth/facebook',    as: :facebook_auth
+  get 'home', :to => "candidates#home", :as => :candidates_home
 
   resources :answers, except: [:destroy]
-  root :to => "candidates#home"
+  root :to => "sessions#new"
 end

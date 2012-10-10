@@ -1,0 +1,11 @@
+.wrapper
+  .row
+    h1 E aí, o que você achou do Verdade ou Consequência?
+    p Essa foi a primeira eleição do Meu Rio e a primeira rodada do Verdade ou Consequência. É muito importante para nós ter o seu feedback sobre a ferramenta, assim vamos poder melhorá-la até as próximas eleições. Queremos saber o que você achou da ferramenta, se ela te ajudou a escolher um vereador, se você a usaria de novo. Essas coisas... Você tem dois minutinhos?
+    p= image_tag "bonecos.png"
+    p= link_to "Dê seu feedback", "http://www.surveymonkey.com/s/J555RCM", :class => "btn"
+    p.keep_using Quer conhecer ou continuar testando a plataforma? #{link_to "Clique aqui", candidates_home_path}
+    h2 Aproveite para conhecer o Meu Rio nas redes sociais
+    p
+      = link_to "Visite-nos no Facebook", "http://www.facebook.com/meurio", :class => "btn facebook icon-facebook"
+      = link_to "Visite-nos no Twitter", "http://twitter.com/meu_rio", :class => "btn twitter icon-twitter"

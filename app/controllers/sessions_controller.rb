@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  layout "application_phase_two"
   skip_authorization_check
 
   def create
@@ -17,5 +18,8 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
     redirect_to root_path 
+  end
+
+  def new
   end
 end

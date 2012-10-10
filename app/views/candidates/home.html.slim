@@ -1,11 +1,59 @@
-.wrapper
-  .row
-    h1 E aí, o que você achou do Verdade ou Consequência?
-    p Essa foi a primeira eleição do Meu Rio e a primeira rodada do Verdade ou Consequência. É muito importante para nós ter o seu feedback sobre a ferramenta, assim vamos poder melhorá-la até as próximas eleições. Queremos saber o que você achou da ferramenta, se ela te ajudou a escolher um vereador, se você a usaria de novo. Essas coisas... Você tem dois minutinhos?
-    p= image_tag "bonecos.png"
-    p= link_to "Dê seu feedback", "#", :class => "btn"
-    p.keep_using Quer conhecer ou continuar testando a plataforma? #{link_to "Clique aqui", "#"}
-    h2 Aproveite para conhecer o Meu Rio nas redes sociais
-    p
-      = link_to "Visite-nos no Facebook", "http://www.facebook.com/meurio", :class => "btn facebook icon-facebook"
-      = link_to "Visite-nos no Twitter", "http://twitter.com/meu_rio", :class => "btn twitter icon-twitter"
+.wrapper.matching#matching
+  .padd
+    h1 Chegou a hora da verdade!
+    h2 Responda ao questionário e descubra quais candidatos combinam mais com você e com o que você deseja para o Rio.
+    = image_tag "steps.jpg"
+    p E aí, vamos lá?
+    .buttons
+      = link_to "Começar o teste", new_answer_path, :class => "btn"
+
+
+.wrapper.parties
+  .padd
+    h1= t 'phase2.header'
+    h2= t 'phase2.no_participation'
+
+    p= link_to "Quer saber como o jogo funciona?", "#/", class: 'infographic btn'
+    .infographic.hidden
+      = image_tag "bg_infographic_phase2.jpg"
+
+    ol.parties
+      li.active= image_tag "parties/01.jpg", title: "DEM"       
+      li.active= image_tag "parties/02.jpg", title: "PCB"
+      li.active.inactive= image_tag "parties/03.jpg", title: "PCdoB"
+      li.active= image_tag "parties/05.jpg", title: "PDT"
+      li.active= image_tag "parties/06.jpg", title: "PHS"
+      li.active= image_tag "parties/07.jpg", title: "PMDB"
+      li.active.inactive= image_tag "parties/08.jpg", title: "PMN"
+      li.active.inactive= image_tag "parties/09.jpg", title: "PP"
+      li.active= image_tag "parties/10.jpg", title: "PPL"
+      li.active= image_tag "parties/11.jpg", title: "PPS"
+      li.active.inactive= image_tag "parties/12.jpg", title: "PR"
+      li.active.inactive= image_tag "parties/13.jpg", title: "PRB"
+      li.active= image_tag "parties/14.jpg", title: "PRP"
+      li.active= image_tag "parties/15.jpg", title: "PRTB"
+      li.active.inactive= image_tag "parties/16.jpg", title: "PSB"
+      li.active= image_tag "parties/17.jpg", title: "PSC"
+      li.active.inactive= image_tag "parties/18.jpg", title: "PSD"
+      li.active= image_tag "parties/19.jpg", title: "PSDB"
+      li.active.inactive= image_tag "parties/20.jpg", title: "PSDC"
+      li.active.inactive= image_tag "parties/21.jpg", title: "PSL"
+      li.active= image_tag "parties/22.jpg", title: "PSOL"
+      li.active= image_tag "parties/25.jpg", title: "PSTU"
+      li.active= image_tag "parties/23.jpg", title: "PT"
+      li.active.inactive= image_tag "parties/27.jpg", title: "PTdoB"
+      li.active.inactive= image_tag "parties/24.jpg", title: "PTB"
+      li.active.inactive= image_tag "parties/26.jpg", title: "PTC"
+      li.active.inactive= image_tag "parties/28.jpg", title: "PTN"
+      li.active= image_tag "parties/29.jpg", title: "PV"
+
+    h2 Clique para pressionar os partidos a enviarem seus contatos
+    .panela= link_to "Pressionar partidos", "http://paneladepressao.org.br/campaigns/91", target: "_blank", :class => "btn"
+    .share
+      a href="https://twitter.com/share" class="twitter-share-button" data-url="http://verdadeouconsequencia.org.br/" data-lang="pt" Tweetar
+      .fb-like data-href="http://verdadeouconsequencia.org.br/" data-send="true" data-width="450" data-show-faces="false"
+.wrapper.questionnaire
+  .padd
+    h2= t 'phase2.questionnaire.header'
+    .questions
+      = render partial: "questions/list_with_index", locals: { questions: @truths + @dares }

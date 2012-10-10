@@ -24,7 +24,7 @@ $grid-half: $grid-system * 0.5
 @mixin grid-padded
   +grid($grid-system)
 
-body.candidates#home h1, body.candidates#home p
+body.sessions#new h1, body.sessions#new p, body.sessions#new h2
   +grid(16)
 
 #facebox
@@ -133,7 +133,7 @@ body.candidates#home h1, body.candidates#home p
 body
   font: normal 1em/28px "Open Sans", "Lucida Sans Unicode", "Lucida Sans" 
   color: darken(gray, 30%)
-  background: image-url('bg2.jpg')
+  background: image-url('bg.png')
 
 .notice
   margin-bottom: 1em
@@ -153,7 +153,7 @@ section.header
 section.login
   line-height: 40px
   +box-shadow(0 -1px 6px darken(gray, 20%))
-  margin-bottom: 3em
+  margin-bottom: 1.5em
 
 a[href="/auth/facebook"], a[href="/auth/meurio"]
   text-transform: uppercase
@@ -178,15 +178,16 @@ a[href="/auth/facebook"]
 
 @mixin btn($color1, $color2)
   color: white
-  font: normal 1.5em "Londrina Solid"
+  font: normal 1.2em "Londrina Solid"
   letter-spacing: 2px
   text-transform: uppercase
+  padding: 0.5em 1em
   cursor: pointer
   background: $color1
-  padding: .7em 1em
+  border: none
   +border-radius(5px)
-  +box-shadow(rgba(0, 0, 0, .5) 1px 1px 1px)
-  +text-shadow(black 1px 1px 1px)
+  +box-shadow(1px 1px 1px black)
+  +text-shadow(1px 1px 1px black)
   &:hover
     background: lighten($color1, 10%)
   &.facebook
@@ -202,7 +203,6 @@ a[href="/auth/facebook"]
   &:before
     padding-right: .5em
     +text-shadow(none)
-
 
 
 section.login
@@ -903,7 +903,7 @@ body.candidates, body.answers
   .match_mobile
     h3
       color: lighten($orange, 8%)
-  &#index
+  &#index, &#home
     .questions
       background: white !important
       .question
@@ -914,7 +914,7 @@ body.candidates, body.answers
         margin-bottom: 0 !important
       .text
         color: black !important
-  &#index, &#new
+  &#index, &#new, &#home
     .padd
       padding: 2em
     .send_answers
@@ -1259,7 +1259,7 @@ table.candidates_list, .candidate_info .likes
   background: lighten(gray, 45%)
   padding: .5em
 
-body.candidates#show, body.candidates#index
+body.candidates#show, body.candidates#index, body.candidates#home
   .discover_your_candidate, .make_the_test
     padding: .4em  0 0 0
     text-align: center
@@ -1737,7 +1737,8 @@ body.answers#new
   section.header
     clear: both
 
-body.candidates#home
+body.sessions#new
+  background: url("bg2.jpg")
   h1, p, h2
     color: white
   h1, h2
@@ -1746,16 +1747,20 @@ body.candidates#home
     font-size: .8em
     text-align: center
     margin-bottom: 3em
+    font-size: .9em
+    +text-shadow(0 0 1px black)
     &.keep_using
       padding-bottom: 3em
-      +box-shadow(inset 0 -15px 20px -20px black)
   a
     color: lighten($orange, 10%)
     text-decoration: underline
+  a[href="/auth/facebook"], a[href="/auth/meurio"]
+    text-decoration: none
   .btn
+    font-size: 1.5em
     color: white
     text-decoration: none
   h2
     font-size: 1.5em
     border: none
-    +box-shadow(inset 0 15px 20px -20px black)
+    +box-shadow(0 -15px 20px -20px black)

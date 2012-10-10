@@ -147,6 +147,8 @@ When /^I go to "(.*?)"$/ do |arg1|
     visit new_answer_path
   elsif arg1 == "this candidate page"
     visit candidate_path(@candidate)
+  elsif arg1 == "the candidates home page"
+    visit candidates_home_path
   else
     raise "I don't know #{arg1}"
   end
