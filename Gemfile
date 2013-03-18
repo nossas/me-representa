@@ -65,3 +65,4 @@ gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
 gem 'googl'
 gem 'launchy'
+gem "selenium-webdriver", "~> 2.29.0"
