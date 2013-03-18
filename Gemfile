@@ -34,7 +34,6 @@ end
 
 group :development do
   gem 'taps'
-  gem 'mailcatcher'
 end
 
 group :test do
