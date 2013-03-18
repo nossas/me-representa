@@ -12,7 +12,7 @@ Feature: Login
   @omniauth_test
   Scenario: when I choose Facebook provider
     Given I'm on the questions page
-    When I click "Facebook"
+    When I click the Facebook login button
     Then I should see Nícolas Iensen
 
   @omniauth_test

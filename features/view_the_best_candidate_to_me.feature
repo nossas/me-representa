@@ -16,8 +16,8 @@ Feature: View the best candidate to me
     And I press "Ver resultado"
     Then I should be in "the parties page"
     When I click "MR"
-    Then I should see Leonardo Eloi
-    Then I should see 100%
+    Then I should see LEONARDO ELOI
+    And I should see 100%
   
   @omniauth_test @javascript
   Scenario: When there is a candidate with 100% of matching through an union
@@ -31,5 +31,5 @@ Feature: View the best candidate to me
     And I press "Ver resultado"
     And I should be in "the parties page"
     When I click "Por um Rio Melhor"
-    Then I should see Leonardo Eloi
+    Then I should see LEONARDO ELOI
     And I should see 100%

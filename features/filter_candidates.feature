@@ -19,13 +19,13 @@ Feature: Filter candidates
     And I press "Ver resultado"
     And I should be in "the parties page"
     And I click "MR"
-    And I should see Leonardo Eloi
-    And I should see Nicolera
-    And I should see Ainbinder
+    And I should see LEONARDO ELOI
+    And I should see NICOLERA
+    And I should see AINBINDER
     When I choose "de 18 a 25 anos" from the filter form
-    Then I should see Ainbinder
-    And I should not see Leonardo Eloi
-    And I should not see Nicolera
+    Then I should see AINBINDER
+    And I should not see LEONARDO ELOI
+    And I should not see NICOLERA
 
 
   @omniauth_test @javascript
@@ -44,13 +44,13 @@ Feature: Filter candidates
     And I press "Ver resultado"
     And I should be in "the parties page"
     And I click "MR"
-    And I should see Leonardo Eloi
-    And I should see Nicolera
-    And I should see Ainbinder
+    And I should see LEONARDO ELOI
+    And I should see NICOLERA
+    And I should see AINBINDER
     When I check "Superior Completo" from the filter form
-    Then I should see Leonardo Eloi
-    And I should not see Ainbinder
-    And I should not see Nicolera
+    Then I should see LEONARDO ELOI
+    And I should not see AINBINDER
+    And I should not see NICOLERA
 
   @omniauth_test @javascript
   Scenario: Filtering candidates by reelection 
@@ -68,13 +68,13 @@ Feature: Filter candidates
     And I press "Ver resultado"
     And I should be in "the parties page"
     And I click "MR"
-    And I should see Leonardo Eloi
-    And I should see Nicolera
-    And I should see Ainbinder
+    And I should see LEONARDO ELOI
+    And I should see NICOLERA
+    And I should see AINBINDER
     When I check "Sim" from the filter form
-    Then I should see Nicolera
-    And I should not see Ainbinder
-    And I should not see Leonardo Eloi
+    Then I should see NICOLERA
+    And I should not see AINBINDER
+    And I should not see LEONARDO ELOI
 
   @omniauth_test @javascript
   Scenario: Filtering candidates by gender 
@@ -91,11 +91,11 @@ Feature: Filter candidates
     And I choose "Sim" for the question "tem animais de estimação?"
     And I press "Ver resultado"
     And I should be in "the parties page"
-    And I click "MR"
-    And I should see Leonardo Eloi
-    And I should see Nicolera
-    And I should see Ainbinder
+    When I click "MR"
+    Then I should see LEONARDO ELOI
+    Then I should see NICOLERA
+    Then I should see AINBINDER
     When I check "Masculino" from the filter form
-    Then I should not see Nicolera
-    And I should see Ainbinder
-    And I should see Leonardo Eloi
+    Then I should not see NICOLERA
+    And I should see AINBINDER
+    And I should see LEONARDO ELOI

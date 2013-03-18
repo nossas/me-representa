@@ -9,7 +9,7 @@ Feature: Edit a question from an user
     And I'm logged in as admin
     And I'm on the questions page
     And I click "Editar esta pergunta"
-    And I should see Edição
+    And I should see EDIÇÃO
     And I should see question's text field
     And I should see question's category field
     And I fill in "question[text]" with "Atualizando a questão de outrem"

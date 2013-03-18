@@ -12,10 +12,10 @@ Feature: Give a star to a candidate
     And this candidate answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    And I press "Ver resultado"
-    And I should be in "the parties page"
-    And I click "Por um Rio Melhor"
-    And I should see Leonardo Eloi
+    When I press "Ver resultado"
+    Then I should be in "the parties page"
+    When I click "Por um Rio Melhor"
+    Then I should see LEONARDO ELOI
     When I check "user[candidate_id]" from the like form
     Then I should have a favorite candidate
 
@@ -28,11 +28,11 @@ Feature: Give a star to a candidate
     And this candidate answered "Sim" for this question
     And I'm on "the answers page"
     And I choose "Sim" for the question "tem animais de estimação?"
-    And I press "Ver resultado"
-    And I should be in "the parties page"
-    And I click "Por um Rio Melhor"
-    And I should see Leonardo Eloi
-    And I should not see Quer que o meu rio refresque sua memória no dia da eleição?
+    When I press "Ver resultado"
+    Then I should be in "the parties page"
+    When I click "Por um Rio Melhor"
+    Then I should see LEONARDO ELOI
+    And I should not see QUER QUE O MEU RIO REFRESQUE SUA MEMÓRIA NO DIA DA ELEIÇÃO?
     When I check "user[candidate_id]" from the like form
-    And I should see Quer que o meu rio refresque sua memória no dia da eleição?
-    Then I should have a favorite candidate
+    Then I should see QUER QUE O MEU RIO REFRESQUE SUA MEMÓRIA NO DIA DA ELEIÇÃO?
+    And I should have a favorite candidate

@@ -29,7 +29,6 @@ end
 
 # Staging stuff
 group :development, :production do
-  gem 'heroku'
   gem 'thin'
 end
 
@@ -67,3 +66,4 @@ gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
 gem 'googl'
+gem 'launchy'

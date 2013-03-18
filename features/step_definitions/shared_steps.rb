@@ -163,7 +163,7 @@ Given /^I'm on "(.*?)"$/ do |arg1|
 end
 
 Given /^I choose "(.*?)" for the question "(.*?)"$/ do |arg1, arg2|
-  within(".question form") do
+  within("form.new_answer") do
     choose(arg1)
     sleep(2)
   end
@@ -305,3 +305,6 @@ Then /^I should have a favorite candidate$/ do
   @current_user.reload.candidate_id.should_not be_nil
 end
 
+When(/^I click the Facebook login button$/) do
+  visit("/auth/facebook")
+end
