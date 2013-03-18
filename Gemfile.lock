@@ -289,10 +289,9 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-oauth2
   pg
-  rails (~> 3.2.8)
+  rails
   rspec-rails
   sass-rails
-  selenium-webdriver (~> 2.29.0)
   shoulda-matchers
   simple_form
   slim

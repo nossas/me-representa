@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Last updated version of rails
-gem 'rails', '~> 3.2.8'
+gem 'rails'
 
 # Back-end stuff
 gem 'inherited_resources'
@@ -65,4 +65,3 @@ gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
 gem 'googl'
 gem 'launchy'
-gem "selenium-webdriver", "~> 2.29.0"
