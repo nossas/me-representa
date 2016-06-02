@@ -1,5 +1,6 @@
-# Meu Rio is no longer supporting this project!
+# Run this project
 
-[![Build Status](https://secure.travis-ci.org/meurio/verdade-ou-consequencia.png?branch=master)](http://travis-ci.org/meurio/verdade-ou-consequencia)
-[![Code Climate](https://codeclimate.com/github/meurio/verdade-ou-consequencia.png)](https://codeclimate.com/github/meurio/verdade-ou-consequencia)
-[![Dependency Status](https://gemnasium.com/meurio/verdade-ou-consequencia.png)](https://gemnasium.com/meurio/verdade-ou-consequencia)
+1. Install Ruby `1.9.3-p551' version with Rbenv or RVM.
+2. Install Bundler with `$ gem install bundler`.
+3. Create tables in database with `$ rake db:migrate`.
+4. Run the server with `$ rails s`.
