@@ -1,3 +1,5 @@
+[![Build Status](https://snap-ci.com/jonatassalgado/verdade-ou-consequencia/branch/master/build_image)](https://snap-ci.com/jonatassalgado/verdade-ou-consequencia/branch/master)
+
 # Run this project
 
 1. Install Ruby `1.9.3-p551' version with Rbenv or RVM.
