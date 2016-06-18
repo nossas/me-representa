@@ -8,8 +8,3 @@
 4. Create tables in database with `$ rake db:migrate`.
 5. Run the server with `$ rails s`.
 
-# TODO
-
-### 0. Run project local. [OK]
-### 1. Configure SnapCI, Codeclimate and Heroku.
-### 2. Passing all Rspec tests.
