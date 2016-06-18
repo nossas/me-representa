@@ -1,4 +1,6 @@
-[![Build Status](https://snap-ci.com/jonatassalgado/verdade-ou-consequencia/branch/master/build_image)](https://snap-ci.com/jonatassalgado/verdade-ou-consequencia/branch/master)
+[![Build Status](https://snap-ci.com/jonatassalgado/verdade-ou-consequencia/branch/master/build_image)](https://snap-ci.com/jonatassalgado/verdade-ou-consequencia/branch/master) 
+[![Tasks to do](https://badge.waffle.io/minhaportoalegre/verdade-ou-consequencia.svg?label=todo&=To Do)](http://waffle.io/minhaportoalegre/verdade-ou-consequencia)
+
 
 # Run this project
 
