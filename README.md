@@ -1,4 +1,4 @@
-[![Build Status](https://snap-ci.com/jonatassalgado/verdade-ou-consequencia/branch/master/build_image)](https://snap-ci.com/jonatassalgado/verdade-ou-consequencia/branch/master) 
+[![CircleCI](https://circleci.com/gh/minhaportoalegre/verdade-ou-consequencia.svg?style=svg)](https://circleci.com/gh/minhaportoalegre/verdade-ou-consequencia)
 [![Tasks to do](https://badge.waffle.io/minhaportoalegre/verdade-ou-consequencia.svg?label=todo&=To Do)](http://waffle.io/minhaportoalegre/verdade-ou-consequencia)
 
 
