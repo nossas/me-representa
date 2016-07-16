@@ -10,10 +10,9 @@ describe SubscribersController do
   end
 
   describe "POST #create" do
-    before do
+    it "should redirect to root path" do
       post :create, :subscriber => {:email => "my_email@test.com"}
+      expect(response.status).to eq 302
     end
-    its(:status) { should == 302 }
   end
-
 end

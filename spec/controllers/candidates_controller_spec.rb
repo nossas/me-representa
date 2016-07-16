@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe CandidatesController do
 
-  describe "#get" do
-    before do
+  describe "#index" do
+    it "should render successfully" do
       get :index
+      expect(response.status).to eq 200
     end
-    its(:status) { should be_== 200 }
   end
 
 
@@ -35,7 +35,7 @@ describe CandidatesController do
       end
       it "should return a hash describing that mobile phone is truthy" do
         expect(response.body).to eq("{\"email\":false,\"mobile_phone\":true}")
-      end   
+      end
     end
   end
 end

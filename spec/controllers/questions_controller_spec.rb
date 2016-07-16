@@ -19,18 +19,18 @@ describe QuestionsController do
     end
 
     context "When an invalid token is provided and it is not XHR" do
-      before do
+      it "should unauthorize access" do
         get :index, token: "TOKEN", format: "json"
+        expect(response.status).to eq 401
       end
-      its(:status) { should == 401 }
     end
 
     context "When a valid token is provided and it is not XHR" do
-      before do 
+      it "should render successfully" do
         ENV["DASH_TOKEN"] = "MYTOKEN"
         get :index, token: "MYTOKEN", format: "json"
+        expect(response.status).to eq 200
       end
-      its(:status) { should == 200 }
     end
   end
 
