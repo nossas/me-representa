@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 # Last updated version of rails
-gem 'rails'
+ruby '2.1.9'
+gem 'rails', '3.2.13'
 
 # Back-end stuff
 gem 'inherited_resources'
@@ -30,10 +31,6 @@ end
 # Staging stuff
 group :development, :production do
   gem 'thin'
-end
-
-group :development do
-  gem 'taps'
 end
 
 group :test do
