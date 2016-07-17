@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 # Last updated version of rails
-gem 'rails'
+ruby '2.1.9'
+gem 'rails', '3.2.13'
 
 # Back-end stuff
 gem 'inherited_resources'
@@ -32,15 +33,12 @@ group :development, :production do
   gem 'thin'
 end
 
-group :development do
-  gem 'taps'
-end
-
 group :test do
-  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails', '1.4.3', require: false
   gem 'shoulda-matchers'
   gem "database_cleaner"
   gem 'factory_girl_rails'
+  gem 'selenium-webdriver', '2.53.4'
 end
 
 # Gems used only for assets and not required
