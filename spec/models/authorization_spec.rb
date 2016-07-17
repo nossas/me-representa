@@ -18,12 +18,12 @@ RSpec.describe Authorization, type: :model do
 
       mr = MEURIO_HASH
       authorization = FactoryGirl.create(:authorization, :provider => mr['provider'], :uid => mr['uid'], :user => @user)
-      Authorization.find_from_hash(mr).should_not be_nil
+      expect(Authorization.find_from_hash(mr)).not_to be_nil
     end
 
     it "Should return nil if the provider/uid isn't in the DB" do
       Authorization.destroy_all
-      Authorization.find_from_hash(MEURIO_HASH).should == nil
+      expect(Authorization.find_from_hash(MEURIO_HASH)).to be_nil
     end
   end
 
