@@ -38,6 +38,7 @@ group :test do
   gem 'shoulda-matchers'
   gem "database_cleaner"
   gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
 end
 
 # Gems used only for assets and not required
