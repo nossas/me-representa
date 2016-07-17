@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe QuestionsController do
+RSpec.describe QuestionsController, type: :controller do
   subject{ response }
 
   let(:question){ FactoryGirl.create(:question) }

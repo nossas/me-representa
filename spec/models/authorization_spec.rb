@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Authorization do
+RSpec.describe Authorization, type: :model do
   before do
     @user = FactoryGirl.create(:user)
   end
@@ -39,7 +39,7 @@ describe Authorization do
       it "should return an existent" do
         expect(subject['uid']).to eq @mr['uid']
         expect(subject['provider']).to eq @mr['provider']
-        expect(subject['user']).to eq @user
+        expect(subject.user).to eq @user
       end
     end
 
@@ -49,7 +49,7 @@ describe Authorization do
       it "should create" do
         expect(subject['uid']).to eq @mr['uid']
         expect(subject['provider']).to eq @mr['provider']
-        expect(subject['user']).not_to be nil
+        expect(subject.user).not_to be nil
       end
     end
   end

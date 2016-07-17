@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CandidatesController do
+RSpec.describe CandidatesController, type: :controller do
 
   describe "#index" do
     it "should render successfully" do

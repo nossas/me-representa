@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe UsersController do
+RSpec.describe UsersController, type: :controller do
   describe "#index" do
     context "When not an admin user" do
-      it "should be unauthorized" do
+      it "should redirect" do
         get :index, format: :csv
-        expect(response.status).to eq 401
+        expect(response.status).to eq 302
       end
     end
 
     context "When an admin user" do
        it "should render successfully" do
         user = FactoryGirl.create(:user, admin: true)
-        controller.stub!(:current_user).and_return(user)
+        allow(controller).to receive(:current_user).and_return(user)
 
         get :index, format: :csv
         expect(response.status).to eq 200

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe SubscribersController do
+RSpec.describe SubscribersController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
       get :index
-      response.should be_success
+      expect(response).to be_successful
     end
   end
 
