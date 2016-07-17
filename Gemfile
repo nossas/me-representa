@@ -34,11 +34,11 @@ group :development, :production do
 end
 
 group :test do
-  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails', '1.4.3', require: false
   gem 'shoulda-matchers'
   gem "database_cleaner"
   gem 'factory_girl_rails'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '2.53.4'
 end
 
 # Gems used only for assets and not required
