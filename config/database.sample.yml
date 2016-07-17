@@ -1,5 +1,19 @@
-test:
-  host: 127.0.0.1
+default: &default
   adapter: postgresql
-  database: myapp_test
-  username: postgres
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  # pool: <%#= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+
+development:
+  <<: *default
+  database: verdade_development
+
+test:
+  <<: *default
+  database: verdade_test
+
+production:
+  <<: *default
+  password: <%= ENV['VERDADE_DB_PASS'] %>
+  url: <%= ENV['DATABASE_URL'] %>
