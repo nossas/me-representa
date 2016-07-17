@@ -15,15 +15,15 @@ describe Question do
 
     it "should fail when the role type is not Truth or Dare" do
       question = Question.create(:text => "Some text", :user => @user, :category => @category, :role_type => "wrong role")
-      question.should have(1).error_on(:role_type)
-      question.should_not be_valid
+      expect(question).not_to be_valid
+      expect(question.errors[:role_type]).not_to be_empty
     end
 
     it "should succeed when the role type is Truth or Dare" do
       role = ['truth', 'dare']
       question =  Question.create(:text => "Some text", :user => @user, :category => @category, :role_type => role[rand(2)])
-      question.should have(0).error_on(:role_type)
-      question.should be_valid
+      expect(question).to be_valid
+      expect(question.errors[:role_type]).to be_empty
     end
   end
 
