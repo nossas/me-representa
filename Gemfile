@@ -14,7 +14,6 @@ gem 'cancan'
 gem 'slim'
 gem 'simple_form'
 gem 'jquery-rails'
-gem 'jasmine'
 
 # Database stuff
 gem 'pg'
@@ -23,8 +22,8 @@ gem 'foreigner'
 group :test, :development do
   gem 'rspec-rails'
   gem 'taps'
-  gem 'sqlite3'
   gem 'mailcatcher'
+  gem 'jasmine'
 end
 
 
