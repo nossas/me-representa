@@ -19,7 +19,7 @@ describe("Common.Login", function(){
     it("should replace the target with a login box", function(){
       spyOn($.fn, "fadeOut");
       spyOn($.fn, "fadeIn");
-      spyOn($.fn, "clone").andCallThrough();
+      spyOn($.fn, "clone").and.callThrough();
 
       view = new App.Common.Login({ el: $('<section><div class="login_options"><ul><li>option</li></ul></div></section>')[0]});
       form = $('<div class="form"><fieldset><form id="questions"></form></fieldset></div>');
