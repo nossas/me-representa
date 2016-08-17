@@ -4,7 +4,7 @@ module OmniAuth
       option :name, :meurio
 
       option :client_options, {
-        :site => "http://meurio.org.br",
+        :site => "http://merepresenta.org.br",
         :authorize_path => "/oauth/authorize"
       }
 
