@@ -15,9 +15,10 @@ CariocaPergunta::Application.routes.draw do
     resources :candidates, only: [:index, :show]
   end
 
-  resources :questions do
-    resources :votes, :only => :create
-  end
+#  Retiradas para nova edição - merepresenta. (votes#create e questions#(index/create/new/edit/show/update/destroy) )
+#  resources :questions do
+#    resources :votes, :only => :create
+#  end
 
   resources :users, only: [:index, :new, :create, :update] do
     resources :answers, except: [:index, :new, :destroy]
