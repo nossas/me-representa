@@ -4,6 +4,7 @@ class Union < ActiveRecord::Base
   has_many :parties
   has_many :candidates, :through => :parties
   has_many :answers, :through => :candidates
+  belongs_to :city
 
   def self.match_for_user user_id
     connection.select_all(
