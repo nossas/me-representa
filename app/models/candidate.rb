@@ -4,6 +4,8 @@ class Candidate < ActiveRecord::Base
   validates :name, :number, :party_id, :presence => true
 
   belongs_to :party
+  belongs_to :city
+  
   has_one :union, :through => :party
   has_many :answers, :as => :responder
   has_many :users
