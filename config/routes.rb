@@ -20,7 +20,7 @@ CariocaPergunta::Application.routes.draw do
 #    resources :votes, :only => :create
 #  end
 
-  resources :users, only: [:index, :new, :create, :update] do
+  resources :users, only: [:index, :new, :create, :update, :edit] do
     resources :answers, except: [:index, :new, :destroy]
     resources :parties, :unions, only: [:index] do
       resources :candidates
@@ -30,6 +30,8 @@ CariocaPergunta::Application.routes.draw do
   resources :subscribers
   
   resources :sessions,    only: [:destroy, :new]
+  
+  resources :cities,      only: [:index]
   
   get 'auth/meurio',      as: :meurio_auth
   get 'auth/facebook',    as: :facebook_auth
