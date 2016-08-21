@@ -1,8 +1,7 @@
 class Candidate < ActiveRecord::Base
-  attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity
+  attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity, :city_id, :cpf, :electoral_title
   validates :number, :token, :uniqueness => true
-  validates :name, :number, :party_id, :presence => true
-  validates :cpf, :titulo_eleitor, :nascimento, :presence => true
+  validates :name, :number, :party_id, :cpf, :electoral_title, :born_at, :city_id, :presence => true
 
   belongs_to :party
   belongs_to :city

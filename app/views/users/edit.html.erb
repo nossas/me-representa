@@ -37,6 +37,9 @@
 .form-input {
 	width: 95%;
 }
+.form-input:invalid {
+	box-shadow: 0 0 1px 1px red;
+}
 </style>
 <div class="form-content">
 	<input type="checkbox" id="candidato">
@@ -50,14 +53,14 @@
 	</div>
 	<div id="div-candidato">
 		<%= form_for @candidate do |f| %>
-			<%= f.label :name, "Nome:", {class: "form-input-label"} %>
-			<%= f.text_field :name, {class: "form-input"} %>
+			<%= f.label :name, "Nome (*):", {class: "form-input-label"} %>
+			<%= f.text_field :name, {class: "form-input", required:"required"} %>
 			<%= f.label :nickname, "Apelido:", {class: "form-input-label"} %>
 			<%= f.text_field :nickname, {class: "form-input"} %>
-			<%= f.label :number, "Número:", {class: "form-input-label"} %>
-			<%= f.text_field :number, {class: "form-input"} %>
-			<%= f.label :party_id, "Partido:", {class: "form-input-label"} %>
-			<%= f.select :party_id, Party.all.collect { |p| [ p.number, p.id ] },{} ,{class: "form-input"} %>
+			<%= f.label :number, "Número (*):", {class: "form-input-label"} %>
+			<%= f.text_field :number, {class: "form-input", required:"required"} %>
+			<%= f.label :party_id, "Partido (*):", {class: "form-input-label"} %>
+			<%= f.select :party_id, Party.all.collect { |p| [ p.number, p.id ] },{} ,{class: "form-input", required:"required"} %>
 			<div class="sexo">
 				<label class="form-input-label">Sexo:</label>
 				<label>
@@ -69,11 +72,8 @@
 					Masculino
 				</label>
 			</div>
-			<%= f.label :born_at, "Nascimento:", {class: "form-input-label"} %>
+			<%= f.label :born_at, "Nascimento (**):", {class: "form-input-label"} %>
 			<%= f.date_select :born_at %>
-			<%= f.hidden_field :created_at %>
-			<%= f.hidden_field :updated_at %>
-			<%= f.hidden_field :token %>
 			<%= f.label :bio, {class: "form-input-label"} %>
 			<%= f.text_area :bio, {class: "form-input"} %>
 			<%= f.label :email, "Email:", {class: "form-input-label"} %>
@@ -88,10 +88,13 @@
 			<%= f.text_field :occupation, {class: "form-input"} %>
 			<%= f.label :scholarity, "Escolaridade:", {class: "form-input-label"} %>
 			<%= f.text_field :scholarity, {class: "form-input"} %>
-
-  			<label for="cidade" class="form-input-label">Município para a eleição:</label>
-			<input type="text" name="cidade" id="cidades" class="form-input"></input>
-			<button type="button">Enviar</button>
+			<%= f.label :cpf, "CPF (**):", {class: "form-input-label"} %>
+			<%= f.text_field :cpf, {class: "form-input", required: "required"} %>
+			<%= f.label :electoral_title, "Título Eleitoral (**):", {class: "form-input-label"} %>
+			<%= f.text_field :electoral_title, {class: "form-input", required: "required"} %>
+			<%= f.label :city_id, "Cidade:", {class: "form-input-label"} %>
+			<%= f.select :city_id, @cities, {}, {class: "form-input"} %>	
+			<%= f.submit %>
 		<% end %>
 	</div>
 </div>

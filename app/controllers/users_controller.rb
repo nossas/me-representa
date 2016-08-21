@@ -16,6 +16,8 @@ class UsersController < ApplicationController
     end
   end
 
+  before_filter :load_all_cities, only:[:edit]
+
   def index
     authorize! :export, @current_user if params[:format] == "csv"
     respond_to do |format|
@@ -25,5 +27,11 @@ class UsersController < ApplicationController
 
   def update
     update! { redirect_to :back and return }
+  end
+
+  private
+
+  def load_all_cities
+    @cities = City.all.map {|c| ["#{c.name}, #{c.state}", c.id]}
   end
 end
