@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     else
       @candidate = Candidate.new
       @candidate.id = @user.id
+      @candidate.name = @user.name
+      @candidate.email = @user.email
+      @candidate.mobile_phone = @user.mobile_phone
+      @candidate.city_id = @user.city_id
     end
   end
 
