@@ -6,7 +6,8 @@ class CandidatesController < ApplicationController
   respond_to :csv
 
   load_and_authorize_resource
-  skip_authorize_resource :only => [:check, :home]
+  skip_authorize_resource :only => [:check, :home, :create  ]
+
   optional_belongs_to :party
   optional_belongs_to :union
 
@@ -22,6 +23,7 @@ class CandidatesController < ApplicationController
       scope.by_age(45,100)
     end
   end
+
   has_scope :by_scholarity,  type: :array do |controller, scope, value|
     scope.by_scholarity(value.delete_if(&:blank?))
   end
@@ -31,9 +33,13 @@ class CandidatesController < ApplicationController
   has_scope :by_gender, type: :array do |controller, scope, value|
     scope.by_gender(value.delete_if(&:blank?))
   end
+
   before_filter { @user = User.find(params[:user_id]) if params[:user_id] }
   before_filter only: [:home] { @truths = Question.truths.chosen; @dares = Question.dares.chosen }
 
+  before_filter only: [:create] do
+    @candidate.id = params['f_code']
+  end
   before_filter only: [:index] do
     if params[:user_id] and params[:party_id]
       @candidates = apply_scopes(Candidate).match_for_user(params[:user_id], { party_id: @party.id })

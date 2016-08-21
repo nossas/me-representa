@@ -12,7 +12,6 @@ class UsersController < ApplicationController
       @candidate = Candidate.find @user.id
     else
       @candidate = Candidate.new
-      @candidate.id = @user.id
       @candidate.name = @user.name
       @candidate.email = @user.email
       @candidate.mobile_phone = @user.mobile_phone
