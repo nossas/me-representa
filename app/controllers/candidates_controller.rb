@@ -57,6 +57,24 @@ class CandidatesController < ApplicationController
 
   def home;end
 
+  def create
+    create! do |success, failure|
+      success.html { redirect_to root_path }
+      failure.html { 
+        envia_erros(@candidate)
+      }
+    end
+  end
+
+  def update
+    update! do |success, failure|
+      success.html { redirect_to root_path }
+      failure.html { 
+        envia_erros(@candidate)
+      }
+    end
+  end
+
   def finish
     @candidate = Candidate.find(params[:candidate_id])
     @candidate.update_attributes :finished_at => Time.now
@@ -90,4 +108,11 @@ class CandidatesController < ApplicationController
     end
   end
 
+  private
+    def envia_erros(modelo)
+        msgs = {}
+        modelo.errors.keys.each {|k| msgs[k] = modelo.errors[k].join("; ") }
+        flash[:erros] = msgs
+        redirect_to edit_user_path(modelo.id)       
+    end
 end

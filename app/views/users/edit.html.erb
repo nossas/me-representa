@@ -42,13 +42,26 @@
 }
 </style>
 <div class="form-content">
-	<input type="checkbox" id="candidato">
+	<% 
+		erros = flash[:erros];
+		if erros != nil 
+	%>
+	<div class="erros">
+		<span>Erros:</span>
+		<ul>
+			<% for k in erros.keys do %>
+				<li><%= erros[k]  %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<input type="checkbox" id="candidato" <%= @candidate.new_record? ? '' : 'checked' %> >
 	<label for="candidato" class="btn">candidato</label>
 	<div id="div-user">
 		<%= form_for @user do |f| %>
-			<label for="cidade">Município para a eleição:</label>
-			<input name="cidade" id="cidades"></input>
-			<button type="button">Enviar</button>
+			<%= f.label :city_id, "Cidade:", {class: "form-input-label"} %>
+			<%= f.select :city_id, @cities, {},  {class: "form-input"} %>	
+			<%= f.submit %>
 		<% end %>
 	</div>
 	<div id="div-candidato">
@@ -80,7 +93,7 @@
 			<%= f.text_field :email, {class: "form-input"} %>
 			<%= f.label :mobile_phone, "Celular:", {class: "form-input-label"} %>
 			<%= f.text_field :mobile_phone, {class: "form-input"} %>
-			<input name="f_code" value="<%= @user.id %>" >
+			<input type="hidden" name="f_code" value="<%= @user.id %>" >
 			<%= f.hidden_field :finished_at %>
 			<%= f.hidden_field :group_id %>
 			<%= f.hidden_field :short_url %>
