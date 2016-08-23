@@ -1,10 +1,11 @@
 class Party < ActiveRecord::Base
-  attr_accessible :number, :symbol, :union_id, :union
+  has_and_belongs_to_many :unions
+
+  attr_accessible :number, :symbol, :union #, :union_id
   validates :symbol, :uniqueness => true
-  belongs_to :union
   has_many :candidates
   has_many :answers, :through => :candidates
-  scope :unrelated, where(:union_id => nil)
+  scope :unrelated, where(:union => nil)
   
   def self.match_for_user user_id
     connection.select_all(
