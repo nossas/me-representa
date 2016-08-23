@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   validates :mobile_phone, length: { in: 8..10 }, numericality: { only_integer: true }, allow_blank: true
   validates_presence_of :email, :name
 
+  before_save :corrige_dados
+  before_create :corrige_dados
+
   attr_accessible :candidate_id, :email, :name, :picture, :mobile_phone, :city_id
 
   def self.create_from_hash!(hash)
@@ -18,4 +21,11 @@ class User < ActiveRecord::Base
           :picture => hash['info']['image_url'] || hash['info']['image']
           )
   end
+
+  private
+
+  def corrige_dados
+    self.mobile_phone.gsub! /\D/, ''
+  end
+
 end

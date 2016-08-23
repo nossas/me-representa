@@ -31,7 +31,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    update! { redirect_to :back and return }
+    update! do |success, failure|
+      success.html { redirect_to root_path }
+      failure.html { 
+        msgs = {}
+        @user.errors.keys.each {|k| msgs[k] = @user.errors[k].join("; ") }
+        flash[:erros] = msgs
+        redirect_to edit_user_path(@user.id)       
+      }
+    end
   end
 
   private

@@ -20,6 +20,9 @@ class Candidate < ActiveRecord::Base
 
   scope :finished, where('finished_at IS NOT NULL')
 
+  before_save :corrige_dados
+  before_create :corrige_dados
+
   def self.assign_next_group candidate
     if candidate && candidate.group_id.nil?
       if Candidate.where(:group_id => 1).count <= Candidate.where(:group_id => 2).count
@@ -55,9 +58,15 @@ class Candidate < ActiveRecord::Base
   end
 
   def verify_tse_data
-      registros = TseData.where("cpf = ? and electoral_title = ? and \"number\" = ? and city_id = ? and born_at = ?", cpf, electoral_title, number, city_id, born_at )
-      p "================================================================"
-      p registros
-      errors.add(:cpf, "Registro não encontrado nos registros do TSE") if (registros == [])
+      # registros = TseData.where("cpf = ? and electoral_title = ? and \"number\" = ? and city_id = ? and born_at = ?", cpf, electoral_title, number, city_id, born_at )
+      # errors.add(:cpf, "Registro não encontrado nos registros do TSE") if (registros == [])
+  end
+
+  private
+
+  def corrige_dados
+    self.mobile_phone.gsub! /\D/, ''
+    self.cpf.gsub! /\D/, ''
+    self.electoral_title.gsub! /\D/, ''    
   end
 end
