@@ -55,7 +55,26 @@ class CandidatesController < ApplicationController
   before_filter :only => [:index] { render partial: 'candidates/list', locals: { candidates: @candidates } if request.xhr? }
   before_filter :only => [:check] { render json: nil if params[:candidate][:email].blank? and params[:candidate][:mobile_phone].blank? }
 
+
   def home;end
+
+  def create
+    create! do |success, failure|
+      success.html { redirect_to root_path }
+      failure.html { 
+        envia_erros(@candidate)
+      }
+    end
+  end
+
+  def update
+    update! do |success, failure|
+      success.html { redirect_to root_path }
+      failure.html { 
+        envia_erros(@candidate)
+      }
+    end
+  end
 
   def finish
     @candidate = Candidate.find(params[:candidate_id])
@@ -90,4 +109,11 @@ class CandidatesController < ApplicationController
     end
   end
 
+  private
+    def envia_erros(modelo)
+        msgs = {}
+        modelo.errors.keys.each {|k| msgs[k] = modelo.errors[k].join("; ") }
+        flash[:erros] = msgs
+        redirect_to edit_user_path(modelo.id)       
+    end
 end

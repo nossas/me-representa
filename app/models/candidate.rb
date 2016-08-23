@@ -2,6 +2,7 @@ class Candidate < ActiveRecord::Base
   attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity, :city_id, :cpf, :electoral_title
   validates :number, :token, :uniqueness => true
   validates :name, :number, :party_id, :cpf, :electoral_title, :born_at, :city_id, :presence => true
+  validate :verify_tse_data
 
   belongs_to :party
   belongs_to :city
@@ -18,6 +19,9 @@ class Candidate < ActiveRecord::Base
   scope :by_reelection,   ->(*politicians)  { where(politician: politicians)  }
 
   scope :finished, where('finished_at IS NOT NULL')
+
+  before_save :corrige_dados
+  before_create :corrige_dados
 
   def self.assign_next_group candidate
     if candidate && candidate.group_id.nil?
@@ -53,4 +57,16 @@ class Candidate < ActiveRecord::Base
     Candidate.joins(:party).where("(candidates.party_id = ? OR parties.union_id = ?) AND candidates.id <> ?", self.party_id, self.party.union_id, self.id)
   end
 
+  def verify_tse_data
+      # registros = TseData.where("cpf = ? and electoral_title = ? and \"number\" = ? and city_id = ? and born_at = ?", cpf, electoral_title, number, city_id, born_at )
+      # errors.add(:cpf, "Registro não encontrado nos registros do TSE") if (registros == [])
+  end
+
+  private
+
+  def corrige_dados
+    self.mobile_phone.gsub! /\D/, ''
+    self.cpf.gsub! /\D/, ''
+    self.electoral_title.gsub! /\D/, ''    
+  end
 end
