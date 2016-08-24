@@ -58,15 +58,17 @@ class Candidate < ActiveRecord::Base
   end
 
   def verify_tse_data
-      registros = TseData.where("cpf = ? and \"number\" = ? and city_id = ? and born_at = ?", cpf, number, city_id, born_at )
+      # registros = TseData.where("cpf = ? and \"number\" = ? and city_id = ? and born_at = ?", cpf, number, city_id, born_at )
+      _cpf = cpf.gsub /\D/, ''
+      registros = TseData.where("cpf = ? and born_at = ?", _cpf, born_at )
       errors.add(:cpf, "Dados passados não correspondem aos dados fornecidos pelo TSE") if (registros == [])
   end
 
   private
 
   def corrige_dados
-    self.mobile_phone.gsub! /\D/, ''
-    self.cpf.gsub! /\D/, ''
-    self.electoral_title.gsub! /\D/, ''    
+    self.mobile_phone.gsub! /\D/, '' if self.mobile_phone != nil
+    self.cpf.gsub! /\D/, '' if self.cpf != nil
+    self.electoral_title.gsub! /\D/, '' if self.electoral_title != nil
   end
 end

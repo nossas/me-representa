@@ -55,7 +55,7 @@
 		</ul>
 	</div>
 	<% end %>
-	<input type="checkbox" id="candidato" <%= @candidate.new_record? ? '' : 'checked' %> >
+	<input type="checkbox" id="candidato" <%= @candidate.cpf == nil ? '' : 'checked' %> >
 	<label for="candidato" class="btn">candidato</label>
 	<div id="div-user">
   		<%= form_for @user do |f| %>
@@ -92,7 +92,7 @@
 				</label>
 			</div>
 			<%= f.label :born_at, "Nascimento (**):", {class: "form-input-label"} %>
-			<%= f.date_select :born_at %>
+			<%= f.date_select :born_at, {:start_year => 1900, :end_year => 2000} %>
 			<%= f.label :bio, {class: "form-input-label"} %>
 			<%= f.text_area :bio, {class: "form-input"} %>
 			<%= f.label :email, "Email:", {class: "form-input-label"} %>

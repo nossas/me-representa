@@ -114,6 +114,7 @@ class CandidatesController < ApplicationController
         msgs = {}
         modelo.errors.keys.each {|k| msgs[k] = modelo.errors[k].join("; ") }
         flash[:erros] = msgs
-        redirect_to edit_user_path(modelo.id)       
+        flash[:candidate] = modelo
+        redirect_to :back # edit_user_path(modelo.id)       
     end
 end

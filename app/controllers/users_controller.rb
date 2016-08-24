@@ -12,11 +12,15 @@ class UsersController < ApplicationController
       if Candidate.exists? @user.id
         @candidate = Candidate.find @user.id
       else
-        @candidate = Candidate.new
-        @candidate.name = @user.name
-        @candidate.email = @user.email
-        @candidate.mobile_phone = @user.mobile_phone
-        @candidate.city_id = @user.city_id
+        @candidate = flash[:candidate] # Se houve erro, será retornado aqui (Edição anterior)
+
+        if @candidate == nil # Caso não seja erro, precisamos de dados novos para serem utilizados
+          @candidate = Candidate.new
+          @candidate.name = @user.name
+          @candidate.email = @user.email
+          @candidate.mobile_phone = @user.mobile_phone
+          @candidate.city_id = @user.city_id
+        end
       end
     end
   end
@@ -37,7 +41,7 @@ class UsersController < ApplicationController
         msgs = {}
         @user.errors.keys.each {|k| msgs[k] = @user.errors[k].join("; ") }
         flash[:erros] = msgs
-        redirect_to edit_user_path(@user.id)       
+        redirect_to :back
       }
     end
   end
