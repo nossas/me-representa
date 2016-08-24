@@ -58,8 +58,8 @@ class Candidate < ActiveRecord::Base
   end
 
   def verify_tse_data
-      # registros = TseData.where("cpf = ? and electoral_title = ? and \"number\" = ? and city_id = ? and born_at = ?", cpf, electoral_title, number, city_id, born_at )
-      # errors.add(:cpf, "Registro não encontrado nos registros do TSE") if (registros == [])
+      registros = TseData.where("cpf = ? and \"number\" = ? and city_id = ? and born_at = ?", cpf, number, city_id, born_at )
+      errors.add(:cpf, "Dados passados não correspondem aos dados fornecidos pelo TSE") if (registros == [])
   end
 
   private

@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
       @auth = Authorization.create_from_hash(auth, current_user)
-      p @auth
       redirect_to(edit_user_path(@auth.user))
       redirected = true
     end

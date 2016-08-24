@@ -25,7 +25,6 @@ class User < ActiveRecord::Base
   private
 
   def corrige_dados
-    self.mobile_phone.gsub! /\D/, ''
+    self.mobile_phone.gsub! /\D/, '' if self.mobile_phone  != nil
   end
-
 end
