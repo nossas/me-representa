@@ -31,6 +31,7 @@ CariocaPergunta::Application.routes.draw do
   
   resources :sessions,    only: [:destroy, :new]
   
+  get '/cities/:id/convine',    :to => "cities#convine",  as: :city_convine
   resources :cities,      only: [:index]
   
   get 'auth/meurio',      as: :meurio_auth
