@@ -60,7 +60,7 @@ class CandidatesController < ApplicationController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to root_path }
+      success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }
       failure.html { 
         envia_erros(@candidate)
       }
@@ -69,7 +69,7 @@ class CandidatesController < ApplicationController
 
   def update
     update! do |success, failure|
-      success.html { redirect_to root_path }
+      success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }
       failure.html { 
         envia_erros(@candidate)
       }

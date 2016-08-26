@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   def update
     update! do |success, failure|
-      success.html { redirect_to root_path }
+      success.html { redirect_to candidates_home_url }
       failure.html { 
         msgs = {}
         @user.errors.keys.each {|k| msgs[k] = @user.errors[k].join("; ") }
