@@ -5,7 +5,7 @@ class Party < ActiveRecord::Base
   validates :symbol, :uniqueness => true
   has_many :candidates
   has_many :answers, :through => :candidates
-  scope :unrelated, where(:union => nil)
+  scope :unrelated, where("( select count(*) from parties_unions pu inner join unions un on pu.union_id = un.id where pu.party_id  = parties.id and un.city_id = us.city_id) = 0")
   
   def self.match_for_user user_id
     connection.select_all(
