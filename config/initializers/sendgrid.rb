@@ -1,6 +1,6 @@
 if Rails.env.production?
   ActionMailer::Base.smtp_settings = {
-#  	:enable_starttls_auto => false,
+  	:enable_starttls_auto => (ENV['SENDGRID_STARTTLS_AUTO']||"FALSE").upcase == "TRUE",
     :address        => ENV['SENDGRID_URL'], # ex: 'smtp.sendgrid.net'
     :port           => ENV['SENDGRID_PORT'], # ex: '587'
     :authentication => :plain,
