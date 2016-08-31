@@ -6,17 +6,17 @@ describe("Questions.List", function(){
 
   describe("#load", function(){
     beforeEach(function(){
-      spyOn($, "get").andReturn({success: function(callback){ callback('<p>html fake</p>'); }});
+      spyOn($, "get").and.returnValue({success: function(callback){ callback('<p>html fake</p>'); }});
     });
 
     it("should call get to questions passing the type role from type and offset 0 as default", function(){
       view.load();
-      expect($.get).toHaveBeenCalledWith('/load_url?type=dare&offset=0&recent_first=true', null, null, 'html');
+      expect($.get).toHaveBeenCalledWith('/load_url?type=dare&offset=0&voted_first=true', null, null, 'html');
     });
 
     it("should call get to questions passing the type role from type", function(){
       view.load({offset: 10});
-      expect($.get).toHaveBeenCalledWith('/load_url?type=dare&offset=10&recent_first=true', null, null, 'html');
+      expect($.get).toHaveBeenCalledWith('/load_url?type=dare&offset=10&voted_first=true', null, null, 'html');
     });
 
     it("should update the el inner HTML", function(){
@@ -64,7 +64,7 @@ describe("Questions.List", function(){
 
   describe("#prependQuestion", function(){
     beforeEach(function(){
-      spyOn($, "get").andReturn({success: function(callback){ callback('<li>new item</li>'); }});
+      spyOn($, "get").and.returnValue({success: function(callback){ callback('<li>new item</li>'); }});
       view.prependQuestion('/questions/7');
     });
 

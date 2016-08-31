@@ -1,9 +1,12 @@
 class Candidate < ActiveRecord::Base
-  attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity
+  attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity, :city_id, :cpf, :electoral_title
   validates :number, :token, :uniqueness => true
-  validates :name, :number, :party_id, :presence => true
+  validates :name, :number, :party_id, :cpf, :electoral_title, :born_at, :city_id, :presence => true
+  validate :verify_tse_data
 
   belongs_to :party
+  belongs_to :city
+  
   has_one :union, :through => :party
   has_many :answers, :as => :responder
   has_many :users
@@ -16,6 +19,9 @@ class Candidate < ActiveRecord::Base
   scope :by_reelection,   ->(*politicians)  { where(politician: politicians)  }
 
   scope :finished, where('finished_at IS NOT NULL')
+
+  before_save :corrige_dados
+  before_create :corrige_dados
 
   def self.assign_next_group candidate
     if candidate && candidate.group_id.nil?
@@ -51,4 +57,18 @@ class Candidate < ActiveRecord::Base
     Candidate.joins(:party).where("(candidates.party_id = ? OR parties.union_id = ?) AND candidates.id <> ?", self.party_id, self.party.union_id, self.id)
   end
 
+  def verify_tse_data
+      # registros = TseData.where("cpf = ? and \"number\" = ? and city_id = ? and born_at = ?", cpf, number, city_id, born_at )
+      _cpf = cpf.gsub /\D/, ''
+      registros = TseData.where("cpf = ? and born_at = ?", _cpf, born_at )
+      errors.add(:cpf, "Dados passados não correspondem aos dados fornecidos pelo TSE") if (registros == [])
+  end
+
+  private
+
+  def corrige_dados
+    self.mobile_phone.gsub! /\D/, '' if self.mobile_phone != nil
+    self.cpf.gsub! /\D/, '' if self.cpf != nil
+    self.electoral_title.gsub! /\D/, '' if self.electoral_title != nil
+  end
 end

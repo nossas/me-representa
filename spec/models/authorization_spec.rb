@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Authorization do
+RSpec.describe Authorization, type: :model do
   before do
     @user = FactoryGirl.create(:user)
   end
@@ -18,30 +18,39 @@ describe Authorization do
 
       mr = MEURIO_HASH
       authorization = FactoryGirl.create(:authorization, :provider => mr['provider'], :uid => mr['uid'], :user => @user)
-      Authorization.find_from_hash(mr).should_not be_nil
+      expect(Authorization.find_from_hash(mr)).not_to be_nil
     end
 
     it "Should return nil if the provider/uid isn't in the DB" do
       Authorization.destroy_all
-      Authorization.find_from_hash(MEURIO_HASH).should == nil
+      expect(Authorization.find_from_hash(MEURIO_HASH)).to be_nil
     end
   end
 
 
   describe "#create_from_hash" do
-    context "When an user exists, return an existent" do
-      mr = MEURIO_HASH
-      subject { Authorization.create_from_hash(mr, @user) }
-      its(:uid) { should == mr['uid'] }
-      its(:provider) { should == mr['provider'] }
-      its(:user) { should == @user }
+    before do
+      @mr = MEURIO_HASH
     end
-    context "When the user doesn't exists, create one" do
-      mr = MEURIO_HASH
-      subject { Authorization.create_from_hash(mr) }
-      its(:uid) { should == mr['uid'] }
-      its(:provider) { should == mr['provider'] }
-      its(:user) { should_not == nil }
+
+    context "When an user exists" do
+      subject { Authorization.create_from_hash(@mr, @user) }
+
+      it "should return an existent" do
+        expect(subject['uid']).to eq @mr['uid']
+        expect(subject['provider']).to eq @mr['provider']
+        expect(subject.user).to eq @user
+      end
+    end
+
+    context "When the user doesn't exists" do
+      subject { Authorization.create_from_hash(@mr) }
+
+      it "should create" do
+        expect(subject['uid']).to eq @mr['uid']
+        expect(subject['provider']).to eq @mr['provider']
+        expect(subject.user).not_to be nil
+      end
     end
   end
 end
