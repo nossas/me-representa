@@ -6,7 +6,8 @@ class CandidatesController < ApplicationController
   respond_to :csv
 
   load_and_authorize_resource
-  skip_authorize_resource :only => [:check, :home]
+  skip_authorize_resource :only => [:check, :home, :create  ]
+
   optional_belongs_to :party
   optional_belongs_to :union
 
@@ -22,6 +23,7 @@ class CandidatesController < ApplicationController
       scope.by_age(45,100)
     end
   end
+
   has_scope :by_scholarity,  type: :array do |controller, scope, value|
     scope.by_scholarity(value.delete_if(&:blank?))
   end
@@ -31,9 +33,13 @@ class CandidatesController < ApplicationController
   has_scope :by_gender, type: :array do |controller, scope, value|
     scope.by_gender(value.delete_if(&:blank?))
   end
+
   before_filter { @user = User.find(params[:user_id]) if params[:user_id] }
   before_filter only: [:home] { @truths = Question.truths.chosen; @dares = Question.dares.chosen }
 
+  before_filter only: [:create] do
+    @candidate.id = params['f_code']
+  end
   before_filter only: [:index] do
     if params[:user_id] and params[:party_id]
       @candidates = apply_scopes(Candidate).match_for_user(params[:user_id], { party_id: @party.id })
@@ -49,7 +55,26 @@ class CandidatesController < ApplicationController
   before_filter :only => [:index] { render partial: 'candidates/list', locals: { candidates: @candidates } if request.xhr? }
   before_filter :only => [:check] { render json: nil if params[:candidate][:email].blank? and params[:candidate][:mobile_phone].blank? }
 
+
   def home;end
+
+  def create
+    create! do |success, failure|
+      success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }
+      failure.html { 
+        envia_erros(@candidate)
+      }
+    end
+  end
+
+  def update
+    update! do |success, failure|
+      success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }
+      failure.html { 
+        envia_erros(@candidate)
+      }
+    end
+  end
 
   def finish
     @candidate = Candidate.find(params[:candidate_id])
@@ -84,4 +109,12 @@ class CandidatesController < ApplicationController
     end
   end
 
+  private
+    def envia_erros(modelo)
+        msgs = {}
+        modelo.errors.keys.each {|k| msgs[k] = modelo.errors[k].join("; ") }
+        flash[:erros] = msgs
+        flash[:candidate] = modelo
+        redirect_to :back # edit_user_path(modelo.id)       
+    end
 end

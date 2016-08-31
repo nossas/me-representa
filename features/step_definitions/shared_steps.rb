@@ -170,7 +170,7 @@ Given /^I choose "(.*?)" for the question "(.*?)"$/ do |arg1, arg2|
 end
 
 Then /^a new answer should be created to this candidate$/ do
-  @candidate.answers.should have(1).answer
+  @candidate.answers.size.should eq 1
 end
 
 Then /^I should be in "(.*?)"$/ do |arg1|
@@ -198,7 +198,7 @@ Given /^there is a candidate with email "(.*?)"$/ do |arg1|
 end
 
 Then /^an email should be sent to "(.*?)"$/ do |arg1|
-  ActionMailer::Base.deliveries.select{|e| e.to.include? arg1}.should have(1).email
+  ActionMailer::Base.deliveries.select{|e| e.to.include? arg1}.size.should eq 1
 end
 
 Given /^there is a candidate called "(.*?)"$/ do |arg1|

@@ -17,7 +17,7 @@
 /.sass-cache
 
 # ignoring database
-database.yml
+config/database.yml
 
 # ignoring vim ghost files
 *.swp

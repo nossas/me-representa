@@ -65,7 +65,7 @@ describe("Questions.Form", function(){
     beforeEach(function(){
       spyOn(view.actions, "slideUp");
       spyOn(view.textarea, "animate");
-      spyOn($.fn, "validate").andCallThrough();
+      spyOn($.fn, "validate").and.callThrough();
       view.returnTextarea();
     });
 
@@ -125,7 +125,7 @@ describe("Questions.Form", function(){
   describe("backToForm", function(){
     beforeEach(function(){
       spyOn($.fn, "trigger");
-      spyOn($.fn, "validate").andCallThrough();
+      spyOn($.fn, "validate").and.callThrough();
       spyOn(view, "hidePreview");
       view.backToForm();
     });
@@ -139,7 +139,7 @@ describe("Questions.Form", function(){
 
     beforeEach(function(){
       view.store = storeStub;
-      spyOn(App.Common.login, "validate").andReturn(true);
+      spyOn(App.Common.login, "validate").and.returnValue(true);
       spyOn(view.store, "get");
       spyOn(view, "showPreview");
       spyOn(Store, "clear");
@@ -147,7 +147,7 @@ describe("Questions.Form", function(){
     });
 
     it("should show the preview if the user wasn't logged in but wrote a question before its login", function(){
-      spyOn(view, "checkStoreData").andReturn(true);
+      spyOn(view, "checkStoreData").and.returnValue(true);
 
 
       view.fillFormWithPreviousStoreData();
@@ -160,7 +160,7 @@ describe("Questions.Form", function(){
     });
 
     it("should NOT show the preview if the user didn't write a question before its login", function(){
-      spyOn(view, "checkStoreData").andReturn(false);
+      spyOn(view, "checkStoreData").and.returnValue(false);
 
 
       view.fillFormWithPreviousStoreData();
@@ -183,9 +183,9 @@ describe("Questions.Form", function(){
 
     it("should store question[category_id] and question[text]", function(){
       spyOn(view.store, "set");
-      spyOn(view.select, "val").andReturn('1')
-      spyOn(view.textarea, "val").andReturn('My question text');
-      spyOn(view.role_type, "val").andReturn('truth')
+      spyOn(view.select, "val").and.returnValue('1')
+      spyOn(view.textarea, "val").and.returnValue('My question text');
+      spyOn(view.role_type, "val").and.returnValue('truth')
       view.storeQuestionData();
 
       expect(view.store.set).toHaveBeenCalledWith('category', '1');
@@ -218,7 +218,7 @@ describe("Questions.Form", function(){
     };
 
     beforeEach(function(){
-      spyOn(validator, "valid").andReturn(true);
+      spyOn(validator, "valid").and.returnValue(true);
       spyOn(App.Common.login, "showOptions");
       $ = function(){
         return validator;
@@ -233,13 +233,13 @@ describe("Questions.Form", function(){
     context("When the user is logged in", function(){
 
       beforeEach(function(){
-        spyOn(App.Common.login, "validate").andReturn(true);
+        spyOn(App.Common.login, "validate").and.returnValue(true);
       })
 
       it("should not require login if form validation is false", function(){
-        validator.valid.andReturn(false);
+        validator.valid.and.returnValue(false);
         view.showPreview();
-        expect(App.Common.login.validate).wasNotCalled();
+        expect(App.Common.login.validate).not.toHaveBeenCalled();
       });
 
       it("should require login", function(){
@@ -275,7 +275,7 @@ describe("Questions.Form", function(){
     context("When the user is not logged in", function(){
 
       beforeEach(function(){
-        spyOn(App.Common.login, "validate").andReturn(false);
+        spyOn(App.Common.login, "validate").and.returnValue(false);
       })
 
       it("should validate the form", function(){
@@ -284,9 +284,9 @@ describe("Questions.Form", function(){
       });
 
       it("should not require login if form validation is false", function(){
-        validator.valid.andReturn(false);
+        validator.valid.and.returnValue(false);
         view.showPreview();
-        expect(App.Common.login.validate).wasNotCalled();
+        expect(App.Common.login.validate).not.toHaveBeenCalled();
       });
 
       it("should require login", function(){
@@ -297,19 +297,19 @@ describe("Questions.Form", function(){
       it("should not generate the preview", function(){
         spyOn(view, "generatePreview");
         view.showPreview();
-        expect(view.generatePreview).wasNotCalled();
+        expect(view.generatePreview).not.toHaveBeenCalled();
       });
 
       it("should not hide question if login.validate is false", function(){
         spyOn(view.question, "hide");
         view.showPreview();
-        expect(view.question.hide).wasNotCalled();
+        expect(view.question.hide).not.toHaveBeenCalled();
       });
 
       it("should not show preview if login.validate is false", function(){
         spyOn(view.preview, "show");
         view.showPreview();
-        expect(view.preview.show).wasNotCalled();
+        expect(view.preview.show).not.toHaveBeenCalled();
       });
 
       it("should store the question data", function(){
