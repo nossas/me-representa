@@ -3,6 +3,9 @@ class SessionsController < ApplicationController
   skip_authorization_check
 
   def create
+    # Now we can identify if login is from an user or from an candidate
+    type = request.env['omniauth.params']["type"]
+
     redirected = false
     auth = request.env['omniauth.auth']
     unless @auth = Authorization.find_from_hash(auth)
