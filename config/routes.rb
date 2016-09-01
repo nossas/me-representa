@@ -39,5 +39,6 @@ CariocaPergunta::Application.routes.draw do
   get 'home', :to => "candidates#home", :as => :candidates_home
 
   resources :answers, except: [:destroy]
-  root :to => "sessions#new"
+
+  root :to => "main#index"
 end

@@ -1,0 +1,105 @@
+<!doctype html>
+<% content_for :head do %>
+<title>MeRepresenta - Bem vindo</title>
+<style>
+    body {
+        font-size: 13px;
+        background-color: #582985;
+        color: #fff;
+    }
+    img.logo {
+        max-width: 100%;
+    }
+    header p, header nav, h2 {
+        display: inline;
+        text-transform: uppercase;
+        font-weight: bolder;
+    }
+    header a {
+        display: inline-block;
+        background-image: url("/assets/fake_logo.svg");
+        background-repeat: no-repeat;
+        background-size: 30px;        
+        overflow: hidden;
+        text-indent: -30ch;
+        width: 30px;
+        height: 30px;
+        top: -.6em;
+        position: relative;
+    }
+    @media screen and (min-width: 360px) {
+        body {
+            font-size: 1rem;
+        }
+        header a {
+            top: -.4em;
+        }
+    }
+    header {
+        padding: 1em;
+        border-bottom: 1px solid #7e5c9e;
+    }
+    header nav {
+        float: right;
+    }
+    .content>h2 {
+        display: block;
+        padding: .5em 0 .5em 0;
+    }
+    .content {
+        color: #fff;
+        padding: 0 2em 0 1em;
+    }
+    .btn  {
+        width: 48%;
+        color: #000;
+    }
+    .btn1 {
+        background-color: #097e74;
+        float: left;
+    }
+    .btn2 {
+        background-color: #d8b212;
+        float: right;
+    }
+    @media screen and (min-width: 991px) {
+        img.logo {
+            display: none;
+        }
+        .content {
+            float: right;
+            width: 51%;
+            margin: 6% 0;
+        }
+        .container {
+            background-image: url("/assets/01.png");
+            background-size: 78%;
+            background-repeat: no-repeat;
+            background-position: -57% 60%;            
+        }
+    }
+</style>
+<% end %>
+<header>
+    <p>Acompanhe de pertinho</p>
+    <nav>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Google+</a>
+    </nav>
+</header>
+<main>    
+    <div class="container">
+        <img src="/assets/01.png" class="logo" alt="Logo">
+        <div class="content">
+            <h2>A plataforma para encontrar seu candidato</h2>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, iste necessitatibus aliquam. Debitis provident reprehenderit eius beatae corporis, quia libero pariatur praesentium nisi temporibus, porro ab modi veniam repellendus, at. Non ab soluta ipsam error incidunt dolore vel, similique quidem ipsum officiis, modi voluptates! Cum animi illo reiciendis molestias nobis voluptate minus deserunt! Aspernatur eveniet quia mollitia assumenda quidem laborum, omnis ut veritatis nam facilis doloribus accusamus consequuntur dolore, asperiores? Est in laborum aliquid iure animi iusto atque dolore inventore, harum consequuntur, consequatur repellat nesciunt earum deserunt ex. Fugiat atque velit, quaerat voluptatum aliquam cum doloremque molestias molestiae reiciendis. Voluptatum.</p>
+
+            <h2>Conecte-se</h2>
+
+            <%= link_to "Eleitor(a)", facebook_auth_path({type: "user"}), {class:"btn btn1"} %>
+            <%= link_to "Candidato", facebook_auth_path({type: "candidate"}), {class:"btn btn2"} %>
+        </div>
+    </div>
+</main>
