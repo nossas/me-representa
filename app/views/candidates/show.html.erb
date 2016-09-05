@@ -4,7 +4,7 @@
         body {
             background-color: #d8b212;            
         }
-        .disclaimer, .legenda h3, .brother a {
+        .disclaimer, .legenda h3, .brother a, .btn-2 {
             text-transform: uppercase;
         }
         main {
@@ -76,11 +76,23 @@
             text-decoration: none;
             font-size: 1.6em;
         }
+        .btn-2 {
+            border: 2px solid #532985;
+            width: 40ch;
+            max-width: 100%;
+            margin: 2em auto;
+            display: block;
+        }
+        .btn-2:before {
+            content: '<';
+            margin-right: 1em;
+            font-size: 1.5em;
+            position: relative;
+            top: .1em;
+        }
         @media screen and (min-width:500px) {
             main {
                 font-size: 1rem;
-            }
-            dt, dd {
             }
         }
         @media screen and (min-width:800px) {
@@ -206,6 +218,10 @@
         </div>
         <% end %>
     </div>
+    
+    <% if not session[:candidate_id]%>
+    <%= link_to "Voltar aos candidatos", url_for(:back) || user_party_candidates(@current_user, @candidate.party), :class => "btn btn-2" %>
+    <% end %>
     
     <div class="disclaimer">
         * #merepresenta avalia sos candidatos de acordo com a proximidade Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati ab cupiditate impedit aut quasi     quis rem laborum dicta tempora quae?
