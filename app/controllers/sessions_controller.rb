@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
         # whether there is already a user signed in.
         @auth = Authorization.create_from_hash(auth, current_user)
         if type == "candidate"
+            session[:candidate_id] = current_user.id
             redirect_to(edit_user_path(@auth.user))
         else
             redirect_to(edit_candidate_path(@auth.user))
@@ -19,10 +20,14 @@ class SessionsController < ApplicationController
     else
         self.current_user = @auth.user
         if type == "candidate"
-          redirect_to(edit_candidate_path(@auth.user.id))
+            session[:candidate_id] = current_user.id
+            if (Candidate.find current_user.id).finished_at
+                redirect_to candidate_path(current_user.id)
+            else
+                redirect_to(edit_candidate_path(@auth.user.id))
+            end
         else
-          redirect_to(edit_user_path(@auth.user))
-#          redirect_to(session[:redirect_url] || root_path)
+            redirect_to(new_answer_path)
         end
     end    
   end

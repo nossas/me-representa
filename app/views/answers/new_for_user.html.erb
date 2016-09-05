@@ -58,7 +58,10 @@
         text-shadow: -.05em -.02em #885c59;
         font-size: 2.4em;
         color: #00a99d;
+        opacity: .6;
         text-align: center;
+        font-family: ProximaNovaSoft-Bold;
+        transform: rotate(-2deg);
     }
     h2 {
         text-align: justify;
@@ -79,6 +82,12 @@
     .question-title {
         display: block;
         margin: 1em 0 .7em 0;
+    }
+    .btn-1-inv {
+        opacity: .8;
+        margin: 2em auto;
+        display: table;
+        width: 40ch;
     }
     @media screen and (min-width: 500px) {
         h1 {
@@ -165,7 +174,7 @@
             </div>
         </div>
         <% end %>
-        <%= link_to "Encontrar candidaturas", user_parties_path(@current_user), {class: "btn btn-primary"} %>
+        <%= link_to "Encontrar candidaturas", user_parties_path(@current_user), {class: "btn btn-1-inv"} %>
     </div>
 <% end %>
 
