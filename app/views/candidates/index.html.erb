@@ -1,40 +1,150 @@
 <% content_for :head do %>
 <style>
+    body {
+        background-color: #582985;
+    }
+    h1 {
+        color: #d8b212;
+        text-transform: uppercase;
+        font-size: 1.5em;
+        font-weight: bolder;
+    }
+    p {
+        color: #fff;
+        margin: 2em 0;
+    }
+    table {
+        width: 100;
+        border-collapse: separate;
+        border-spacing: 4px;
+        color: #582985;
+        font-weight: bolder;
+    }
+    th {
+        background-color: #097e74;
+        border: 1em solid #582985;
+        padding: 1em;
+    }
+    td {
+        background-color: #097e74;
+        padding: 1em;
+    }
+    .voto, .score {
+        text-align: center; 
+        width: 10%;
+    }
+    .candidato {
+        width: 100%;
+    }
+    conteudo img {
+        width: 20px;
+        height: 20px;
+    }
+    label {
+        display: block;
+        font-size: .8em;
+    }
+    .btn-2-inv {
+        border: 2px solid #d8b212;
+        padding: 1.2em;
+        margin: auto;
+        display: block;
+        width: 36ch;
+        text-transform: uppercase;
+        font-weight: bolder;
+        margin-top: 4em;
+    }
+    .filtros {
+        text-transform: uppercase;
+        margin-bottom: 4em;
+    }
+    .filtro {
+        padding: 2em;
+        background-color: #097e74;
+        color: #582985;
+        font-weight: bolder;
+        letter-spacing: .2em;
+    }
+    .filtros h2 {
+        text-align: center;
+        border: 2px solid #00a99d;
+        color: #00a99d;
+        font-weight: bolder;
+        font-size: 1em;
+        padding: 1em;
+        letter-spacing: .2em;
+        border-radius: .3em;
+    }
+    .filtro input {
+        display: none;
+    }
+    input+span:before {
+        content: "\00a0";
+        background-image: url("/assets/rb20p.svg");
+        background-size: 100%;
+        width: 1em;
+        height: 1em;
+        background-repeat: no-repeat;
+        display: inline-block;
+        top: 0.2em;
+        position: relative;
+        margin-right: .5em;
+    }
+    input:checked+span:before {
+        background-image: url("/assets/rb21p.svg");
+    }
+    @media screen and (min-width: 1100px){
+        .container {
+            width: 100%;
+            max-width: 100%;
+        }
+        .conteudo {
+            width: calc( 100% - 40ch );
+            float: left;
+            padding: 1em;
+        }
+        .filtros {
+            width: 40ch;
+            float: right;
+        }
+    }
 </style>
 <% end %>
 
 <% content_for :main do %>
     <div class="container">
+       <% if false %>
         <div class="filtros">
             <h2>Filtre os candidatos</h2>
             <div class="filtro">
                 <h3>Idade</h3>
-                <label><input type="radio" name="idade">todas</label>
-                <label><input type="radio" name="idade">18-25 anos</label>
-                <label><input type="radio" name="idade">26-35 anos</label>
-                <label><input type="radio" name="idade">36-45 anos</label>
-                <label><input type="radio" name="idade">acima dos 45 anos</label>
+                <label><input type="radio" name="idade"><span>todas</span></label>
+                <label><input type="radio" name="idade"><span>18-25 anos</span></label>
+                <label><input type="radio" name="idade"><span>26-35 anos</span></label>
+                <label><input type="radio" name="idade"><span>36-45 anos</span></label>
+                <label><input type="radio" name="idade"><span>acima dos 45 anos</span></label>
             </div>
             <div class="filtro">
                 <h3>Escolaridade</h3>
-                <label><input type="radio" name="escolaridade">Fundamental incompleto</label>
-                <label><input type="radio" name="escolaridade">fundamental completo</label>
-                <label><input type="radio" name="escolaridade">médio incompleto</label>
-                <label><input type="radio" name="escolaridade">médio completo</label>
-                <label><input type="radio" name="escolaridade">superior incompleto</label>
-                <label><input type="radio" name="escolaridade">superior completo</label>
+                <label><input type="radio" name="escolaridade"><span>Fundamental incompleto</span></label>
+                <label><input type="radio" name="escolaridade"><span>fundamental completo</span></label>
+                <label><input type="radio" name="escolaridade"><span>médio incompleto</span></label>
+                <label><input type="radio" name="escolaridade"><span>médio completo</span></label>
+                <label><input type="radio" name="escolaridade"><span>superior incompleto</span></label>
+                <label><input type="radio" name="escolaridade"><span>superior completo</span></label>
             </div>
             <div class="filtro">
                 <h3>Reeleição</h3>
-                <label><input type="radio" name="reeleicao">Sim</label>
-                <label><input type="radio" name="reeleicao">Não</label>
+                <label><input type="radio" name="reeleicao"><span>Sim</span></label>
+                <label><input type="radio" name="reeleicao"><span>Não</span></label>
             </div>
             <div class="filtro">
                 <h3>Sexo</h3>
-                <label><input type="radio" name="sexo">Sim</label>
-                <label><input type="radio" name="sexo">Não</label>
+                <label><input type="radio" name="sexo"><span>Sim</span></label>
+                <label><input type="radio" name="sexo"><span>Não</span></label>
             </div>
         </div>
+        <% end %>
         <div class="conteudo">
             <h1>Esses são os candidatos que mais combinam com seu perfil</h1>
             <p>Aqui estão os candidatas e os candidatos que têm a ver com você! Eles estão organizados de acordo com  seus posicionamentos pessoais, mas também de acordo com o compromisso de seus partidos e coligações com os direitos humanos.</p>
@@ -51,20 +161,22 @@
                 <tbody>
                     <% @candidates.each do |candidate| %>
                         <tr>
-                            <td>
+                            <td class="voto">
                                 <% if candidate["id"] == @user.candidate_id %>
                                 <img src="/assets/c1.svg" alt="Recebe meu voto">
                                 <% else %>
                                 <img src="/assets/c0.svg" alt="Não receberá meu voto">
                                 <% end %>
                             </td>
-                            <td><%= candidate["name"] %></td>
-                            <td><%= candidate["score"] %></td>
+                            <td class="candidato"><%= candidate["name"] %></td>
+                            <td class="score"><%= candidate["score"] %></td>
                         </tr>
                     <% end %>
                 </tbody>
             </table>
-            <button type="button" class="btn">mostrar mais</button>
+            <% if @candidates.size() > 10 %>
+            <button type="button" class="btn btn-2-inv">mostrar mais</button>
+            <% end %>
         </div>
     </div>
 <% end %>
