@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-    layout "merepresenta"
+    layout "merepresentaunlogged"
     skip_authorization_check
     
     def index

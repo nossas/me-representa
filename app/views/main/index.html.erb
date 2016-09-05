@@ -1,11 +1,12 @@
-<!doctype html>
 <% content_for :head do %>
 <title>MeRepresenta - Bem vindo</title>
 <style>
     body {
         font-size: 13px;
-        background-color: #582985;
+        background-color: #6a438b;
         color: #fff;
+        background-image: url('/assets/FC1.png');
+        background-repeat: no-repeat;
     }
     img.logo {
         max-width: 100%;
@@ -15,9 +16,17 @@
         text-transform: uppercase;
         font-weight: bolder;
     }
+    .google {
+        background-image: url("/assets/google.svg");
+    }
+    .twitter {
+        background-image: url("/assets/twitter.svg");
+    }
+    .face {
+        background-image: url("/assets/face.svg");
+    }
     header a {
         display: inline-block;
-        background-image: url("/assets/fake_logo.svg");
         background-repeat: no-repeat;
         background-size: 30px;        
         overflow: hidden;
@@ -44,6 +53,8 @@
     }
     .content>h2 {
         display: block;
+        font-size: 1.2em;
+        font-weight: bolder;
         padding: .5em 0 .5em 0;
     }
     .content {
@@ -69,37 +80,42 @@
         .content {
             float: right;
             width: 51%;
-            margin: 6% 0;
+            margin: 15% 0;
         }
         .container {
             background-image: url("/assets/01.png");
-            background-size: 78%;
+            background-size: 60%;
             background-repeat: no-repeat;
-            background-position: -57% 60%;            
+            background-position: -24% 60%;            
+        }
+    }
+    @media screen and (min-width: 1100px) {
+        body {
+            background-size: 100%;
         }
     }
 </style>
 <% end %>
-<header>
+<% content_for :header do %>
     <p>Acompanhe de pertinho</p>
     <nav>
-        <a href="#">Facebook</a>
-        <a href="#">Twitter</a>
-        <a href="#">Google+</a>
+        <a href="#" class="face">Facebook</a>
+        <a href="#" class="twitter">Twitter</a>
+        <a href="#" class="google">Google+</a>
     </nav>
 </header>
-<main>    
+<% end %>
+<% content_for :main do %>
     <div class="container">
         <img src="/assets/01.png" class="logo" alt="Logo">
         <div class="content">
-            <h2>A plataforma para encontrar seu candidato</h2>
+            <h2>Quais candidatos respeitam os direitos das mulheres e de LGBTS?</h2>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, iste necessitatibus aliquam. Debitis provident reprehenderit eius beatae corporis, quia libero pariatur praesentium nisi temporibus, porro ab modi veniam repellendus, at. Non ab soluta ipsam error incidunt dolore vel, similique quidem ipsum officiis, modi voluptates! Cum animi illo reiciendis molestias nobis voluptate minus deserunt! Aspernatur eveniet quia mollitia assumenda quidem laborum, omnis ut veritatis nam facilis doloribus accusamus consequuntur dolore, asperiores? Est in laborum aliquid iure animi iusto atque dolore inventore, harum consequuntur, consequatur repellat nesciunt earum deserunt ex. Fugiat atque velit, quaerat voluptatum aliquam cum doloremque molestias molestiae reiciendis. Voluptatum.</p>
-
-            <h2>Conecte-se</h2>
+            <p>#MeRepresenta é uma plataforma para te ajudar a decidir em quem votar para vereador nas próximas eleições de 2016. Aqui você vai saber o posicionamento das candidaturas sobre pautas relevantes à construção das igualdades de gênero, racial e de orientação sexual.</p>
+            <p>O site é completamente idependente de partidos e instituições, e é o resultado de uma parceria entre o #VoteLGBT, o #AgoraÉQueSãoElas, a Rede Feminista de Juristas, a Rede Nossas Cidades (Meu Rio, Minha Sampa, Minha Porto Alegre e Meu Recife), a CFEMEA e o grupo LGBT Brasil.</p>
 
             <%= link_to "Eleitor(a)", facebook_auth_path({type: "user"}), {class:"btn btn1"} %>
             <%= link_to "Candidato", facebook_auth_path({type: "candidate"}), {class:"btn btn2"} %>
         </div>
     </div>
-</main>
+<% end %>

@@ -1,0 +1,70 @@
+<% content_for :head do %>
+<style>
+</style>
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <div class="filtros">
+            <h2>Filtre os candidatos</h2>
+            <div class="filtro">
+                <h3>Idade</h3>
+                <label><input type="radio" name="idade">todas</label>
+                <label><input type="radio" name="idade">18-25 anos</label>
+                <label><input type="radio" name="idade">26-35 anos</label>
+                <label><input type="radio" name="idade">36-45 anos</label>
+                <label><input type="radio" name="idade">acima dos 45 anos</label>
+            </div>
+            <div class="filtro">
+                <h3>Escolaridade</h3>
+                <label><input type="radio" name="escolaridade">Fundamental incompleto</label>
+                <label><input type="radio" name="escolaridade">fundamental completo</label>
+                <label><input type="radio" name="escolaridade">médio incompleto</label>
+                <label><input type="radio" name="escolaridade">médio completo</label>
+                <label><input type="radio" name="escolaridade">superior incompleto</label>
+                <label><input type="radio" name="escolaridade">superior completo</label>
+            </div>
+            <div class="filtro">
+                <h3>Reeleição</h3>
+                <label><input type="radio" name="reeleicao">Sim</label>
+                <label><input type="radio" name="reeleicao">Não</label>
+            </div>
+            <div class="filtro">
+                <h3>Sexo</h3>
+                <label><input type="radio" name="sexo">Sim</label>
+                <label><input type="radio" name="sexo">Não</label>
+            </div>
+        </div>
+        <div class="conteudo">
+            <h1>Esses são os candidatos que mais combinam com seu perfil</h1>
+            <p>Aqui estão os candidatas e os candidatos que têm a ver com você! Eles estão organizados de acordo com  seus posicionamentos pessoais, mas também de acordo com o compromisso de seus partidos e coligações com os direitos humanos.</p>
+            <p>Nas eleições, você terá direito a apenas um voto para vereados, então escolha com cuidado com quem vai votar. E, se possível, escolha votar em uma mulher! Assim você vai contribuir para a igualdade de gênero na Câmara Municipal de sua cidades.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Eu voto</th>
+                        <th>Candidatos</th>
+                        <th>Afinidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @candidates.each do |candidate| %>
+                        <tr>
+                            <td>
+                                <% if candidate["id"] == @user.candidate_id %>
+                                <img src="/assets/c1.svg" alt="Recebe meu voto">
+                                <% else %>
+                                <img src="/assets/c0.svg" alt="Não receberá meu voto">
+                                <% end %>
+                            </td>
+                            <td><%= candidate["name"] %></td>
+                            <td><%= candidate["score"] %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <button type="button" class="btn">mostrar mais</button>
+        </div>
+    </div>
+<% end %>

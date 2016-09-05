@@ -1,8 +1,12 @@
 class AnswersController < ApplicationController
-  layout 'application_phase_two'
+  layout 'merepresentalogged'
+    
+  load_and_authorize_resource
   inherit_resources
+
   optional_belongs_to :user, :polymorphic => true
   optional_belongs_to :candidate, :polymorphic => true
+    
   before_filter :only => [:index, :new] { @questions = Question.chosen }
   
   before_filter :only => [:new] {  authorize!(:new, @answer || Answer) unless params[:candidate_id]} 
@@ -14,14 +18,45 @@ class AnswersController < ApplicationController
   end
 
   def create
-    create! { return render :file => "answers/show", layout: false }
+    @answer = Answer.new
+    @answer.question_id = params[:question_id]
+    if @candidate
+        @answer.responder = @candidate
+    else
+        @answer.responder = @user
+    end
+    @answer.short_answer = params[:short_answer]
+    @answer.save
+      
+    render :json => @answer
+    #create! { return render :json => @answer }
   end
   
   def update
-    update! { return render :file => "answers/show", layout: false }
+    @answer.short_answer = params[:answer][:short_answer]
+    @answer.weight = params[:weight] if params[:weight]
+    if params[:candidate_id]
+        @answer.responder = Candidate.find params[:candidate_id]
+    else
+        @answer.responder = User.find params[:user_id]
+    end
+    @answer.save
+    render :json => @answer
   end
 
   def new
-    new! { return params[:candidate_id] ? render(:file => "answers/new_for_candidate") : render(:file => "answers/new_for_user") }
+    if params[:candidate_id]
+        Question.where("chosen = true and role_type = 'truth'").each{|q|
+            a = Answer.new
+            a.question = q
+            a.responder = @candidate
+            a.short_answer = 'Não'
+            a.weight = 0
+            a.save
+        }
+        render(:file => "answers/new_for_candidate")
+    else
+        new! { return render(:file => "answers/new_for_user") }
+    end
   end
 end

@@ -1,6 +1,6 @@
 # coding: utf-8
 class CandidatesController < ApplicationController
-  layout "application_phase_two"
+  layout "merepresentalogged"
   
   inherit_resources
   respond_to :csv
@@ -66,6 +66,10 @@ class CandidatesController < ApplicationController
       }
     end
   end
+    
+  def profile
+      
+  end
 
   def update
     update! do |success, failure|
@@ -80,7 +84,6 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:candidate_id])
     @candidate.update_attributes :finished_at => Time.now
     CandidateMailer.finished(@candidate).deliver
-    redirect_to root_path, :notice => "#{@candidate.name}, seu questionário foi enviado com sucesso, obrigado pela sua participação!"
   end
   
   def check

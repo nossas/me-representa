@@ -63,7 +63,15 @@ class Candidate < ActiveRecord::Base
       registros = TseData.where("cpf = ? and born_at = ?", _cpf, born_at )
       errors.add(:cpf, "Dados passados não correspondem aos dados fornecidos pelo TSE") if (registros == [])
   end
-
+        
+  def rank
+      return 4;
+  end
+        
+  def picture
+      (User.find id).picture
+  end
+        
   private
 
   def corrige_dados

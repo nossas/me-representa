@@ -1,0 +1,140 @@
+<% content_for :head do %>
+<style>
+    body {
+        background: #097e74;
+        background-image: url('/assets/FC3.png');
+        color: #fff;
+        text-transform: uppercase;
+    }
+    h1 {
+        color: #00a99d;
+        font-size: 2em;
+        transform: rotate(-3deg);
+        margin: 1em 0;
+        text-align: center;
+        text-shadow: -.05em -.02em #3a497d;
+        font-weight: bolder;
+    }
+    h2 {
+        font-size: 1.1em;
+        font-weight: bolder;
+        color: #582985;
+    }
+    .radio {
+        display: none;
+    }
+    .radio + span {
+        float: right;
+        position: relative;
+        left: 1.5em;
+        padding-right: 1.5em;
+        width: 100%;
+    }
+    label {
+        position: relative;
+        width: 100%;
+    }
+    .radio+span:before {
+        content: '\00a0';
+        background-size: 1em;
+        height: 1em;
+        width: 1em;
+        background-image: url('/assets/RADIO%20BUTTON_05.svg');
+        position: absolute;
+        background-repeat: no-repeat;
+        top: .25em;
+        left: -1.5em;
+    }
+    .radio:checked+span:before {
+        background-image: url('/assets/RADIO%20BUTTON_06.svg');
+    }
+    .btn {
+        margin: 0 auto;
+        display: table;
+        margin-top: 2em;
+        font-size: 1em;
+    }
+    @media screen and (min-width: 400px) {
+        body {
+            font-size: 1.2em;
+        }
+    }
+    @media screen and (min-width: 600px) {
+        body {
+            font-size: 2em;
+        }
+        h1 {
+            font-size: 2em;
+        }
+    }
+    @media screen and (min-width: 1000px) {
+        h1 {
+            font-size: 3em;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        h1 {
+            font-size: 4em;
+        }
+    }
+</style>
+<% end %>
+
+<% content_for :main do %>
+
+
+<div class="container">
+    <div class="alert alert-danger invisivel" id="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      Não foi possível completar a operação, por favor recarregue a página.
+    </div>
+    <h1>Questionário</h1>
+    <h2>Agora é hora de fazer o teste! Por favor selecione as afirmações que fazem parte das pautas de sua campanha</h2>
+    <% @candidate.answers
+        .select{|c| c.id !=nil }
+        .sort{|a,b| a.id-b.id }
+        .each do |a| %>
+        <div class="question">
+            <label>
+                <input class="radio" type="checkbox" <%= "checked" if a.short_answer == 'Sim' %> answer_id="<%= a.id %>">
+                <span class="text"><%= a.question.text %></span>
+            </label>
+        </div>
+    <% end %>
+    <form action="<%= candidate_finish_path(@candidate) %>" method="post">
+        <input type="hidden" name="<%= request_forgery_protection_token.to_s %>" value="<%= form_authenticity_token %>">
+        <input name="_method" type="hidden" value="put">
+        <button type="submit" class="btn btn-1">SALVAR RESPOSTAS</button>
+    </form>
+</div>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+    (function(){
+        var toSend = {
+            <%= request_forgery_protection_token.to_s %>: "<%= form_authenticity_token %>"
+            , candidate_id: <%= @candidate.id %>
+        }, url = "<%= candidate_answers_path(@candidate.id) %>/";
+        
+        let submit = function() {
+            var prev = $(this).prev();
+            prev.val();
+            $(this).parent().parent().submit();
+        }
+        $("input[type='checkbox']").on("click", function(){
+            toSend["short_answer"] = this.checked?"Sim":"Não";
+            $.ajax({
+                  method: "put"
+                , contentType: "application/json"
+                , data: JSON.stringify(toSend)
+                , url: url + $(this).attr("answer_id")
+                , error(data) {
+                    $("#alert").removeClass("sumiu");
+                }
+            })
+            ;
+        });
+    })();
+</script>
+<% end %>

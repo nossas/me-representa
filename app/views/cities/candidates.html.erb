@@ -1,0 +1,76 @@
+<% content_for :head do %>
+<style>
+    body {
+        background-color: #097e74;
+        background-image: url('/assets/FC3.png');
+        color: #d8b212;
+    }
+    h1 {
+        font-size: 3em;
+    }
+    p {
+        letter-spacing: .3em;
+        font-size: 1.3em;
+        padding: 2em 0;
+    }
+    .candidato {
+        width: 100%;
+    }
+    .indice {
+        font-size: 3em;
+        font-weight: bolder;
+        width: 10%;
+        text-align: center;
+    }
+    .dados {
+        width: 90%;
+        background-color: #582985;
+        border-radius: .5em;
+        text-transform: uppercase;
+        font-weight: bolder;
+    }
+    .nome {
+        float: left;
+    }
+    .partido {
+        float: right;
+    }
+    .nome, .nome:hover, .partido {
+        padding: 0 2em;
+        color: #fff;
+        text-decoration: none;
+    }
+</style>
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <h1>Você respondeu não à todas as perguntas do questionário?</h1>
+        <p>Tudo bem! O <span class="merepresenta">#merepresenta</span> selecionou os top 10 candidatos com pautas relevantes aos direitos humanos (segundo nossa avaliação), como sugestão de voto para você. Veja alguns:</p>
+        <table class="candidato">
+            <tbody>
+                <% p @candidates %>
+                <% (0 .. (@candidates.size - 1) ).each do |idx| %>
+                    <% p idx %>
+                    <% candidate = @candidates[idx] %>
+                    <% p candidate %>
+                    <tr>
+<!--                    <td class="candidato <%= "escondido" if idx>2%>">-->
+                        <td class="indice">
+                            <%= idx + 1 %>
+                        </td>
+                        <td class="dados">
+                            <a class="nome" href="<%= candidate_url(candidate.id)%>"><%= candidate.name %></a>
+                            <span class="partido"><%= candidate.party.symbol %></span>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+</script>
+<% end %>

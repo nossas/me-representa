@@ -1,0 +1,105 @@
+<% content_for :head do %>
+    <title>Perfil de Candidato</title>
+    <style>
+        body {
+            background-color: #d8b212;
+        }
+        .info-basica, .info-bio {
+            background-color: #532985;
+            color: #fff;
+            margin: 2em 0;
+            padding: 2em;
+        }
+        .info-text {
+            display: block;
+        }
+        .puxar .title, .brother {
+            background-color: #532985;
+            color: #fff;
+        }
+        .puxar h2,.puxar h5 {
+            display: inline;
+        }
+    </style>
+<% end %>
+
+<% content_for :main do %>
+<div class="container">    
+    <div class="info-basica">        
+        <img src="<%= @candidate.picture %>" alt="Foto do candidato">
+        <span class="info-text">
+            <%= @candidate.name %>
+        </span>
+        <span class="info-text">
+            nº <span class="candidate-number"><%= @candidate.number %></span>
+        </span>
+        <span class="info-text">
+            Partido: <%= @candidate.party.symbol %>
+        </span>
+        <span class="info-text">
+            Idade: <%= ((Date.today - @candidate.born_at)/365).to_i if @candidate.born_at %>
+        </span>
+        <span class="info-text">
+            Escolaridade: <%= @candidate.scholarity %>
+        </span>
+        <span class="info-text">
+            Reeleição: <%= @candidate.politician? ? "Sim" : "Não" %>
+        </span>
+    </div>
+    <div class="info-bio">
+        <h3>Sobre mim</h3>
+        <%= @candidate.bio %>
+        
+        <div class="avaliacao">Avaliação me representa:
+           <% if @candidate.rank == 1 %>
+            <img src="/assets/f1w.svg" alt="Carinha triste">
+            <% elsif @candidate.rank == 2 %>
+            <img src="/assets/f2w.svg" alt="Carinha indiferente">
+            <% elsif @candidate.rank == 3 %>
+            <img src="/assets/f3w.svg" alt="Carinha feliz">
+            <% elsif @candidate.rank == 4 %>
+            <img src="/assets/f4w.svg" alt="Carinha muito feliz">
+            <% else %>
+            Sem ranking.
+            <% end %>
+        </div>
+    </div>
+
+    <div class="puxar">
+     <div class="title">
+          <h2>Quem eu posso puxar ?</h2>
+          <h5>Veja alguns candidatos que podem vir a tomar posse se você votar em mim.</h5>
+     </div>
+      
+       <% @candidate.gang.order("random()").limit(15).each do |brother| %>
+        <div class="brother">
+            <span class="candidato">
+               <%= link_to brother.nickname, brother %>
+            </span>
+            <span class="partido">
+                <%= brother.party.symbol %>
+            </span>
+        </div>
+        <% end %>
+    </div>
+    
+    <div class="disclaimer">
+        * #merepresenta avalia sos candidatos de acordo com a proximidade Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati ab cupiditate impedit aut quasi     quis rem laborum dicta tempora quae?
+    </div>
+    
+    <div class="legenda">
+        <h3>Legenda</h3>
+        <dl>
+            <dt><img src="/assets/f1.svg" alt="Carinha triste"></dt>
+            <dd>Este candidato possui causas que vão diretamente contra os direitos humanos.</dd>
+            <dt><img src="/assets/f2.svg" alt="Carinha indiferente"></dt>
+            <dd>Esse candidato não possui causas que vão diretamente contra os direitos humanos, mas também nenhuma que seja relevante.</dd>
+            <dt><img src="/assets/f3.svg" alt="Carinha feliz"></dt>
+            <dd>Esse candidato possui causas que vão a favor dos direitos humanos.</dd>
+            <dt><img src="/assets/f4.svg" alt="Carinha muito feliz"></dt>
+            <dd>Esse candidato possui causas que vão diretamente a favor dos diretos humanos, abordando principalmente pautas voltadas para as minorias.</dd>
+        </dl>
+    </div>
+</div>
+
+<% end %>

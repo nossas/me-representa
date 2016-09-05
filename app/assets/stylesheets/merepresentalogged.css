@@ -1,0 +1,20 @@
+.main-menu-item {
+    background-color: transparent;
+    border: none;
+}
+.main-menu-item:hover {
+    border-left: 1px dotted lightgray;
+    box-shadow: inset 1 -1 0px lightgray;
+}
+.dropdown {
+    float: right;   
+}
+.user-image {
+    border-radius: 1.5em;
+    width: 3em;
+    margin-right: .5em;
+}
+.user {
+    color: #fff;
+    font-weight: bolder;
+}

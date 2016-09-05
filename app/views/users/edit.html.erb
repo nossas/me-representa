@@ -1,120 +1,58 @@
-<!doctype html>
-<style>
-.form-content {
-  margin-top: 2em;
-  padding: 2em;
-  width: 50%;
-  margin: 0 auto;
-  background-color: white;
-}
-#candidato {
-  display: none;
-}
-#candidato ~ div {
-  margin-top: 2em;
-}
-#candidato + label:before {
-  content: "Sou ";
-}
-#candidato:checked + label:before {
-  content: "Não sou ";
-}
-#candidato ~ #div-candidato {
-  display: none;
-}
-#candidato ~ #div-user {
-  display: block;
-}
-#candidato:checked ~ #div-candidato {
-  display: block;
-}
-#candidato:checked ~ #div-user {
-  display: none;
-}
-.form-input-label {
-	display: block;
-}
-.form-input {
-	width: 95%;
-}
-.form-input:invalid {
-	box-shadow: 0 0 1px 1px red;
-}
-</style>
-<div class="form-content">
-	<% 
-		erros = flash[:erros];
-		if erros != nil 
-	%>
-	<div class="erros">
-		<span>Erros:</span>
-		<ul>
-			<% for k in erros.keys do %>
-				<li><%= erros[k]  %></li>
-			<% end %>
-		</ul>
-	</div>
-	<% end %>
-	<input type="checkbox" id="candidato" <%= @candidate.cpf == nil ? '' : 'checked' %> >
-	<label for="candidato" class="btn">candidato</label>
-	<div id="div-user">
-  		<%= form_for @user do |f| %>
-  			<%= f.hidden_field :candidate_id %>
-  			<%= f.hidden_field :email %>
-  			<%= f.hidden_field :picture %>
-  			<%= f.hidden_field :name %>
-			<%= f.label :mobile_phone, "Celular: (somente números)", {class: "form-input-label"} %>
-			<%= f.text_field :mobile_phone, {class: "form-input", pattern: "\\d{8,11}"} %>
-			<%= f.label :city_id, "Cidade:", {class: "form-input-label"} %>
-			<%= f.select :city_id, @cities, {},  {class: "form-input"} %>	
-			<%= f.submit %>
-		<% end %>
-	</div>
-	<div id="div-candidato">
-		<%= form_for @candidate do |f| %>
-			<%= f.label :name, "Nome (*):", {class: "form-input-label"} %>
-			<%= f.text_field :name, {class: "form-input", required:"required"} %>
-			<%= f.label :nickname, "Apelido:", {class: "form-input-label"} %>
-			<%= f.text_field :nickname, {class: "form-input"} %>
-			<%= f.label :number, "Número (*):", {class: "form-input-label"} %>
-			<%= f.text_field :number, {class: "form-input", required:"required"} %>
-			<%= f.label :party_id, "Partido (*):", {class: "form-input-label"} %>
-			<%= f.select :party_id, Party.all.collect { |p| [ p.number, p.id ] },{} ,{class: "form-input", required:"required"} %>
-			<div class="sexo">
-				<label class="form-input-label">Sexo:</label>
-				<label>
-					<%= radio_button("candidate", "male", "0") %>
-					Feminino
-				</label>
-				<label>
-					<%= radio_button("candidate", "male", "1") %>
-					Masculino
-				</label>
-			</div>
-			<%= f.label :born_at, "Nascimento (**):", {class: "form-input-label"} %>
-			<%= f.date_select :born_at, {:start_year => 1900, :end_year => 2000} %>
-			<%= f.label :bio, {class: "form-input-label"} %>
-			<%= f.text_area :bio, {class: "form-input"} %>
-			<%= f.label :email, "Email:", {class: "form-input-label"} %>
-			<%= f.text_field :email, {class: "form-input"} %>
-			<%= f.label :mobile_phone, "Celular: (somente números)", {class: "form-input-label"} %>
-			<%= f.text_field :mobile_phone, {class: "form-input", pattern: "\\d{8,11}"} %>
-			<input type="hidden" name="f_code" value="<%= @user.id %>" >
-			<%= f.hidden_field :finished_at %>
-			<%= f.hidden_field :group_id %>
-			<%= f.hidden_field :short_url %>
-  <!-- politician boolean, -->
-			<%= f.label :occupation, "Ocupação:", {class: "form-input-label"} %>
-			<%= f.text_field :occupation, {class: "form-input"} %>
-			<%= f.label :scholarity, "Escolaridade:", {class: "form-input-label"} %>
-			<%= f.text_field :scholarity, {class: "form-input"} %>
-			<%= f.label :cpf, "CPF (**):", {class: "form-input-label"} %>
-			<%= f.text_field :cpf, {class: "form-input", required: "required"} %>
-			<%= f.label :electoral_title, "Título Eleitoral (**):", {class: "form-input-label"} %>
-			<%= f.text_field :electoral_title, {class: "form-input", required: "required"} %>
-			<%= f.label :city_id, "Cidade:", {class: "form-input-label"} %>
-			<%= f.select :city_id, @cities, {}, {class: "form-input"} %>	
-			<%= f.submit %>
-		<% end %>
-	</div>
+<% content_for :head do %>
+    <title>Faça seu cadastro</title>
+    <link rel="stylesheet" href="/assets/questionnaire.css">
+<% end %>
+
+<% content_for :main do %>
+<div class="container">
+    <h1>Crie sua conta</h1>
+    <div class="form-content">
+        <% 
+            erros = flash[:erros];
+            if erros != nil 
+        %>
+        <div class="erros">
+            <span>Erros:</span>
+            <ul>
+                <% for k in erros.keys do %>
+                    <li><%= erros[k]  %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+        <div id="div-user form-horizontal">
+            <%= form_for @user do |f| %>
+                <div class="form-group">
+                    <%= f.label :name, {class: "col-sm-2 control-label"} %>
+                    <div class="col-sm-10">
+                        <%= f.text_field :name, {class: "form-control"} %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :email, "Email", {class: "col-sm-2 control-label"} %>
+                    <div class="col-sm-10">
+                        <%= f.text_field :email, {class: "form-control col-sm-10"} %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :city_id, "Cidade", {class: "col-sm-2 control-label"} %>
+                    <div class="col-sm-10">
+                        <%= f.select :city_id, @cities, {},  {class: "form-control col-sm-10"} %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :mobile_phone, "Celular", {class: "col-sm-2 control-label"} %>
+                    <div class="col-sm-10">
+                        <%= f.text_field :mobile_phone, {class: "form-control col-sm-10", pattern: "\\d{8,11}"} %>
+                    </div>
+                </div>
+                <%= f.hidden_field :candidate_id %>
+                <%= f.hidden_field :picture %>
+                <div class="buttons">
+                    <%= f.submit "E ai, vamos lá? Faça o seu questionário!", {class: "btn btn-save"} %>                
+                </div>
+            <% end %>
+        </div>
+    </div>    
 </div>
+<% end %>

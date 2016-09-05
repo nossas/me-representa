@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/merepresenta.css">
+    <link rel="stylesheet" href="/assets/merepresentalogged.css">
+    <%= yield :head %>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="dropdown">
+                    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="main-menu-item">
+                       <img class="user-image" src="<%= @current_user.picture %>" alt="Foto de <%= @current_user.name %>">
+                        <span class="user"><%= (@current_user||@user).name %></span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li>Sair</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <%= yield :main %>
+    </main>
+    <footer>
+        <%= yield :footer %>
+    </footer>
+    <script src="/assets/jquery-3.1.0.min.js"></script>
+    <script src="/assets/tether.min.js"></script><!-- Tether for Bootstrap --> 
+    <script src="/assets/bootstrap.min.js"></script>
+    <%= yield :scripts %>
+</body>
+</html>

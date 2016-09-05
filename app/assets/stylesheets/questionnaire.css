@@ -1,0 +1,42 @@
+body, option {
+    background-color: #097e74;
+}
+.control-label {
+    color: #fff;
+    text-align: right;
+    font-weight: bolder;
+}        
+.btn-save, .control-label {
+    text-transform: uppercase;
+}        
+.btn-save {
+    background-color: #582985;
+    font-weight: bolder;
+    color: #097e74;
+    max-width: 100%;
+    white-space: normal;
+    word-wrap: break-word;
+    display: block;
+    margin: 0 auto;
+}
+.buttons {
+    width: 100%;
+    display: inline-block;
+    padding-top: 1.5em;  
+}
+.form-control, .form-control:focus {
+    background-color: transparent;
+    border: 2px solid #fff;
+    margin-bottom: 1em;
+    color: #fff;
+}
+@media screen and (min-width: 544px) {
+    .control-label {
+    }
+    .form-control, .form-control:focus {
+        margin-bottom: 2em;
+    }
+    .buttons {
+        padding-top: 4em;
+    }
+}

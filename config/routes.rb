@@ -2,8 +2,6 @@ CariocaPergunta::Application.routes.draw do
   match '/auth/:provider/callback',   :to => 'sessions#create'
 
   post '/candidates/check', to: 'candidates#check', as: :candidates_check
-
-
   resources :likes, only: [:create, :update]
 
   resources :candidates do
@@ -32,7 +30,8 @@ CariocaPergunta::Application.routes.draw do
   resources :sessions,    only: [:destroy, :new]
   
   get '/cities/:id/convine',    :to => "cities#convine",  as: :city_convine
-  resources :cities,      only: [:index]
+  get '/cities/:id/candidates',    :to => "cities#candidates",  as: :city_candidates
+  resources :cities,      only: [:index] 
   
   get 'auth/meurio',      as: :meurio_auth
   get 'auth/facebook',    as: :facebook_auth

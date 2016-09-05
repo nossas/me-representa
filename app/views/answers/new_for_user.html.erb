@@ -1,0 +1,226 @@
+<% content_for :main do %>
+<style>
+    body {
+        background: #582985;
+        background-image: url('/assets/FE3.png');
+        color: #fff;
+    }
+    input[type=radio] {
+        display: none;
+    }
+    .resposta + span:after {
+        content: "\00a0";
+        background-image: url("/assets/rb0.svg");
+        width: 32px;
+        height: 22px;
+        background-size: 100%;
+        display: inline-block;
+        background-repeat: no-repeat;
+        margin: 0 .5em;        
+    }
+    .resposta:checked + span:after {
+        background-image: url("/assets/rb1.svg");
+    }
+    .importancia + span:before {
+        content: "\00a0";
+        background-image: url("/assets/rb20.svg");
+        width: 22px;
+        height: 22px;
+        background-size: 100%;
+        display: inline-block;
+        background-repeat: no-repeat;
+        margin: 0 .5em;        
+    }
+    .importancia:checked + span:before {
+        background-image: url("/assets/rb21.svg");
+    }
+    .container {
+        text-transform: uppercase;
+        font-weight: bolder;
+    }
+    .relevancia, .opiniao, h1 {
+        position: relative;
+        color: #d8b212;
+    }
+    .relevancia:before {
+        content:""; 
+        background: white; 
+        position: absolute; 
+        top: -.3em; 
+        left: 4em; 
+        right: 4em; 
+        height: 1px; 
+    }
+    .relevancia label {
+        display: block;
+    }
+    h1 {
+        text-shadow: -.05em -.02em #885c59;
+        font-size: 2.4em;
+        color: #00a99d;
+        text-align: center;
+    }
+    h2 {
+        text-align: justify;
+        font-size: 1em;
+        font-weight:  bolder;
+        margin: 2em 0 1.5em 0;
+        color: #d8b212;
+    }
+    .conteudo {
+/*        width: 90%;*/
+/*        font-size: .8em;*/
+        margin: 0 auto;
+    }
+    .question-title:before {
+        content: '/ /';
+        padding-right: .5em;
+    }
+    .question-title {
+        display: block;
+        margin: 1em 0 .7em 0;
+    }
+    @media screen and (min-width: 500px) {
+        h1 {
+            font-size: 3.5em;
+        }
+        .question-title {
+            clear: both;
+        }
+        .relevancia label {
+            display: inline;
+        }
+    }
+    @media screen and (min-width: 773px) {
+        h1 {
+            font-size: 5em;
+        }
+        .relevancia:before {
+            left: -1em;
+            width: 1px;
+            top: -.3em;
+            height: 2em;
+        }
+        .relevancia, .opiniao {
+            display: inline-block;
+        }
+        .opiniao {
+            margin-right: 1em;
+            padding-right: 1em;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        h1 {
+            font-size: 7em;
+        }
+        h2 {
+            font-size: 1em;
+        }
+    }
+</style>
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <h1>Questionário</h1>
+        <div class="conteudo">
+            <h2>Agora é a sua vez de fazer o teste! Faremos a comparação entre a sua resposta e as respostas dos candidatos e candidatas.</h2>
+        </div>
+
+        <div class="alert alert-danger invisivel" id="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          Não foi possível completar a operação, por favor recarregue a página.
+        </div>
+
+        <% @questions.truths.each do |question| %>
+        <% answer = current_user.answers.find_by_question_id(question.id) || Answer.new %>
+        <div class="question" answer-id="<%= answer.id %>" question_id="<%= question.id%>">
+            <span class="question-title">
+                <%= question.text %>
+            </span>
+            
+            <div class="opiniao" o_answer="<%= answer.short_answer %>">
+                <label>
+                   <input type="radio" class="resposta ans<%= question.id%>" name="short_answer<%= question.id %>" value="Sim" <%= "checked" if answer.short_answer == "Sim" %>>
+                   <span>Sim</span>
+                </label>
+                <label>
+                   <input type="radio" class="resposta ans<%= question.id%>" name="short_answer<%= question.id %>" value="Não" <%= "checked" if answer.short_answer == "Não" %>>
+                    <span>Não</span>
+                </label>
+            </div>
+            <div class="relevancia" o_weight="<%= answer.weight%>">
+                <label>
+                   <input type="radio" class="importancia wei<%= question.id%>" name="weight<%= question.id %>" value="2" <%= "disabled" if answer.short_answer == nil %> <%= "checked" if answer.weight == 2 %>>
+                    <span>Muito Relevante</span>
+                </label>
+                <label>
+                   <input type="radio" class="importancia wei<%= question.id%>" name="weight<%= question.id %>" value="1" <%= "disabled" if answer.short_answer == nil %> <%= "checked" if answer.weight == 2 %>>
+                    <span>Relevante</span>
+                </label>
+                <label>
+                   <input type="radio" class="importancia wei<%= question.id%>" name="weight<%= question.id %>" value="0" <%= "disabled" if answer.short_answer == nil %> <%= "checked" if answer.weight == 2 %>>
+                    <span>Irrelevante</span>
+                </label>
+            </div>
+        </div>
+        <% end %>
+        <%= link_to "Encontrar candidaturas", user_parties_path(@current_user), {class: "btn btn-primary"} %>
+    </div>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+    (function(){
+        function getShortAnswer(questionId) {
+            return $(".ans" + questionId + ":checked").val();
+        }
+        function getWeight(questionId) {
+            return $(".wei" + questionId + ":checked").val();
+        }
+        
+        var url = "<%= user_answers_path(@current_user) %>";
+        
+        var submit = function(questionId) {
+            var url_envio, method;
+            var obj = {
+                user_id: <%= @current_user.id %>
+                , <%= request_forgery_protection_token.to_s %>: "<%= form_authenticity_token %>"
+                , question_id: questionId
+                , short_answer: getShortAnswer(questionId)
+                , weight: getWeight(questionId)
+            }
+            var c = $(".question[question_id="+questionId+"]");
+            $(".wei"+questionId+", .ans"+questionId).attr("disabled", "disabled");
+            if (c.attr("answer-id") != "") {
+                var aid = c.attr("answer-id");
+                obj["answer-id"] = aid;
+                url_envio = url + "/" + aid;
+                method = "put"
+            }
+            else {
+                method = "post";
+                url_envio = url;
+            }
+            $.ajax({
+                method: method
+                , contentType: "application/json"
+                , url: url_envio
+                , data: JSON.stringify(obj)
+                , success(data) {
+                    c.attr("answer-id", data.id);
+                    $(".wei"+questionId+", .ans"+questionId).removeAttr("disabled");
+                }
+                , error(data) {
+                    $("#alert").removeClass("invisivel");
+                }
+            });
+            console.log(obj);
+            //$(this).parent().parent().parent().submit();
+        };
+        $(".question input").on("change", function(){
+            submit($(this).parent().parent().parent().attr("question_id"));
+        });
+    })();
+</script>
+<% end %>

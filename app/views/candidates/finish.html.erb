@@ -1,0 +1,58 @@
+<% content_for :head do %>
+<style>
+    body {
+        background: #582985;
+        background-image: url('/assets/FC4.png');
+        color: #fff;
+        text-transform: uppercase;
+    }
+    h1 {
+        color: #d8b212;
+        font-size: 2.3em;
+        transform: rotate(-3deg);
+        margin: 1em 0;
+        text-align: center;
+        text-shadow: -.05em -.02em #00a99d;
+        font-weight: bolder;
+        margin-bottom: 2em;
+    }
+    h2 {
+        font-size: 1.1em;
+        font-weight: bolder;
+        color: #d8b212;
+        text-align: center;
+    }
+    @media screen and (min-width: 400px) {
+        body {
+            font-size: 1.2em;
+        }
+    }
+    @media screen and (min-width: 600px) {
+        body {
+            font-size: 2em;
+        }
+        h1 {
+            font-size: 2em;
+        }
+    }
+    @media screen and (min-width: 1000px) {
+        h1 {
+            font-size: 3em;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        h1 {
+            font-size: 4em;
+        }
+    }
+</style>
+<% end %>
+
+<% content_for :main do %>
+
+
+<div class="container">
+    <h1>Obrigado !</h1>
+    <h2>Agora é só visitar o seu perfil no #merepresenta para acompanhar sua popularidade entre os eleitores</h2>
+</div>
+<% end %>

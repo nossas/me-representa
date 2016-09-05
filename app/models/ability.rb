@@ -15,7 +15,7 @@ class Ability
     if user
       can :create, Answer
       can :update, Answer do |a|
-        a.user == user
+        a.responder = user
       end
       can :update, User
     end

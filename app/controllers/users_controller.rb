@@ -1,29 +1,30 @@
 #coding: utf-8
 class UsersController < ApplicationController
-  layout "application_phase_two" 
+  layout "merepresentaunlogged", :only => [:edit] 
 
   inherit_resources
   load_and_authorize_resource
 
   # Se existir um candidato para o usuário, vai carregar também
   # Leva em consideração que o ID do candidato = ID do usuário
-  before_filter only:[:edit] do
-    if defined?(@candidate).nil?
-      if Candidate.exists? @user.id
-        @candidate = Candidate.find @user.id
-      else
-        @candidate = flash[:candidate] # Se houve erro, será retornado aqui (Edição anterior)
+#  before_filter only:[:edit] do
+#    if defined?(@candidate).nil?
+#      if Candidate.exists? @user.id
+#        @candidate = Candidate.find @user.id
+#      else
+#        @candidate = flash[:candidate] # Se houve erro, será retornado aqui (Edição anterior)
+#
+#        if @candidate == nil # Caso não seja erro, precisamos de dados novos para serem utilizados
+#          @candidate = Candidate.new
+#          @candidate.name = @user.name
+#          @candidate.email = @user.email
+#          @candidate.mobile_phone = @user.mobile_phone
+#          @candidate.city_id = @user.city_id
+#        end
+#      end
+#    end
+#  end
 
-        if @candidate == nil # Caso não seja erro, precisamos de dados novos para serem utilizados
-          @candidate = Candidate.new
-          @candidate.name = @user.name
-          @candidate.email = @user.email
-          @candidate.mobile_phone = @user.mobile_phone
-          @candidate.city_id = @user.city_id
-        end
-      end
-    end
-  end
 
   before_filter :load_all_cities, only:[:edit]
 
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
 
   def update
     update! do |success, failure|
-      success.html { redirect_to candidates_home_url }
+      success.html { redirect_to new_answer_path }
       failure.html { 
         msgs = {}
         @user.errors.keys.each {|k| msgs[k] = @user.errors[k].join("; ") }

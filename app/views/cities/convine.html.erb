@@ -1,0 +1,101 @@
+<% content_for :head do %>
+<style>
+    #sadface {
+        max-width: 270px;
+        width: 50%;
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 3em;
+    }
+    body {
+        background-color: gray;
+        background-image: url('/assets/FE4.png');
+    }
+	div.cities {
+		background-color: white;
+		border-radius: .5em;
+		padding: 2em;
+	}
+	div.cities>div {
+		margin-top: 1em;
+	}
+    .mensagem h2, .mensagem p {
+        color: #d8b212;
+        line-height: 1.3em;
+    }
+    .mensagem>h2 {
+        text-transform: uppercase;
+        font-size: 1em;
+        font-weight: bolder;
+    }
+    .conteudo {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .btn {
+        margin: 3em auto 0 auto;
+        display: table;
+        text-transform: uppercase;
+    }
+    @media screen and (min-width: 400px) {
+        body {
+            font-size: 1.3rem;
+        }
+    }
+    @media screen and (min-width: 800px) {
+        .conteudo {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            right: 0;
+            bottom: 0;            
+            min-width: 400px;
+        }
+        .left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 60%;
+            bottom: 0;
+        }
+        .right {
+            position: absolute;
+            top: 0;
+            left: 40%;
+            right: 0;
+            bottom: 0;
+        }
+        .mensagem, #sadface {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: inline-table;
+            margin: auto;
+        }
+        #sadface {
+        }
+        body {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+<% end %>
+
+<% content_for :main do %>
+<div class="conteudo">
+    <div class="left">
+        <img src="/assets/sadfacey.svg" id="sadface" alt="Icone SadFace">
+    </div>
+    <div class="right">
+        <div class="mensagem">
+            <h2>desculpe, ainda não temos nenhuma candidatura cadastrada na sua cidade :(</h2>
+            <div>
+                <p>Mas não se preocupe! Se você quiser ajudar a gente a encontrar candidatos que respeitem os direitos humanos na sua cidade, é só se inscrever como voluntário !</p>
+                <a href="#" class="btn btn-2">Clique aqui e se inscreva!</a>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
