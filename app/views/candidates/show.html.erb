@@ -2,23 +2,134 @@
     <title>Perfil de Candidato</title>
     <style>
         body {
-            background-color: #d8b212;
+            background-color: #d8b212;            
+        }
+        .disclaimer, .legenda h3, .brother a {
+            text-transform: uppercase;
+        }
+        main {
+            font-size: .8em;
+            color: #532985;
+        }
+        main h3 {
+            font-size: 2em;
         }
         .info-basica, .info-bio {
+            position: relative;
             background-color: #532985;
             color: #fff;
-            margin: 2em 0;
-            padding: 2em;
+            padding: 1.5em 1.5em .5em 1.5em;
+            text-transform: uppercase;
+            margin-bottom: 1em;
         }
         .info-text {
             display: block;
+        }
+        .info-text.name {
+            margin-top: 1em;
+        }
+        .info-text.number {
+            margin: 1em 0;
+        }
+        .candidate-number {
+            font-size: 2em;
         }
         .puxar .title, .brother {
             background-color: #532985;
             color: #fff;
         }
-        .puxar h2,.puxar h5 {
-            display: inline;
+        .puxar h2 {
+            text-transform: uppercase;
+        }
+        .can-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .votes-int {
+            margin-top: 2em;
+            color: #d8b212;
+            text-align: center;
+            display: block;
+        }
+        .title {
+            padding: 1em;
+        }
+        .legenda img, .legenda h3 {
+            margin-right: 1em;
+        }
+        table  {
+            width: 100%;
+        }
+        .brother {
+            margin: 1em 0;
+            padding: 1.5em;
+        }
+        .brother a, .partido {
+            color: #fff;
+            font-size: 1.5em;
+        }
+        .partido {
+            float: right;
+        }
+        .brother a:hover {
+            text-decoration: none;
+            font-size: 1.6em;
+        }
+        @media screen and (min-width:500px) {
+            main {
+                font-size: 1rem;
+            }
+            dt, dd {
+            }
+        }
+        @media screen and (min-width:800px) {
+            .can-pic {
+                width: 150px;
+                height: 150px;
+            }
+            .flex {
+                display: flex;
+                margin-bottom: 2em;
+            }
+            .info-bio {
+                font-size: 1.2em;
+                margin: 0;
+                width: 100%;
+            }
+            .info-basica {
+                font-size: 1.2em;
+                width: 40ch;
+                margin: 0 3em 0 0;
+                box-sizing: border-box;
+            }
+            .info-basica:after {
+                content: '\00a0';
+                box-sizing: border-box;
+                position: absolute;
+                bottom: 5em;
+                left: 0;
+                width: 69vw;
+                max-width: 900px;
+                background-color: #532985;
+                height: .5em;
+                z-index: -1;
+            }            
+            .avaliacao {
+                position: absolute;
+                bottom: 1em;
+            }
+            .avaliacao>span {
+                margin-right: 1em;
+            }
+            .legenda {
+                margin-top: 2em;
+            }
+        }
+        @media screen and (min-width:1200px) {
+            .puxar h2,.puxar h5 {
+                display: inline;
+            }
         }
     </style>
 <% end %>
@@ -33,56 +144,61 @@
 
 <% content_for :main do %>
 <div class="container">    
-    <div class="info-basica">        
-        <img src="<%= @candidate.picture %>" alt="Foto do candidato">
-        <span class="info-text">
-            <%= @candidate.name %>
-        </span>
-        <span class="info-text">
-            nº <span class="candidate-number"><%= @candidate.number %></span>
-        </span>
-        <span class="info-text">
-            Partido: <%= @candidate.party.symbol %>
-        </span>
-        <span class="info-text">
-            Idade: <%= ((Date.today - @candidate.born_at)/365).to_i if @candidate.born_at %>
-        </span>
-        <span class="info-text">
-            Escolaridade: <%= @candidate.scholarity %>
-        </span>
-        <span class="info-text">
-            Reeleição: <%= @candidate.politician? ? "Sim" : "Não" %>
-        </span>
-    </div>
-    <div class="info-bio">
-        <h3>Sobre mim</h3>
-        <%= @candidate.bio %>
-        
-        <div class="avaliacao">Avaliação me representa:
-           <% if @candidate.rank == 1 %>
-            <img src="/assets/f1w.svg" alt="Carinha triste">
-            <% elsif @candidate.rank == 2 %>
-            <img src="/assets/f2w.svg" alt="Carinha indiferente">
-            <% elsif @candidate.rank == 3 %>
-            <img src="/assets/f3w.svg" alt="Carinha feliz">
-            <% elsif @candidate.rank == 4 %>
-            <img src="/assets/f4w.svg" alt="Carinha muito feliz">
-            <% else %>
-            Sem ranking.
-            <% end %>
+    <div class="flex">
+        <div class="info-basica">        
+            <img class="can-pic" src="<%= @candidate.picture %>" alt="Foto do candidato">
+            <span class="info-text name">
+                <%= @candidate.name %>
+            </span>
+            <span class="info-text number">
+                nº <span class="candidate-number"><%= @candidate.number %></span>
+            </span>
+            <span class="info-text party">
+                Partido: <%= @candidate.party.symbol %>
+            </span>
+            <span class="info-text age">
+                Idade: <%= ((Date.today - @candidate.born_at)/365).to_i if @candidate.born_at %>
+            </span>
+            <span class="info-text politician">
+                Reeleição: <%= @candidate.politician? ? "Sim" : "Não" %>
+            </span>
+            <span class="info-text schoolarship">
+                Escolaridade: <%= @candidate.scholarity %>
+            </span>
+            <span class="votes-int">
+                <%= User.where("users.id = #{@candidate.id}" ).count %> intenções de voto
+            </span>
         </div>
-    </div>
+        <div class="info-bio">
+            <h3>Sobre mim</h3>
+            <%= @candidate.bio %>
+
+            <div class="avaliacao"><span>* Avaliação #MeRepresenta:</span>
+               <% if @candidate.rank == 1 %>
+                <img src="/assets/f1w.svg" alt="Carinha triste">
+                <% elsif @candidate.rank == 2 %>
+                <img src="/assets/f2w.svg" alt="Carinha indiferente">
+                <% elsif @candidate.rank == 3 %>
+                <img src="/assets/f3w.svg" alt="Carinha feliz">
+                <% elsif @candidate.rank == 4 %>
+                <img src="/assets/f4w.svg" alt="Carinha muito feliz">
+                <% else %>
+                Sem ranking.
+                <% end %>
+            </div>
+        </div>
+   </div>
 
     <div class="puxar">
-     <div class="title">
-          <h2>Quem eu posso puxar ?</h2>
-          <h5>Veja alguns candidatos que podem vir a tomar posse se você votar em mim.</h5>
-     </div>
-      
-       <% @candidate.gang.order("random()").limit(15).each do |brother| %>
+        <div class="title">
+            <h3>Quem eu posso puxar ?</h3>
+            <h5>Veja alguns candidatos que podem vir a tomar posse se você votar em mim.</h5>
+        </div>
+
+        <% @candidate.gang.order("random()").limit(15).each do |brother| %>
         <div class="brother">
             <span class="candidato">
-               <%= link_to brother.nickname, brother %>
+                <%= link_to brother.nickname, brother %>
             </span>
             <span class="partido">
                 <%= brother.party.symbol %>
@@ -97,16 +213,26 @@
     
     <div class="legenda">
         <h3>Legenda</h3>
-        <dl>
-            <dt><img src="/assets/f1.svg" alt="Carinha triste"></dt>
-            <dd>Este candidato possui causas que vão diretamente contra os direitos humanos.</dd>
-            <dt><img src="/assets/f2.svg" alt="Carinha indiferente"></dt>
-            <dd>Esse candidato não possui causas que vão diretamente contra os direitos humanos, mas também nenhuma que seja relevante.</dd>
-            <dt><img src="/assets/f3.svg" alt="Carinha feliz"></dt>
-            <dd>Esse candidato possui causas que vão a favor dos direitos humanos.</dd>
-            <dt><img src="/assets/f4.svg" alt="Carinha muito feliz"></dt>
-            <dd>Esse candidato possui causas que vão diretamente a favor dos diretos humanos, abordando principalmente pautas voltadas para as minorias.</dd>
-        </dl>
+        <table>
+            <tbody>
+                <tr>
+                    <td><img src="/assets/f1.svg" alt="Carinha triste"></td>
+                    <td>Este candidato possui causas que vão diretamente contra os direitos humanos.</td>
+                </tr>
+                <tr>
+                    <td><img src="/assets/f2.svg" alt="Carinha indiferente"></td>
+                    <td>Esse candidato não possui causas que vão diretamente contra os direitos humanos, mas também nenhuma que seja relevante.</td>
+                </tr>
+                <tr>
+                    <td><img src="/assets/f3.svg" alt="Carinha feliz"></td>
+                    <td>Esse candidato possui causas que vão a favor dos direitos humanos.</td>
+                </tr>
+                <tr>
+                    <td><img src="/assets/f4.svg" alt="Carinha muito feliz"></td>
+                    <td>Esse candidato possui causas que vão diretamente a favor dos diretos humanos, abordando principalmente pautas voltadas para as minorias.</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
