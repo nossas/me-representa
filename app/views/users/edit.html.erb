@@ -1,11 +1,48 @@
 <% content_for :head do %>
     <title>Faça seu cadastro</title>
     <link rel="stylesheet" href="/assets/questionnaire.css">
+<style>
+    .container {
+        margin-top: 2em;
+    }
+    .header, .div-user {
+        display: inline-block;
+        width: 100%;
+    }
+    h1, p {
+        font-family: ProximaNovaSoft-Bold;
+    }
+    h1 {
+        color: #d8b212;
+        font-size: 6em;
+        text-shadow: -.1em 0 #582985;
+        transform: rotate(-2deg);
+        text-transform: uppercase;
+        float: left;
+        width: 40%;
+    }
+    p {
+        color: #582985;
+        display: block;
+        position: relative;
+        top: 6em;
+        width: 100%;
+        left: -4em;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+    .form-content {
+        width: 100%;
+    }
+</style>
 <% end %>
 
 <% content_for :main do %>
 <div class="container">
+   <div class="header">
     <h1>Crie sua conta</h1>
+    <p>Informe a cidade em que você vota. Se quiser receber mais informações sobre a campanha, deixe também seu nome, e-mail, e número de celular</p>
+   </div>
     <div class="form-content">
         <% 
             erros = flash[:erros];
@@ -35,7 +72,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <%= f.label :city_id, "Cidade", {class: "col-sm-2 control-label"} %>
+                    <%= f.label :city_id, "Cidade em que vota *", {class: "col-sm-2 control-label"} %>
                     <div class="col-sm-10">
                         <%= f.select :city_id, @cities, {},  {class: "form-control col-sm-10"} %>
                     </div>
