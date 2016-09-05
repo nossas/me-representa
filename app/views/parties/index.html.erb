@@ -30,9 +30,13 @@
     }
     .coligacao a, .coligacao a:hover {
         color: #00a99d;
-        text-decoration: none;
         font-weight: bolder;
         font-size: 1.5em;
+    }
+    .coligacao a:hover {
+        color: #00a99d;
+        text-decoration: none;
+        font-size: 2em;
     }
     .container {
         margin-top: 2em;
@@ -69,6 +73,8 @@
         <% end %>
     </table>
     
+    <% if @matching.size() > 10 %>
     <a href="#" class="btn btn-1-inv">Mostrar mais</a>
+    <% end %>
 </div>  
 <% end %>
