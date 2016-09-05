@@ -23,6 +23,14 @@
     </style>
 <% end %>
 
+<% content_for :menu do %>
+    <% if session[:candidate_id] %>
+        <li><a href="<%= edit_candidate_path(@current_user.id) %>">Perfil no #MeRepresenta</a></li>
+    <% else %>
+        <li><a href="<%= new_answer_path %>">Refazer questionário</a></li>
+    <% end %>
+<% end %>
+
 <% content_for :main do %>
 <div class="container">    
     <div class="info-basica">        

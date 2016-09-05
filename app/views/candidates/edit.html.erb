@@ -1,6 +1,11 @@
 <% content_for :head do %>
     <title>Faça seu cadastro</title>
     <link rel="stylesheet" href="/assets/questionnaire.css">
+<style>
+    .btn-save {
+        width: 40ch;
+    }
+</style>
 <% end %>
 
 <% content_for :main do %>
@@ -71,7 +76,7 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <%= f.submit "E ai, vamos lá? Faça o seu questionário!", {class: "btn btn-save"} %>                
+                    <%= f.submit (@candidate.finished_at ? "Salvar os dados!" : "E ai, vamos lá? Faça o seu questionário!"), {class: "btn btn-save"} %>                
                 </div>
             </div>
         <% end %>

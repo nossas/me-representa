@@ -36,6 +36,7 @@ class CandidatesController < ApplicationController
 
   before_filter { @user = User.find(params[:user_id]) if params[:user_id] }
   before_filter only: [:home] { @truths = Question.truths.chosen; @dares = Question.dares.chosen }
+  before_filter only: [:edit] { @current_user = User.find session[:user_id] }
 
   before_filter only: [:create] do
     @candidate.id = params['f_code']
