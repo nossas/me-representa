@@ -20,6 +20,14 @@
         color: #582985;
         font-weight: bolder;
     }
+    td a {
+        color: #582985;
+    }
+    td a:hover {
+        color: #582985;
+        text-decoration: none;
+        font-size: 1.2em;
+    }
     th {
         background-color: #097e74;
         border: 1em solid #582985;
@@ -168,7 +176,7 @@
                                 <img src="/assets/c0.svg" alt="Não receberá meu voto">
                                 <% end %>
                             </td>
-                            <td class="candidato"><%= candidate["name"] %></td>
+                            <td class="candidato"><%= link_to candidate["name"], candidate_path(candidate["id"]) %></td>
                             <td class="score"><%= candidate["score"] %></td>
                         </tr>
                     <% end %>
