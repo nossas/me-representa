@@ -2,7 +2,7 @@ class Candidate < ActiveRecord::Base
   attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity, :city_id, :cpf, :electoral_title
 
   validates :number, :token, :uniqueness => true
-  validates :name, :number, :party_id, :cpf, :born_at, :city_id, :presence => true
+  validates :number, :party_id, :cpf, :born_at, :city_id, :presence => true
   validate :verify_tse_data
 
   belongs_to :party

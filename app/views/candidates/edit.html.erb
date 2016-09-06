@@ -83,7 +83,11 @@
                 <div class="form-group row">
                     <%= f.label :born_at, "Data de nascimento *", {class: "col-sm-2 control-label"} %>
                     <div class="col-sm-10">
+                        <% if @candidate.born_at %>
+                        <%= f.text_field :born_at, {value: @candidate.born_at.strftime("%d/%m/%Y"), class: "form-control date-input", required: "required"} %>
+                        <% else %>
                         <%= f.text_field :born_at, {class: "form-control date-input", required: "required"} %>
+                        <% end %>
                     </div>
                </div>
                 <div class="form-group row">

@@ -89,7 +89,7 @@
       Não foi possível completar a operação, por favor recarregue a página.
     </div>
     <h1>Questionário</h1>
-    <h2>Agora é hora de fazer o teste! Por favor selecione as afirmações que fazem parte das pautas de sua campanha</h2>
+    <h2>Responda as perguntas abaixo para que suas eleitoras e eleitores saibam o que você pensa!</h2>
     <% @candidate.answers
         .select{|c| c.id !=nil }
         .sort{|a,b| a.id-b.id }
@@ -113,7 +113,7 @@
     <form action="<%= candidate_finish_path(@candidate) %>" method="post">
         <input type="hidden" name="<%= request_forgery_protection_token.to_s %>" value="<%= form_authenticity_token %>">
         <input name="_method" type="hidden" value="put">
-        <button type="submit" class="btn btn-1">SALVAR RESPOSTAS</button>
+        <button type="submit" class="btn btn-1">Submeter respostas</button>
     </form>
 </div>
 <% end %>
