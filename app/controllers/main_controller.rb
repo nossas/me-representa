@@ -1,5 +1,7 @@
+
 class MainController < ApplicationController
     layout "merepresentaunlogged"
+    
     skip_authorization_check
     
     def index
@@ -13,5 +15,8 @@ class MainController < ApplicationController
         elsif session[:user_id]
             redirect_to new_answer_path;
         end
+    end
+    
+    def about
     end
 end

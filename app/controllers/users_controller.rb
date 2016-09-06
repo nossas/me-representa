@@ -50,6 +50,6 @@ class UsersController < ApplicationController
   private
 
   def load_all_cities
-    @cities = City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", c.id]}
+    @cities = City.cities_for_select
   end
 end

@@ -1,0 +1,119 @@
+<% content_for :header do %>
+    <style>
+        .redes {
+            float: right;
+            display: inline;
+            width: 20%;
+            margin-top: 1em;
+        }
+        .redes a {
+            font-size: 0;
+            position: relative;
+        }
+        .redes a:before {
+            content: "";
+            background-size: 100%;
+            position: relative;
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+        }
+        .face:before {
+            background-image: url('/assets/face.svg');
+        }
+        .google:before {
+            background-image: url('/assets/google.svg');
+        }
+        .twitter:before {
+            background-image: url('/assets/twitter.svg');
+        }
+        .msg {
+            float: left;
+        }
+        main {
+            font-family: ProximaNovaSoft-Bold;
+            text-transform: uppercase;
+            letter-spacing: .2em;
+        }
+        body, .form-control, .form-control:focus {
+            background-color: #097e74;
+        }
+        .msg {
+            color: #fff;
+            padding: 2em;
+        }
+        .form-control {
+            color: #fff;
+            border: 2px solid #582985;
+        }
+        .form-group {
+            padding-bottom: 3em;
+        }
+        label, h1 {
+            color: #582985;
+        }
+        label {
+            text-align: right;
+            position: relative;
+            top: .5em;
+        }
+        h1 {
+            font-size: 5em;
+            margin: .5em auto 1em auto;
+            transform: rotate(-5deg);
+            text-shadow: .1em .1em #d8b212;
+            left: calc( ( 100% - 5em ) / 3 );
+            position: relative;
+        }
+        .btn-1 {
+            width: 30ch;
+            letter-spacing: .2em;
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            top: 2em;
+        }
+</style>
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <h1>Contato</h1>
+        <div class='form'>
+            <%= form_tag contact_path do %>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="nome">Nome</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="nome" name="name" size="30" type="text" placeholder="Seu nome" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="email">E-mail</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="email" name="email" type="text" placeholder="fulano@meuhost.com.br" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="city">Cidade</label>
+                        <div class="col-sm-10">
+                            <select name="city" id="city" class= "form-control">
+                            <% City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", "#{c.name}, #{c.state} - #{c.id}"]}.each do |cidade| %>
+                                <option value="<%= cidade[1] %>"><%= cidade[0]%></option>
+                            <% end %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="mensagem">Mensagem</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" cols="40" id="mensagem" name="mensagem" rows="20"></textarea>
+                       </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-1">Enviar</button>
+            <% end %>
+        </div>
+    </div>
+<% end %>
