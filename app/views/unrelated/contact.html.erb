@@ -1,12 +1,38 @@
-<% content_for :header %>
+<% content_for :header do %>
     <style>
-        body {
+        body, .form-control {
+            background-color: #097e74;
+        }
+        .form-control {
+            border: 2px solid #582985;
         }
     </style>
 <% end %>
 
-<% content_for :menu %>
-<% end %>
-
-<% content_for :main %>
+<% content_for :main do %>
+    <div class="container">
+        <h1>Contato</h1>
+        <%= form_tag contact_path do %>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="nome">Nome</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="nome" name="name" size="30" type="text" placeholder="Seu nome" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="email">E-mail</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="email" name="email" type="text" placeholder="fulano@meuhost.com.br" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="mensagem">Mensagem</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" cols="40" id="mensagem" name="mensagem" rows="20"></textarea>
+                   </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
 <% end %>
