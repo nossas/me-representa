@@ -8,11 +8,14 @@
     input[type=radio] {
         display: none;
     }
+    .relevancia {
+        padding-top: .8em;
+    }
     .resposta + span:after {
         content: "\00a0";
         background-image: url("/assets/rb0.svg");
-        width: 32px;
-        height: 22px;
+        width: 45px;
+        height: 38px;
         background-size: 100%;
         display: inline-block;
         background-repeat: no-repeat;
@@ -100,7 +103,10 @@
             display: inline;
         }
     }
-    @media screen and (min-width: 773px) {
+    @media screen and (min-width: 992px) {
+        .relevancia {
+            padding-top: 0;
+        }
         h1 {
             font-size: 5em;
         }
@@ -112,6 +118,9 @@
         }
         .relevancia, .opiniao {
             display: inline-block;
+        }
+        .opiniao label {
+            font-size: 1.4em;
         }
         .opiniao {
             margin-right: 1em;
