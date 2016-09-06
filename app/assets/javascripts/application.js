@@ -10,12 +10,3 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require ./lib/jquery
-//= require ./lib/jquery.effects.core
-//= require jquery_ujs
-//= require ./lib/underscore.js
-//= require ./lib/backbone.js
-//= require_tree ./lib
-//= require ./app.js
-//= require_tree ./app
-//= require ./init.js

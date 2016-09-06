@@ -4,6 +4,10 @@ CariocaPergunta::Application.routes.draw do
   post '/candidates/check', to: 'candidates#check', as: :candidates_check
   resources :likes, only: [:create, :update]
 
+  get   '/about', :to => 'unrelated#about', as: :about
+  get   '/contact', :to => 'unrelated#contact', as: :contact
+  post  '/contact', :to => 'unrelated#contacting'
+  
   resources :candidates do
     resources :answers, except: [:destroy] 
     put :finish
