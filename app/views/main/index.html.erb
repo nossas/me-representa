@@ -63,7 +63,7 @@
     }
     .btn2 {
         background-color: #d8b212;
-        float: right;
+        display: block;
     }
     @media screen and (min-width: 360px) {
         body {
@@ -100,24 +100,31 @@
 </style>
 <% end %>
 <% content_for :header do %>
+<!--
     <p>Acompanhe de pertinho</p>
     <nav>
         <a href="#" class="face">Facebook</a>
         <a href="#" class="twitter">Twitter</a>
         <a href="#" class="google">Google+</a>
     </nav>
+-->
 <% end %>
 <% content_for :main do %>
     <div class="container">
         <img src="/assets/01.png" class="logo" alt="Logo">
         <div class="content">
-            <h2>Quais candidatos respeitam os direitos das mulheres e de LGBTS?</h2>
-
-            <p>#MeRepresenta é uma plataforma para te ajudar a decidir em quem votar para vereador nas próximas eleições de 2016. Aqui você vai saber o posicionamento das candidaturas sobre pautas relevantes à construção das igualdades de gênero, racial e de orientação sexual.</p>
-            <p>O site é completamente idependente de partidos, e é o resultado de uma parceria entre o #VoteLGBT, o #AgoraÉQueSãoElas, a Rede Feminista de Juristas, a Rede Nossas Cidades (Meu Rio, Minha Sampa, Minha Porto Alegre e Meu Recife), a CFEMEA e o grupo LGBT Brasil.</p>
-
+            <h2>Plataforma de candidaturas a favor dos direitos humanos</h2>
+           
+            <p>Se você respeita os direitos humanos e está se candidatando a vereador/a nas eleições de 2016, inscreva-se no nosso site! Assim vai ficar mais fácil divulgar sua candidatura para eleitoras e eleitores da sua cidade :)</p>
+            <p>Se você é eleitor/a, poderá acessar a nossa lista de candidaturas a partir do dia 15 de setembro!</p>
+            
+            <% if false %>
             <%= link_to "Eleitor(a)", facebook_auth_path({type: "user"}), {class:"btn btn1"} %>
-            <%= link_to "Candidato", facebook_auth_path({type: "candidate"}), {class:"btn btn2"} %>
+            <% end %>
+            <div class="botao">
+                <%= link_to "Sou candidato/a", facebook_auth_path({type: "candidate"}), {class: "btn btn2"} %>
+                Quero  divulgar minha candidatura!
+            </div>
         </div>
     </div>
 <% end %>
