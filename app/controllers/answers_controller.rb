@@ -46,15 +46,20 @@ class AnswersController < ApplicationController
 
   def new
     if params[:candidate_id]
-        Question.where("chosen = true and role_type = 'truth'").each{|q|
-            a = Answer.new
-            a.question = q
-            a.responder = @candidate
-            a.short_answer = 'Não'
-            a.weight = 0
-            a.save
-        }
-        render(:file => "answers/new_for_candidate")
+        @current_candidate = Candidate.find params[:candidate_id]
+        if @current_candidate.finished_at
+            redirect_to candidate_path @candidate
+        else
+            Question.where("chosen = true and role_type = 'truth'").each{|q|
+                a = Answer.new
+                a.question = q
+                a.responder = @candidate
+                a.short_answer = 'Não'
+                a.weight = 0
+                a.save
+            }
+            render(:file => "answers/new_for_candidate")
+        end
     else
         new! { return render(:file => "answers/new_for_user") }
     end

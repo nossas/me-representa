@@ -48,9 +48,10 @@
 </style>
 <% end %>
 
+<% content_for :menu do %>
+    <li><%= link_to "Perfil no #MeRepresenta", candidate_path(@candidate.id) %></li>
+<% end %>
 <% content_for :main do %>
-
-
 <div class="container">
     <h1>Obrigado !</h1>
     <h2>Agora é só visitar o seu perfil no #merepresenta para acompanhar sua popularidade entre os eleitores</h2>
