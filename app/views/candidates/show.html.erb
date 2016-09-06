@@ -187,7 +187,7 @@
                 Escolaridade: <%= @candidate.scholarity %>
             </span>
             <span class="votes-int">
-                <%= User.where("users.id = #{@candidate.id}" ).count %> intenções de voto
+                <%= User.where("users.candidate_id = #{@candidate.id}" ).count %> intenções de voto
             </span>
             <% if @candidate.id == @current_user.candidate_id %>
                 <img src="/assets/c1.svg" alt="Vou votar" id="votar">
