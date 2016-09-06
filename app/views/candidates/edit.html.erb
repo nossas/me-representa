@@ -42,7 +42,10 @@
         font-size: 1em;
         text-transform: uppercase;
     }
-
+    .explicacao {
+        font-size: .8em;
+        position: initial;
+    }
 </style>
 <% end %>
 
@@ -51,8 +54,7 @@
    <div class="header">
         <h1>Crie sua conta</h1>
         <p>
-            Candidato(a) <br>
-            Por favor informe seus dados para darmos andamento a ferramenta e confirmar seus dados. O preenchimento dessas informações é importante para dar continuidade ao nosso trabalho :)
+            Por favor, informe seus dados para criar seu perfil na nossa plataforma:
         </p>
        
    </div>
@@ -114,6 +116,7 @@
                         <%= f.text_area :bio, {class: "form-control"} %>
                     </div>
                 </div>
+                <p class="explicacao">* Campos obrigatórios.</p>
                 <div class="buttons">
                     <%= f.submit (@candidate.finished_at ? "Salvar os dados!" : "E ai, vamos lá? Faça o seu questionário!"), {class: "btn btn-3"} %>                
                 </div>
