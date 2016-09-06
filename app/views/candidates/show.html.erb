@@ -1,6 +1,15 @@
 <% content_for :head do %>
     <title>Perfil de Candidato</title>
     <style>
+        #votar, #votar img {
+            background-color: #532985;
+            border: none;
+            width: 2em;
+            height: 2em;
+            position: absolute;
+            top: .5em;
+            right: .5em;
+        }
         body {
             background-color: #d8b212;            
         }
@@ -180,6 +189,17 @@
             <span class="votes-int">
                 <%= User.where("users.id = #{@candidate.id}" ).count %> intenções de voto
             </span>
+            <% if @candidate.id == @current_user.candidate_id %>
+                <img src="/assets/c1.svg" alt="Vou votar" id="votar">
+            <% else %>
+                <%= form_for @current_user do |f| %>
+                    <%= f.hidden_field :candidate_id, value: @candidate.id %>
+                    <button type="submit" id="votar">
+                        <img src="/assets/c02.svg" alt="Quero votar">
+                    </button>
+                <% end %>
+            <% end %>
+<!--            <input type="checkbox" id="votar"><label for="votar">Votar</label> -->
         </div>
         <div class="info-bio">
             <h3>Sobre mim</h3>
@@ -252,4 +272,8 @@
     </div>
 </div>
 
+<% end %>
+
+
+<% content_for :scripts do %>
 <% end %>
