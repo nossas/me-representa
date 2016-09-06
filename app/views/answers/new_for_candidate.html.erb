@@ -20,33 +20,42 @@
         font-weight: bolder;
         color: #582985;
     }
-    .radio {
+    label {
+        width: 23%;
+        display: inline-block;
+    }
+    .opiniao {
+        position: relative;
+        left: 30%;
+    }
+    .question {
+        margin: 1em 0;
+    }
+    .resposta {
         display: none;
     }
-    .radio + span {
+    /*
+    .resposta + span {
         float: right;
         position: relative;
         left: 1.5em;
         padding-right: 1.5em;
         width: 100%;
     }
-    label {
+    */
+    .resposta+span:before {
+        content: "";
+        background-size: contain;
+        height: 1px;
+        width: 1px;
+        background-image: url('/assets/rb20p.svg');
         position: relative;
-        width: 100%;
-    }
-    .radio+span:before {
-        content: '\00a0';
-        background-size: 1em;
-        height: 1em;
-        width: 1em;
-        background-image: url('/assets/RADIO%20BUTTON_05.svg');
-        position: absolute;
+        padding-right: 1.32em;
         background-repeat: no-repeat;
-        top: .25em;
-        left: -1.5em;
+        display: inline;
     }
-    .radio:checked+span:before {
-        background-image: url('/assets/RADIO%20BUTTON_06.svg');
+    .resposta:checked+span:before {
+        background-image: url('/assets/rb21p.svg');
     }
     .btn {
         margin: 0 auto;
@@ -95,10 +104,19 @@
         .sort{|a,b| a.id-b.id }
         .each do |a| %>
         <div class="question">
-            <label>
-                <input class="radio" type="checkbox" <%= "checked" if a.short_answer == 'Sim' %> answer_id="<%= a.id %>">
-                <span class="text"><%= a.question.text %></span>
-            </label>
+            <span class="question-title">
+                <%= a.question.text %>
+            </span>
+            <div class="opiniao" answer_id="<%= a.id %>">
+                <label>
+                   <input type="radio" class="resposta" name="short_answer<%= a.id %>" value="Sim" <%= "checked" if a.short_answer == "Sim" %>>
+                   <span>Sim</span>
+                </label>
+                <label>
+                   <input type="radio" class="resposta" name="short_answer<%= a.id %>" value="Não" <%= "checked" if a.short_answer == "Não" %>>
+                    <span>Não</span>
+                </label>
+            </div>
         </div>
     <% end %>
     <form action="<%= candidate_finish_path(@candidate) %>" method="post">
@@ -122,15 +140,15 @@
             prev.val();
             $(this).parent().parent().submit();
         }
-        $("input[type='checkbox']").on("click", function(){
-            toSend["short_answer"] = this.checked?"Sim":"Não";
+        $("input[type='radio']").on("change", function(){
+            toSend["short_answer"] = this.value;
             $.ajax({
                   method: "put"
                 , contentType: "application/json"
                 , data: JSON.stringify(toSend)
-                , url: url + $(this).attr("answer_id")
+                , url: url + $(this).parent().parent().attr("answer_id")
                 , error(data) {
-                    $("#alert").removeClass("sumiu");
+                    $("#alert").removeClass("invisivel");
                 }
             })
             ;
