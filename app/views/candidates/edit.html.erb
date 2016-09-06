@@ -73,45 +73,39 @@
         <%= form_for @candidate do |f| %>
             <div id="form-horizontal">
                 <div class="form-group row">
-                    <%= f.label :name, "Nome completo", {class: "col-sm-2 control-label"} %>
+                    <%= f.label :nickname, "Nome de urna *",  {class: "col-sm-2 control-label"} %>
                     <div class="col-sm-10">
-                        <%= f.text_field :name, {class: "form-control"} %>
+                        <%= f.text_field :nickname, {class: "form-control", required: "required"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :nickname, "Nome de urna",  {class: "col-sm-2 control-label"} %>
+                    <%= f.label :born_at, "Data de nascimento *", {class: "col-sm-2 control-label"} %>
                     <div class="col-sm-10">
-                        <%= f.text_field :nickname, {class: "form-control"} %>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <%= f.label :born_at, "Data de nascimento", {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
-                        <%= f.text_field :born_at, {class: "form-control"} %>
+                        <%= f.text_field :born_at, {class: "form-control date-input", required: "required"} %>
                     </div>
                </div>
                 <div class="form-group row">
-                    <%= f.label :cpf, "CPF",  {class: "col-sm-2 control-label"} %>
+                    <%= f.label :cpf, "CPF *",  {class: "col-sm-2 control-label"} %>
                     <div class="col-sm-10">
-                        <%= f.text_field :cpf, {class: "form-control"} %>
+                        <%= f.text_field :cpf, {class: "form-control cpf-input", required: "required"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :party_id, "Partido", {class: "col-sm-2 control-label"} %>
+                    <%= f.label :party_id, "Partido *", {class: "col-sm-2 control-label", required: "required"} %>
                     <div class="col-sm-10">
                         <%= f.select :party_id, Party.all.sort{|a,b| a.symbol <=> b.symbol }.collect { |p| [ "#{p.symbol} - #{p.number}", p.id ] }, {},  {class: "form-control col-sm-10"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :number, "Número de urna",  {class: "col-sm-2 control-label"} %>
+                    <%= f.label :number, "Número de urna *",  {class: "col-sm-2 control-label"} %>
                     <div class="col-sm-10">
-                        <%= f.text_field :number, {class: "form-control"} %>
+                        <%= f.text_field :number, {class: "form-control", required: "required"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :city_id, "Confirmar município de voto", {class: "col-sm-2 control-label"} %>
+                    <%= f.label :city_id, "Confirmar município de voto*", {class: "col-sm-2 control-label"} %>
                     <div class="col-sm-10">
-                        <%= f.select :city_id, City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", c.id]}, {},  {class: "form-control col-sm-10"} %>
+                        <%= f.select :city_id, City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", c.id]}, {},  {class: "form-control"} %>
                     </div>
                 </div>
                 <div class="form-group row">
