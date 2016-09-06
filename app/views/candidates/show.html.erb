@@ -64,12 +64,6 @@
         .title {
             padding: 1em;
         }
-        .legenda img, .legenda h3 {
-            margin-right: 1em;
-        }
-        table  {
-            width: 100%;
-        }
         .brother {
             margin: 1em 0;
             padding: 1.5em;
@@ -98,6 +92,9 @@
             font-size: 1.5em;
             position: relative;
             top: .1em;
+        }
+        .votes-int p {
+            font-size: .6em;
         }
         @media screen and (min-width:500px) {
             main {
@@ -169,7 +166,7 @@
         <div class="info-basica">        
             <img class="can-pic" src="<%= @candidate.picture %>" alt="Foto do candidato">
             <span class="info-text name">
-                <%= @candidate.name %>
+                <%= @candidate.nickname %>
             </span>
             <span class="info-text number">
                 nº <span class="candidate-number"><%= @candidate.number %></span>
@@ -187,7 +184,10 @@
                 Escolaridade: <%= @candidate.scholarity %>
             </span>
             <span class="votes-int">
+                <% if false  %>
                 <%= User.where("users.candidate_id = #{@candidate.id}" ).count %> intenções de voto
+                <% end %>
+                <p>* A partir do dia 15 de setembro, eleitores poderão acessar a plataforma e declarar suas intenções de voto.</p>
             </span>
             <% if ! session[:candidate_id] %>
                 <% if @candidate.id == @current_user.candidate_id %>
@@ -205,23 +205,10 @@
         <div class="info-bio">
             <h3>Sobre mim</h3>
             <%= @candidate.bio %>
-
-            <div class="avaliacao"><span>* Avaliação #MeRepresenta:</span>
-               <% if @candidate.rank == 1 %>
-                <img src="/assets/f1w.svg" alt="Carinha triste">
-                <% elsif @candidate.rank == 2 %>
-                <img src="/assets/f2w.svg" alt="Carinha indiferente">
-                <% elsif @candidate.rank == 3 %>
-                <img src="/assets/f3w.svg" alt="Carinha feliz">
-                <% elsif @candidate.rank == 4 %>
-                <img src="/assets/f4w.svg" alt="Carinha muito feliz">
-                <% else %>
-                Sem ranking.
-                <% end %>
-            </div>
         </div>
    </div>
-
+   
+    <% if false  %>
     <div class="puxar">
         <div class="title">
             <h3>Quem eu posso puxar ?</h3>
@@ -239,38 +226,11 @@
         </div>
         <% end %>
     </div>
+    <% end %>
     
     <% if not session[:candidate_id]%>
     <%= link_to "Voltar aos candidatos", url_for(:back) || user_party_candidates(@current_user, @candidate.party), :class => "btn btn-2" %>
     <% end %>
-    
-    <div class="disclaimer">
-        * #merepresenta avalia sos candidatos de acordo com a proximidade Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati ab cupiditate impedit aut quasi     quis rem laborum dicta tempora quae?
-    </div>
-    
-    <div class="legenda">
-        <h3>Legenda</h3>
-        <table>
-            <tbody>
-                <tr>
-                    <td><img src="/assets/f1.svg" alt="Carinha triste"></td>
-                    <td>Este candidato possui causas que vão diretamente contra os direitos humanos.</td>
-                </tr>
-                <tr>
-                    <td><img src="/assets/f2.svg" alt="Carinha indiferente"></td>
-                    <td>Esse candidato não possui causas que vão diretamente contra os direitos humanos, mas também nenhuma que seja relevante.</td>
-                </tr>
-                <tr>
-                    <td><img src="/assets/f3.svg" alt="Carinha feliz"></td>
-                    <td>Esse candidato possui causas que vão a favor dos direitos humanos.</td>
-                </tr>
-                <tr>
-                    <td><img src="/assets/f4.svg" alt="Carinha muito feliz"></td>
-                    <td>Esse candidato possui causas que vão diretamente a favor dos diretos humanos, abordando principalmente pautas voltadas para as minorias.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
 
 <% end %>
