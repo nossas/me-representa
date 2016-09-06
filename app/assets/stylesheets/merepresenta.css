@@ -1,3 +1,13 @@
+.btn-1 {
+    background-color: #582985;
+    color: #097e74;
+    font-weight: bolder;
+}
+.btn-1-inv {
+    background-color: #00a99d;
+    color: #582985;
+    font-weight: bolder;
+}
 .btn-2 {
     background-color: #d8b212;
     color: #582985;
@@ -8,15 +18,10 @@
     color: #d8b212;
     font-weight: bolder;
 }
-.btn-1 {
-    background-color: #582985;
-    color: #097e74;
-    font-weight: bolder;
-}
-.btn-1-inv {
-    background-color: #00a99d;
+.btn-3 {
+    background-color: #097e74;
     color: #582985;
-    font-weight: bolder;
+    font-weight: bolder;    
 }
 .invisivel {
     display: none;

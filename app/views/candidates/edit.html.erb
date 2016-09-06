@@ -2,15 +2,60 @@
     <title>Faça seu cadastro</title>
     <link rel="stylesheet" href="/assets/questionnaire.css">
 <style>
-    .btn-save {
-        width: 40ch;
+    body {
+        background-color: #582985;
+        background-image: url("/assets/FE3.png");
     }
+    main {
+        color: #fff;
+        font-family: ProximaNovaSoft-Bold;
+    }
+    .btn-3 {
+        width: 40ch;
+        margin: 0 auto;
+        display: block;
+        text-transform: uppercase;
+    }
+    .header, .div-user {
+        display: inline-block;
+        width: 100%;
+    }
+    .header {
+        margin-bottom: 5em;
+    }
+    h1 {
+        color: #d8b212;
+        text-transform: uppercase;
+        font-size: 5em;
+        text-shadow: -.1em 0 #097e74;
+        width: 7em;
+        letter-spacing: .2em;
+        float: left;
+        transform: rotate(-5deg);
+    }
+    p {
+        display: block;
+        position: relative;
+        top: 5em;
+        width: 100%;
+        left: -9em;
+        font-size: 1em;
+        text-transform: uppercase;
+    }
+
 </style>
 <% end %>
 
 <% content_for :main do %>
 <div class="container">
-    <h1>Crie sua conta</h1>
+   <div class="header">
+        <h1>Crie sua conta</h1>
+        <p>
+            Candidato(a) <br>
+            Por favor informe seus dados para darmos andamento a ferramenta e confirmar seus dados. O preenchimento dessas informações é importante para dar continuidade ao nosso trabalho :)
+        </p>
+       
+   </div>
     <div class="form-content">
         <% 
             erros = flash[:erros];
@@ -76,7 +121,7 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <%= f.submit (@candidate.finished_at ? "Salvar os dados!" : "E ai, vamos lá? Faça o seu questionário!"), {class: "btn btn-save"} %>                
+                    <%= f.submit (@candidate.finished_at ? "Salvar os dados!" : "E ai, vamos lá? Faça o seu questionário!"), {class: "btn btn-3"} %>                
                 </div>
             </div>
         <% end %>

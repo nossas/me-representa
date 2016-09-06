@@ -6,19 +6,9 @@ body, option {
     text-align: right;
     font-weight: bolder;
 }        
-.btn-save, .control-label {
+.control-label {
     text-transform: uppercase;
 }        
-.btn-save {
-    background-color: #582985;
-    font-weight: bolder;
-    color: #097e74;
-    max-width: 100%;
-    white-space: normal;
-    word-wrap: break-word;
-    display: block;
-    margin: 0 auto;
-}
 .buttons {
     width: 100%;
     display: inline-block;
@@ -37,6 +27,6 @@ body, option {
         margin-bottom: 2em;
     }
     .buttons {
-        padding-top: 4em;
+        padding-top: 2em;
     }
 }
