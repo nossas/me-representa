@@ -1,6 +1,9 @@
 <% content_for :head do %>
     <title>Faça seu cadastro</title>
     <link rel="stylesheet" href="/assets/questionnaire.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.theme.css">
 <style>
     body {
         background-image: url("/assets/FE3.png");
@@ -31,15 +34,28 @@
     .intro {
         margin-bottom: 2em;
     }
-    .alert P {
+    .alert p {
         margin: 0;
     }
     .alert {
         margin-bottom: 3em;
     }
+    #busca_cidade, #busca_cidade~input {
+        display: none;
+    }
+    #busca_cidade:checked~input {
+        display: block;
+    }
+    #busca_cidade + label {
+        cursor: pointer;
+        color: #d8b212;
+    };
     @media screen and (min-width: 500px) {
         h1 {    
             font-size: 4em;
+        }
+        #busca_cidade + label {
+            display: inline;
         }
     }
     @media screen and (min-width: 800px) {
@@ -134,10 +150,16 @@
                         <%= f.text_field :number, {class: "form-control", required: "required"} %>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row ">
                     <%= f.label :city_id, "Confirmar município de voto*", {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">
+                        <%= f.hidden_field :city_id %>
+                        <span class="city_name" id="city_name"><%= @candidate.city ? @candidate.city.name : "<< Nenhuma cidade selecionada >>"  %></span>
+                        <input type="checkbox" id="busca_cidade"> <label for="busca_cidade">Buscar Cidade</label>
+                        <input type="text" id="edit_busca_cidade" class="form-control">
+                        <% if false %>
                         <%= f.select :city_id, City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", c.id]}, {},  {class: "form-control"} %>
+                        <% end %>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -154,4 +176,43 @@
         <% end %>
     </div>    
 </div>
+<% end %>
+
+
+<% content_for :scripts do %>
+  <script src="/assets/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#edit_busca_cidade" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+            url: "/cities?match=" + request.term
+            , method: "get"
+            , accept: "application/json"
+            , success: function( data ) { //data.map(a=>{"label": a[1], "value": a[0]}
+                var objetos  = data.map(function(cidade){
+                    return {
+                        value: cidade[0]
+                        , label: cidade[1]
+                    };
+                });
+                response( data.length === 1 && data[ 0 ].length === 0 ? [] : objetos );
+            }
+        })
+      },
+      minLength: 2  ,
+      select: function( event, ui ) {
+        $("#candidate_city_id").val(ui.item.value);
+        $("#city_name").text(ui.item.label);
+        $("#edit_busca_cidade").val('');
+        $("#busca_cidade").prop('checked', false);
+        return false;
+      }
+      , focus: function( event, ui ) {
+        event.preventDefault();
+        $(event.target).val(ui.item.label);
+      }
+    } );
+  } );
+  </script>
 <% end %>
