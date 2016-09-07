@@ -3,8 +3,8 @@
     <link rel="stylesheet" href="/assets/questionnaire.css">
 <style>
     body {
-        background-color: #582985;
         background-image: url("/assets/FE3.png");
+        background-color: #582985;
     }
     main {
         color: #fff;
@@ -15,36 +15,56 @@
         margin: 0 auto;
         display: block;
         text-transform: uppercase;
-    }
-    .header, .div-user {
-        display: inline-block;
-        width: 100%;
-    }
-    .header {
-        margin-bottom: 5em;
+        max-width: 100%;
+        white-space: normal;
     }
     h1 {
         color: #d8b212;
         text-transform: uppercase;
-        font-size: 5em;
         text-shadow: -.1em 0 #097e74;
+        font-size: 3em;
         width: 7em;
         letter-spacing: .2em;
-        float: left;
         transform: rotate(-5deg);
+        margin: 0 auto .5em auto;
     }
-    p {
-        display: block;
-        position: relative;
-        top: 5em;
-        width: 100%;
-        left: -9em;
-        font-size: 1em;
-        text-transform: uppercase;
+    .intro {
+        margin-bottom: 2em;
     }
-    .explicacao {
-        font-size: .8em;
-        position: initial;
+    @media screen and (min-width: 500px) {
+        h1 {    
+            font-size: 4em;
+        }
+    }
+    @media screen and (min-width: 800px) {
+        h1 {    
+            font-size: 5em;
+        }
+    }
+    @media screen and (min-width: 900px) {
+        .header {
+            margin-bottom: 5em;
+        }
+        .header, .div-user {
+            display: inline-block;
+            width: 100%;
+        }
+        h1 {
+            float: left;
+        }
+        .intro {
+            display: block;
+            top: 6em;
+            width: 100%;
+            left: -10em;
+            font-size: 1em;
+            text-transform: uppercase;
+            position: relative;
+        }
+        .explicacao {
+            font-size: .8em;
+            position: initial;
+        }
     }
 </style>
 <% end %>
@@ -53,7 +73,7 @@
 <div class="container">
    <div class="header">
         <h1>Crie sua conta</h1>
-        <p>
+        <p class="intro">
             Por favor, informe seus dados para criar seu perfil na nossa plataforma:
         </p>
        
@@ -75,14 +95,14 @@
         <%= form_for @candidate do |f| %>
             <div id="form-horizontal">
                 <div class="form-group row">
-                    <%= f.label :nickname, "Nome de urna *",  {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
+                    <%= f.label :nickname, "Nome de urna *",  {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
                         <%= f.text_field :nickname, {class: "form-control", required: "required"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :born_at, "Data de nascimento *", {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
+                    <%= f.label :born_at, "Data de nascimento *", {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
                         <% if @candidate.born_at %>
                         <%= f.text_field :born_at, {value: @candidate.born_at.strftime("%d/%m/%Y"), class: "form-control date-input", required: "required"} %>
                         <% else %>
@@ -91,32 +111,32 @@
                     </div>
                </div>
                 <div class="form-group row">
-                    <%= f.label :cpf, "CPF *",  {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
+                    <%= f.label :cpf, "CPF *",  {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
                         <%= f.text_field :cpf, {class: "form-control cpf-input", required: "required"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :party_id, "Partido *", {class: "col-sm-2 control-label", required: "required"} %>
-                    <div class="col-sm-10">
-                        <%= f.select :party_id, Party.all.sort{|a,b| a.symbol <=> b.symbol }.collect { |p| [ "#{p.symbol} - #{p.number}", p.id ] }, {},  {class: "form-control col-sm-10"} %>
+                    <%= f.label :party_id, "Partido *", {class: "col-md-2 control-label", required: "required"} %>
+                    <div class="col-md-10">
+                        <%= f.select :party_id, Party.all.sort{|a,b| a.symbol <=> b.symbol }.collect { |p| [ "#{p.symbol} - #{p.number}", p.id ] }, {},  {class: "form-control col-md-10"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :number, "Número de urna *",  {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
+                    <%= f.label :number, "Número de urna *",  {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
                         <%= f.text_field :number, {class: "form-control", required: "required"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :city_id, "Confirmar município de voto*", {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
+                    <%= f.label :city_id, "Confirmar município de voto*", {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
                         <%= f.select :city_id, City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", c.id]}, {},  {class: "form-control"} %>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <%= f.label :bio, "Escrever mini bio",  {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
+                    <%= f.label :bio, "Escrever mini bio",  {class: "col-md-2 control-label"} %>
+                    <div class="col-lg-10">
                         <%= f.text_area :bio, {class: "form-control"} %>
                     </div>
                 </div>
