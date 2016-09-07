@@ -31,6 +31,12 @@
     .intro {
         margin-bottom: 2em;
     }
+    .alert P {
+        margin: 0;
+    }
+    .alert {
+        margin-bottom: 3em;
+    }
     @media screen and (min-width: 500px) {
         h1 {    
             font-size: 4em;
@@ -42,6 +48,9 @@
         }
     }
     @media screen and (min-width: 900px) {
+        .alert {
+            margin-bottom: 6em;
+        }
         .header {
             margin-bottom: 5em;
         }
@@ -83,13 +92,10 @@
             erros = flash[:erros];
             if erros != nil 
         %>
-        <div class="erros">
-            <span>Erros:</span>
-            <ul>
+        <div class="alert alert-danger" role="alert">
                 <% for k in erros.keys do %>
-                    <li><%= erros[k]  %></li>
+                    <p><%= "#{k} - #{erros[k]}" %></p>
                 <% end %>
-            </ul>
         </div>
         <% end %>
         <%= form_for @candidate do |f| %>
