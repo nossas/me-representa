@@ -1,7 +1,24 @@
-<% content_for :header do %>
+<% content_for :head do %>
     <style>
         body {
             background-image: url("/assets/FE4.png");
+        }
+        header {
+            padding: 1em;
+            border-bottom: 1px solid darkgray;
+        }
+        .links {
+            color: #582985;
+            font-weight: bolder;
+            font-size: 1.1em;
+            display: inline-block;
+        }
+        .links:hover {
+            color: #582985;
+            font-size: 1.2em;
+            text-decoration: none;
+            transform: rotate(360deg);
+            transition: font-size 1s, transform 2s;
         }
         h1 {
             color: #d8b212;
@@ -28,6 +45,10 @@
             color: #fff;
         }
     </style>
+<% end %>
+
+<% content_for :header do %>
+    <%= link_to "Página Principal", root_path, {class: "links"} %>
 <% end %>
 
 <% content_for :main do %>

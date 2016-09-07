@@ -8,40 +8,24 @@
         background-image: url('/assets/FE1.png');
         background-size: cover;
     }
+    .links {
+        color: #d8b212;
+        font-size: 1em;
+        display: inline-block;
+    }
+    .links:hover {
+        color: #d8b212;
+        font-size: 1.1em;
+        text-decoration: none;
+        transform: rotate(360deg);
+        transition: font-size 1s, transform 2s;
+    }
     img.logo {
         max-width: 100%;
-    }
-    header p, header nav, h2 {
-        display: inline;
-        text-transform: uppercase;
-        font-weight: bolder;
-    }
-    .google {
-        background-image: url("/assets/google.svg");
-    }
-    .twitter {
-        background-image: url("/assets/twitter.svg");
-    }
-    .face {
-        background-image: url("/assets/face.svg");
-    }
-    header a {
-        display: inline-block;
-        background-repeat: no-repeat;
-        background-size: 30px;        
-        overflow: hidden;
-        text-indent: -30ch;
-        width: 30px;
-        height: 30px;
-        top: -.6em;
-        position: relative;
     }
     header {
         padding: 1em;
         border-bottom: 1px solid #7e5c9e;
-    }
-    header nav {
-        float: right;
     }
     .content>h2 {
         display: block;
@@ -72,9 +56,6 @@
         body {
             font-size: 1rem;
         }
-        header a {
-            top: -.4em;
-        }
     }
     @media screen and (min-width: 991px) {
         body {
@@ -103,14 +84,7 @@
 </style>
 <% end %>
 <% content_for :header do %>
-<!--
-    <p>Acompanhe de pertinho</p>
-    <nav>
-        <a href="#" class="face">Facebook</a>
-        <a href="#" class="twitter">Twitter</a>
-        <a href="#" class="google">Google+</a>
-    </nav>
--->
+    <%= link_to "Sobre nós", about_path, {class: "links"} %>
 <% end %>
 <% content_for :main do %>
     <div class="container">
