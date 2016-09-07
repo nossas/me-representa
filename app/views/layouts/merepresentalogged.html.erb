@@ -23,7 +23,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <%= yield :menu %>
                         <li>
-                            <a href="#" id="sair">Sair</a>
+                            <a href="#" id="sair" class="dropdown-item">Sair</a>
                             <%= form_tag(session_path(session[:user_id]), method: :delete) do %><% end %>
                         </li>
                     </ul>

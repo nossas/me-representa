@@ -55,7 +55,7 @@
 <% end %>
 
 <% content_for :menu do %>
-    <li><%= link_to "Perfil no #MeRepresenta", candidate_path(@candidate.id) %></li>
+    <li><%= link_to "Perfil no #MeRepresenta", candidate_path(@candidate.id) % class="dropdown-item"></li>
 <% end %>
 <% content_for :main do %>
 <div class="container">

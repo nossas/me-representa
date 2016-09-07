@@ -154,9 +154,9 @@
 
 <% content_for :menu do %>
     <% if session[:candidate_id] %>
-        <li><a href="<%= edit_candidate_path(@current_user.id) %>">Perfil no #MeRepresenta</a></li>
+        <li><a href="<%= edit_candidate_path(@current_user.id) %>" class="dropdown-item">Perfil no #MeRepresenta</a></li>
     <% else %>
-        <li><a href="<%= new_answer_path %>">Refazer questionário</a></li>
+        <li><a href="<%= new_answer_path %>" class="dropdown-item">Refazer questionário</a></li>
     <% end %>
 <% end %>
 
