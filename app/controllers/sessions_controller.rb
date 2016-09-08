@@ -33,7 +33,11 @@ class SessionsController < ApplicationController
             session[:candidate_id] = @auth.user.id
             session[:user_id] = @auth.user.id
         else
-            redirect_to(new_answer_path)
+            if (@auth.user.city)
+                redirect_to(new_answer_path)
+            else
+                redirect_to(edit_user_path(@auth.user))
+            end
         end
     end    
   end

@@ -23,7 +23,12 @@ class MainController < ApplicationController
                 reset_session
                 redirect_to(root_path)
             else
-                redirect_to new_answer_path;
+                user = User.find session[:user_id]
+                if user.city_id 
+                    redirect_to new_answer_path;
+                else
+                    redirect_to edit_user_path(user);
+                end
             end
         end
     end
