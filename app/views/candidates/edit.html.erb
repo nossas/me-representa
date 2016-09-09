@@ -160,9 +160,6 @@
                         <span class="city_name" id="city_name"><%= @candidate.city ? @candidate.city.name : "<< Nenhuma cidade selecionada >>"  %></span>
                         <input type="checkbox" id="busca_cidade"> <label for="busca_cidade">Buscar Cidade</label>
                         <input type="text" id="edit_busca_cidade" class="form-control">
-                        <% if false %>
-                        <%= f.select :city_id, City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", c.id]}, {},  {class: "form-control"} %>
-                        <% end %>
                     </div>
                 </div>
                 <div class="form-group row">

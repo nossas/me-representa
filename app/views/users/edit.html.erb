@@ -1,9 +1,19 @@
 <% content_for :head do %>
     <title>Faça seu cadastro</title>
     <link rel="stylesheet" href="/assets/questionnaire.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.theme.css">
 <style>
     body, option {
         background-color: #097e74;
+        background-image: url('/assets/FC3.png');
+    }
+    .btn-1 {
+        margin: 0 auto;
+        display: block;
+        max-width: 100%;
+        white-space: normal;
     }
     .container {
         margin-top: 2em;
@@ -15,27 +25,65 @@
     h1, p {
         font-family: ProximaNovaSoft-Bold;
     }
+    .form-content {
+        width: 100%;
+        margin-bottom: 2em;
+    }
     h1 {
         color: #d8b212;
-        font-size: 6em;
+        display: table;
+        margin: auto;
+        font-size: 4em;
         text-shadow: -.1em 0 #582985;
         transform: rotate(-2deg);
         text-transform: uppercase;
-        float: left;
-        width: 40%;
     }
+
     p {
         color: #582985;
         display: block;
-        position: relative;
-        top: 6em;
-        width: 100%;
-        left: -4em;
-        font-size: 1.2em;
         text-transform: uppercase;
+        margin: 2em 0 1em 0;
+        padding: 0 1em;
     }
-    .form-content {
-        width: 100%;
+    #busca_cidade, #busca_cidade~input {
+        display: none;
+    }
+    #busca_cidade:checked~input {
+        display: block;
+    }
+    #busca_cidade + label {
+        cursor: pointer;
+        color: #d8b212;
+    }
+    #city_name {
+        color: #fff;
+        font-weight: bold;
+        margin-left: .8em;
+    }
+    @media screen and (min-width: 1000px) {
+        h1 {
+            position: relative;
+            font-size: 6em;
+            float: left; 
+            width: 58%; 
+            left: .5em;
+        }
+        p {
+            position: relative; 
+            top: 5em; 
+            width: 100%; 
+            left: -6em; 
+            font-size: 1em; 
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        h1 {
+            width: 40%;
+        }
+        p {
+            left: -3em;
+        }
     }
 </style>
 <% end %>
@@ -62,37 +110,78 @@
         <% end %>
         <div id="div-user form-horizontal">
             <%= form_for @user do |f| %>
-                <div class="form-group">
-                    <%= f.label :name, {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
+                <div class="form-group row">
+                    <%= f.label :name, {class: "col-lg-2 control-label"} %>
+                    <div class="col-lg-10">
                         <%= f.text_field :name, {class: "form-control"} %>
                     </div>
                 </div>
-                <div class="form-group">
-                    <%= f.label :email, "Email", {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
-                        <%= f.text_field :email, {class: "form-control col-sm-10"} %>
+                <div class="form-group row">
+                    <%= f.label :email, "Email", {class: "col-lg-2 control-label"} %>
+                    <div class="col-lg-10">
+                        <%= f.text_field :email, {class: "form-control col-lg-10"} %>
                     </div>
                 </div>
-                <div class="form-group">
-                    <%= f.label :city_id, "Cidade em que vota *", {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
-                        <%= f.select :city_id, @cities, {},  {class: "form-control col-sm-10"} %>
+                <div class="form-group row">
+                    <%= f.label :city_id, "Cidade em que vota *", {class: "col-lg-2 control-label"} %>
+                    <div class="col-lg-10">
+                        <%= f.hidden_field :city_id %>
+                        <span class="city_name" id="city_name"><%= @user.city ? @user.city.name : "<< Nenhuma cidade selecionada >>"  %></span>
+                        <input type="checkbox" id="busca_cidade"><label for="busca_cidade">Buscar Cidade</label>
+                        <input type="text" id="edit_busca_cidade" class="form-control">
                     </div>
                 </div>
-                <div class="form-group">
-                    <%= f.label :mobile_phone, "Celular", {class: "col-sm-2 control-label"} %>
-                    <div class="col-sm-10">
-                        <%= f.text_field :mobile_phone, {class: "form-control col-sm-10", pattern: "\\d{8,11}"} %>
+                <div class="form-group row">
+                    <%= f.label :mobile_phone, "Celular", {class: "col-lg-2 control-label"} %>
+                    <div class="col-lg-10">
+                        <%= f.text_field :mobile_phone, {class: "form-control col-lg-10", pattern: "\\d{8,11}"} %>
                     </div>
                 </div>
                 <%= f.hidden_field :candidate_id %>
                 <%= f.hidden_field :picture %>
                 <div class="buttons">
-                    <%= f.submit "E ai, vamos lá? Faça o seu questionário!", {class: "btn btn-save"} %>                
+                    <%= f.submit "E ai, vamos lá? Faça o seu questionário!", {class: "btn btn-1"} %>
                 </div>
             <% end %>
         </div>
     </div>    
 </div>
+<% end %>
+
+<% content_for :scripts do %>
+  <script src="/assets/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#edit_busca_cidade" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+            url: "/cities?match=" + request.term
+            , method: "get"
+            , accept: "application/json"
+            , success: function( data ) { //data.map(a=>{"label": a[1], "value": a[0]}
+                var objetos  = data.map(function(cidade){
+                    return {
+                        value: cidade[0]
+                        , label: cidade[1]
+                    };
+                });
+                response( data.length === 1 && data[ 0 ].length === 0 ? [] : objetos );
+            }
+        })
+      },
+      minLength: 2  ,
+      select: function( event, ui ) {
+        $("#user_city_id").val(ui.item.value);
+        $("#city_name").text(ui.item.label);
+        $("#edit_busca_cidade").val('');
+        $("#busca_cidade").prop('checked', false);
+        return false;
+      }
+      , focus: function( event, ui ) {
+        event.preventDefault();
+        $(event.target).val(ui.item.label);
+      }
+    } );
+  } );
+  </script>
 <% end %>

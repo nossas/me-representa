@@ -1,6 +1,8 @@
 CariocaPergunta::Application.routes.draw do
   match '/auth/:provider/callback',   :to => 'sessions#create'
 
+  get '/dataclip/candidatos/responderam', :to => 'dataclip#responderam', :as => :dataclip_who_answer
+
   post '/candidates/check', to: 'candidates#check', as: :candidates_check
   resources :likes, only: [:create, :update]
 
