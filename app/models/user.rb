@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   belongs_to :candidate
   belongs_to :city
   
-  validates :mobile_phone, length: { in: 8..11 }, numericality: { only_integer: true }, allow_blank: true
   validates_presence_of :email, :name
 
   before_save :corrige_dados
