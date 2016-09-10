@@ -101,7 +101,7 @@
         <% @current_user.answers.sort{|a,b| a.question_id-b.question_id }.each do |answer| %>
         <div class="question">
             <div class="answer">
-                <input type="checkbox" id="question-<%= answer.question_id %>" answer-id="<%= answer.id %>" >
+                <input type="checkbox" id="question-<%= answer.question_id %>" answer-id="<%= answer.id %>" <%= "checked" if answer.weight == 2 %> >
                 <label for="question-<%= answer.question_id %>">Me importo!</label>
             </div>
             <span class="question-title">
