@@ -253,7 +253,7 @@
                         if resposta_eleitor.count > 0
                             resposta_eleitor = resposta_eleitor[0]
                             if not session[:candidate_id]
-                                if resposta_eleitor.weight == 1 and answer.short_answer == "Sim"
+                                if resposta_eleitor.weight > 0 and answer.short_answer == "Sim"
                                     classe = "otima-resposta"
                                 elsif answer.short_answer == "Não"
                                     classe = "perigo"
