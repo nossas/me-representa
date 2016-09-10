@@ -1,7 +1,6 @@
 class Candidate < ActiveRecord::Base
   attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity, :city_id, :cpf, :electoral_title
 
-  validates :number, :token, :uniqueness => true
   validates :number, :party_id, :cpf, :born_at, :city_id, :presence => true
   validate :verify_tse_data
 
@@ -55,6 +54,8 @@ class Candidate < ActiveRecord::Base
   end
 
   def gang
+    # alterar aqui
+    
     Candidate.joins(:party).where("(candidates.party_id = ? OR parties.union_id = ?) AND candidates.id <> ?", self.party_id, self.party.union_id, self.id)
   end
 
