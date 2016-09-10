@@ -5,57 +5,9 @@
         background-image: url('/assets/FE3.png');
         color: #fff;
     }
-    input[type=radio] {
-        display: none;
-    }
-    .relevancia {
-        padding-top: .8em;
-    }
-    .resposta + span:after {
-        content: "\00a0";
-        background-image: url("/assets/rb0.svg");
-        width: 45px;
-        height: 38px;
-        background-size: 100%;
-        display: inline-block;
-        background-repeat: no-repeat;
-        margin: 0 .5em;        
-    }
-    .resposta:checked + span:after {
-        background-image: url("/assets/rb1.svg");
-    }
-    .importancia + span:before {
-        content: "\00a0";
-        background-image: url("/assets/rb20.svg");
-        width: 22px;
-        height: 22px;
-        background-size: 100%;
-        display: inline-block;
-        background-repeat: no-repeat;
-        margin: 0 .5em;        
-    }
-    .importancia:checked + span:before {
-        background-image: url("/assets/rb21.svg");
-    }
     .container {
         text-transform: uppercase;
         font-weight: bolder;
-    }
-    .relevancia, .opiniao, h1 {
-        position: relative;
-        color: #d8b212;
-    }
-    .relevancia:before {
-        content:""; 
-        background: white; 
-        position: absolute; 
-        top: -.3em; 
-        left: 4em; 
-        right: 4em; 
-        height: 1px; 
-    }
-    .relevancia label {
-        display: block;
     }
     h1 {
         text-shadow: -.05em -.02em #885c59;
@@ -74,17 +26,16 @@
         color: #d8b212;
     }
     .conteudo {
-/*        width: 90%;*/
-/*        font-size: .8em;*/
         margin: 0 auto;
     }
     .question-title:before {
-        content: '/ /';
+        content: '//';
         padding-right: .5em;
     }
-    .question-title {
-        display: block;
-        margin: 1em 0 .7em 0;
+    .question {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2em;
     }
     .btn-1-inv {
         opacity: .8;
@@ -94,39 +45,34 @@
         max-width: 100%;
         display: block;
     }
+    .answer {
+        margin-right: .8em;
+    }
+    .answer input {
+        display: none;
+    }
+    .answer label {
+        font-size: 0;
+    }
+    .answer>input+label:after {
+        content: "";
+        background-image: url("/assets/cb0.svg");
+        background-size: cover;
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+    }
+    .answer>input:checked+label:after {
+        background-image: url("/assets/cb1.svg");
+    }
     @media screen and (min-width: 500px) {
         h1 {
             font-size: 3.5em;
         }
-        .question-title {
-            clear: both;
-        }
-        .relevancia label {
-            display: inline;
-        }
     }
     @media screen and (min-width: 992px) {
-        .relevancia {
-            padding-top: 0;
-        }
         h1 {
             font-size: 5em;
-        }
-        .relevancia:before {
-            left: -1em;
-            width: 1px;
-            top: -.3em;
-            height: 2em;
-        }
-        .relevancia, .opiniao {
-            display: inline-block;
-        }
-        .opiniao label {
-            font-size: 1.4em;
-        }
-        .opiniao {
-            margin-right: 1em;
-            padding-right: 1em;
         }
     }
     @media screen and (min-width: 1200px) {
@@ -149,40 +95,18 @@
 
         <div class="alert alert-danger invisivel" id="alert">
           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          Não foi possível completar a operação, por favor recarregue a página.
+          <div id="msgErro"></div>
         </div>
 
-        <% @questions.truths.each do |question| %>
-        <% answer = current_user.answers.find_by_question_id(question.id) || Answer.new %>
-        <div class="question" answer-id="<%= answer.id %>" question_id="<%= question.id%>">
+        <% @current_user.answers.sort{|a,b| a.question_id-b.question_id }.each do |answer| %>
+        <div class="question">
+            <div class="answer">
+                <input type="checkbox" id="question-<%= answer.question_id %>" answer-id="<%= answer.id %>" >
+                <label for="question-<%= answer.question_id %>">Me importo!</label>
+            </div>
             <span class="question-title">
-                <%= question.text %>
-            </span>
-            
-            <div class="opiniao" o_answer="<%= answer.short_answer %>">
-                <label>
-                   <input type="radio" class="resposta ans<%= question.id%>" name="short_answer<%= question.id %>" value="Sim" <%= "checked" if answer.short_answer == "Sim" %>>
-                   <span>Sim</span>
-                </label>
-                <label>
-                   <input type="radio" class="resposta ans<%= question.id%>" name="short_answer<%= question.id %>" value="Não" <%= "checked" if answer.short_answer == "Não" %>>
-                    <span>Não</span>
-                </label>
-            </div>
-            <div class="relevancia" o_weight="<%= answer.weight%>">
-                <label>
-                   <input type="radio" class="importancia wei<%= question.id%>" name="weight<%= question.id %>" value="2" <%= "disabled" if answer.short_answer == nil %> <%= "checked" if answer.weight == 2 %>>
-                    <span>Muito Relevante</span>
-                </label>
-                <label>
-                   <input type="radio" class="importancia wei<%= question.id%>" name="weight<%= question.id %>" value="1" <%= "disabled" if answer.short_answer == nil %> <%= "checked" if answer.weight == 2 %>>
-                    <span>Relevante</span>
-                </label>
-                <label>
-                   <input type="radio" class="importancia wei<%= question.id%>" name="weight<%= question.id %>" value="0" <%= "disabled" if answer.short_answer == nil %> <%= "checked" if answer.weight == 2 %>>
-                    <span>Irrelevante</span>
-                </label>
-            </div>
+                <%= answer.question.text %>
+            </span>            
         </div>
         <% end %>
         <%= link_to "Encontrar candidaturas", user_parties_path(@current_user), {class: "btn btn-1-inv"} %>
@@ -191,56 +115,53 @@
 
 <% content_for :scripts do %>
 <script>
-    (function(){
-        function getShortAnswer(questionId) {
-            return $(".ans" + questionId + ":checked").val();
-        }
-        function getWeight(questionId) {
-            return $(".wei" + questionId + ":checked").val();
-        }
-        
-        var url = "<%= user_answers_path(@current_user) %>";
-        
-        var submit = function(questionId) {
-            var url_envio, method;
-            var obj = {
-                user_id: <%= @current_user.id %>
-                , <%= request_forgery_protection_token.to_s %>: "<%= form_authenticity_token %>"
-                , question_id: questionId
-                , short_answer: getShortAnswer(questionId)
-                , weight: getWeight(questionId)
+    var UserCall = function(restUrl, tokenName, token) {
+        var retorno = {
+            _url: restUrl + "/"
+            , _tokenName: tokenName
+            , _token: token
+            , bindElement: function ( elements, event ) {
+                $(elements).on(event, function() {
+                    checkbox = $(this);
+                    checkbox.attr("disabled", "disabled");
+                    dados = {
+                        weight: checkbox.prop("checked")?2:0
+                    }
+                    dados[retorno._tokenName] = retorno._token;
+                    $("#alert").addClass("invisivel");
+                    $.ajax({
+                        url: retorno._url + checkbox.attr("answer-id")
+                        , contentType: "application/json"
+                        , method: "PUT"
+                        , data: JSON.stringify (dados)
+                        , success: function(dados) {
+                            checkbox.removeAttr("disabled");
+                        }
+                        , error: function(dados) {
+                            checkbox.removeAttr("disabled");
+                            $("#alert").removeClass("invisivel");
+                            var msg;
+                            if (dados.status == 0)
+                                msg = "Não foi possível completar a operação, erro de comunicação com o site, por favor recarregue a página.";
+                            else {
+                                msg = "Erro de processamento";
+                                checkbox.prop("checked",! checkbox.prop("checked"));
+                            }
+                            $("#msgErro").text(msg);
+                        }
+                    });
+                });
             }
-            var c = $(".question[question_id="+questionId+"]");
-            $(".wei"+questionId+", .ans"+questionId).attr("disabled", "disabled");
-            if (c.attr("answer-id") != "") {
-                var aid = c.attr("answer-id");
-                obj["answer-id"] = aid;
-                url_envio = url + "/" + aid;
-                method = "put"
-            }
-            else {
-                method = "post";
-                url_envio = url;
-            }
-            $.ajax({
-                method: method
-                , contentType: "application/json"
-                , url: url_envio
-                , data: JSON.stringify(obj)
-                , success(data) {
-                    c.attr("answer-id", data.id);
-                    $(".wei"+questionId+", .ans"+questionId).removeAttr("disabled");
-                }
-                , error(data) {
-                    $("#alert").removeClass("invisivel");
-                }
-            });
-            console.log(obj);
-            //$(this).parent().parent().parent().submit();
         };
-        $(".question input").on("change", function(){
-            submit($(this).parent().parent().parent().attr("question_id"));
-        });
+        return retorno;
+    };
+
+    
+    (function(){
+        var userCall = UserCall( "<%= user_answers_path(@current_user) %>", "<%= request_forgery_protection_token.to_s %>", "<%= form_authenticity_token %>" );
+
+        userCall.bindElement(".answer input", "change");
     })();
+
 </script>
 <% end %>
