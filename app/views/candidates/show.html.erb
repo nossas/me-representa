@@ -96,9 +96,50 @@
         .votes-int p {
             font-size: .6em;
         }
+
+        .respostas, .puxar {
+            margin: 6em 0;
+        }
+        .brother, .respostas table {
+            width: 100%;
+            color: #fff;
+            border-spacing: .3em;
+            border-collapse: separate;
+            text-transform: uppercase;
+            font-family: ProximaNovaSoft-Bold;
+        }
+        .respostas td {
+            background-color: #532985;
+        }
+        .pergunta:before {
+            content: "//";
+            padding-right: .5em;
+        }
+        .resposta.perigo {
+            font-size: 1.1em;
+        }
+        .otima-resposta {
+            color: #71e7dc;
+        }        
+        .perigo {
+            color: #d8b212;
+        }
+        .pergunta, .resposta {
+            padding: .5em;
+        }
+        .brother .candidato {
+            width: 100%;
+        }
+        .brother .partido {
+            text-align: right;
+        }
         @media screen and (min-width:500px) {
             main {
                 font-size: 1rem;
+            }
+            .pergunta, .resposta {
+                padding: 1em 3em;
+
             }
         }
         @media screen and (min-width:800px) {
@@ -174,15 +215,6 @@
             <span class="info-text party">
                 Partido: <%= @candidate.party.symbol %>
             </span>
-            <span class="info-text age">
-                Idade: <%= ((Date.today - @candidate.born_at)/365).to_i if @candidate.born_at %>
-            </span>
-            <span class="info-text politician">
-                Reeleição: <%= @candidate.politician? ? "Sim" : "Não" %>
-            </span>
-            <span class="info-text schoolarship">
-                Escolaridade: <%= @candidate.scholarity %>
-            </span>
             <span class="votes-int">
                 <% if false  %>
                 <%= User.where("users.candidate_id = #{@candidate.id}" ).count %> intenções de voto
@@ -207,26 +239,58 @@
             <%= @candidate.bio %>
         </div>
    </div>
-   
-    <% if false  %>
+
+
+    <div class="respostas">
+        <h2>Conheça suas respostas ao nosso questionário</h2>
+
+        <table>
+            <tbody>
+                <% @candidate.answers.sort{|a, b| a.question_id - b.question.id}.each do |answer| %>
+                    <%  
+                        resposta_eleitor = @current_user.answers.select{|a| a.question_id == answer.question_id}
+                        classe = ""
+                        if resposta_eleitor.count > 0
+                            resposta_eleitor = resposta_eleitor[0]
+                            if resposta_eleitor.weight == 1 and answer.short_answer == "Sim"
+                                classe = "otima-resposta"
+                            elsif answer.short_answer == "Não"
+                                classe = "perigo"
+                            end
+                        end
+                    %>
+                    <tr>
+                        <td class="pergunta <%= classe %>"><%= answer.question.text %></td>
+                        <td class="resposta <%= classe %>"><%= answer.short_answer %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+       
     <div class="puxar">
         <div class="title">
-            <h3>Quem eu posso puxar ?</h3>
+            <h3>Quem posso puxar ?</h3>
             <h5>Veja alguns candidatos que podem vir a tomar posse se você votar em mim.</h5>
         </div>
 
-        <% @candidate.gang.order("random()").limit(15).each do |brother| %>
+        <% @candidate.gang.each do |brother| %>
         <div class="brother">
-            <span class="candidato">
-                <%= link_to brother.nickname, brother %>
-            </span>
-            <span class="partido">
-                <%= brother.party.symbol %>
-            </span>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="candidato">
+                            <%= brother.name %>                            
+                        </td>
+                        <td class="partido">
+                            <%= brother.party.symbol %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <% end %>
     </div>
-    <% end %>
     
     <% if not session[:candidate_id]%>
     <%= link_to "Voltar aos candidatos", url_for(:back) || user_party_candidates(@current_user, @candidate.party), :class => "btn btn-2" %>

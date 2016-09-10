@@ -54,9 +54,10 @@ class Candidate < ActiveRecord::Base
   end
 
   def gang
-    # alterar aqui
-    
-    Candidate.joins(:party).where("(candidates.party_id = ? OR parties.union_id = ?) AND candidates.id <> ?", self.party_id, self.party.union_id, self.id)
+    TseData.joins(:party)
+      .where("tse_data.city_id = #{city_id} and tse_data.male='true'")
+      .order("(100 - extract(year from age(tse_data.born_at))) * parties.score, parties.score")
+      .limit(10)
   end
 
   def verify_tse_data
