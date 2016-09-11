@@ -74,6 +74,7 @@ class AnswersController < ApplicationController
           a.save
         end
       end
+      @current_user = User.find @current_user.id
       new! { return render(:file => "answers/new_for_user") }
     end
   end
