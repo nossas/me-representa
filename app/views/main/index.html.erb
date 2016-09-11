@@ -37,20 +37,30 @@
         color: #fff;
         padding: 0 2em 0 1em;
     }
-    .btn  {
-        width: 48%;
-        color: #000;
-        text-transform: uppercase;
-    }
-    .btn1 {
-        background-color: #097e74;
-        float: left;
-    }
-    .btn2 {
-        background-color: #d8b212;
+    .botao {
         display: block;
         width: 40ch;
         max-width: 100%;
+        margin: 1.5em auto;
+    }
+    .botao span {
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+    .btn  {
+        /*width: 48%;*/
+        color: #000;
+        text-transform: uppercase;
+        width: 40ch;
+        max-width: 100%;
+    }
+    .btn1 {
+        background-color: #097e74;
+        /*float: left;*/
+    }
+    .btn2 {
+        background-color: #d8b212;
     }
     @media screen and (min-width: 360px) {
         body {
@@ -96,11 +106,14 @@
             <p>Se você é eleitor/a, poderá acessar a nossa lista de candidaturas a partir do dia 15 de setembro!</p>
             
             <% if false or true %>
-            <%= link_to "Eleitor(a)", facebook_auth_path({type: "user"}), {class:"btn btn1"} %>
+            <div class="botao">
+                <%= link_to "Eleitor(a)", facebook_auth_path({type: "user"}), {class:"btn btn1"} %>
+                <span>Quero escolher alguém ideal para vereador(a)!</span>
+            </div>
             <% end %>
             <div class="botao">
                 <%= link_to "Sou candidato/a", facebook_auth_path({type: "candidate"}), {class: "btn btn2"} %>
-                Quero  divulgar minha candidatura!
+                <span>Quero  divulgar minha candidatura!</span>
             </div>
         </div>
     </div>
