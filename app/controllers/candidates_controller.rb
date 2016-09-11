@@ -72,6 +72,11 @@ class CandidatesController < ApplicationController
       
   end
 
+  def show
+    @candidate = Candidate.find params[:id]
+    render layout: "merepresentaunlogged" if not session[:user_id]
+  end
+
   def update
     update! do |success, failure|
       success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }

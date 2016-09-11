@@ -1,6 +1,10 @@
 <% content_for :head do %>
     <title>Perfil de Candidato</title>
     <style>
+        .container {
+            margin-top: 2em;
+            margin-bottom: 2em;
+        }
         #votar, #votar img {
             background-color: #532985;
             border: none;
@@ -221,7 +225,7 @@
                 <% end %>
                 <p>* A partir do dia 15 de setembro, eleitores poderão acessar a plataforma e declarar suas intenções de voto.</p>
             </span>
-            <% if ! session[:candidate_id] %>
+            <% if ! session[:candidate_id] and  session[:user_id] %>
                 <% if @candidate.id == @current_user.candidate_id %>
                     <img src="/assets/c1.svg" alt="Vou votar" id="votar">
                 <% else %>
@@ -248,15 +252,17 @@
             <tbody>
                 <% @candidate.answers.sort{|a, b| a.question_id - b.question.id}.each do |answer| %>
                     <%  
-                        resposta_eleitor = @current_user.answers.select{|a| a.question_id == answer.question_id}
-                        classe = ""
-                        if resposta_eleitor.count > 0
-                            resposta_eleitor = resposta_eleitor[0]
-                            if not session[:candidate_id]
-                                if resposta_eleitor.weight > 0 and answer.short_answer == "Sim"
-                                    classe = "otima-resposta"
-                                elsif answer.short_answer == "Não"
-                                    classe = "perigo"
+                        if session[:user_id]
+                            resposta_eleitor = @current_user.answers.select{|a| a.question_id == answer.question_id}
+                            classe = ""
+                            if resposta_eleitor.count > 0
+                                resposta_eleitor = resposta_eleitor[0]
+                                if not session[:candidate_id]
+                                    if resposta_eleitor.weight > 0 and answer.short_answer == "Sim"
+                                        classe = "otima-resposta"
+                                    elsif answer.short_answer == "Não"
+                                        classe = "perigo"
+                                    end
                                 end
                             end
                         end
@@ -294,7 +300,7 @@
         <% end %>
     </div>
     
-    <% if not session[:candidate_id]%>
+    <% if not session[:candidate_id] and session[:user_id]%>
     <%= link_to "Voltar aos candidatos", url_for(:back) || user_party_candidates(@current_user, @candidate.party), :class => "btn btn-2" %>
     <% end %>
 </div>
