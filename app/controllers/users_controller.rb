@@ -1,6 +1,6 @@
 #coding: utf-8
 class UsersController < ApplicationController
-  layout "merepresentalogged", :only => [:edit] 
+  layout "merepresentalogged"
 
   inherit_resources
   load_and_authorize_resource
@@ -43,6 +43,24 @@ class UsersController < ApplicationController
         @user.errors.keys.each {|k| msgs[k] = @user.errors[k].join("; ") }
         flash[:erros] = msgs
         redirect_to :back
+      }
+    end
+  end
+
+  def matchup
+    @user = User.find params[:user_id]
+    if params[:first] 
+      @mathing = @user.matches params[:first] 
+    else
+      @mathing = @user.matches
+    end
+    p @mathing
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => @mathing.map{|val| {
+            :id => val["id"], :name => val["name"], :score => @user.percent_care(val["score"].to_i), 
+            :party_symbol => val["party_symbol"], :union => val["union"]} }
       }
     end
   end

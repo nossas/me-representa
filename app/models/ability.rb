@@ -19,6 +19,7 @@ class Ability
         a.responder = user
       end
       can :update, User
+      can :matchup, User
     end
 
 

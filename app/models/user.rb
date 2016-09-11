@@ -21,6 +21,37 @@ class User < ActiveRecord::Base
           )
   end
 
+  def percent_care(qtde)
+    qtde * 100 / answers.select{|a| a.weight > 0}.count
+  end
+
+  def matches(first_record = 0, quantity = 10)
+    Candidate.
+     select(
+       %Q{
+        (
+          select
+              count(*)
+            from 
+              answers ca 
+              inner join
+                answers ua
+                on (ua.responder_id = #{id}) and (ca.question_id = ua.question_id) and (ua.responder_type = 'User') and (ua.weight>0)
+            where 
+              ca.responder_id = candidates.id and ca.responder_type='Candidate' and ca.short_answer = 'Sim'
+        ) as score
+        , candidates.id
+        , candidates.name
+        , parties.symbol as party_symbol
+        , (select u.name from parties_unions pu inner join unions u on pu.union_id = u.id where pu.party_id = candidates.party_id and u.city_id = candidates.city_id) as union 
+        }).
+     joins(:party).
+     where("candidates.finished_at is not null and candidates.city_id = #{city_id}").
+     offset(first_record).
+     limit(quantity).
+     order("2 desc")
+  end
+
   private
 
   def corrige_dados

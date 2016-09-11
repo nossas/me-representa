@@ -1,7 +1,7 @@
 CariocaPergunta::Application.routes.draw do
   match '/auth/:provider/callback',   :to => 'sessions#create'
 
-  get '/dataclip/candidatos/responderam', :to => 'dataclip#responderam', :as => :dataclip_who_answer
+  get '/dataclip/candidatos/nresponderam', :to => 'dataclip#responderam', :as => :dataclip_who_answer
 
   post '/candidates/check', to: 'candidates#check', as: :candidates_check
   resources :likes, only: [:create, :update]
@@ -26,6 +26,7 @@ CariocaPergunta::Application.routes.draw do
 #  end
 
   resources :users, only: [:index, :new, :create, :update, :edit] do
+    get "matchup", :to => "users#matchup" 
     resources :answers, except: [:index, :new, :destroy]
     resources :parties, :unions, only: [:index] do
       resources :candidates
