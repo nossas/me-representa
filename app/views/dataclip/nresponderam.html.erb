@@ -19,7 +19,7 @@
 <% content_for :main do %>
 	<div class="container">
 		<h1>Candidatos Registrados no Sistema #MeRepresenta</h1>
-		<%= form_tag dataclip_who_answered_path, method: :get do %>
+		<%= form_tag dataclip_who_didnt_answered_path, method: :get do %>
 			<div class="form-group">
 				<input type="hidden" name="city_id" id="city_id">
 				<label for="cidade">Município:</label>
@@ -35,6 +35,7 @@
 						<th colspan="8"><%= "#{@city.name}, #{@city.state}" %></th>
 					</tr>
 					<tr>
+						<th>nome</th>
 						<th>nome urna</th>
 						<th>código partido</th>
 						<th>sigla</th>
@@ -42,43 +43,42 @@
 						<th>email</th>
 						<th>cidade</th>
 						<th>uf</th>
-						<th>Respondeu Tudo</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% @candidates.each do |c| %>
 					<tr>
 						<td>
-							<%= c[:nickname] %>
+							<%= c.name %>
 						</td> 
 						<td>
-							<%= c[:party_id] %>
+							<%= c.nickname %>
 						</td> 
 						<td>
-							<%= c[:party] %>
+							<%= c.party_id %>
 						</td> 
 						<td>
-							<%= c[:number] %>
+							<%= c.party.symbol %>
 						</td> 
 						<td>
-							<%= c[:email] %>
+							<%= c.number %>
 						</td> 
 						<td>
-							<%= c[:city] %>
+							<%= c.email %>
 						</td> 
 						<td>
-							<%= c[:state] %>
+							<%= c.city.name %>
 						</td> 
 						<td>
-							<%= c[:finished] %>
-						</td>
+							<%= c.city.state %>
+						</td> 
 					</tr>
 					<% end %>
 				</tbody>
 			</table>
-			<a href="<%= dataclip_who_answered_path(:city_id => @city_id, :format => "csv") %>" class="btn btn-primary">csv</a>
-			<a href="<%= dataclip_who_answered_path(:city_id => @city_id, :format => "xml") %>" class="btn btn-primary">xml</a>
-			<a href="<%= dataclip_who_answered_path(:city_id => @city_id, :format => "json") %>" class="btn btn-primary">json</a>
+			<a href="<%= dataclip_who_didnt_answered_path(:city_id => @city_id, :format => "csv") %>" class="btn btn-primary">csv</a>
+			<a href="<%= dataclip_who_didnt_answered_path(:city_id => @city_id, :format => "xml") %>" class="btn btn-primary">xml</a>
+			<a href="<%= dataclip_who_didnt_answered_path(:city_id => @city_id, :format => "json") %>" class="btn btn-primary">json</a>
 		<% end %>
 	</div>
 <% end %>

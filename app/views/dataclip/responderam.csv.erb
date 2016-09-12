@@ -1,6 +1,6 @@
-nome,nome urna,codigo partido,sigla,codigo urna,email,cidade,uf
+nome urna,codigo partido,sigla,codigo urna,email,cidade,uf,terminou de responder
 <%= CSV.generate do |csv|
 	@candidates.map do |c| 
-		csv << [c.name, c.nickname, c.party_id, c.party.symbol, c.number, c.email, c.city.name, c.city.state]
+		csv << [c[:nickname],c[:party_id],c[:party],c[:number],c[:email],c[:city],c[:city],c[:finished]]
 	end
 end %>
