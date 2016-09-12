@@ -1,5 +1,16 @@
 <% content_for :head do %>
 <style>
+    .dados-ok {
+        color: gold;
+        animation: blinker .8s linear infinite;
+    }
+    .dados-erro {
+        color: red;
+        animation: blinker .4s linear infinite;
+    }
+    @keyframes blinker {  
+        50% { opacity: 0.0; }
+    }
     body {
         background: #097e74;
         background-image: url('/assets/FC3.png');
@@ -30,6 +41,12 @@
     }
     .question {
         margin: 1em 0;
+    }
+    .question+.alert {
+        display: none;
+    }
+    .question.dados-erro+.alert {
+        display: inline-block;
     }
     .resposta {
         display: none;
@@ -84,10 +101,6 @@
 
 
 <div class="container">
-    <div class="alert alert-danger invisivel" id="alert">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      Não foi possível completar a operação, por favor recarregue a página.
-    </div>
     <h1>Questionário</h1>
     <h2>Responda as perguntas abaixo para que suas eleitoras e eleitores saibam o que você pensa!</h2>
     <% @candidate.answers
@@ -108,6 +121,10 @@
                     <span>Não</span>
                 </label>
             </div>
+        </div>
+        <div class="alert alert-danger invisivel">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          Erro ao completar a operação, dados não foram gravados. Por favor recarregue a página.
         </div>
     <% end %>
     <form action="<%= candidate_finish_path(@candidate) %>" method="post">
@@ -132,14 +149,23 @@
             $(this).parent().parent().submit();
         }
         $("input[type='radio']").on("change", function(){
+            var div = $(this).parent().parent().parent();
             toSend["short_answer"] = this.value;
+            div.removeClass("dados-erro");
             $.ajax({
                   method: "put"
                 , contentType: "application/json"
                 , data: JSON.stringify(toSend)
                 , url: url + $(this).parent().parent().attr("answer_id")
                 , error(data) {
+                    div.addClass("dados-erro");
                     $("#alert").removeClass("invisivel");
+                }
+                , success(data) {
+                    div.addClass("dados-ok");
+                    setTimeout(function(){
+                        div.removeClass("dados-ok");
+                    }, 1000);
                 }
             })
             ;
