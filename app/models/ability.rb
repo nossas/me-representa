@@ -8,6 +8,7 @@ class Ability
     can :finish, Candidate
     can :create, Candidate
     can :update, Candidate
+    can :confirm, Candidate  
 
     if request.format == "csv"
       cannot :read, Candidate

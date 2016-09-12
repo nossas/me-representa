@@ -5,6 +5,9 @@ CariocaPergunta::Application.routes.draw do
   get '/dataclip/candidatos/responderam', :to => 'dataclip#responderam', :as => :dataclip_who_answered
 
   post '/candidates/check', to: 'candidates#check', as: :candidates_check
+  get '/candidates/confirm', to: 'candidates#confirm', as: :candidate_confirmation
+  put '/candidates/finish', to: 'candidates#finish', as: :candidate_finish
+  
   resources :likes, only: [:create, :update]
 
   get   '/about', :to => 'main#about', as: :about
@@ -14,7 +17,6 @@ CariocaPergunta::Application.routes.draw do
   
   resources :candidates do
     resources :answers, except: [:destroy] 
-    put :finish
   end
 
   resources :unions, :parties, only: [:index, :show] do 

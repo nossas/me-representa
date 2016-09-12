@@ -86,8 +86,12 @@ class CandidatesController < ApplicationController
     end
   end
 
+  def confirm
+    @current_candidate = Candidate.find session[:candidate_id]
+  end
+
   def finish
-    @candidate = Candidate.find(params[:candidate_id])
+    @candidate = Candidate.find(session[:candidate_id])
     @candidate.update_attributes :finished_at => Time.now
     CandidateMailer.finished(@candidate).deliver
   end

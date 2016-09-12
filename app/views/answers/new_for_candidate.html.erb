@@ -127,11 +127,7 @@
           Erro ao completar a operação, dados não foram gravados. Por favor recarregue a página.
         </div>
     <% end %>
-    <form action="<%= candidate_finish_path(@candidate) %>" method="post">
-        <input type="hidden" name="<%= request_forgery_protection_token.to_s %>" value="<%= form_authenticity_token %>">
-        <input name="_method" type="hidden" value="put">
-        <button type="submit" class="btn btn-1">Submeter respostas</button>
-    </form>
+    <a href="<%= candidate_confirmation_path %>" class="btn btn-1">Submeter respostas</a>
 </div>
 <% end %>
 
