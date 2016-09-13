@@ -56,6 +56,14 @@ class CandidatesController < ApplicationController
   before_filter :only => [:index] { render partial: 'candidates/list', locals: { candidates: @candidates } if request.xhr? }
   before_filter :only => [:check] { render json: nil if params[:candidate][:email].blank? and params[:candidate][:mobile_phone].blank? }
 
+  def edit
+    if @candidate.id == session[:candidate_id]
+      edit!
+    else
+      redirect_to edit_candidate_path session[:candidate_id]
+    end
+  end
+
 
   def home;end
     
