@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
      where("candidates.finished_at is not null and candidates.city_id = #{city_id}").
      offset(first_record).
      limit(quantity).
-     order("2 desc")
+     order("1 desc")
   end
 
   private

@@ -49,7 +49,6 @@ class UsersController < ApplicationController
     else
       @mathing = @user.matches
     end
-    p @mathing
     respond_to do |format|
       format.html
       format.json {
