@@ -37,12 +37,6 @@
     .intro {
         margin-bottom: 2em;
     }
-    .alert p {
-        margin: 0;
-    }
-    .alert {
-        margin-bottom: 3em;
-    }
     #busca_cidade, #busca_cidade~input {
         display: none;
     }
@@ -52,7 +46,10 @@
     #busca_cidade + label {
         cursor: pointer;
         color: #d8b212;
-    };
+    }
+    .erros, .erro {
+        margin: 0;
+    }
     @media screen and (min-width: 500px) {
         h1 {    
             font-size: 4em;
@@ -67,9 +64,6 @@
         }
     }
     @media screen and (min-width: 900px) {
-        .alert {
-            margin-bottom: 6em;
-        }
         .header {
             margin-bottom: 5em;
         }
@@ -141,6 +135,15 @@
                         <% end %>
                     </div>
                </div>
+                <% if @candidate.errors[:cpf].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:cpf].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row">
                     <%= f.label :cpf, "CPF *",  {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">
@@ -159,6 +162,15 @@
                         <%= f.text_field :number, {class: "form-control", required: "required"} %>
                     </div>
                 </div>
+                <% if @candidate.errors[:city_id].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:city_id].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row ">
                     <%= f.label :city_id, "Confirmar município de voto*", {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">

@@ -58,18 +58,8 @@ class CandidatesController < ApplicationController
 
 
   def home;end
-
-  def create
-    create! do |success, failure|
-      success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }
-      failure.html { 
-        envia_erros(@candidate)
-      }
-    end
-  end
     
-  def profile
-      
+  def profile      
   end
 
   def show
@@ -80,9 +70,7 @@ class CandidatesController < ApplicationController
   def update
     update! do |success, failure|
       success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }
-      failure.html { 
-        envia_erros(@candidate)
-      }
+      failure.html
     end
   end
 
@@ -121,13 +109,4 @@ class CandidatesController < ApplicationController
       end
     end
   end
-
-  private
-    def envia_erros(modelo)
-        msgs = {}
-        modelo.errors.keys.each {|k| msgs[k] = modelo.errors[k].join("; ") }
-        flash[:erros] = msgs
-        flash[:candidate] = modelo
-        redirect_to :back # edit_user_path(modelo.id)       
-    end
 end
