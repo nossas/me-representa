@@ -101,40 +101,61 @@
        
    </div>
     <div class="form-content">
-        <% 
-            erros = flash[:erros];
-            if erros != nil 
-        %>
-        <div class="alert alert-danger" role="alert">
-                <% for k in erros.keys do %>
-                    <p><%= "#{k} - #{erros[k]}" %></p>
-                <% end %>
-        </div>
-        <% end %>
         <%= form_for @candidate do |f| %>
+            <% p @candidate %>
             <div id="form-horizontal">
+                <% if @candidate.errors[:nickname].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:nickname].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row">
                     <%= f.label :nickname, "Nome de urna *",  {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">
-                        <%= f.text_field :nickname, {class: "form-control", required: "required"} %>
+                        <%= f.text_field :nickname, {class: "form-control"} %>
                     </div>
                 </div>
+            
+                <% if @candidate.errors[:email].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:email].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row">
                     <%= f.label :email, "Email *",  {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">
-                        <%= f.text_field :email, {class: "form-control", required: "required"} %>
+                        <%= f.text_field :email, {class: "form-control"} %>
                     </div>
                 </div>
+
+                <% if @candidate.errors[:born_at].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:born_at].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row">
                     <%= f.label :born_at, "Data de nascimento *", {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">
                         <% if @candidate.born_at %>
-                        <%= f.text_field :born_at, {value: @candidate.born_at.strftime("%d/%m/%Y"), class: "form-control date-input", required: "required"} %>
+                        <%= f.text_field :born_at, {value: @candidate.born_at.strftime("%d/%m/%Y"), class: "form-control date-input"} %>
                         <% else %>
-                        <%= f.text_field :born_at, {class: "form-control date-input", required: "required"} %>
+                        <%= f.text_field :born_at, {class: "form-control date-input"} %>
                         <% end %>
                     </div>
-               </div>
+                </div>
+
                 <% if @candidate.errors[:cpf].count > 0 %>
                 <div class="alert alert-danger" role="alert">
                     <ul class="erros">
@@ -147,21 +168,42 @@
                 <div class="form-group row">
                     <%= f.label :cpf, "CPF *",  {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">
-                        <%= f.text_field :cpf, {class: "form-control cpf-input", required: "required"} %>
+                        <%= f.text_field :cpf, {class: "form-control cpf-input"} %>
                     </div>
                 </div>
+
+                <% if @candidate.errors[:party_id].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:party_id].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row">
-                    <%= f.label :party_id, "Partido *", {class: "col-md-2 control-label", required: "required"} %>
+                    <%= f.label :party_id, "Partido *", {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">
                         <%= f.select :party_id, Party.all.sort{|a,b| a.symbol <=> b.symbol }.collect { |p| [ "#{p.symbol} - #{p.number}", p.id ] }, {},  {class: "form-control col-md-10"} %>
                     </div>
                 </div>
+
+                <% if @candidate.errors[:number].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:number].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row">
                     <%= f.label :number, "Número de urna *",  {class: "col-md-2 control-label"} %>
                     <div class="col-md-10">
-                        <%= f.text_field :number, {class: "form-control", required: "required"} %>
+                        <%= f.text_field :number, {class: "form-control"} %>
                     </div>
                 </div>
+
                 <% if @candidate.errors[:city_id].count > 0 %>
                 <div class="alert alert-danger" role="alert">
                     <ul class="erros">
@@ -180,6 +222,7 @@
                         <input type="text" id="edit_busca_cidade" class="form-control">
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <%= f.label :bio, "Escrever mini bio",  {class: "col-md-2 control-label"} %>
                     <div class="col-lg-10">
