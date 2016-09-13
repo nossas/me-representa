@@ -242,8 +242,31 @@
             <h3>Sobre mim</h3>
             <%= @candidate.bio %>
         </div>
-   </div>
+    </div>
+       
+    <div class="puxar">
+        <div class="title">
+            <h3>Quem posso puxar ?</h3>
+            <h5>Veja alguns candidatos que podem vir a tomar posse se você votar em mim.</h5>
+        </div>
 
+        <% @candidate.gang.each do |brother| %>
+        <div class="brother">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="candidato">
+                            <%= brother.name %>                            
+                        </td>
+                        <td class="partido">
+                            <%= brother.party.symbol %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <% end %>
+    </div>
 
     <div class="respostas">
         <h2>Conheça suas respostas ao nosso questionário</h2>
@@ -274,30 +297,6 @@
                 <% end %>
             </tbody>
         </table>
-    </div>
-       
-    <div class="puxar">
-        <div class="title">
-            <h3>Quem posso puxar ?</h3>
-            <h5>Veja alguns candidatos que podem vir a tomar posse se você votar em mim.</h5>
-        </div>
-
-        <% @candidate.gang.each do |brother| %>
-        <div class="brother">
-            <table>
-                <tbody>
-                    <tr>
-                        <td class="candidato">
-                            <%= brother.name %>                            
-                        </td>
-                        <td class="partido">
-                            <%= brother.party.symbol %>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <% end %>
     </div>
     
     <% if not session[:candidate_id] and session[:user_id]%>
