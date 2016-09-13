@@ -56,6 +56,7 @@ class SessionsController < ApplicationController
         c = Candidate.new
         c.id = @auth.user.id
         c.name = @auth.user.name
+        c.email = @auth.user.email
         c.save validate: false
     end
 end

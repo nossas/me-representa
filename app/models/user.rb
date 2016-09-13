@@ -14,11 +14,18 @@ class User < ActiveRecord::Base
   attr_accessible :candidate_id, :email, :name, :picture, :mobile_phone, :city_id
 
   def self.create_from_hash!(hash)
-    create!(
-          :email => hash['info']['email'],
-          :name => "#{hash['info']['name']}",
-          :picture => hash['info']['image_url'] || hash['info']['image']
-          )
+    user = User.new
+    if hash['info']['email']
+      user.email = hash['info']['email']
+      user.email_validated = true
+    else
+      user.email = ''
+      user.email_validated = false
+    end
+    user.name = "#{hash['info']['name']}"
+    user.picture =hash['info']['image_url'] || hash['info']['image']
+    user.save(:validate => false)
+    user
   end
 
   def percent_care(qtde)
