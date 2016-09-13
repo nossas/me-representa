@@ -1,5 +1,16 @@
 <% content_for :main do %>
 <style>
+    .dados-ok {
+        color: gold;
+        animation: blinker .8s linear infinite;
+    }
+    .dados-erro {
+        color: red;
+        animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {  
+        50% { opacity: 0.0; }
+    }
     body {
         background: #582985;
         background-image: url('/assets/FE3.png');
@@ -93,10 +104,6 @@
             <h2>Agora é a sua vez de fazer o teste! Faremos a comparação entre a sua resposta e as respostas dos candidatos e candidatas.</h2>
         </div>
 
-        <div class="alert alert-danger invisivel" id="alert">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <div id="msgErro"></div>
-        </div>
 
         <% @current_user.answers.sort{|a,b| a.question_id-b.question_id }.each do |answer| %>
         <div class="question">
@@ -107,6 +114,10 @@
             <span class="question-title">
                 <%= answer.question.text %>
             </span>            
+        </div>
+        <div class="alert alert-danger invisivel" id="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <div></div>
         </div>
         <% end %>
         <%= link_to "Encontrar candidaturas", user_matchup_path(@current_user), {class: "btn btn-1-inv"} %>
@@ -122,24 +133,32 @@
             , _token: token
             , bindElement: function ( elements, event ) {
                 $(elements).on(event, function() {
+                    var div = $(this).parent().parent()
+                        divErro = div.next();
                     checkbox = $(this);
                     checkbox.attr("disabled", "disabled");
                     dados = {
                         weight: checkbox.prop("checked")?2:0
                     }
                     dados[retorno._tokenName] = retorno._token;
-                    $("#alert").addClass("invisivel");
+                    divErro.addClass("invisivel")
+                    div.removeClass("dados-erro");
                     $.ajax({
                         url: retorno._url + checkbox.attr("answer-id")
                         , contentType: "application/json"
                         , method: "PUT"
                         , data: JSON.stringify (dados)
                         , success: function(dados) {
+                            div.addClass("dados-ok");
+                            window.setTimeout(function(){
+                                div.removeClass("dados-ok");
+                            }, 1000);
                             checkbox.removeAttr("disabled");
                         }
                         , error: function(dados) {
+                            div.addClass("dados-erro");
                             checkbox.removeAttr("disabled");
-                            $("#alert").removeClass("invisivel");
+                            divErro.removeClass("invisivel")
                             var msg;
                             if (dados.status == 0)
                                 msg = "Não foi possível completar a operação, erro de comunicação com o site, por favor recarregue a página.";
@@ -147,7 +166,7 @@
                                 msg = "Erro de processamento";
                                 checkbox.prop("checked",! checkbox.prop("checked"));
                             }
-                            $("#msgErro").text(msg);
+                            divErro.children("div").text(msg);
                         }
                     });
                 });
