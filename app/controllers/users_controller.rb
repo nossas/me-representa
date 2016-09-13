@@ -38,12 +38,7 @@ class UsersController < ApplicationController
   def update
     update! do |success, failure|
       success.html { redirect_to new_answer_path }
-      failure.html { 
-        msgs = {}
-        @user.errors.keys.each {|k| msgs[k] = @user.errors[k].join("; ") }
-        flash[:erros] = msgs
-        redirect_to :back
-      }
+      failure.html
     end
   end
 

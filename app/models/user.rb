@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   belongs_to :candidate
   belongs_to :city
   
-  validates_presence_of :email, :name
+  validates_presence_of :email, :name, :city_id
 
   before_save :corrige_dados
   before_create :corrige_dados

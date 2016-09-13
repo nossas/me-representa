@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="/assets/jquery-ui.structure.css">
     <link rel="stylesheet" href="/assets/jquery-ui.theme.css">
 <style>
+    .erros {
+        margin: 0;
+    }
     body, option {
         background-color: #097e74;
         background-image: url('/assets/FC3.png');
@@ -95,33 +98,49 @@
     <p>Informe a cidade em que você vota. Se quiser receber mais informações sobre a campanha, deixe também seu nome, e-mail, e número de celular</p>
    </div>
     <div class="form-content">
-        <% 
-            erros = flash[:erros];
-            if erros != nil 
-        %>
-        <div class="erros">
-            <span>Erros:</span>
-            <ul>
-                <% for k in erros.keys do %>
-                    <li><%= erros[k]  %></li>
-                <% end %>
-            </ul>
-        </div>
-        <% end %>
         <div id="div-user form-horizontal">
             <%= form_for @user do |f| %>
+                <% if @user.errors[:name].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @user.errors[:name].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row">
                     <%= f.label :name, {class: "col-lg-2 control-label"} %>
                     <div class="col-lg-10">
                         <%= f.text_field :name, {class: "form-control"} %>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <%= f.label :email, "Email", {class: "col-lg-2 control-label"} %>
-                    <div class="col-lg-10">
-                        <%= f.text_field :email, {class: "form-control col-lg-10"} %>
+                <%if not @user.email_validated? %>
+                    <% if @user.errors[:email].count > 0 %>
+                    <div class="alert alert-danger" role="alert">
+                        <ul class="erros">
+                            <% @user.errors[:email].each do |msg| %>
+                            <li class="erro"><%= msg %></li>
+                            <% end %>
+                        </ul>
                     </div>
+                    <% end %>
+                    <div class="form-group row">
+                        <%= f.label :email, "Email", {class: "col-lg-2 control-label"} %>
+                        <div class="col-lg-10">
+                            <%= f.text_field :email, {class: "form-control col-lg-10", required: "required"} %>
+                        </div>
+                    </div>
+                <% end %>
+                <% if @user.errors[:city_id].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @user.errors[:city_id].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
                 </div>
+                <% end %>
                 <div class="form-group row">
                     <%= f.label :city_id, "Cidade em que vota *", {class: "col-lg-2 control-label"} %>
                     <div class="col-lg-10">
@@ -131,6 +150,15 @@
                         <input type="text" id="edit_busca_cidade" class="form-control">
                     </div>
                 </div>
+                <% if @user.errors[:mobile_phone].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @user.errors[:mobile_phone].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
                 <div class="form-group row">
                     <%= f.label :mobile_phone, "Celular", {class: "col-lg-2 control-label"} %>
                     <div class="col-lg-10">
