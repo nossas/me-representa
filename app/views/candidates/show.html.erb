@@ -197,11 +197,12 @@
     </style>
 <% end %>
 
-<% content_for :menu do %>
+<% content_for :menu_logged do %>
     <% if session[:candidate_id] %>
         <li><a href="<%= edit_candidate_path(@current_user.id) %>" class="dropdown-item">Perfil no #MeRepresenta</a></li>
     <% else %>
-        <li><a href="<%= new_answer_path %>" class="dropdown-item">Refazer questionário</a></li>
+        <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
+        <li><%= link_to "Refazer questionário", new_answer_path(session[:user_id]), {class: "dropdown-item"} %>
     <% end %>
 <% end %>
 
