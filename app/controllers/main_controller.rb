@@ -3,6 +3,8 @@ class MainController < ApplicationController
     layout "merepresentalogged"
 
     include LoggedHelper;
+
+    before_filter :load_logged, :except => [:index]
     
     skip_authorization_check
 
@@ -32,8 +34,9 @@ class MainController < ApplicationController
                     redirect_to edit_user_path(user);
                 end
             end
+        else
+            render layout: "merepresentaunlogged"
         end
-        render layout: "merepresentaunlogged"
     end
     
     def about

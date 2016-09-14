@@ -28,6 +28,9 @@
     border: none;
     color: #582985;
 }
+.navbar-light .navbar-nav .nav-link.dropdown-toggle:hover {
+    border-bottom: none;
+}
 @media screen and (min-width: 768px){
     .user-image {
         display: initial; 

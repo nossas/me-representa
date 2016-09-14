@@ -6,7 +6,7 @@ var ligaCidades = function(componenteBusca, selecionaValores) {
           url: "/cities?match=" + request.term
           , method: "get"
           , accept: "application/json"
-          , success: function( data ) { //data.map(a=>{"label": a[1], "value": a[0]}
+          , success: function( data ) {
               var objetos  = data.map(function(cidade){
                   return {
                       value: cidade[0]
