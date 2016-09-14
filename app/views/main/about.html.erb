@@ -1,20 +1,25 @@
 <% content_for :head do %>
     <style>
         body {
-            background-image: url("/assets/FE4.png");
+            background-color: #00a9d9;
+            background-image: url("/assets/FC3.png");
         }
         header {
             padding: 1em;
-            border-bottom: 1px solid darkgray;
+            border-bottom: 1px solid #582985;
+        }
+        .links.atual {
+            color: #582985;
         }
         .links {
-            color: #582985;
+            color: #fff;
             font-weight: bolder;
             font-size: 1.1em;
             display: inline-block;
+            text-transform: uppercase;
+            margin-right: 2em;
         }
-        .links:hover {
-            color: #582985;
+        a.links:hover {
             font-size: 1.2em;
             text-decoration: none;
             transform: rotate(360deg);
@@ -22,7 +27,7 @@
         }
         h1 {
             color: #d8b212;
-            font-size: 3em;
+            font-size: 2.5em;
             text-transform: uppercase;
             transform: rotate(-3deg);
             text-shadow: -.1em .1em #582985;
@@ -44,16 +49,45 @@
         p {
             color: #fff;
         }
+        .navbar-light .navbar-nav .disabled.nav-link, .navbar-light .navbar-nav .disabled.nav-link:hover {
+            color: #582985;
+        }
+        @media screen and (min-width: 600px) {
+            h1 {
+                font-size: 3em;
+            }
+        }
+        @media screen and (min-width: 1000px) {
+            h1 {
+                font-size: 5em;
+            }
+        }
     </style>
 <% end %>
 
-<% content_for :header do %>
-    <%= link_to "Página Principal", root_path, {class: "links"} %>
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <span class="nav-link disabled">Saiba mais</span>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Contato", contact_path, {class: "nav-link"} %>
+    </div>
+<% end %>
+
+<% content_for :menu do %>
+    <% if session[:candidate_id] %>
+        <li><a href="<%= edit_candidate_path(session[:candidate_id]) %>" class="dropdown-item">Perfil</a></li>
+    <% elsif session[:user_id] %>
+        <li><a href="<%= edit_user_path(session[:user_id]) %>" class="dropdown-item">Perfil</a></li>
+    <% end %>
 <% end %>
 
 <% content_for :main do %>
     <div class="container">
-        <h1>Sobre o projeto</h1>
+        <h1>Saiba mais sobre o projeto</h1>
         <h2>O que é o #MeRepresenta?</h2>
         <p>Resultado de uma parceria entre as campanhas #VoteLGBT, #AgoraéQueSãoElas, a Rede Feminista de Juristas (#DeFEMde), a Rede Nossas Cidades (Meu Rio, Minha Sampa, Minha Porto Alegre e Meu Recife), a organização não governamental CFEMEA e o grupo LGBT Brasil, a plataforma #MeRepresenta tem como objetivo divulgar aos eleitores as posições de candidatos a vereador sobre pautas relevantes à construção das igualdades de gênero, racial e de orientação sexual.</p>
         
