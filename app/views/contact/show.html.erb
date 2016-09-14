@@ -1,79 +1,77 @@
-<% content_for :header do %>
-    <style>
-        .redes {
-            float: right;
-            display: inline;
-            width: 20%;
-            margin-top: 1em;
+<% content_for :head do %>
+<style>
+    nav {
+        border-bottom: 1px solid #582985;
+    }
+    main {
+        font-family: ProximaNovaSoft-Bold;
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        margin-bottom: 3em;
+    }
+    body, .form-control, .form-control:focus {
+        background-color: #097e74;
+    }
+    label, h1 {
+        color: #582985;
+    }
+    h1 {
+        font-size: 3.5em;
+        margin: .5em 0;
+        text-shadow: .1em .1em #d8b212;
+        text-align: center;
+    }
+    .form-control {
+        color: #fff;
+        border: 2px solid #582985;
+    }
+    .btn {
+        width: 30ch;
+        max-width: 100%;
+        letter-spacing: .2em;
+        display: block;
+        position: relative;
+        top: 2em;
+    }
+    .container {
+        margin-bottom: 2em;
+    }
+    @media screen and (min-width: 340px) {
+        .btn {
+            margin: 0 0 0 auto;
         }
-        .redes a {
-            font-size: 0;
-            position: relative;
+    }
+    @media screen and (min-width: 500px) {
+        h1 {
+            font-size: 5em;
+            margin: .5em auto;
         }
-        .redes a:before {
-            content: "";
-            background-size: 100%;
-            position: relative;
-            display: inline-block;
-            height: 40px;
-            width: 40px;
-        }
-        .face:before {
-            background-image: url('/assets/face.svg');
-        }
-        .google:before {
-            background-image: url('/assets/google.svg');
-        }
-        .twitter:before {
-            background-image: url('/assets/twitter.svg');
-        }
-        .msg {
-            float: left;
-        }
-        main {
-            font-family: ProximaNovaSoft-Bold;
-            text-transform: uppercase;
-            letter-spacing: .2em;
-        }
-        body, .form-control, .form-control:focus {
-            background-color: #097e74;
-        }
-        .msg {
-            color: #fff;
-            padding: 2em;
-        }
-        .form-control {
-            color: #fff;
-            border: 2px solid #582985;
-        }
+    }
+    @media screen and (min-width: 768px) {
         .form-group {
-            padding-bottom: 3em;
+            padding-bottom: 1em;
         }
-        label, h1 {
-            color: #582985;
-        }
+    }
+    @media screen and (min-width: 1200px) {
         label {
             text-align: right;
             position: relative;
             top: .5em;
         }
-        h1 {
-            font-size: 5em;
-            margin: .5em auto 1em auto;
-            transform: rotate(-5deg);
-            text-shadow: .1em .1em #d8b212;
-            left: calc( ( 100% - 5em ) / 3 );
-            position: relative;
-        }
-        .btn-1 {
-            width: 30ch;
-            letter-spacing: .2em;
-            margin: 0 auto;
-            display: block;
-            position: relative;
-            top: 2em;
-        }
+    }
 </style>
+<% end %>
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <span class="nav-link disabled">Contato</span>
+    </div>
 <% end %>
 
 <% content_for :main do %>
@@ -82,21 +80,21 @@
         <div class='form'>
             <%= form_tag contact_path do %>
                 <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="nome">Nome</label>
-                        <div class="col-sm-10">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="nome">Nome</label>
+                        <div class="col-md-10">
                             <input class="form-control" id="nome" name="name" size="30" type="text" placeholder="Seu nome" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="email">E-mail</label>
-                        <div class="col-sm-10">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="email">E-mail</label>
+                        <div class="col-md-10">
                             <input class="form-control" id="email" name="email" type="text" placeholder="fulano@meuhost.com.br" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="city">Cidade</label>
-                        <div class="col-sm-10">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="city">Cidade</label>
+                        <div class="col-md-10">
                             <select name="city" id="city" class= "form-control">
                             <% City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", "#{c.name}, #{c.state} - #{c.id}"]}.each do |cidade| %>
                                 <option value="<%= cidade[1] %>"><%= cidade[0]%></option>
@@ -104,15 +102,15 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="mensagem">Mensagem</label>
-                        <div class="col-sm-10">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="mensagem">Mensagem</label>
+                        <div class="col-md-10">
                             <textarea class="form-control" cols="40" id="mensagem" name="mensagem" rows="20"></textarea>
                        </div>
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-1">Enviar</button>
+                <button type="submit" class="btn btn-amarelo-roxo">Enviar</button>
             <% end %>
         </div>
     </div>

@@ -1,6 +1,6 @@
 
 class ContactController < ApplicationController
-    layout "merepresentaunlogged"
+    layout "merepresentalogged"
     
     def create
     end
