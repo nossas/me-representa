@@ -115,10 +115,6 @@
         .respostas td {
             background-color: #532985;
         }
-        .pergunta:before {
-            content: "//";
-            padding-right: .5em;
-        }
         .resposta.perigo {
             font-size: 1.1em;
         }
@@ -200,7 +196,7 @@
 <% content_for :menu_logged do %>
     <% if session[:candidate_id] %>
         <li><a href="<%= edit_candidate_path(@current_user.id) %>" class="dropdown-item">Perfil no #MeRepresenta</a></li>
-    <% else %>
+    <% elsif session[:user_id] %>
         <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
         <li><%= link_to "Refazer questionário", new_answer_path(session[:user_id]), {class: "dropdown-item"} %>
     <% end %>
@@ -240,15 +236,15 @@
             <% end %>
         </div>
         <div class="info-bio">
-            <h3>Sobre mim</h3>
+            <h3>Sobre o/a candidato/a</h3>
             <%= @candidate.bio %>
         </div>
     </div>
        
     <div class="puxar">
         <div class="title">
-            <h3>Quem posso puxar ?</h3>
-            <h5>Veja alguns candidatos que podem vir a tomar posse se você votar em mim.</h5>
+            <h3>Cuidado com as coligações partidárias!</h3>
+            <h5>Os votos nesse/a candidato/a vão para todos os partidos de sua coligação e podem acabar elegendo alguém em quem você não votaria. Veja um exemplo de quem vai se beneficiar dos votos que essa candidatura receber:</h5>
         </div>
 
         <% @candidate.gang.each do |brother| %>
@@ -270,7 +266,7 @@
     </div>
 
     <div class="respostas">
-        <h2>Conheça suas respostas ao nosso questionário</h2>
+        <h2>Veja o que o/a candidato/a respondeu</h2>
 
         <table>
             <tbody>
