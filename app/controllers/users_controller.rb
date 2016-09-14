@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def update
     update! do |success, failure|
-      success.html { redirect_to new_answer_path }
+      success.html { redirect_to params[:redirect_to] || new_answer_path }
       failure.html
     end
   end
