@@ -4,18 +4,9 @@
         background-color: #582985;
         background-image: url("/assets/FE3.png");
     }
-    .voto img {
-        width: 2em;
-    }
-    table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 4px;
-        color: #582985;
-        font-weight: bolder;
-    }
     .conteudo {
         margin: 2em 0;
+        font-family: ProximaNovaSoft-Bold;
     }
     h1 {
         color: #d8b212;
@@ -28,32 +19,9 @@
         color: #fff;
         margin: 2em 0;
     }
-    td a {
-        color: #582985;
-    }
-    td a:hover {
-        color: #582985;
-        text-decoration: none;
-        font-size: 1.2em;
-    }
-    th {
-        background-color: #097e74;
-        border: .2em solid #582985;
-    }
-    td {
-        background-color: #097e74;
-        padding: 1em;
-    }
-    .voto, .score {
-        text-align: center; 
-        width: 10%;
-    }
-    .candidato {
-        width: 100%;
-    }
-    .btn-2-inv {
+    .btn-2 {
         border: 2px solid #d8b212;
-        padding: 1.2em;
+        padding: 1em;
         margin: auto;
         display: block;
         width: 36ch;
@@ -61,14 +29,43 @@
         text-transform: uppercase;
         font-weight: bolder;
         margin-top: 4em;
-    }
-    .union {
-        color: #ececec;
-        font-size: .7em;
-        letter-spacing: 0;
+        font-size: 1.2em;
     }
     .btn.invisivel {
         display: none;
+    }
+    .candidatos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .candidato {
+        background-color: #097e74;
+        display: inline-block;
+        width: 300px;
+        margin: 1em;
+        padding: 1.5em;
+    }
+    .can-pic {
+        display: block;
+        margin: 0 auto 1em auto;
+        width: 150px;
+        border-radius: 50%;
+    }
+    .info-text {
+        text-transform: uppercase;
+        color: #fff;
+        display: block;
+        text-align: center;
+    }
+    .info-text.name {
+        font-weight: bolder;
+    }
+    .candidate-number {
+        font-size: 3em;
+    }
+    .info-text.party, .info-text.contagem {
+        color: #d8b212;
     }
     @media screen and (min-width: 1200px) {
         th {
@@ -94,41 +91,35 @@
             <h1>Esses são os candidatos que mais combinam com seu perfil</h1>
             <p>Aqui estão os candidatas e os candidatos que têm a ver com você! Eles estão organizados de acordo com  seus posicionamentos pessoais, mas também de acordo com o compromisso de seus partidos e coligações com os direitos humanos.</p>
             <p>Nas eleições, você terá direito a apenas um voto para vereados, então escolha com cuidado com quem vai votar. E, se possível, escolha votar em uma mulher! Assim você vai contribuir para a igualdade de gênero na Câmara Municipal de sua cidades.</p>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Eu voto</th>
-                        <th>Candidatos</th>
-                        <th>Afinidade</th>
-                    </tr>
-                </thead>
-                <tbody id="candidatos">
-                    <% @mathing.each do |candidate| %>
-                        <tr>
-                            <td class="voto">
-                                <% if candidate["id"] == @user.candidate_id %>
-                                <img src="/assets/c1.svg" alt="Recebe meu voto">
-                                <% else %>
-                                <img src="/assets/c0.svg" alt="Não receberá meu voto">
-                                <% end %>
-                            </td>
-                            <td class="candidato">
-                                <div class="link">
-                                    <%= link_to candidate["name"], candidate_path(candidate["id"]) %>
-                                </div>
-                                <div class="union">
-                                    <%=  candidate["union"] ? candidate["union"] : candidate["party_symbol"] %>
-                                </div>        
-                            </td>
-                            <td class="score"><%= @user.percent_care candidate["score"].to_i %></td>
-                        </tr>
-                    <% end %>
-                </tbody>
-            </table>
-            <% if @mathing.size() == 10 %>
-            <input type="hidden" id="nextRecord" value="10">
-            <button id="btn-mais-cand" type="button" class="btn btn-2-inv">mostrar mais</button>
+
+            <% p @matching %>
+            <div class="candidatos">
+                <% @matching.each do |match| %>
+                    <div class="candidato">
+                        <img class="can-pic" src="<%= match['picture'] %>" alt="Foto do candidato">
+                        <span class="info-text name">
+                            <%= match['nickname'] %>
+                        </span>
+                        <span class="info-text number">
+                            nº <span class="candidate-number"><%= match['number'] %></span>
+                        </span>
+                        <span class="info-text party">
+                            <% if match['union'] %>
+                                Coligação: <%= match['union'] %>
+                            <% else %>
+                                Partido: <%= match['party_symbol'] %>
+                            <% end %>
+                        </span>
+                        <span class="info-text contagem">
+                            <%= match['contagem'] %> intenções de voto
+                        </span>                        
+                    </div>
+                <% end %>
+            </div>
+
+            <% if @matching.size() == 6 %>
+            <input type="hidden" id="nextRecord" value="6">
+            <button id="btn-mais-cand" type="button" class="btn btn-2">mostrar mais</button>
             <% end %>
         </div>
     </div>
@@ -150,30 +141,41 @@
                         first: nextRecord.val()
                     }
                     , success: function(data){
+                        var divGrupo = $("div.candidatos");
                         data.forEach(function(match){
-                            var  tr = $("<tr>")
-                                , voto = $("<td>", {class: "voto"})
-                                , img = $("<img>", {src: (match.id == retorno.candidateId ? "/assets/c1.svg" : "/assets/c0.svg")} )
-                                , candidato = $("<td>", {class: "candidato"})
-                                , link = $("<div>", {class: "link"})
-                                , union = $("<div>", {class: "union"})
-                                , a = $("<a>", {href: "/candidates/" + match.id})
-                                , score = $("<td>", {class: "score"});
-                            a.text(match.name);
-                            link.append(a);
-                            voto.append(img);
-                            union.text(match.union == null?match.party_symbol:match.union);
-                            score.text(match.score);
-                            
-                            candidato.append(link);
-                            candidato.append(union);
-                            tr.append(voto);
-                            tr.append(candidato);
-                            tr.append(score);
-                            $("#candidatos").append(tr);
+                            var  divCand = $("<div>", {class: 'candidato'})
+                                , imgCand = $("<img>", {class: 'can-pic', src: match['picture'], alt:"Foto do candidato"})
+                                , nickname = $("<span>", {class: 'info-text name'})
+                                , candNumber = $("<span>", {class: 'info-text number'})
+                                , number = $("<span>", {class: 'candidate-number'})
+                                , party = $("<span>", {class: 'info-text party'}) 
+                                , contagem = $("<span>", {class: 'info-text contagem'}) 
+                                , img = $("<img>", {src: (match.id == retorno.candidateId ? "/assets/c1.svg" : "/assets/c0.svg")} );
+
+                            number.text(match['number']);
+                            contagem.text(match['contagem'] + ' intenções de voto');
+
+                            candNumber.text("nº ");
+                            candNumber.append(number);
+
+                            nickname.text(match['nickname']);
+
+                            if (match['union'] == null)
+                                party.text('Coligação: ' + match['party_symbol']);    
+                            else
+                                party.text('Partido: ' + match['union']);    
+
+
+                            divCand.append(imgCand);
+                            divCand.append(nickname);
+                            divCand.append(candNumber);
+                            divCand.append(party);
+                            divCand.append(contagem);
+
+                            divGrupo.append(divCand);
                         });
-                        nextRecord.val(parseInt(nextRecord.val()) + 10);
-                        if (data.length < 10)
+                        nextRecord.val(parseInt(nextRecord.val())+6);
+                        if (data.length < 6)
                             $('#btn-mais-cand').addClass('invisivel');
                     }
                 });

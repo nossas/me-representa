@@ -44,17 +44,23 @@ class UsersController < ApplicationController
 
   def matchup
     @user = User.find params[:user_id]
+    if @user.answers.select{|a| a.weight >0 }.count == 0
+      redirect_to city_candidates_path(@user.city)
+      return
+    end
     if params[:first] 
-      @mathing = @user.matches params[:first] 
+      @matching = @user.matches params[:first] 
     else
-      @mathing = @user.matches
+      @matching = @user.matches
+      if @matching.count == 0
+        redirect_to city_convine_path(@user.city)
+        return
+      end
     end
     respond_to do |format|
-      format.html
+      format.html 
       format.json {
-        render :json => @mathing.map{|val| {
-            :id => val["id"], :name => val["name"], :score => @user.percent_care(val["score"].to_i), 
-            :party_symbol => val["party_symbol"], :union => val["union"]} }
+        render :json => @matching
       }
     end
   end

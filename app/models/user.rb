@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     qtde * 100 / answers.select{|a| a.weight > 0}.count
   end
 
-  def matches(first_record = 0, quantity = 10)
+  def matches(first_record = 0, quantity = 6)
     Candidate.
      select(
        %Q{
@@ -47,16 +47,20 @@ class User < ActiveRecord::Base
             where 
               ca.responder_id = candidates.id and ca.responder_type='Candidate' and ca.short_answer = 'Sim'
         ) as score
-        , candidates.id
-        , candidates.name
+        , candidates.id as id
+        , candidates.nickname as nickname
+        , candidates.number
+        , users.picture as picture
         , parties.symbol as party_symbol
         , (select u.name from parties_unions pu inner join unions u on pu.union_id = u.id where pu.party_id = candidates.party_id and u.city_id = candidates.city_id) as union 
+        , (select count(*) from users u where u.candidate_id = candidates.id) as contagem
         }).
      joins(:party).
+     joins("inner join users on users.id = candidates.id").
      where("candidates.finished_at is not null and candidates.city_id = #{city_id}").
      offset(first_record).
      limit(quantity).
-     order("1 desc")
+     order("1 desc, 2")
   end
 
   private

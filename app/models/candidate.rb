@@ -7,7 +7,7 @@ class Candidate < ActiveRecord::Base
   belongs_to :party
   belongs_to :city
   
-  has_one :union, :through => :party
+#  has_one :union, :through => :party
   has_many :answers, :as => :responder
   has_many :users
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
@@ -66,7 +66,7 @@ class Candidate < ActiveRecord::Base
       registros = TseData.where("cpf = ? and born_at = ?", _cpf, born_at )
       errors.add(:cpf, "Dados passados não correspondem aos dados fornecidos pelo TSE") if (registros == [])
   end
-        
+
   def rank
       return 4;
   end
