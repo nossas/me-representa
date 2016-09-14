@@ -211,7 +211,7 @@
                 </div>
                 <% end %>
                 <div class="form-group row ">
-                    <%= f.label :city_id, "Confirmar município de voto*", {class: "col-md-2 control-label"} %>
+                    <label for="city_name" class="col-md-2 control-label">Confirmar município de voto*</label>
                     <div class="col-md-10">
                         <%= f.hidden_field :city_id %>
                         <input type="text" id="city_name" class="form-control" value= '<%= "#{@candidate.city.name}, #{@candidate.city.state}" if @candidate.city %>'>
