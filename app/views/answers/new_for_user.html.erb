@@ -39,10 +39,6 @@
     .conteudo {
         margin: 0 auto;
     }
-    .question-title:before {
-        content: '//';
-        padding-right: .5em;
-    }
     .question {
         display: flex;
         align-items: center;
@@ -63,14 +59,16 @@
         display: none;
     }
     .answer label {
-        font-size: 0;
+        width: 2em;
+        font-size: .8em;
+        text-align: center;
     }
     .answer>input+label:after {
         content: "";
         background-image: url("/assets/cb0.svg");
         background-size: cover;
-        width: 1rem;
-        height: 1rem;
+        width: 1.5rem;
+        height: 1.5rem;
         display: inline-block;
     }
     .answer>input:checked+label:after {
@@ -84,6 +82,9 @@
     @media screen and (min-width: 992px) {
         h1 {
             font-size: 5em;
+        }
+        h2 {
+            text-align: center;
         }
     }
     @media screen and (min-width: 1200px) {
@@ -99,9 +100,9 @@
 
 <% content_for :main do %>
     <div class="container">
-        <h1>Questionário</h1>
+        <h1>O que é importante pra você?</h1>
         <div class="conteudo">
-            <h2>Agora é a sua vez de fazer o teste! Faremos a comparação entre a sua resposta e as respostas dos candidatos e candidatas.</h2>
+            <h2>Marque “Sim” nas perguntas e descubra quais candidatas e candidatos concordam com você!</h2>
         </div>
 
 
@@ -109,7 +110,7 @@
         <div class="question">
             <div class="answer">
                 <input type="checkbox" id="question-<%= answer.question_id %>" answer-id="<%= answer.id %>" <%= "checked" if answer.weight == 2 %> >
-                <label for="question-<%= answer.question_id %>">Me importo!</label>
+                <label for="question-<%= answer.question_id %>">Sim</label>
             </div>
             <span class="question-title">
                 <%= answer.question.text %>
@@ -122,6 +123,11 @@
         <% end %>
         <%= link_to "Encontrar candidaturas", user_matchup_path(@current_user), {class: "btn btn-1-inv"} %>
     </div>
+<% end %>
+
+
+<% content_for :menu_logged do %>
+    <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
 <% end %>
 
 <% content_for :scripts do %>
