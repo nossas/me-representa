@@ -38,7 +38,7 @@
         text-transform: uppercase;
     }
     @media screen and (min-width: 400px) {
-        body {
+        main {
             font-size: 1.3rem;
         }
     }
@@ -76,11 +76,14 @@
         }
         #sadface {
         }
-        body {
-            font-size: 1.3rem;
-        }
     }
 </style>
+<% end %>
+
+
+<% content_for :menu_logged do %>
+    <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
+    <li><%= link_to "Questionário", new_answer_path(session[:user_id]), {class: "dropdown-item"} %>
 <% end %>
 
 <% content_for :main do %>
