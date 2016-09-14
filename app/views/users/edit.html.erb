@@ -25,29 +25,23 @@
         display: inline-block;
         width: 100%;
     }
-    h1, p {
-        font-family: ProximaNovaSoft-Bold;
-    }
     .form-content {
         width: 100%;
         margin-bottom: 2em;
     }
     h1 {
+        font-family: ProximaNovaSoft-Bold;
         color: #d8b212;
-        display: table;
         margin: auto;
-        font-size: 4em;
-        text-shadow: -.1em 0 #582985;
-        transform: rotate(-2deg);
+        font-size: 1.5em;
         text-transform: uppercase;
+        letter-spacing: .15em;
     }
-
     p {
-        color: #582985;
+        color: #fff;
         display: block;
-        text-transform: uppercase;
-        margin: 2em 0 1em 0;
-        padding: 0 1em;
+        font-size: 1.1em;
+        margin: 1em 0 3em 0;
     }
     #busca_cidade, #busca_cidade~input {
         display: none;
@@ -62,30 +56,10 @@
     #city_name {
         color: #fff;
         font-weight: bold;
-        margin-left: .8em;
-    }
-    @media screen and (min-width: 1000px) {
-        h1 {
-            position: relative;
-            font-size: 6em;
-            float: left; 
-            width: 58%; 
-            left: .5em;
-        }
-        p {
-            position: relative; 
-            top: 5em; 
-            width: 100%; 
-            left: -6em; 
-            font-size: 1em; 
-        }
     }
     @media screen and (min-width: 1200px) {
         h1 {
-            width: 40%;
-        }
-        p {
-            left: -3em;
+            font-size: 2em;
         }
     }
 </style>
@@ -94,8 +68,8 @@
 <% content_for :main do %>
 <div class="container">
    <div class="header">
-    <h1>Crie sua conta</h1>
-    <p>Informe a cidade em que você vota. Se quiser receber mais informações sobre a campanha, deixe também seu nome, e-mail, e número de celular</p>
+    <h1>Encontre candidatas e candidatos perto de você!</h1>
+    <p>Informe a cidade em que você vota. Se quiser receber mais informações sobre a campanha, deixe também seu nome, e-mail e número de celular.</p>
    </div>
     <div class="form-content">
         <div id="div-user form-horizontal">
@@ -128,7 +102,7 @@
                     <div class="form-group row">
                         <%= f.label :email, "Email", {class: "col-lg-2 control-label"} %>
                         <div class="col-lg-10">
-                            <%= f.text_field :email, {class: "form-control col-lg-10", required: "required"} %>
+                            <%= f.text_field :email, {class: "form-control", required: "required"} %>
                         </div>
                     </div>
                 <% end %>
@@ -142,7 +116,7 @@
                 </div>
                 <% end %>
                 <div class="form-group row">
-                    <%= f.label :city_id, "Cidade em que vota *", {class: "col-lg-2 control-label"} %>
+                    <label for="city_name" class="col-lg-2 control-label">Cidade em que vota *</label>
                     <div class="col-lg-10">
                         <%= f.hidden_field :city_id %>
                         <input type="text" id="city_name" class="form-control" value= '<%= "#{@user.city.name}, #{@user.city.state}" if @user.city %>'>
@@ -160,11 +134,12 @@
                 <div class="form-group row">
                     <%= f.label :mobile_phone, "Celular", {class: "col-lg-2 control-label"} %>
                     <div class="col-lg-10">
-                        <%= f.text_field :mobile_phone, {class: "form-control col-lg-10 phone-input"} %>
+                        <%= f.text_field :mobile_phone, {class: "form-control phone-input"} %>
                     </div>
                 </div>
                 <%= f.hidden_field :candidate_id %>
                 <%= f.hidden_field :picture %>
+                <p>* Campos obrigatórios</p>
                 <div class="buttons">
                     <%= f.submit "E ai, vamos lá? Faça o seu questionário!", {class: "btn btn-1"} %>
                 </div>

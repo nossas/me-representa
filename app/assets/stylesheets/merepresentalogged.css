@@ -30,6 +30,10 @@
 .navbar-light .navbar-nav .nav-link.dropdown-toggle:hover {
     border-bottom: none;
 }
+.dropdown-menu {
+    left: inherit;
+    right: 0;
+}
 @media screen and (min-width: 768px){
     .user-image {
         display: initial; 
