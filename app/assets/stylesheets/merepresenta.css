@@ -29,3 +29,18 @@
 body { 
     font-family: ProximaNovaSoft-Regular; 
 }
+.btn-amarelo-roxo {
+    background-color: #d8b212;
+    color: #582985;
+    font-weight: bolder;
+}
+.btn-verdeescuro-roxo {
+    background-color: #097e74;
+    color: #097e74;
+    font-weight: bolder;
+}
+.btn-verdeclaro-roxo {
+    background-color: #00a99d;
+    color: #097e74;
+    font-weight: bolder;
+}

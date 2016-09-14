@@ -8,18 +8,6 @@
         background-image: url('/assets/FE1.png');
         background-size: cover;
     }
-    .links {
-        color: #d8b212;
-        font-size: 1em;
-        display: inline-block;
-    }
-    .links:hover {
-        color: #d8b212;
-        font-size: 1.1em;
-        text-decoration: none;
-        transform: rotate(360deg);
-        transition: font-size 1s, transform 2s;
-    }
     img.logo {
         max-width: 100%;
     }
@@ -39,7 +27,7 @@
     }
     .botao {
         display: block;
-        width: 40ch;
+        width: 38ch;
         max-width: 100%;
         margin: 1.5em auto;
     }
@@ -49,22 +37,64 @@
         display: block;
     }
     .btn  {
-        /*width: 48%;*/
         color: #000;
         text-transform: uppercase;
-        width: 40ch;
+        width: 38ch;
         max-width: 100%;
+        white-space: normal;
     }
-    .btn1 {
-        background-color: #097e74;
-        /*float: left;*/
+    header {
+        border: none;
     }
-    .btn2 {
-        background-color: #d8b212;
+    .link, .link:hover {
+        color: transparent;
+        position: relative;
+        margin-right: .5em;
+    }
+    .link:before {
+        content: "";
+        background-size: 2em;
+        background-color: rgba(211, 211, 211, 0.35);
+        background-repeat: no-repeat;
+        height: 4em;
+        width: 4em;
+        display: inline-block;
+        position: absolute;
+        background-position: 1em;
+        border-radius: 50%;
+    }
+    .link.contact:before {
+        background-image: url('/assets/envelope.svg');
+    }
+    .link.facebook:before {
+        background-image: url('/assets/face.svg');
+    }
+    .links {
+        position: absolute;
+        top: 0;
     }
     @media screen and (min-width: 360px) {
         body {
             font-size: 1rem;
+        }
+    }
+    @media screen and (min-width: 600px) {
+        .link, .link:hover {
+            color: transparent;
+            position: relative;
+            margin-right: 1.5em;
+        }
+        .link:before {
+            background-size: 3em;
+            height: 8em;
+            width: 5em;
+            border-radius: 0;
+        }
+        .link.contact:before {
+            background-position: 1em 5em;
+        }
+        .link.facebook:before {
+            background-position: 1em 4.5em;
         }
     }
     @media screen and (min-width: 991px) {
@@ -87,14 +117,33 @@
             background-repeat: no-repeat;
             background-position: -24% 60%;            
         }
+        .links {
+            left: 10%;
+        }
         nav a {
             margin-right: 2em;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        .sistema {
+            display: flex;
+            justify-content: space-between;
+        }
+        .botao, .about {
+            width: 100%;
+        }
+        .sistema .botao {
+            width: 26ch;
+            margin: 0;
         }
     }
 </style>
 <% end %>
 <% content_for :header do %>
-    <%= link_to "Sobre nós", about_path, {class: "links"} %>
+    <div class="links">
+        <a href="https://www.facebook.com/pages/Rede-Nossas-Cidades/711876345548757?pnref=lhc" class="link facebook" target="_new">Facebook</a>
+        <%= link_to "Contato", contact_path, {class: "link contact"} %>
+    </div>
 <% end %>
 <% content_for :main do %>
     <div class="container">
@@ -106,14 +155,21 @@
             <p>Se você é eleitor/a, poderá acessar a nossa lista de candidaturas a partir do dia 15 de setembro!</p>
             
             <% if false or true %>
-            <div class="botao">
-                <%= link_to "Eleitor(a)", facebook_auth_path({type: "user"}), {class:"btn btn1"} %>
-                <span>Quero escolher alguém ideal para vereador(a)!</span>
-            </div>
-            <% end %>
-            <div class="botao">
-                <%= link_to "Sou candidato/a", facebook_auth_path({type: "candidate"}), {class: "btn btn2"} %>
-                <span>Quero  divulgar minha candidatura!</span>
+            <div class="nav">
+                <div class="sistema">
+                    <div class="botao">
+                        <%= link_to "Eleitor(a)", facebook_auth_path({type: "user"}), {class:"btn btn-verdeclaro-roxo"} %>
+                        <span>Quero escolher alguém ideal para vereador(a)!</span>
+                    </div>
+                    <% end %>
+                    <div class="botao">
+                        <%= link_to "Sou candidato/a", facebook_auth_path({type: "candidate"}), {class: "btn btn-verdeescuro-roxo"} %>
+                        <span>Quero  divulgar minha candidatura!</span>
+                    </div>
+                </div>
+                <div class="botao">
+                    <%= link_to "Saiba mais sobre o projeto", about_path, {class: "btn btn-amarelo-roxo about"} %>
+                </div>
             </div>
         </div>
     </div>
