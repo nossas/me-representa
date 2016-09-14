@@ -21,7 +21,7 @@
         text-shadow: .1em .1em #d8b212;
         text-align: center;
     }
-    .form-control {
+    .form-control,.form-control:focus {
         color: #fff;
         border: 2px solid #582985;
     }
@@ -95,11 +95,8 @@
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="city">Cidade</label>
                         <div class="col-md-10">
-                            <select name="city" id="city" class= "form-control">
-                            <% City.order([:name, :state]).map {|c| ["#{c.name}, #{c.state}", "#{c.name}, #{c.state} - #{c.id}"]}.each do |cidade| %>
-                                <option value="<%= cidade[1] %>"><%= cidade[0]%></option>
-                            <% end %>
-                            </select>
+                            <input type="hidden" name="city_id" id="cityid" class="form-control">
+                            <input type="text" name="city" id="city" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -108,10 +105,18 @@
                             <textarea class="form-control" cols="40" id="mensagem" name="mensagem" rows="20"></textarea>
                        </div>
                     </div>
-                </div>
-                
+                </div>                
                 <button type="submit" class="btn btn-amarelo-roxo">Enviar</button>
             <% end %>
         </div>
     </div>
+<% end %>
+
+<% content_for :scripts do %>
+    <script src="/assets/cidades.js"></script>
+    <script>
+        ligaCidades("#city", function(erro, dados){
+            $("#cityid").val(dados.id);
+        });
+    </script>
 <% end %>
