@@ -36,6 +36,7 @@ var ligaCidades = function(componenteBusca, selecionaValores) {
       }
       else {
         cBusca.val('');
+        selecionaValores(null, {});
       }
       return false;
     }

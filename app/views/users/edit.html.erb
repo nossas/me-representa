@@ -145,7 +145,7 @@
                     <%= f.label :city_id, "Cidade em que vota *", {class: "col-lg-2 control-label"} %>
                     <div class="col-lg-10">
                         <%= f.hidden_field :city_id %>
-                        <input type="text" id="city_name" class="form-control" value= "<%= @user.city.name if @user.city %>">
+                        <input type="text" id="city_name" class="form-control" value= '<%= "#{@user.city.name}, #{@user.city.state}" if @user.city %>'>
                     </div>
                 </div>
                 <% if @user.errors[:mobile_phone].count > 0 %>
