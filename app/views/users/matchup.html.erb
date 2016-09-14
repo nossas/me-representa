@@ -81,8 +81,9 @@
 </style>
 <% end %>
 
-<% content_for :menu do %>
-    <li><a href="<%= new_answer_path %>" class="dropdown-item">Refazer questionário</a></li>
+<% content_for :menu_logged do %>
+    <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
+    <li><%= link_to "Refazer questionário", new_answer_path(session[:user_id]), {class: "dropdown-item"} %>
 <% end %>
 
 <% content_for :main do %>
@@ -95,25 +96,27 @@
             <% p @matching %>
             <div class="candidatos">
                 <% @matching.each do |match| %>
-                    <div class="candidato">
-                        <img class="can-pic" src="<%= match['picture'] %>" alt="Foto do candidato">
-                        <span class="info-text name">
-                            <%= match['nickname'] %>
-                        </span>
-                        <span class="info-text number">
-                            nº <span class="candidate-number"><%= match['number'] %></span>
-                        </span>
-                        <span class="info-text party">
-                            <% if match['union'] %>
-                                Coligação: <%= match['union'] %>
-                            <% else %>
-                                Partido: <%= match['party_symbol'] %>
-                            <% end %>
-                        </span>
-                        <span class="info-text contagem">
-                            <%= match['contagem'] %> intenções de voto
-                        </span>                        
-                    </div>
+                    <a href="<%= candidate_path(match['id']) %>">
+                        <div class="candidato">
+                            <img class="can-pic" src="<%= match['picture'] %>" alt="Foto do candidato">
+                            <span class="info-text name">
+                                <%= match['nickname'] %>
+                            </span>
+                            <span class="info-text number">
+                                nº <span class="candidate-number"><%= match['number'] %></span>
+                            </span>
+                            <span class="info-text party">
+                                <% if match['union'] %>
+                                    Coligação: <%= match['union'] %>
+                                <% else %>
+                                    Partido: <%= match['party_symbol'] %>
+                                <% end %>
+                            </span>
+                            <span class="info-text contagem">
+                                <%= match['contagem'] %> intenções de voto
+                            </span>                        
+                        </div>
+                    </a>
                 <% end %>
             </div>
 
