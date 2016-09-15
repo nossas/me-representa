@@ -19,11 +19,11 @@
 	div.cities>div {
 		margin-top: 1em;
 	}
-    .mensagem h2, .mensagem p {
+    h2, p {
         color: #d8b212;
         line-height: 1.3em;
     }
-    .mensagem>h2 {
+    h2 {
         text-transform: uppercase;
         font-size: 1em;
         font-weight: bolder;
@@ -36,6 +36,10 @@
         margin: 3em auto 0 auto;
         display: table;
         text-transform: uppercase;
+    }
+    .mensagem>p {
+        color: #582985;
+        letter-spacing: .17em;
     }
     @media screen and (min-width: 400px) {
         main {
@@ -65,7 +69,7 @@
             right: 0;
             bottom: 0;
         }
-        .mensagem, #sadface {
+        .right>div, #sadface {
             position: absolute;
             top: 0;
             left: 0;
@@ -92,10 +96,27 @@
         <img src="/assets/sadfacey.svg" id="sadface" alt="Icone SadFace">
     </div>
     <div class="right">
-        <div class="mensagem">
+        <div>
             <h2>desculpe, ainda não temos nenhuma candidatura cadastrada na sua cidade :(</h2>
             <div>
-                <p>Mas não se preocupe! Se você quiser ajudar a gente a encontrar candidatos que respeitem os direitos humanos na sua cidade, é só se inscrever como voluntário !</p>
+                <p>Procure na sua cidade candidatas e candidatos a vereador que tenham compromisso com os direitos humanos e peça a eles que se cadastrem no nosso site! Use a carta abaixo como modelo:</p>
+                <cite class="mensagem">
+<p>
+Cara(o) candidata(o) a veredador(a),
+</p>
+<p>
+Gostaria de te convidar a fazer um cadastro no site #MeRepresenta, que está listando candidaturas a vereador de todo o Brasil que lutem a favor dos direitos humanos. Basta entrar no site <strong>candidatos.merepresenta.org.br</strong> por meio de seu perfil no Facebook e responder a 14 questões, que permitirão que a sua campanha se aproxime de eleitoras e eleitores!     
+</p>
+<p>
+Conto com a sua participação! Você tem até dia 18 de setembro para se cadastrar!
+</p>
+<p>
+Abraços,
+</p>
+<p>
+(Seu nome.)
+</p>
+                </cite>
                 <a href="#" class="btn btn-2">Clique aqui e se inscreva!</a>
             </div>
         </div>
