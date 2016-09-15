@@ -113,7 +113,7 @@
                 <label for="question-<%= answer.question_id %>">Sim</label>
             </div>
             <span class="question-title">
-                <%= answer.question.text %>
+                <%= answer.question.afirmative||answer.question.text %>
             </span>            
         </div>
         <div class="alert alert-danger invisivel" id="alert">
