@@ -4,6 +4,13 @@
         background-color: #582985;
         background-image: url("/assets/FE3.png");
     }
+    h2 {
+        font-family: ProximaNovaSoft-Bold;
+        text-transform: uppercase;
+        color: #097e74;
+        font-size: 1.2em;
+        text-align: center;
+    }
     .conteudo {
         margin: 2em 0;
         font-family: ProximaNovaSoft-Bold;
@@ -67,11 +74,19 @@
     .info-text.party, .info-text.contagem {
         color: #d8b212;
     }
+    @media screen and (min-width: 768px) {
+        h2 {
+            font-size: 1.5em;
+        }
+    }
     @media screen and (min-width: 1200px) {
         th {
             background-color: #097e74;
             border: 1em solid #582985;
             padding: 1em;
+        }
+        h2 {
+            font-size: 2em;
         }
         label {
             display: block;
@@ -93,6 +108,7 @@
             <p>Aqui estão os candidatas e os candidatos que têm a ver com você! Eles estão organizados de acordo com  seus posicionamentos pessoais, mas também de acordo com o compromisso de seus partidos e coligações com os direitos humanos.</p>
             <p>Nas eleições, você terá direito a apenas um voto para vereados, então escolha com cuidado com quem vai votar. E, se possível, escolha votar em uma mulher! Assim você vai contribuir para a igualdade de gênero na Câmara Municipal de sua cidades.</p>
 
+            <h2>Clique na foto para ver o perfil do/a candidato/a</h2>
             <% p @matching %>
             <div class="candidatos">
                 <% @matching.each do |match| %>
