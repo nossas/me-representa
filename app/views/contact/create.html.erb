@@ -1,13 +1,45 @@
-<% content_for :header do %>
-    <style>
-    </style>
+<% content_for :head do %>
+<style>
+    body {
+        background-color: #097e74;
+    }
+    main {
+        font-family: ProximaNovaSoft-Bold;
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        margin-bottom: 3em;
+    }
+    h1 {
+        font-size: 3.5em;
+        margin: .5em 0;
+        text-shadow: .1em .1em #d8b212;
+        text-align: center;
+        color: #582985;
+    }
+    .mensagem {
+        color: #582985;
+        text-align: center
+    }
+</style>
+<% end %>
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <span class="nav-link disabled">Contato</span>
+    </div>
 <% end %>
 
 <% content_for :main do %>
     <div class="container">
         <h1>Agradecemos pelo contato</h1>
         <div class='mensagem'>
-            Mutchas gracias, bambino !
+            Tenha certeza que em breve estaremos analisando sua mensagem.
         </div>
     </div>
 <% end %>
