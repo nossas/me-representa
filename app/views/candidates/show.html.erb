@@ -1,3 +1,4 @@
+<% require 'uri' %>
 <% content_for :head do %>
     <title>Perfil de Candidato</title>
     <style>
@@ -296,9 +297,10 @@
             </tbody>
         </table>
     </div>
-    
-    <% if not session[:candidate_id] and session[:user_id]%>
+
+    <% if ( not session[:candidate_id] ) and session[:user_id]%>
     <%= link_to "Voltar aos candidatos", user_matchup_path(@current_user), :class => "btn btn-2" %>
+    <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn btn-2" >Compartilhe sua escolha</a>
     <% end %>
 </div>
 
