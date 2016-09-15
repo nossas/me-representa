@@ -2,6 +2,14 @@
 <% content_for :head do %>
     <title>Perfil de Candidato</title>
     <style>
+        textarea {
+            background-color: #532985;
+            border: none;
+            width: 101%;
+            height: 80%;
+            resize: none;
+            color: #fff;
+        }
         .container {
             margin-top: 2em;
             margin-bottom: 2em;
@@ -120,17 +128,17 @@
         .brother .partido {
             text-align: right;
         }
-        .nav a {
+        main .nav a {
             width: 100%;
             margin-top: .5em;
         }
-        .nav {
+        main .nav {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
         }
         @media screen and (min-width:500px) {
-            .nav a {
+            main .nav a {
                 width: 49%;
             }
             main {
@@ -237,7 +245,9 @@
         </div>
         <div class="info-bio">
             <h3>Sobre o/a candidato/a</h3>
-            <%= @candidate.bio %>
+            <textarea readonly>
+                <%= @candidate.bio %>
+            </textarea>
         </div>
     </div>
        
