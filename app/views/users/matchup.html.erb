@@ -98,7 +98,7 @@
                 <% @matching.each do |match| %>
                     <a href="<%= candidate_path(match['id']) %>">
                         <div class="candidato">
-                            <img class="can-pic" src="<%= match['picture'] %>" alt="Foto do candidato">
+                            <img class="can-pic" src="<%= match['picture'] %>?type=large" alt="Foto do candidato">
                             <span class="info-text name">
                                 <%= match['nickname'] %>
                             </span>
@@ -147,7 +147,7 @@
                         var divGrupo = $("div.candidatos");
                         data.forEach(function(match){
                             var  divCand = $("<div>", {class: 'candidato'})
-                                , imgCand = $("<img>", {class: 'can-pic', src: match['picture'], alt:"Foto do candidato"})
+                                , imgCand = $("<img>", {class: 'can-pic', src: match['picture'] + "?type=large", alt:"Foto do candidato"})
                                 , nickname = $("<span>", {class: 'info-text name'})
                                 , candNumber = $("<span>", {class: 'info-text number'})
                                 , number = $("<span>", {class: 'candidate-number'})
