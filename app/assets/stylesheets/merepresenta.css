@@ -34,6 +34,11 @@ body {
     color: #582985;
     font-weight: bolder;
 }
+.btn-roxo-amarelo {
+    background-color: #582985;
+    color: #d8b212;
+    font-weight: bolder;
+}
 .btn-verdeescuro-roxo {
     background-color: #097e74;
     color: #097e74;

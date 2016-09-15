@@ -84,26 +84,12 @@
             text-decoration: none;
             font-size: 1.6em;
         }
-        .btn-2 {
-            border: 2px solid #532985;
-            width: 40ch;
-            max-width: 100%;
-            margin: 2em auto;
-            display: block;
-        }
-        .btn-2:before {
-            content: '<';
-            margin-right: 1em;
-            font-size: 1.5em;
-            position: relative;
-            top: .1em;
-        }
         .votes-int p {
             font-size: .6em;
         }
 
         .respostas, .puxar {
-            margin: 6em 0;
+            margin: 3em 0;
         }
         .brother, .respostas table {
             width: 100%;
@@ -134,7 +120,19 @@
         .brother .partido {
             text-align: right;
         }
+        .nav a {
+            width: 100%;
+            margin-top: .5em;
+        }
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
         @media screen and (min-width:500px) {
+            .nav a {
+                width: 49%;
+            }
             main {
                 font-size: 1rem;
             }
@@ -207,7 +205,7 @@
 <div class="container">    
     <div class="flex">
         <div class="info-basica">        
-            <img class="can-pic" src="<%= @candidate.picture %>" alt="Foto do candidato">
+            <img class="can-pic" src="<%= @candidate.picture %>?type=large" alt="Foto do candidato">
             <span class="info-text name">
                 <%= @candidate.nickname %>
             </span>
@@ -299,8 +297,10 @@
     </div>
 
     <% if ( not session[:candidate_id] ) and session[:user_id]%>
-    <%= link_to "Voltar aos candidatos", user_matchup_path(@current_user), :class => "btn btn-2" %>
-    <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn btn-2" >Compartilhe sua escolha</a>
+    <div class="nav">
+        <%= link_to "Voltar aos candidatos", user_matchup_path(@current_user), :class => "btn btn-roxo-amarelo", :id=>"btn-voltar" %>
+        <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn btn-roxo-amarelo" id="btn-compartilhar">Compartilhe sua escolha</a>
+    </div>
     <% end %>
 </div>
 
