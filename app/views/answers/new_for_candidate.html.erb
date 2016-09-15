@@ -139,7 +139,7 @@
             , candidate_id: <%= @candidate.id %>
         }, url = "<%= candidate_answers_path(@candidate.id) %>/";
         
-        let submit = function() {
+        var submit = function() {
             var prev = $(this).prev();
             prev.val();
             $(this).parent().parent().submit();
