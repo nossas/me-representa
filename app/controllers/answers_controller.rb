@@ -65,7 +65,7 @@ class AnswersController < ApplicationController
       end
     else
       Question.where("chosen = true and role_type = 'truth'").each do |q|
-        if (not @current_user.answers) or (@current_user.answers.select{|a| a.question.id == q.id}.count == 0)
+        if (not @current_user.answers) or (@current_user.answers.select{|a| a.question_id == q.id}.count == 0)
           a = Answer.new
           a.question = q
           a.responder = @current_user
