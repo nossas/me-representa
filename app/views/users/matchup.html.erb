@@ -146,7 +146,7 @@
 
 <% content_for :scripts do %>
 <script>
-    var MatchupCreator = function(match_url, idCandidate){
+    var MatchupCreator = function(match_url, candidatesPath, idCandidate){
         var retorno = {
             _url: match_url + ".json"
             , candidateId: idCandidate
@@ -162,7 +162,8 @@
                     , success: function(data){
                         var divGrupo = $("div.candidatos");
                         data.forEach(function(match){
-                            var  divCand = $("<div>", {class: 'candidato'})
+                            var   link  = $("<a>", {href: candidatesPath + match["id"] })
+                                , divCand = $("<div>", {class: 'candidato'})
                                 , imgCand = $("<img>", {class: 'can-pic', src: match['picture'] + "?type=large", alt:"Foto do candidato"})
                                 , nickname = $("<span>", {class: 'info-text name'})
                                 , candNumber = $("<span>", {class: 'info-text number'})
@@ -191,7 +192,9 @@
                             divCand.append(party);
                             divCand.append(contagem);
 
-                            divGrupo.append(divCand);
+                            link.append(divCand);
+
+                            divGrupo.append(link);
                         });
                         nextRecord.val(parseInt(nextRecord.val())+6);
                         if (data.length < 6)
@@ -204,7 +207,7 @@
     };
 
     (function(){
-        var matchupCreator = MatchupCreator("<%= user_matchup_path(@user)%>", <%= @user.candidate_id ? @user.candidate_id : 0 %>);
+        var matchupCreator = MatchupCreator("<%= user_matchup_path(@user)%>","<%= candidates_path %>/", <%= @user.candidate_id ? @user.candidate_id : 0 %>);
 
         $("#btn-mais-cand").on("click", matchupCreator.callForMore);
     })();

@@ -54,20 +54,16 @@ class Candidate < ActiveRecord::Base
   end
 
   def gang
+    u = Union.joins(:parties).where("parties.id = #{party.id} and unions.city_id = #{city_id}")
+
     partidos = "tse_data.party_id = #{party_id}"
-    if union
-      partidos = union.parties.map {|p|  "tse_data.party_id = #{p.id}"}.reduce{|a,b| "#{a} or #{b}"}
+    if u.count > 0
+      partidos = u[0].parties.map {|p|  "tse_data.party_id = #{p.id}"}.reduce{|a,b| "#{a} or #{b}"}
     end
     TseData.joins(:party)
       .where("tse_data.city_id = #{city_id} and tse_data.male='true' and (#{partidos})")
       .order("(100 - extract(year from age(tse_data.born_at))) * parties.score, parties.score")
       .limit(10)
-  end
-
-  def union
-    u = Union.joins(:parties).where("parties.id = #{party_id} and unions.city_id = #{city_id}")
-    u[0]
-    u.count>0?u[0]:nil
   end
 
   def verify_tse_data
