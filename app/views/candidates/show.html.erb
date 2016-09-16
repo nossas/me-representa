@@ -5,8 +5,8 @@
         textarea {
             background-color: #532985;
             border: none;
-            width: 101%;
             height: 80%;
+            width: 100%;
             resize: none;
             color: #fff;
         }
@@ -137,6 +137,21 @@
             flex-wrap: wrap;
             justify-content: space-around;
         }
+        #btn-voltar:before {
+            content: "<";
+            margin-right: 1em;
+        }
+        #btn-compartilhar:before {
+            content: "";
+            display: inline-block;
+            background-image: url('/assets/face2.svg');
+            background-size: cover;
+            width: 2em;
+            height: 2em;
+            position: relative;
+            left: 23%;
+            top: .5em;
+            }
         @media screen and (min-width:500px) {
             main .nav a {
                 width: 49%;
@@ -245,7 +260,7 @@
         </div>
         <div class="info-bio">
             <h3>Sobre o/a candidato/a</h3>
-            <textarea readonly>
+            <textarea readonly rows="13" cols="40">
                 <%= @candidate.bio %>
             </textarea>
         </div>
