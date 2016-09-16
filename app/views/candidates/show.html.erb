@@ -275,6 +275,15 @@
     </style>
 <% end %>
 
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Contato", contact_path, {class: "nav-link"} %>
+    </div>
+<% end %>
+
 <% content_for :menu_logged do %>
     <% if session[:candidate_id] %>
         <li><a href="<%= edit_candidate_path(@current_user.id) %>" class="dropdown-item">Perfil no #MeRepresenta</a></li>
