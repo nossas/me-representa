@@ -1,4 +1,3 @@
-<% require 'uri' %>
 <% content_for :head do %>
     <title>Perfil de Candidato</title>
     <style>
@@ -56,8 +55,8 @@
         .candidate-number {
             font-size: 2em;
         }
-        .puxar .title, .brother {
-            background-color: #532985;
+        .puxar .title {
+                background-color: #532985;
             color: #fff;
         }
         .puxar h2 {
@@ -77,29 +76,36 @@
         .title {
             padding: 1em;
         }
+        .brother td {
+            background-color: #532985;
+            color: #fff;
+            padding: 1em;
+        }
         .brother {
             margin: 1em 0;
-            padding: 1.5em;
+            border-collapse: separate;
+            border-spacing: 0 1em;
+            width: 100%;
+            font-size: 1.2em;
         }
-        .brother a, .partido {
-            color: #fff;
-            font-size: 1.5em;
+        .partido span {
+            display: block;
         }
         .partido {
-            float: right;
+            text-transform: uppercase;
+            text-align: center;
+            width: 7ch;
         }
-        .brother a:hover {
-            text-decoration: none;
-            font-size: 1.6em;
+        .nota {
+            font-weight: bolder
         }
         .votes-int p {
             font-size: .6em;
         }
-
         .respostas, .puxar {
             margin: 3em 0;
         }
-        .brother, .respostas table {
+        .respostas table {
             width: 100%;
             color: #fff;
             border-spacing: .3em;
@@ -113,55 +119,72 @@
         .resposta.perigo {
             font-size: 1.1em;
         }
-        .otima-resposta {
-            color: #71e7dc;
-        }        
-        .perigo {
-            color: #d8b212;
+        td.perigo {
+            color: #532985;
+            background-color: pink;
         }
         .pergunta, .resposta {
             padding: .5em;
         }
-        .brother .candidato {
+        .puxar {
             width: 100%;
-        }
-        .brother .partido {
-            text-align: right;
         }
         main .nav a {
-            width: 100%;
-            margin-top: .5em;
+            display: block;
+            text-transform: uppercase;
+            position: relative;
+            margin-bottom: 1em;
         }
-        main .nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+        #btn-voltar {
+            padding: .6em 0 .8em 0;
         }
         #btn-voltar:before {
             content: "<";
-            margin-right: 1em;
+            margin-right: .5em;
+            font-size: 1.8em;
+            position: relative;
+            top: .15em;
+        }
+        #btn-compartilhar {
+            padding: .6em 0 1em 0;
         }
         #btn-compartilhar:before {
             content: "";
             display: inline-block;
             background-image: url('/assets/face2.svg');
             background-size: cover;
-            width: 2em;
-            height: 2em;
+            width: 1.5em;
+            height: 1.5em;
             position: relative;
-            left: 23%;
-            top: .5em;
-            }
+            top: .38em;
+            margin-right: .5em;
+
+        }
+        .nota {
+            background-color: #d8b212;
+            font-size: .6em;
+            padding: .3em;
+            border-radius: .4em;
+        }
         @media screen and (min-width:500px) {
-            main .nav a {
-                width: 49%;
-            }
             main {
                 font-size: 1rem;
             }
             .pergunta, .resposta {
                 padding: 1em 3em;
 
+            }
+        }
+        @media screen and (min-width:600px) {
+            main .nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            main .nav a {
+                width: 49%;
+                margin-top: .5em;
+                display: inline;
             }
         }
         @media screen and (min-width:800px) {
@@ -207,7 +230,26 @@
                 margin-top: 2em;
             }
         }
+        @media screen and (min-width:992px) {
+            .partido span {
+                display: inline-block;
+            }
+            .partido {
+                width: 30%;
+                text-align: right;
+            }
+            .nota {
+                background-color: #d8b212;
+                font-size: .6em;
+                padding: 0.4em 2em .2em 2em;
+                border-radius: .4em;
+                margin-left: 1em;
+            }
+        }
         @media screen and (min-width:1200px) {
+            .partido {
+                width: 25%;
+            }
             .puxar h2,.puxar h5 {
                 display: inline;
             }
@@ -225,6 +267,9 @@
 <% end %>
 
 <% content_for :main do %>
+<% 
+   require 'uri'
+%>
 <div class="container">    
     <div class="flex">
         <div class="info-basica">        
@@ -272,22 +317,21 @@
             <h5>Os votos nesse/a candidato/a vão para todos os partidos de sua coligação e podem acabar elegendo alguém em quem você não votaria. Veja um exemplo de quem vai se beneficiar dos votos que essa candidatura receber:</h5>
         </div>
 
-        <% @candidate.gang.each do |brother| %>
-        <div class="brother">
-            <table>
-                <tbody>
-                    <tr>
-                        <td class="candidato">
-                            <%= brother.name %>                            
-                        </td>
-                        <td class="partido">
-                            <%= brother.party.symbol %>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <% end %>
+        <table class="brother">
+            <tbody>
+                <% @candidate.gang.each do |brother| %>
+                <tr>
+                    <td class="candidato">
+                        <%= brother.name %>                            
+                    </td>
+                    <td class="partido">
+                        <span class="partido"><%= brother.party.symbol %></span>
+                        <span class="nota">nota <%= (10 * brother.party.score).round %></span>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
     </div>
 
     <div class="respostas">
@@ -303,9 +347,7 @@
                             if resposta_eleitor.count > 0
                                 resposta_eleitor = resposta_eleitor[0]
                                 if not session[:candidate_id]
-                                    if resposta_eleitor.weight > 0 and answer.short_answer == "Sim"
-                                        classe = "otima-resposta"
-                                    elsif answer.short_answer == "Não"
+                                    if answer.short_answer == "Não"
                                         classe = "perigo"
                                     end
                                 end
@@ -322,9 +364,9 @@
     </div>
 
     <% if ( not session[:candidate_id] ) and session[:user_id]%>
-    <div class="nav">
-        <%= link_to "Voltar aos candidatos", user_matchup_path(@current_user), :class => "btn btn-roxo-amarelo", :id=>"btn-voltar" %>
-        <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn btn-roxo-amarelo" id="btn-compartilhar">Compartilhe sua escolha</a>
+    <div class="nav">   
+        <a href="<%= user_matchup_path(@current_user) %>" class="btn btn-roxo-amarelo" id="btn-voltar"><span>Voltar aos candidatos</span></a>
+        <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn btn-roxo-amarelo" id="btn-compartilhar"><span>Compartilhe sua escolha</span></a>
     </div>
     <% end %>
 </div>
