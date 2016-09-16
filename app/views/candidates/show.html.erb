@@ -229,7 +229,7 @@
                 display: inline-block;
             }            
             #votar:before {
-                bottom: 1.15em;
+                bottom: 1.8em;
             }
             .avaliacao {
                 position: absolute;
@@ -295,17 +295,20 @@
             <span class="info-text party">
                 Partido: <%= @candidate.party.symbol %>
             </span>
+            <% if @candidate.party_union and @candidate.party_union.parties.count > 1 %>
+            <span class="info-text coligacao">
+                Coligação: <%= @candidate.party_union.name %>
+            </span>
+            <% else %><br>
+            <% end %>
             <span class="votes-int">
-                <% if false  %>
                 <%= User.where("users.candidate_id = #{@candidate.id}" ).count %> intenções de voto
-                <% end %>
-                <p>* A partir do dia 15 de setembro, eleitores poderão acessar a plataforma e declarar suas intenções de voto.</p>
             </span>
         </div>
         <div class="info-bio">
             <div class="bio">
                 <h3>Sobre o/a candidato/a</h3>
-                <textarea readonly rows="13" cols="40">
+                <textarea readonly rows="10" cols="40">
                     <%= @candidate.bio %>
                 </textarea>
             </div>

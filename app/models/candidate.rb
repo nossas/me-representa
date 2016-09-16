@@ -7,7 +7,6 @@ class Candidate < ActiveRecord::Base
   belongs_to :party
   belongs_to :city
   
-#  has_one :union, :through => :party
   has_many :answers, :as => :responder
   has_many :users
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
@@ -53,12 +52,15 @@ class Candidate < ActiveRecord::Base
     connection.select_all(candidates.order("score DESC").group("candidates.name, candidates.nickname, candidates.id, symbol"))
   end
 
-  def gang
+  def party_union
     u = Union.joins(:parties).where("parties.id = #{party.id} and unions.city_id = #{city_id}")
+    (u.count > 0)?u[0]:nil
+  end
 
+  def gang
     partidos = "tse_data.party_id = #{party_id}"
-    if u.count > 0
-      partidos = u[0].parties.map {|p|  "tse_data.party_id = #{p.id}"}.reduce{|a,b| "#{a} or #{b}"}
+    if party_union
+      partidos = party_union.parties.map {|p|  "tse_data.party_id = #{p.id}"}.reduce{|a,b| "#{a} or #{b}"}
     end
     TseData.joins(:party)
       .where("tse_data.city_id = #{city_id} and tse_data.male='true' and (#{partidos})")
