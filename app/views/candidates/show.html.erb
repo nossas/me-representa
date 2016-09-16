@@ -13,14 +13,11 @@
             margin-top: 2em;
             margin-bottom: 2em;
         }
-        #votar, #votar img {
-            background-color: #532985;
-            border: none;
-            width: 2em;
-            height: 2em;
-            position: absolute;
-            top: .5em;
-            right: .5em;
+        #votar {
+            border: 3px solid #532985;
+            position: relative;
+            margin: 0 auto;
+            display: block;        
         }
         body {
             background-color: #d8b212;            
@@ -35,8 +32,14 @@
         main h3 {
             font-size: 2em;
         }
-        .info-basica, .info-bio {
-            position: relative;
+        .info-basica {
+            background-color: #532985;
+            color: #fff;
+            padding: 1.5em 1.5em .5em 1.5em;
+            text-transform: uppercase;
+            margin-bottom: 1em;
+        }
+        .bio {
             background-color: #532985;
             color: #fff;
             padding: 1.5em 1.5em .5em 1.5em;
@@ -195,6 +198,7 @@
             .flex {
                 display: flex;
                 margin-bottom: 2em;
+                position: relative;
             }
             .info-bio {
                 font-size: 1.2em;
@@ -207,18 +211,26 @@
                 margin: 0 3em 0 0;
                 box-sizing: border-box;
             }
-            .info-basica:after {
-                content: '\00a0';
-                box-sizing: border-box;
+            .info-basica:after, #votar:before {
+                content: "";
                 position: absolute;
-                bottom: 5em;
                 left: 0;
-                width: 69vw;
-                max-width: 900px;
+                right: 0;
                 background-color: #532985;
                 height: .5em;
                 z-index: -1;
             }            
+            .info-basica:after {
+                bottom: 5em;
+            }            
+            #votar {
+                float: right;
+                position: initial;
+                display: inline-block;
+            }            
+            #votar:before {
+                bottom: 1.15em;
+            }
             .avaliacao {
                 position: absolute;
                 bottom: 1em;
@@ -289,25 +301,26 @@
                 <% end %>
                 <p>* A partir do dia 15 de setembro, eleitores poderão acessar a plataforma e declarar suas intenções de voto.</p>
             </span>
+        </div>
+        <div class="info-bio">
+            <div class="bio">
+                <h3>Sobre o/a candidato/a</h3>
+                <textarea readonly rows="13" cols="40">
+                    <%= @candidate.bio %>
+                </textarea>
+            </div>
             <% if ! session[:candidate_id] and  session[:user_id] %>
-                <% if @candidate.id == @current_user.candidate_id %>
-                    <img src="/assets/c1.svg" alt="Vou votar" id="votar">
-                <% else %>
+                <% if @candidate.id != @current_user.candidate_id %>
                     <%= form_for @current_user do |f| %>
                         <%= f.hidden_field :candidate_id, value: @candidate.id %>
                         <input type="hidden" name="redirect_to" value="<%= candidate_path(@candidate.id)%>">
-                        <button type="submit" id="votar">
-                            <img src="/assets/c02.svg" alt="Quero votar">
+                        <button type="submit" id="votar" class="btn btn-amarelo-roxo">
+                            Já decidi meu voto para vereador/a
                         </button>
                     <% end %>
                 <% end %>
             <% end %>
-        </div>
-        <div class="info-bio">
-            <h3>Sobre o/a candidato/a</h3>
-            <textarea readonly rows="13" cols="40">
-                <%= @candidate.bio %>
-            </textarea>
+            
         </div>
     </div>
        
