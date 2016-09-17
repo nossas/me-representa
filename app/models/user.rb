@@ -66,17 +66,17 @@ class User < ActiveRecord::Base
     x = match_data.map do |dt|
       {
         :score => dt.score,
-        :union_score => dt.score,
+        :union_score => dt.union_score,
         :party_score => dt.party_score,
         :score_final => dt.score_final,
         :id => dt.id,
         :nickname => dt.nickname
       }
     end.sort { |a,b| 
-      (a[:score_final] == b[:score_final]) ? (a[:score_final] - b[:score_final]) :
-      (a[:union_score] == b[:union_score]) ? (a[:union_score] - b[:union_score]) :
-      (a[:party_score] == b[:party_score]) ? (a[:party_score] - b[:party_score]) :
-      (a[:score] == b[:score]) ? (a[:score] - b[:score]) : a[:nickname] <=> b[:nickname]
+      (a[:score_final] != b[:score_final]) ? (a[:score_final] - b[:score_final]) :
+      (a[:union_score] != b[:union_score]) ? (a[:union_score] - b[:union_score]) :
+      (a[:party_score] != b[:party_score]) ? (a[:party_score] - b[:party_score]) :
+      (a[:score] != b[:score]) ? (a[:score] - b[:score]) : a[:nickname] <=> b[:nickname]
     }.reverse
   end
 
