@@ -16,6 +16,7 @@ class Ability
       can :create, Candidate
       can :update, Candidate
       can :confirm, Candidate  
+      can :confirm, Candidate  
 
       can :create, Answer
       can :update, Answer do |a|
@@ -23,6 +24,7 @@ class Ability
       end
       can :update, User
       can :matchup, User
+      can :matchup_data, User
     end
 
 

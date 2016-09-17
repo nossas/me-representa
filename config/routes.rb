@@ -7,6 +7,7 @@ CariocaPergunta::Application.routes.draw do
   post '/candidates/check', to: 'candidates#check', as: :candidates_check
   get '/candidates/confirm', to: 'candidates#confirm', as: :candidate_confirmation
   put '/candidates/finish', to: 'candidates#finish', as: :candidate_finish
+  get "/candidates/matches", to: "users#matchup_data", as: :candidates_matchup_data 
   
   resources :likes, only: [:create, :update]
 

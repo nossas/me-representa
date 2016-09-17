@@ -32,35 +32,52 @@ class User < ActiveRecord::Base
     qtde * 100 / answers.select{|a| a.weight > 0}.count
   end
 
-  def matches(first_record = 0, quantity = 6)
-    Candidate.
-     select(
-       %Q{
-        (
-          select
-              count(*)
-            from 
-              answers ca 
-              inner join
-                answers ua
-                on (ua.responder_id = #{id}) and (ca.question_id = ua.question_id) and (ua.responder_type = 'User') and (ua.weight>0)
-            where 
-              ca.responder_id = candidates.id and ca.responder_type='Candidate' and ca.short_answer = 'Sim'
-        ) as score
-        , candidates.id as id
-        , candidates.nickname as nickname
-        , candidates.number
-        , users.picture as picture
-        , parties.symbol as party_symbol
-        , (select u.name from parties_unions pu inner join unions u on pu.union_id = u.id where pu.party_id = candidates.party_id and u.city_id = candidates.city_id) as union 
-        , (select count(*) from users u where u.candidate_id = candidates.id) as contagem
+
+  def matches
+    match_data = Candidate.
+      select(
+        %Q{
+          (
+            select
+                count(*)
+              from 
+                answers ca 
+                inner join
+                  answers ua
+                  on (ua.responder_id = #{id}) and (ca.question_id = ua.question_id) and (ua.responder_type = 'User') and (ua.weight>0)
+              where 
+                ca.responder_id = candidates.id and ca.responder_type='Candidate' and ca.short_answer = 'Sim'
+          ) as score
+          , candidates.nickname
+          , candidates.id as id
+          , (select u.score from parties_unions pu inner join unions u on pu.union_id = u.id where pu.party_id = candidates.party_id and u.city_id = candidates.city_id) as union_score
+          , parties.score as party_score
         }).
-     joins(:party).
-     joins("inner join users on users.id = candidates.id").
-     where("candidates.finished_at is not null and candidates.city_id = #{city_id}").
-     offset(first_record).
-     limit(quantity).
-     order("1 desc, 2")
+      joins(:party).
+      where("candidates.finished_at is not null and candidates.city_id = #{city_id}")
+
+    match_data.each do |dt| 
+      dt['score'] = dt['score'].to_i
+      dt['union_score'] = dt['union_score'].to_f if dt['union_score']
+      dt['party_score'] = dt['party_score'].to_f
+      dt['score_final'] = dt['score'] * (dt['union_score'] ? dt['union_score'] : dt['party_score'])
+    end
+
+    x = match_data.map do |dt|
+      {
+        :score => dt.score,
+        :union_score => dt.score,
+        :party_score => dt.party_score,
+        :score_final => dt.score_final,
+        :id => dt.id,
+        :nickname => dt.nickname
+      }
+    end.sort { |a,b| 
+      (a[:score_final] == b[:score_final]) ? (a[:score_final] - b[:score_final]) :
+      (a[:union_score] == b[:union_score]) ? (a[:union_score] - b[:union_score]) :
+      (a[:party_score] == b[:party_score]) ? (a[:party_score] - b[:party_score]) :
+      (a[:score] == b[:score]) ? (a[:score] - b[:score]) : a[:nickname] <=> b[:nickname]
+    }.reverse
   end
 
   private

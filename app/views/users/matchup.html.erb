@@ -109,35 +109,33 @@
             <p>Nas eleições, você terá direito a apenas um voto para vereados, então escolha com cuidado com quem vai votar. E, se possível, escolha votar em uma mulher! Assim você vai contribuir para a igualdade de gênero na Câmara Municipal de sua cidades.</p>
 
             <h2>Clique na foto para ver o perfil do/a candidato/a</h2>
-            <% p @matching %>
             <div class="candidatos">
                 <% @matching.each do |match| %>
-                    <a href="<%= candidate_path(match['id']) %>">
-                        <div class="candidato">
-                            <img class="can-pic" src="<%= match['picture'] %>?type=large" alt="Foto do candidato">
-                            <span class="info-text name">
-                                <%= match['nickname'] %>
-                            </span>
-                            <span class="info-text number">
-                                nº <span class="candidate-number"><%= match['number'] %></span>
-                            </span>
-                            <span class="info-text party">
-                                <% if match['union'] %>
-                                    Coligação: <%= match['union'] %>
-                                <% else %>
-                                    Partido: <%= match['party_symbol'] %>
-                                <% end %>
-                            </span>
-                            <span class="info-text contagem">
-                                <%= match['contagem'] %> intenções de voto
-                            </span>                        
-                        </div>
-                    </a>
+                    <div class="candidato">
+                        <a href="<%= candidate_path(match[:id]) %>">
+                            <img class="can-pic" src="<%= match[:picture] %>?type=large" alt="Foto do candidato">
+                        </a>
+                        <span class="info-text name">
+                            <%= match[:nickname] %>
+                        </span>
+                        <span class="info-text number">
+                            nº <span class="candidate-number"><%= match[:number] %></span>
+                        </span>
+                        <span class="info-text party">
+                            <% if match[:union] %>
+                                Coligação: <%= match[:union] %>
+                            <% else %>
+                                Partido: <%= match[:party_symbol] %>
+                            <% end %>
+                        </span>
+                        <span class="info-text contagem">
+                            <%= match[:vote_intension] %> intenções de voto
+                        </span>                        
+                    </div>
                 <% end %>
             </div>
 
-            <% if @matching.size() == 6 %>
-            <input type="hidden" id="nextRecord" value="6">
+            <% if @matdata.size() > 0 %>
             <button id="btn-mais-cand" type="button" class="btn btn-2">mostrar mais</button>
             <% end %>
         </div>
@@ -146,23 +144,32 @@
 
 <% content_for :scripts do %>
 <script>
-    var MatchupCreator = function(match_url, candidatesPath, idCandidate){
+
+    var CandidateDateGetter = function(match_url, candidatesPath, candidates, noMoreDataCallback){
         var retorno = {
             _url: match_url + ".json"
-            , candidateId: idCandidate
+            , _candidates: candidates
+            , _searching: false
             , callForMore: function() {
-                var nextRecord = $("#nextRecord");
+                if (retorno._searching) return;
+                var nextList = retorno._candidates.slice(0,6);
+                retorno._candidates = retorno._candidates.slice(6,retorno._candidates.length);
+                retorno._searching =  true;
                 $.ajax({
                     url: retorno._url
                     , method: 'get'
                     , dataType: "json"
                     , data: {
-                        first: nextRecord.val()
+                        list: nextList
+                    }
+                    , error: function(data) {
+                        retorno._searching = false;
+                        alert("Erro ao buscar dados do servidor. Por favor, tente novamente ou recarregue a página");
                     }
                     , success: function(data){
                         var divGrupo = $("div.candidatos");
                         data.forEach(function(match){
-                            var   link  = $("<a>", {href: candidatesPath + match["id"] })
+                            var   link  = $("<a>", {href: candidatesPath +'/'+ match["id"] })
                                 , divCand = $("<div>", {class: 'candidato'})
                                 , imgCand = $("<img>", {class: 'can-pic', src: match['picture'] + "?type=large", alt:"Foto do candidato"})
                                 , nickname = $("<span>", {class: 'info-text name'})
@@ -173,7 +180,7 @@
                                 , img = $("<img>", {src: (match.id == retorno.candidateId ? "/assets/c1.svg" : "/assets/c0.svg")} );
 
                             number.text(match['number']);
-                            contagem.text(match['contagem'] + ' intenções de voto');
+                            contagem.text(match['vote_intension'] + ' intenções de voto');
 
                             candNumber.text("nº ");
                             candNumber.append(number);
@@ -181,35 +188,42 @@
                             nickname.text(match['nickname']);
 
                             if (match['union'] == null)
-                                party.text('Coligação: ' + match['party_symbol']);    
+                                party.text('Partido: ' + match['party_symbol']);    
                             else
-                                party.text('Partido: ' + match['union']);    
+                                party.text('Coligação: ' + match['union']);    
 
-
-                            divCand.append(imgCand);
+                            link.append(imgCand);
+                            divCand.append(link);
                             divCand.append(nickname);
                             divCand.append(candNumber);
                             divCand.append(party);
                             divCand.append(contagem);
 
-                            link.append(divCand);
 
-                            divGrupo.append(link);
+                            divGrupo.append(divCand);
+
+                            retorno._candidates.slice(retorno._candidates.findIndex(function(x){
+                                return x == match["id"];
+                            }))
                         });
-                        nextRecord.val(parseInt(nextRecord.val())+6);
-                        if (data.length < 6)
-                            $('#btn-mais-cand').addClass('invisivel');
+                        if (retorno._candidates.length == 0)
+                            noMoreDataCallback();
+                        retorno._searching = false;
                     }
                 });
             }
         };
         return retorno;
+
     };
 
-    (function(){
-        var matchupCreator = MatchupCreator("<%= user_matchup_path(@user)%>","<%= candidates_path %>/", <%= @user.candidate_id ? @user.candidate_id : 0 %>);
+    var candidateMatchList = [<%= @matdata.map{|m| m[:id] }.reduce{|t, o| "#{t}, #{o}"} %>];
+    var botaoBuscaCand = $("#btn-mais-cand");
 
-        $("#btn-mais-cand").on("click", matchupCreator.callForMore);
+    (function(){
+        var candidateDateGetter = CandidateDateGetter("<%= candidates_matchup_data_path %>", "<%= candidates_path %>", candidateMatchList, function() { botaoBuscaCand.addClass("invisivel"); } );
+
+        $("#btn-mais-cand").on("click", candidateDateGetter.callForMore);
     })();
 </script>
 <% end %>

@@ -82,7 +82,11 @@ class Candidate < ActiveRecord::Base
   def picture
       (User.find id).picture
   end
-        
+
+  def vote_intension
+    User.where("candidate_id = #{id}").count
+  end
+
   private
 
   def corrige_dados
