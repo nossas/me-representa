@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
     x = match_data.map do |dt|
       {
         :score => dt.score,
-        :union_score => dt.score,
+        :union_score => dt.union_score,
         :party_score => dt.party_score,
         :score_final => dt.score_final,
         :id => dt.id,
