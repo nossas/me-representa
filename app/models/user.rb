@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
           , candidates.id as id
           , (select u.score from parties_unions pu inner join unions u on pu.union_id = u.id where pu.party_id = candidates.party_id and u.city_id = candidates.city_id) as union_score
           , parties.score as party_score
+          , (select count(*) from users us where us.candidate_id = candidates.id) as votos 
         }).
       joins(:party).
       where("candidates.finished_at is not null and candidates.city_id = #{city_id}")
@@ -61,22 +62,30 @@ class User < ActiveRecord::Base
       dt['union_score'] = dt['union_score'].to_f if dt['union_score']
       dt['party_score'] = dt['party_score'].to_f
       dt['score_final'] = dt['score'] * (dt['union_score'] ? dt['union_score'] : dt['party_score'])
+      dt['votos'] = dt['votos'].to_i
     end
 
-    x = match_data.map do |dt|
+    x = match_data.select{ |dt| dt.score > 0 }
+
+    if (x.count == 0) # Se não houver ninguém, mostra o que tem
+      x = match_data
+    end
+    x.map do |dt|
       {
         :score => dt.score,
         :union_score => dt.union_score,
         :party_score => dt.party_score,
         :score_final => dt.score_final,
         :id => dt.id,
-        :nickname => dt.nickname
+        :nickname => dt.nickname,
+        :votos => dt.votos
       }
     end.sort { |a,b| 
       (a[:score_final] != b[:score_final]) ? (a[:score_final] - b[:score_final]) :
       (a[:union_score] != b[:union_score]) ? (a[:union_score] - b[:union_score]) :
       (a[:party_score] != b[:party_score]) ? (a[:party_score] - b[:party_score]) :
-      (a[:score] != b[:score]) ? (a[:score] - b[:score]) : a[:nickname] <=> b[:nickname]
+      (a[:score] != b[:score]) ? (a[:score] - b[:score]) :
+      (a[:votos] != b[:votos]) ? (a[:votos] - b[:votos]) : a[:nickname] <=> b[:nickname]
     }.reverse
   end
 
