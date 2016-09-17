@@ -41,4 +41,8 @@ class MainController < ApplicationController
     
     def about
     end
+
+    def criteria
+        
+    end
 end
