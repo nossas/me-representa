@@ -106,7 +106,8 @@
             width: 7ch;
         }
         .nota {
-            font-weight: bolder
+            font-weight: bolder;
+            color: #532985;
         }
         .votes-int p {
             font-size: .6em;
@@ -357,7 +358,9 @@
                     </td>
                     <td class="partido">
                         <span class="partido"><%= brother.party.symbol %></span>
-                        <span class="nota">nota <%= (10 * brother.party.score).round %></span>
+                        <a href="<%= criteria_path %>">
+                            <span class="nota">nota <%= (10 * brother.party.score).round %></span>
+                        </a>
                     </td>
                 </tr>
                 <% end %>

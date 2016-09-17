@@ -72,20 +72,17 @@ class User < ActiveRecord::Base
     end
     x.map do |dt|
       {
-        :score => dt.score,
-        :union_score => dt.union_score,
-        :party_score => dt.party_score,
-        :score_final => dt.score_final,
         :id => dt.id,
-        :nickname => dt.nickname,
-        :votos => dt.votos
+        :score_final => dt.score_final,
+        :party_score => dt.party_score,
+        :score => dt.score,
+        :shuffler => Random.rand(1000)
       }
     end.sort { |a,b| 
       (a[:score_final] != b[:score_final]) ? (a[:score_final] - b[:score_final]) :
-      (a[:union_score] != b[:union_score]) ? (a[:union_score] - b[:union_score]) :
       (a[:party_score] != b[:party_score]) ? (a[:party_score] - b[:party_score]) :
       (a[:score] != b[:score]) ? (a[:score] - b[:score]) :
-      (a[:votos] != b[:votos]) ? (a[:votos] - b[:votos]) : a[:nickname] <=> b[:nickname]
+      (a[:shuffler] - b[:shuffler])
     }.reverse
   end
 
