@@ -57,18 +57,12 @@ class User < ActiveRecord::Base
       joins(:party).
       where("candidates.finished_at is not null and candidates.city_id = #{city_id}")
 
-    match_data.each do |dt| 
-      dt['score'] = dt['score'].to_i
-      dt['union_score'] = dt['union_score'].to_f if dt['union_score']
-      dt['party_score'] = dt['party_score'].to_f
-      dt['score_final'] = dt['score'] * (dt['union_score'] ? dt['union_score'] : dt['party_score'])
-      dt['votos'] = dt['votos'].to_i
-    end.map do |dt|
+    match_data.map do |dt|
       {
-        :id => dt.id,
-        :score_final => dt.score_final,
-        :party_score => dt.party_score,
-        :score => dt.score,
+        :id => dt.id.to_i,
+        :score_final => dt.score.to_i * (dt.union_score ? dt.union_score.to_f : dt.party_score.to_f),
+        :party_score => dt.party_score.to_f ,
+        :score => dt.score.to_i,
         :shuffler => Random.rand(1000)
       }
     end.sort { |a,b| 
