@@ -35,16 +35,11 @@ class UsersController < ApplicationController
     else
       qtde_importantes = @user.answers.select{|a| a.weight > 0}.count
 
-      p "======================================================="
-      p @matdata
-
       match_total = @matdata.select{|dt| dt[:score] >= qtde_importantes}
-      p match_total
 
       if (match_total.size > 0)
-        @matching = match_total
-        @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
-        @matdata = @matdata.slice( 6, @matdata.count) || []
+        @matching = get_match_data match_total.slice(0,6).map{|dt| dt[:id]}
+        @matdata = match_total.slice( 6, match_total.count) || []
       else
         @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
         render "semi_match"
