@@ -27,12 +27,24 @@ class UsersController < ApplicationController
 
   def matchup
     @user = User.find params[:user_id]
+
+
     @matdata = @user.matches
     if (@matdata.size == 0)
       redirect_to city_convine_path(@user.city_id)
     else
-      @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
-      @matdata = @matdata.slice( 6, @matdata.count) || []
+      qtde_importantes = @user.answers.select{|a| a.weight > 0}.count
+
+      match_total = @matdata.select{|dt| dt[:score] >= qtde_importantes}
+
+      if (match_total.size > 0)
+        @matching = match_total
+        @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
+        @matdata = @matdata.slice( 6, @matdata.count) || []
+      else
+        @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
+        render "semi_match"
+      end
     end
   end
 

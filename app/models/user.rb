@@ -63,14 +63,7 @@ class User < ActiveRecord::Base
       dt['party_score'] = dt['party_score'].to_f
       dt['score_final'] = dt['score'] * (dt['union_score'] ? dt['union_score'] : dt['party_score'])
       dt['votos'] = dt['votos'].to_i
-    end
-
-    x = match_data.select{ |dt| dt.score > 0 }
-
-    if (x.count == 0) # Se não houver ninguém, mostra o que tem
-      x = match_data
-    end
-    x.map do |dt|
+    end.map do |dt|
       {
         :id => dt.id,
         :score_final => dt.score_final,

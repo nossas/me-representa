@@ -1,0 +1,79 @@
+<% content_for :head do %>
+<style>
+	body {
+		background-color: #878787;
+	}
+	header {
+		border-bottom: 1px solid #fff;
+		padding: 1em 0;
+		margin-bottom: 2em;
+	}
+	.mensagem img {
+		width: 80%;
+		margin: 0 auto;
+		display: block;
+	}
+	main {
+		color: #fff;
+	}
+	.container {
+		margin-bottom: 4em;
+	}
+	.container>h2 {
+		font-family: ProximaNovaSoft-Bold;
+	    text-transform: uppercase;
+	    color: #d8b212;
+	    font-size: 1em;
+	    text-align: center;
+	    letter-spacing: .15em;
+	    font-weight: bolder;
+	    margin-top: 3em;
+	}
+	.textos a {
+		color: #fff;
+		border-bottom: 1px solid #fff;
+	}
+	.textos a:hover {
+		color: #fff;
+		text-decoration: none;
+		font-size: 1.1em;
+	}
+	@media screen and (min-width: 800px) {
+		.mensagem {
+			display: flex;
+			margin: 5em;
+		}
+		.mensagem img {
+			flex-flow: 1;
+		}
+		.mensagem .textos {
+			flex-flow: 2;
+		}
+		.container>h2 {
+	    	font-size: 1.5em;
+		}
+	}
+</style>
+    <link rel="stylesheet" href="/assets/candidates-match.css">
+<% end %>
+
+<% content_for :menu_logged do %>
+    <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
+    <li><%= link_to "Refazer questionário", new_answer_path, {class: "dropdown-item"} %>
+<% end %>
+
+<% content_for :main do %>
+	<div class="container">
+		<div class="mensagem">
+			<img src="/assets/f21.svg" alt="Carinha meio triste">
+			<div class="textos">
+				<p>Infelizmente, nenhum dos candidatos participantes até agora concordam com as pautas de direitos humanos que são importantes para você.</p>
+				<p>Segue uma lista de outras candidatas e candidatos para você conhecer, ordenados segundo suas respostas e a avaliação dos partidos que compoem a sua coligação. <a href="<%= criteria_path %>">Saiba mais.</a></p>
+				<p>Na dúvida, prefira uma mulher e contribua para a igualdade de gênero na Câmara Municipal de sua cidade!</p>
+			</div>
+		</div>
+
+        <%= render partial: "candidatos" %>
+
+	</div>
+<% end %>

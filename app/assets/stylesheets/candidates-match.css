@@ -1,0 +1,33 @@
+.candidatos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.candidato {
+    background-color: #097e74;
+    display: inline-block;
+    width: 300px;
+    margin: 1em;
+    padding: 1.5em;
+}
+.can-pic {
+    display: block;
+    margin: 0 auto 1em auto;
+    width: 150px;
+    border-radius: 50%;
+}
+.info-text {
+    text-transform: uppercase;
+    color: #fff;
+    display: block;
+    text-align: center;
+}
+.info-text.name {
+    font-weight: bolder;
+}
+.candidate-number {
+    font-size: 3em;
+}
+.info-text.party, .info-text.contagem {
+    color: #d8b212;
+}

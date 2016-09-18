@@ -290,7 +290,7 @@
         <li><a href="<%= edit_candidate_path(@current_user.id) %>" class="dropdown-item">Perfil no #MeRepresenta</a></li>
     <% elsif session[:user_id] %>
         <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
-        <li><%= link_to "Refazer questionário", new_answer_path(session[:user_id]), {class: "dropdown-item"} %>
+        <li><%= link_to "Refazer questionário", new_answer_path, {class: "dropdown-item"} %>
     <% end %>
 <% end %>
 

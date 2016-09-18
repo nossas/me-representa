@@ -41,39 +41,6 @@
     .btn.invisivel {
         display: none;
     }
-    .candidatos {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .candidato {
-        background-color: #097e74;
-        display: inline-block;
-        width: 300px;
-        margin: 1em;
-        padding: 1.5em;
-    }
-    .can-pic {
-        display: block;
-        margin: 0 auto 1em auto;
-        width: 150px;
-        border-radius: 50%;
-    }
-    .info-text {
-        text-transform: uppercase;
-        color: #fff;
-        display: block;
-        text-align: center;
-    }
-    .info-text.name {
-        font-weight: bolder;
-    }
-    .candidate-number {
-        font-size: 3em;
-    }
-    .info-text.party, .info-text.contagem {
-        color: #d8b212;
-    }
     @media screen and (min-width: 768px) {
         h2 {
             font-size: 1.5em;
@@ -94,11 +61,12 @@
         }
     }
 </style>
+    <link rel="stylesheet" href="/assets/candidates-match.css">
 <% end %>
 
 <% content_for :menu_logged do %>
     <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
-    <li><%= link_to "Refazer questionário", new_answer_path(session[:user_id]), {class: "dropdown-item"} %>
+    <li><%= link_to "Refazer questionário", new_answer_path, {class: "dropdown-item"} %>
 <% end %>
 
 <% content_for :main do %>
@@ -108,32 +76,8 @@
             <p>Aqui estão os candidatas e os candidatos que têm a ver com você! Eles estão organizados de acordo com  seus posicionamentos pessoais, mas também de acordo com o compromisso de seus partidos e coligações com os direitos humanos.</p>
             <p>Nas eleições, você terá direito a apenas um voto para vereados, então escolha com cuidado com quem vai votar. E, se possível, escolha votar em uma mulher! Assim você vai contribuir para a igualdade de gênero na Câmara Municipal de sua cidades.</p>
 
-            <h2>Clique na foto para ver o perfil do/a candidato/a</h2>
-            <div class="candidatos">
-                <% @matching.each do |match| %>
-                    <div class="candidato">
-                        <a href="<%= candidate_path(match[:id]) %>">
-                            <img class="can-pic" src="<%= match[:picture] %>?type=large" alt="Foto do candidato">
-                        </a>
-                        <span class="info-text name">
-                            <%= match[:nickname] %>
-                        </span>
-                        <span class="info-text number">
-                            nº <span class="candidate-number"><%= match[:number] %></span>
-                        </span>
-                        <span class="info-text party">
-                            <% if match[:union] %>
-                                Coligação: <%= match[:union] %>
-                            <% else %>
-                                Partido: <%= match[:party_symbol] %>
-                            <% end %>
-                        </span>
-                        <span class="info-text contagem">
-                            <%= match[:vote_intension] %> intenções de voto
-                        </span>                        
-                    </div>
-                <% end %>
-            </div>
+
+            <%= render partial: "candidatos" %>
 
             <% if @matdata.size() > 0 %>
             <button id="btn-mais-cand" type="button" class="btn btn-2">mostrar mais</button>
