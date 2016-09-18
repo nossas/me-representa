@@ -66,7 +66,7 @@
 <div class="container">
    <div class="header">
     <h1>Encontre candidatas e candidatos perto de você!</h1>
-    <p>Informe a cidade em que você vota. Se quiser receber mais informações sobre a campanha, deixe também seu nome, e-mail e número de celular.</p>
+    <p>Informe a cidade em que você vota. Se quiser receber mais informações sobre a campanha, deixe também seu nome, e-mail.</p>
    </div>
     <div class="form-content">
         <div id="div-user form-horizontal">
@@ -117,21 +117,6 @@
                     <div class="col-lg-10">
                         <%= f.hidden_field :city_id %>
                         <input type="text" id="city_name" class="form-control" value= '<%= "#{@user.city.name}, #{@user.city.state}" if @user.city %>'>
-                    </div>
-                </div>
-                <% if @user.errors[:mobile_phone].count > 0 %>
-                <div class="alert alert-danger" role="alert">
-                    <ul class="erros">
-                        <% @user.errors[:mobile_phone].each do |msg| %>
-                        <li class="erro"><%= msg %></li>
-                        <% end %>
-                    </ul>
-                </div>
-                <% end %>
-                <div class="form-group row">
-                    <%= f.label :mobile_phone, "Celular", {class: "col-lg-2 control-label"} %>
-                    <div class="col-lg-10">
-                        <%= f.text_field :mobile_phone, {class: "form-control phone-input"} %>
                     </div>
                 </div>
                 <%= f.hidden_field :candidate_id %>
