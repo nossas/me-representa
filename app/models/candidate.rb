@@ -59,10 +59,11 @@ class Candidate < ActiveRecord::Base
 
   def gang
     if party_union
-      party_union.parties.sort{|a,b| a.score-b.score}.slice(0,6).map{|p| select_one_of_tse_worsts p.id}
+      result = party_union.parties.sort{|a,b| a.score-b.score}.slice(0,6).map{|p| select_one_of_tse_worsts p.id}
     else
-      [ select_one_of_tse_worsts(self.party_id) ]
+      result = [ select_one_of_tse_worsts(self.party_id) ]
     end
+    result.select{|v|v != nil}
   end
 
   def verify_tse_data
@@ -91,7 +92,8 @@ class Candidate < ActiveRecord::Base
       .where("tse_data.city_id = #{city_id} and tse_data.male='true' and (party_id = #{party_id_to_search})")
       .order("(100 - extract(year from age(tse_data.born_at))) * parties.score, parties.score")
       .limit(15)
-    tse[Random.rand(tse.size)]
+
+    tse[Random.rand(tse.size)] if tse != []
   end
 
   def corrige_dados

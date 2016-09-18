@@ -28,8 +28,12 @@ class UsersController < ApplicationController
   def matchup
     @user = User.find params[:user_id]
     @matdata = @user.matches
-    @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
-    @matdata = @matdata.slice( 6, @matdata.count)
+    if (@matdata.size == 0)
+      redirect_to city_convine_path(@user.city_id)
+    else
+      @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
+      @matdata = @matdata.slice( 6, @matdata.count) || []
+    end
   end
 
   private
