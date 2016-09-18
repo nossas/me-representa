@@ -58,14 +58,11 @@ class Candidate < ActiveRecord::Base
   end
 
   def gang
-    partidos = "tse_data.party_id = #{party_id}"
     if party_union
-      partidos = party_union.parties.map {|p|  "tse_data.party_id = #{p.id}"}.reduce{|a,b| "#{a} or #{b}"}
+      party_union.parties.sort{|a,b| a.score-b.score}.slice(0,6).map{|p| select_one_of_tse_worsts p.id}
+    else
+      [ select_one_of_tse_worsts(self.party_id) ]
     end
-    TseData.joins(:party)
-      .where("tse_data.city_id = #{city_id} and tse_data.male='true' and (#{partidos})")
-      .order("(100 - extract(year from age(tse_data.born_at))) * parties.score, parties.score")
-      .limit(10)
   end
 
   def verify_tse_data
@@ -88,6 +85,14 @@ class Candidate < ActiveRecord::Base
   end
 
   private
+
+  def select_one_of_tse_worsts party_id_to_search
+    tse = TseData.joins(:party)
+      .where("tse_data.city_id = #{city_id} and tse_data.male='true' and (party_id = #{party_id_to_search})")
+      .order("(100 - extract(year from age(tse_data.born_at))) * parties.score, parties.score")
+      .limit(15)
+    tse[Random.rand(tse.size)]
+  end
 
   def corrige_dados
     self.mobile_phone.gsub! /\D/, '' if self.mobile_phone != nil
