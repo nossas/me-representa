@@ -103,7 +103,7 @@
         .partido {
             text-transform: uppercase;
             text-align: center;
-            width: 7ch;
+            width: 10ch;
         }
         .nota {
             font-weight: bolder;
@@ -175,6 +175,7 @@
             font-size: .6em;
             padding: .3em;
             border-radius: .4em;
+            white-space: nowrap;
         }
         @media screen and (min-width:500px) {
             main {
@@ -260,7 +261,7 @@
             .nota {
                 background-color: #d8b212;
                 font-size: .6em;
-                padding: 0.4em 2em .2em 2em;
+                padding: 0.4em 1em .2em 1em;
                 border-radius: .4em;
                 margin-left: 1em;
             }
@@ -345,8 +346,8 @@
        
     <div class="puxar">
         <div class="title">
-            <h3>Cuidado com as coligações partidárias!</h3>
-            <h5>Os votos nesse/a candidato/a vão para todos os partidos de sua coligação e podem acabar elegendo alguém em quem você não votaria. Veja um exemplo de quem vai se beneficiar dos votos que essa candidatura receber:</h5>
+            <h3>Atenção às coligações!</h3>
+            <h5>Os votos nesse/a candidato/a vão para todos os partidos de sua coligação e podem acabar elegendo alguém em quem você não votaria. Veja como avaliamos cada partido dessa coligação em relação às pautas dos direitos humanos e exemplos de quem pode se beneficiar dos votos que essa candidatura receber.</h5>
         </div>
 
         <table class="brother">
@@ -359,7 +360,7 @@
                     <td class="partido">
                         <span class="partido"><%= brother.party.symbol %></span>
                         <a href="<%= criteria_path %>">
-                            <span class="nota">nota <%= (10 * brother.party.score).round %></span>
+                            <span class="nota">nota do partido - <%= (10 * brother.party.score).round %></span>
                         </a>
                     </td>
                 </tr>
