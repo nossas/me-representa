@@ -495,7 +495,7 @@
     </style>
     <div class="share-it invisivel">
         <h4>Ei, psiu !!! <a href="#">fechar</a></h4>
-        <p>Essa plataforma te representa? <a href="#">Compartilhe</a> no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
+        <p>Essa plataforma te representa? <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>">Compartilhe</a> no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
     </div>
     <script type="text/javascript">
         (function() {
