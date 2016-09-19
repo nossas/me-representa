@@ -66,7 +66,7 @@
 <div class="container">
    <div class="header">
     <h1>Encontre candidatas e candidatos perto de você!</h1>
-    <p>Informe a cidade em que você vota. Se quiser receber mais informações sobre a campanha, deixe também seu nome, e-mail.</p>
+    <p>Informe a cidade em que você vota. Se quiser receber mais informações sobre a campanha, deixe também seu nome<%if not @user.email_validated? %>, e-mail<% end %>.</p>
    </div>
     <div class="form-content">
         <div id="div-user form-horizontal">
@@ -83,7 +83,7 @@
                 <div class="form-group row">
                     <%= f.label :name, {class: "col-lg-2 control-label"} %>
                     <div class="col-lg-10">
-                        <%= f.text_field :name, {class: "form-control"} %>
+                        <%= f.text_field :name, 'Nome', {class: "form-control"} %>
                     </div>
                 </div>
                 <%if not @user.email_validated? %>
@@ -97,7 +97,7 @@
                     </div>
                     <% end %>
                     <div class="form-group row">
-                        <%= f.label :email, "Email", {class: "col-lg-2 control-label"} %>
+                        <%= f.label :email, 'Email', {class: "col-lg-2 control-label"} %>
                         <div class="col-lg-10">
                             <%= f.text_field :email, {class: "form-control", required: "required"} %>
                         </div>
