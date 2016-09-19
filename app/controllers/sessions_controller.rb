@@ -14,11 +14,11 @@ class SessionsController < ApplicationController
         if type == "candidate"
             create_candidate @auth.user
             session[:candidate_id] = @auth.user.id
-            session[:user_id] = @auth.user.id
             redirect_to(edit_candidate_path(@auth.user))
         else
             redirect_to(edit_user_path(@auth.user))
         end
+        session[:user_id] = @auth.user.id
     else
         self.current_user = @auth.user
         if type == "candidate"
@@ -31,7 +31,6 @@ class SessionsController < ApplicationController
                 redirect_to(edit_candidate_path(@auth.user.id))
             end
             session[:candidate_id] = @auth.user.id
-            session[:user_id] = @auth.user.id
         else
             if (@auth.user.city)
                 redirect_to(new_answer_path)
@@ -39,6 +38,7 @@ class SessionsController < ApplicationController
                 redirect_to(edit_user_path(@auth.user))
             end
         end
+        session[:user_id] = @auth.user.id
     end    
   end
 

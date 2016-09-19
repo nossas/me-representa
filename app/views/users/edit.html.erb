@@ -81,9 +81,9 @@
                 </div>
                 <% end %>
                 <div class="form-group row">
-                    <%= f.label :name, {class: "col-lg-2 control-label"} %>
+                    <%= f.label :name, 'Nome', {class: "col-lg-2 control-label"} %>
                     <div class="col-lg-10">
-                        <%= f.text_field :name, 'Nome', {class: "form-control"} %>
+                        <%= f.text_field :name, {class: "form-control"} %>
                     </div>
                 </div>
                 <%if not @user.email_validated? %>
