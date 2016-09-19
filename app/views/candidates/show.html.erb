@@ -355,11 +355,11 @@
                 <% @candidate.gang.each do |brother| %>
                 <tr>
                     <td class="candidato">
-                        <%= brother.name %>                            
+                        <%= brother.nickname %>                            
                     </td>
                     <td class="partido">
                         <span class="partido"><%= brother.party.symbol %></span>
-                        <a href="<%= criteria_path %>">
+                        <a href="#">
                             <span class="nota">nota do partido - <%= (10 * brother.party.score).round %></span>
                         </a>
                     </td>
