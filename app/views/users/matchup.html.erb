@@ -41,6 +41,11 @@
     .btn.invisivel {
         display: none;
     }
+    .conteudo a, .conteudo a:hover {
+        color: white;
+        border-bottom: 1px solid #fff;
+        text-decoration: none;
+    }
     @media screen and (min-width: 768px) {
         h2 {
             font-size: 1.5em;
@@ -72,10 +77,9 @@
 <% content_for :main do %>
     <div class="container">
         <div class="conteudo">
-            <h1>Esses são os candidatos que mais combinam com seu perfil</h1>
-            <p>Aqui estão os candidatas e os candidatos que têm a ver com você! Eles estão organizados de acordo com  seus posicionamentos pessoais, mas também de acordo com o compromisso de seus partidos e coligações com os direitos humanos.</p>
-            <p>Nas eleições, você terá direito a apenas um voto para vereados, então escolha com cuidado com quem vai votar. E, se possível, escolha votar em uma mulher! Assim você vai contribuir para a igualdade de gênero na Câmara Municipal de sua cidades.</p>
-
+            <h1>Esses são as candidatas e os candidatos que mais combinam com você!</h1>
+            <p>Navegue e descubra um pouco mais sobre as candidaturas, coligações e sobre quem você poderá ajudar a eleger ao definir seu voto. Os candidatos aparecem ordenados segundo suas respostas e a avaliação dos partidos que compõem a sua coligação. <a href="<%= criteria_path %>">Saiba mais</a>.</p>
+            <p>Na dúvida, prefira uma mulher e contribua para a igualdade de gênero na Câmara Municipal de sua cidade!</p>
 
             <%= render partial: "candidatos" %>
 
