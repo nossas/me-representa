@@ -1,4 +1,5 @@
 <% content_for :open_graph do %>
+    <meta name="og:url" content="<%= candidate_url(@candidate) %>">
     <meta name="og:title" content="Eu já encontrei uma candidatura para vereador/a que te representa! E você?">
     <meta name="og:description" content="Encontrei o candidato <%= @candidate.nickname %> (<%= @candidate.number %>) do <%= @candidate.party.symbol%> no site do #MeRepresenta! 'Bora lá?"
 <% end %>
