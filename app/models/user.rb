@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
           ) as score
           , candidates.nickname
           , candidates.id as id
-          , (select u.score from parties_unions pu inner join unions u on pu.union_id = u.id where pu.party_id = candidates.party_id and u.city_id = candidates.city_id) as union_score
+          , (select u.score from parties_unions pu inner join unions u on pu.union_id = u.id where pu.party_id = candidates.party_id and u.city_id = candidates.city_id limit 1) as union_score
           , parties.score as party_score
           , (select count(*) from users us where us.candidate_id = candidates.id) as votos 
         }).
