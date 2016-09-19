@@ -10,8 +10,8 @@
         margin-bottom: 3em;
     }
     h1 {
-        font-size: 3.5em;
-        margin: .5em 0;
+        font-size: 2.5em;
+        margin: .5em 0 2em 0;
         text-shadow: .1em .1em #d8b212;
         text-align: center;
         color: #582985;
@@ -19,6 +19,12 @@
     .mensagem {
         color: #582985;
         text-align: center
+    }
+    @media screen and (min-width: 600px) {
+        h1 {
+            margin: 3em 0 2em 0;
+            font-size: 3.5em;
+        }
     }
 </style>
 <% end %>
@@ -37,9 +43,9 @@
 
 <% content_for :main do %>
     <div class="container">
-        <h1>Agradecemos pelo contato</h1>
+        <h1>Obrigada pela mensagem!</h1>
         <div class='mensagem'>
-            Tenha certeza que em breve estaremos analisando sua mensagem.
+            Em breve entramos em contato com você.
         </div>
     </div>
 <% end %>

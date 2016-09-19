@@ -407,7 +407,7 @@
     <% if ( not session[:candidate_id] ) and session[:user_id]%>
     <div class="nav">   
         <a href="<%= user_matchup_path(@current_user) %>" class="btn btn-roxo-amarelo" id="btn-voltar"><span>Voltar aos candidatos</span></a>
-        <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn btn-roxo-amarelo" id="btn-compartilhar"><span>Compartilhe sua escolha</span></a>
+        <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn btn-roxo-amarelo" id="btn-compartilhar"><span>Compartilhe sua escolha!</span></a>
     </div>
     <% end %>
 </div>
