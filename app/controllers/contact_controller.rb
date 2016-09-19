@@ -13,7 +13,7 @@ class ContactController < ApplicationController
 
     	message = <<MESSAGE_END
 From: Sistema de Contatos <testes@tamanhofamilia.com.br>
-To: <pirola@nossascidades.org>
+To: <contato@merepresenta.org.br>
 Subject: CONTATO
 
 * Nome: #{params[:nome]}
@@ -23,7 +23,7 @@ Subject: CONTATO
 #{params[:mensagem]}
 MESSAGE_END
     	Net::SMTP.start('mail.tamanhofamilia.com.br', 587, 'localhost', contato_login, contato_senha) do |smtp| 
-    		smtp.send_message(message, 'testes@tamanhofamilia.com.br', 'pirola@nossascidades.org', 'testes@tamanhofamilia.com.br')
+    		smtp.send_message(message, 'testes@tamanhofamilia.com.br', 'contato@merepresenta.org.br', 'testes@tamanhofamilia.com.br')
 		end
     end
     
