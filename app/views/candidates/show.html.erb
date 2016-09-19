@@ -413,3 +413,98 @@
 </div>
 
 <% end %>
+
+<% content_for :scripts do %>
+    <style type="text/css">
+        .share-it {
+            width: 87.5%;
+            position: fixed;
+            top: 20%;
+            z-index: 2;
+            background-color: aliceblue;
+            border-radius: 1em;
+            border: 1px double gray;
+            left: 6.25%;
+            animation-duration: 2s;
+            animation-name: treme;
+        }
+        .share-it h4 {
+            font-size: 1.1em;
+            font-family: ProximaNovaSoft-Bold;
+            background-color: #532985;
+            color: #d8b212;
+            border-radius: 1em 1em 0 0;
+            padding: .4em;
+        }
+        .share-it p {
+            margin: 0;
+            padding: 0 1em 1em 1em;
+        }
+        .share-it>h4>a {
+            position: absolute;
+            right: .5em;
+            color: transparent;
+        }
+        .share-it>h4>a:after {
+            content: "X";
+            position: absolute;
+            right: .5em;
+            color: red;
+        }
+        @keyframes treme {
+          from {
+            transform: rotate(0deg);
+          }
+          5% {
+            transform: rotate(2deg);
+          }
+          10% {
+            transform: rotate(-2deg);
+          }
+          15% {
+            transform: rotate(2deg);
+          }
+          20% {
+            transform: rotate(-2deg);
+          }
+          25% {
+            transform: rotate(2deg);
+          }
+          30% {
+            transform: rotate(-2deg);
+          }
+          35% {
+            transform: rotate(2deg);
+          }
+          40% {
+            transform: rotate(-2deg);
+          }
+          45% {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(0deg);
+          }
+        } 
+        @media screen and (min-width: 650px) {
+            .share-it {
+                width: 550px;
+                left: calc( ( 100% - 550px ) / 2 );
+            }
+        }
+    </style>
+    <div class="share-it invisivel">
+        <h4>Ei, psiu !!! <a href="#">fechar</a></h4>
+        <p>Essa plataforma te representa? <a href="#">Compartilhe</a> no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            window.setTimeout(function(){
+                $(".share-it").removeClass("invisivel");
+            }, 10000);
+            $(".share-it>h4>a").on("click", function(){
+                $(".share-it").addClass("invisivel");
+            })
+        })();
+    </script>
+<% end %>
