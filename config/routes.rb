@@ -12,7 +12,7 @@ CariocaPergunta::Application.routes.draw do
   resources :likes, only: [:create, :update]
 
   get   '/about', :to => 'main#about', as: :about
-  # get   '/criteria', to: 'main#criteria', as: :criteria
+  get   '/criteria', to: 'main#criteria', as: :criteria
 
   get   '/contact', :to => 'contact#show', as: :contact
   post  '/contact', :to => 'contact#create'
