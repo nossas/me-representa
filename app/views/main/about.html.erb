@@ -49,6 +49,20 @@
         p {
             color: #fff;
         }
+        .video-container {
+            position:relative;
+            padding-bottom:56.25%;
+            padding-top:30px;
+            height:0;
+            overflow:hidden;
+        }
+        .video-container iframe, .video-container object, .video-container embed {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+        }
         @media screen and (min-width: 600px) {
             h1 {
                 font-size: 3em;
@@ -85,6 +99,9 @@
 <% content_for :main do %>
     <div class="container">
         <h1>Saiba mais sobre o projeto</h1>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/9gdkygw0W3Q" frameborder="0" allowfullscreen></iframe>
+        </div>
         <h2>O que é o #MeRepresenta?</h2>
         <p>Resultado de uma parceria entre as campanhas #VoteLGBT, #AgoraéQueSãoElas, a Rede Feminista de Juristas (#DeFEMde), a Rede Nossas Cidades (Meu Rio, Minha Sampa, Minha Porto Alegre e Meu Recife), a organização não governamental CFEMEA e o grupo LGBT Brasil, a plataforma #MeRepresenta tem como objetivo divulgar aos eleitores as posições de candidatos a vereador sobre pautas relevantes à construção das igualdades de gênero, racial e de orientação sexual.</p>
         
