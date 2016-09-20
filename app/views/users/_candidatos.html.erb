@@ -15,8 +15,17 @@
                             <% if match[:union] %>
                                 Coligação: <%= match[:union] %>
                             <% else %>
-                                Partido: <%= match[:party_symbol] %>
+                                Partido: <%= match[:party] %>
                             <% end %>
+                        </span>
+                        <% nota = (match[:union] ? match[:union_score] : match[:party_score] ) %>
+                        <span class="info-text nota <%= 'perigo' if (nota <= 5 ) %>">
+                            <% if match[:union] %>
+                                Nota da Coligação:
+                            <% else %>
+                                Nota do Partido:
+                            <% end %>
+                            <%= nota.round 2 %>
                         </span>
                         <span class="info-text contagem">
                             <%= match[:vote_intension] %> intenções de voto

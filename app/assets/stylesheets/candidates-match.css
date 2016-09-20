@@ -28,6 +28,9 @@
 .candidate-number {
     font-size: 3em;
 }
-.info-text.party, .info-text.contagem {
+.info-text.party, .info-text.contagem, .info-text.nota {
     color: #d8b212;
+}
+.info-text.nota.perigo {
+    color: red;
 }

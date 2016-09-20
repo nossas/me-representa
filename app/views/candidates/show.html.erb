@@ -65,6 +65,9 @@
         .info-text.number {
             margin: 1em 0;
         }
+        .info-text.score.perigo {
+            color: red;
+        }
         .candidate-number {
             font-size: 2em;
         }
@@ -321,6 +324,9 @@
             <% if @candidate.party_union and @candidate.party_union.parties.count > 1 %>
             <span class="info-text coligacao">
                 Coligação: <%= @candidate.party_union.name %>
+            </span>
+            <span class="info-text score <%= 'perigo' if @candidate.party_union.score <= 0.5 %>">
+                Nota da Coligação: <%= (@candidate.party_union.score * 10.0).round 2 %>
             </span>
             <% else %><br>
             <% end %>

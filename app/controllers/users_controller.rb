@@ -56,7 +56,9 @@ class UsersController < ApplicationController
         :nickname => can.nickname,
         :number => can.number,
         :union => can.party_union ? can.party_union.name : nil ,
+        :union_score => can.party_union ? (can.party_union.score * 10.0).round(2) : nil ,
         :party_symbol => can.party.symbol,
+        :party_score => can.party.score.round(2),
         :vote_intension => can.vote_intension
       }}
   end

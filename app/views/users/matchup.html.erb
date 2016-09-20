@@ -92,7 +92,6 @@
 
 <% content_for :scripts do %>
 <script>
-
     var CandidateDateGetter = function(match_url, candidatesPath, candidates, noMoreDataCallback){
         var retorno = {
             _url: match_url + ".json"
@@ -124,6 +123,8 @@
                                 , candNumber = $("<span>", {class: 'info-text number'})
                                 , number = $("<span>", {class: 'candidate-number'})
                                 , party = $("<span>", {class: 'info-text party'}) 
+                                , score = $("<span>", {class: 'info-text nota'}) 
+                                , score_val = 0 
                                 , contagem = $("<span>", {class: 'info-text contagem'}) 
                                 , img = $("<img>", {src: (match.id == retorno.candidateId ? "/assets/c1.svg" : "/assets/c0.svg")} );
 
@@ -135,16 +136,24 @@
 
                             nickname.text(match['nickname']);
 
-                            if (match['union'] == null)
-                                party.text('Partido: ' + match['party_symbol']);    
-                            else
+                            if (match['union'] == null){
+                                party.text('Partido: ' + match['party_symbol']);
+                                score.text('Nota do Partido: ' + (Math.roundmatch['party_score']));
+                                score_val = match['party_score']
+                            } else {
                                 party.text('Coligação: ' + match['union']);    
+                                score.text('Nota do Coligação: ' + match['union_score']);
+                                score_val = match['union_score']
+                            }
+                            if (score_val <= 5)
+                                score.addClass('perigo');
 
                             link.append(imgCand);
                             divCand.append(link);
                             divCand.append(nickname);
                             divCand.append(candNumber);
                             divCand.append(party);
+                            divCand.append(score);
                             divCand.append(contagem);
 
 

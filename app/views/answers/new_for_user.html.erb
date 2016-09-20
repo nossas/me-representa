@@ -100,9 +100,8 @@
     <div class="container">
         <h1>O que é importante pra você?</h1>
         <div class="conteudo">
-            <h2>Essas são as perguntas que fizemos aos candidatos e candidatas. Para encontrar a sua candidatura ideal, precisamos que você marque todas as perguntas em que você faz questão que elas ou eles tenham respondido positivamente.</h2>
+            <h2>Marque as pautas mais importantes na definição de seu voto e descubra as candidatas e candidatos mais comprometidos com Direitos Humanos!</h2>
         </div>
-
 
         <% @current_user.answers.sort{|a,b| a.question_id-b.question_id }.each do |answer| %>
         <div class="question">
