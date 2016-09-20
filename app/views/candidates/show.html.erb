@@ -365,8 +365,8 @@
                     </td>
                     <td class="partido">
                         <span class="partido"><%= brother.party.symbol %></span>
-                        <a href="#">
-                            <span class="nota">nota do partido - <%= (10 * brother.party.score).round %></span>
+                        <a href="<%= criteria_path %>">
+                            <span class="nota">nota do partido = <%= (10 * brother.party.score).round %></span>
                         </a>
                     </td>
                 </tr>
