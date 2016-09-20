@@ -61,11 +61,13 @@ class User < ActiveRecord::Base
       {
         :id => dt.id.to_i,
         :score_final => dt.score.to_i * (dt.union_score ? dt.union_score.to_f : dt.party_score.to_f),
+        :comp_score =>( dt.union_score ? dt.union_score.to_f : dt.party_score.to_f),
         :party_score => dt.party_score.to_f ,
         :score => dt.score.to_i,
         :shuffler => Random.rand(1000)
       }
     end.sort { |a,b| 
+      (ranking(a) != ranking(b) ) ? ranking(a) - ranking(b) : 
       (a[:shuffler] - b[:shuffler])
     }.reverse
   end
@@ -74,5 +76,10 @@ class User < ActiveRecord::Base
 
   def corrige_dados
     self.mobile_phone.gsub! /\D/, '' if self.mobile_phone  != nil
+  end
+
+  def ranking( dt )
+    (dt[:comp_score] >= 0.7 ) ? 3 :
+    (dt[:comp_score] >= 0.4 ) ? 2 : 1
   end
 end

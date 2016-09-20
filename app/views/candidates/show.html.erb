@@ -86,7 +86,6 @@
             display: block;
         }
         .votes-int {
-            margin-top: 2em;
             color: #d8b212;
             text-align: center;
             display: block;
@@ -185,6 +184,16 @@
             padding: .3em;
             border-radius: .4em;
             white-space: nowrap;
+        }
+        span.info-text.score {
+            margin-top: 2em;
+            background-color: #d8b212;
+            text-align: center;
+            color: #532985;
+            border-radius: 4px;
+            font-size: .8em;
+            position: relative;
+            bottom: 0px;
         }
         @media screen and (min-width:500px) {
             main {
@@ -337,7 +346,7 @@
         <div class="info-bio">
             <div class="bio">
                 <h3>Sobre o/a candidato/a</h3>
-                <textarea readonly rows="10" cols="40">
+                <textarea readonly rows="11" cols="40">
                     <%= @candidate.bio %>
                 </textarea>
             </div>
@@ -499,7 +508,7 @@
     </style>
     <div class="share-it invisivel">
         <h4>Ei, psiu !!! <a href="#">fechar</a></h4>
-        <p>Essa plataforma te representa? <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>">Compartilhe</a> no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
+        <p>Essa plataforma te representa? <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode root_url %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>">Compartilhe</a> no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
     </div>
     <script type="text/javascript">
         (function() {
