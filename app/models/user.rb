@@ -66,9 +66,6 @@ class User < ActiveRecord::Base
         :shuffler => Random.rand(1000)
       }
     end.sort { |a,b| 
-      (a[:score_final] != b[:score_final]) ? (a[:score_final] - b[:score_final]) :
-      (a[:party_score] != b[:party_score]) ? (a[:party_score] - b[:party_score]) :
-      (a[:score] != b[:score]) ? (a[:score] - b[:score]) :
       (a[:shuffler] - b[:shuffler])
     }.reverse
   end
