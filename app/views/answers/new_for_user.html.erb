@@ -100,7 +100,7 @@
     <div class="container">
         <h1>O que é importante pra você?</h1>
         <div class="conteudo">
-            <h2>Marque as pautas mais importantes na definição de seu voto e descubra as candidatas e candidatos mais comprometidos com Direitos Humanos!</h2>
+            <h2>Marque as pautas das quais você não abre mão na hora de escolher sua candidatura:</h2>
         </div>
 
         <% @current_user.answers.sort{|a,b| a.question_id-b.question_id }.each do |answer| %>
