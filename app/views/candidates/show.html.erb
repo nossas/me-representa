@@ -325,7 +325,7 @@
             <span class="info-text coligacao">
                 Coligação: <%= @candidate.party_union.name %>
             </span>
-            <span class="info-text score <%= 'perigo' if @candidate.party_union.score <= 0.5 %>">
+            <span class="info-text score">
                 Nota da Coligação: <%= (@candidate.party_union.score * 10.0).round 2 %>
             </span>
             <% else %><br>
