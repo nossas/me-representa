@@ -337,7 +337,13 @@
             <span class="info-text score">
                 Nota da Coligação: <%= (@candidate.party_union.score * 10.0).round 2 %>
             </span>
-            <% else %><br>
+            <% else %>
+            <span class="info-text coligacao">
+                Partido: <%= @candidate.party.name %>
+            </span>
+            <span class="info-text score">
+                Nota da Coligação: <%= (@candidate.party.score * 10.0).round 2 %>
+            </span>
             <% end %>
             <span class="votes-int">
                 <%= User.where("users.candidate_id = #{@candidate.id}" ).count %> #MeRepresenta
