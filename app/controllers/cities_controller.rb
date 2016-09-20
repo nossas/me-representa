@@ -4,7 +4,7 @@ class CitiesController < ApplicationController
 
     def index
 		@match = params['match']
-		@cidades = City.where("name ilike '#{@match}%'")
+		@cidades = City.where("unaccent(name) ilike unaccent('#{@match}%')")
 		@cid = @cidades.map{|c| [c.id, "#{c.name}, #{c.state}"]}
 		render :json => @cid
 	end
