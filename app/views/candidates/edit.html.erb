@@ -88,6 +88,21 @@
 </style>
 <% end %>
 
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Contato", contact_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
+<% end %>
+
 <% content_for :main do %>
 <div class="container">
    <div class="header">
