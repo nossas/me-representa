@@ -1,0 +1,74 @@
+<% content_for :head do %>
+	<style>
+		body {
+			background-color: #097e74;
+			color: #fff;
+		}
+		header {
+			border-bottom: 1px solid #fff;
+			padding: .5em 0;
+		}
+		main {
+			text-align: justify;
+			letter-spacing: .1em;
+		}
+		h1 {
+			text-transform: uppercase; 
+		}
+		h2, h1 {
+			margin-top: 2em;
+		}
+		li {
+			margin-top: 1em;
+		}
+		.container {
+			margin-bottom: 5em;
+		}
+	</style>
+<% end %>
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Contato", contact_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <span class="nav-link disabled">Política de Privacidade</span>
+    </div>    
+<% end %>
+
+<% content_for :menu do %>
+    <% if session[:candidate_id] %>
+        <li><a href="<%= edit_candidate_path(session[:candidate_id]) %>" class="dropdown-item">Perfil</a></li>
+    <% elsif session[:user_id] %>
+        <li><a href="<%= edit_user_path(session[:user_id]) %>" class="dropdown-item">Perfil</a></li>
+    <% end %>
+<% end %>
+
+<% content_for :main do %>
+	<div class="container">
+		<h1>Preâmbulo</h1>
+
+		<p>Ao acessar a este site, certas informações sobre o usuário como o protocolo de Internet (IP), navegação através do site, o software utilizado e o tempo gasto, junto com outras informações semelhantes, serão armazenados em servidores da #MeRepresenta. Este registro não irá identificar especificamente o usuário. A informação será utilizada apenas internamente para análise de tráfego no website. Se o usuário fornece informações de identificação específicas, tais como nome, endereço e outras informações em formulários armazenados no site, tais informações serão usadas apenas para fins estatísticos e não serão publicados para acesso geral. A #MeRepresenta, no entanto, não assume qualquer responsabilidade pela segurança dessas informações.</p>
+
+		<h2>Disposições</h2>
+
+		<ol>
+			<li>No desempenho de suas finalidades, a #MeRepresenta pode solicitar ou obter dados pessoais (aqui denominados "dados") dos seus usuários. Esses dados são governados pelos Termos de Uso da #MeRepresenta, bem como pela presente política de privacidade.</li>
+			<li>A #MeRepresenta jamais utilizará os dados solicitados para outras finalidades que não aquelas relativas à administração do site, que inclui, dentre outras, realização de estatísticas e estudos, porém jamais venderá os dados. A #MeRepresenta também jamais fornecerá os dados obtidos junto aos usuários a terceiros, exceto se houver autorização expressa do usuário. E a #MeRepresenta também não utilizará esses dados para envio de spam, prática a qual é terminantemente contra, ou para qualquer outra prática semelhante ao spam com relação a seus usuários.</li>
+			<li>Os dados dos usuários também poderão ser utilizados para adminstração, gestão, ampliação e melhoramento das funcionalidades da Plataforma, bem como a customização dos serviços. Os usuários poderão eventualmente ser contactados pela equipe da #MeRepresenta, caso isso se faça necessário.</li>
+			<li>O usuário da #MeRepresenta garante que os dados pessoais fornecidos para a #MeRepresenta são verdadeiros e atuais, bem como garante que irá atualizar seus dados sempre houver qualquer modificação neles.</li>
+			<li>Para acessar e utilizar certos serviços e conteúdos da #MeRepresenta, é necessário que os usuários forneçam previamente alguns dados pessoais. A #MeRepresenta adota níveis de segurança dentro dos requisitos legais para a proteção dos dados pessoais. Entretanto, é importante que o usuário tenha ciência de que pela própria natureza e características técnicas da Internet, essa proteção não é infalível e encontra-se sujeita à violação pelas mais diversas práticas maliciosas.</li>
+			<li>A #MeRepresenta não verifica e não possui qualquer obrigação de verificar a identidade dos usuários nem a veracidade, completude, autenticidade dos dados que os usuários fornecem sobre si em qualquer circunstância. A #MeRepresenta somente fornecerá quaisquer desses dados para terceiros se solicitada por meio de canais legais em vigor mediante ordem judicial legalmente válida.</li>
+			<li>A #MeRepresenta, enquanto canal de comunicação, priorização, construção, visualização, distribuição e compilação de conteúdo, não será responsável por qualquer conduta dos seus usuários. Caso a #MeRepresenta seja envolvida em disputas e conflitos relativos à conduta dos usuários, o usuário fica ciente de que a #MeRepresenta denunciará todas e quaisquer lides, litígios e disputas no qual for envolvido por conta de conteúdos e condutas submetidos ou perpetradas por usuários ou terceiros, na medida permitida pela lei, de modo a não mais ser parte da lide, litígio ou disputa. A #MeRepresenta também faculta-se o direito de chamar ao processo qualquer usuário, em razão de quaisquer ações originárias de sua conduta e conteúdo submetido. Faculta-se também o direito de responsabilizar diretamente o usuário perpetrador da conduta abusiva, valendo-se para isso de todas os recursos legalmente possíveis, incluindo direito de regresso, dentre outros. Para tanto, a #MeRepresenta irá valer-se dos dados de registro bem como quaisquer outros dados técnicos que permitam identificar o usuário, ficando desde já ciente disso o usuário ou terceiros afetados. A #MeRepresenta reserva-se também o direito de cancelar o registro a qualquer tempo de qualquer usuário, por sua única e exclusiva discricionariedade, sem qualquer aviso prévio.</li>
+			<li>Com relação à privacidade dos usuários, a #MeRepresenta, enquanto projeto colaborativo, não tem como garantir a privacidade e segurança na utilização do mesmo e de seus serviços com relação aos usuários e terceiros, havendo sempre o risco inerente de que sejam possíveis a terceiros inferir de qualquer forma informações sobre condições, características dados, circunstâncias e classes pertinentes aos usuários da #MeRepresenta. Isso, naturalmente, não é responsabilidade da #MeRepresenta, mas da própria arquitetura da internet.</li>
+			<li>Existirá canal onde os usuários poderão corrigir ou atualizar dados, sempre que necessário, bem como poderão solicitar exclusão definitiva de seus dados da #MeRepresenta na hipótese desejar sair ou ser excluído da Plataforma. Para casos excepcionais em que por algum motivo relevante o usuário não conseguir efetuar ele mesmo a remoção, será possível solicitar a remoção através de requisição por meio do canal de contato com a equipe da #MeRepresenta, devendo identificar-se e informar quais conteúdos de sua autoria deseja ter removidos.</li>
+			<li>Esta política de privacidade pode vir a ser atualizada regularmente. Cabe ao usuário verificar regularmente no site da #MeRepresenta para buscar atualizações</li>
+		</ol>
+	</div>
+<% end %>

@@ -13,6 +13,7 @@ CariocaPergunta::Application.routes.draw do
 
   get   '/about', :to => 'main#about', as: :about
   get   '/criteria', to: 'main#criteria', as: :criteria
+  get   '/privacy', to: 'main#privacy', as: :privacy
 
   get   '/contact', :to => 'contact#show', as: :contact
   post  '/contact', :to => 'contact#create'

@@ -5,7 +5,7 @@
             background-image: url("/assets/FC3.png");
         }
         header {
-            padding: 1em;
+            padding: .5em 0;
             border-bottom: 1px solid #582985;
         }
         .links.atual {
@@ -89,6 +89,9 @@
     <div class="nav-item">
         <%= link_to "Contato", contact_path, {class: "nav-link"} %>
     </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
 <% end %>
 
 <% content_for :menu do %>

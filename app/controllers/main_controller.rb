@@ -42,7 +42,9 @@ class MainController < ApplicationController
     def about
     end
 
-    def criteria
-        
+    def criteria        
+    end
+
+    def privacy
     end
 end

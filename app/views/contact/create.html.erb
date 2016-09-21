@@ -3,6 +3,10 @@
     body {
         background-color: #097e74;
     }
+    header {
+        border-bottom: 1px solid #582985;
+        padding: .5em 0;
+    }
     main {
         font-family: ProximaNovaSoft-Bold;
         text-transform: uppercase;
@@ -39,6 +43,9 @@
     <div class="nav-item">
         <span class="nav-link disabled">Contato</span>
     </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
 <% end %>
 
 <% content_for :main do %>
