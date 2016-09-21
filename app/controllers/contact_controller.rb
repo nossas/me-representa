@@ -14,6 +14,7 @@ class ContactController < ApplicationController
     	message = <<MESSAGE_END
 From: Sistema de Contatos <testes@tamanhofamilia.com.br>
 To: <contato@merepresenta.org.br>
+Reply-To: #{params[:email]} 
 Subject: CONTATO
 
 * Nome: #{params[:nome]}
