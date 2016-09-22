@@ -47,7 +47,15 @@ class User < ActiveRecord::Base
                   on (ua.responder_id = #{id}) and (ca.question_id = ua.question_id) and (ua.responder_type = 'User') and (ua.weight>0)
               where 
                 ca.responder_id = candidates.id and ca.responder_type='Candidate' and ca.short_answer = 'Sim'
-          ) as score
+          ) as score_eleitor
+          ,(
+            select
+                count(*)
+              from 
+                answers ca 
+              where 
+                ca.responder_id = candidates.id and ca.responder_type='Candidate' and ca.short_answer = 'Sim'
+          ) as score_direitos_humanos
           , candidates.nickname
           , candidates.id as id
           , (select u.score from parties_unions pu inner join unions u on pu.union_id = u.id where pu.party_id = candidates.party_id and u.city_id = candidates.city_id limit 1) as union_score
@@ -55,15 +63,16 @@ class User < ActiveRecord::Base
           , (select count(*) from users us where us.candidate_id = candidates.id) as votos 
         }).
       joins(:party).
-      where("candidates.finished_at is not null and candidates.city_id = #{city_id}")
+      where("candidates.finished_at is not null and candidates.city_id = #{city_id}").
+      select { |dt| dt.score_direitos_humanos.to_i > 0 }
 
     match_data.map do |dt|
       {
         :id => dt.id.to_i,
-        :score_final => dt.score.to_i * (dt.union_score ? dt.union_score.to_f : dt.party_score.to_f),
+        :score_final => dt.score_direitos_humanos.to_i * (dt.union_score ? dt.union_score.to_f : dt.party_score.to_f),
         :comp_score =>( dt.union_score ? dt.union_score.to_f : dt.party_score.to_f),
         :party_score => dt.party_score.to_f ,
-        :score => dt.score.to_i,
+        :score => dt.score_eleitor.to_i,
         :shuffler => Random.rand(1000)
       }
     end.sort { |a,b| 
@@ -79,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def ranking( dt )
-    (dt[:comp_score] >= 0.7 ) ? 3 :
-    (dt[:comp_score] >= 0.4 ) ? 2 : 1
+    (dt[:score_final] >= 9.8 ) ? 3 :
+    (dt[:score_final] >= 5.6 ) ? 2 : 1
   end
 end
