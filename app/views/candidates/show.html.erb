@@ -445,12 +445,12 @@
             width: 87.5%;
             position: fixed;
             top: 20%;
-            z-index: 2;
-            background-color: aliceblue;
-            border: 1px double gray;
+            background-color: #532985;
             left: 6.25%;
-            animation-duration: 2s;
             animation-name: treme;
+            box-shadow: 0 0 0 calc( 100vw + 100vh ) rgba(0,0,0,.6);
+            font-size: 1.2em;
+            text-align: center;
         }
         .share-it h4 {
             font-size: 1.1em;
@@ -458,10 +458,13 @@
             background-color: #532985;
             color: #d8b212;
             padding: .4em .4em .4em .85em;
+            text-transform: uppercase;
+            padding: 1.5em;
         }
         .share-it p {
             margin: 0;
-            padding: 0 1em 1em 1em;
+            color: #fff;
+            padding: 0 2em 1.5em 2em;
         }
         .share-it>h4>a {
             position: absolute;
@@ -471,44 +474,25 @@
         .share-it>h4>a:after {
             content: "X";
             position: absolute;
-            right: .5em;
-            color: red;
+            right: 0.2em;
+            color: #d8b212;
+            top: -17px;
         }
-        @keyframes treme {
-          from {
-            transform: rotate(0deg);
-          }
-          5% {
-            transform: rotate(2deg);
-          }
-          10% {
-            transform: rotate(-2deg);
-          }
-          15% {
-            transform: rotate(2deg);
-          }
-          20% {
-            transform: rotate(-2deg);
-          }
-          25% {
-            transform: rotate(2deg);
-          }
-          30% {
-            transform: rotate(-2deg);
-          }
-          35% {
-            transform: rotate(2deg);
-          }
-          40% {
-            transform: rotate(-2deg);
-          }
-          45% {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(0deg);
-          }
-        } 
+        .share-it:after {
+            content: "";
+            position: absolute;
+            background-image: url('/assets/01_.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100px;
+            width: 100px;
+            bottom: -54px;
+            right: 0px;
+        }
+        .share-it a, .share-it a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
         @media screen and (min-width: 650px) {
             .share-it {
                 width: 550px;
@@ -518,13 +502,14 @@
     </style>
     <div class="share-it invisivel">
         <h4>Ei, psiu !!! <a href="#">fechar</a></h4>
-        <p>Essa plataforma te representa? <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode root_url %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>">Compartilhe</a> no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
+        <p>Essa plataforma te representa?</p>
+        <p><a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode root_url %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>">Compartilhe</a> no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
     </div>
     <script type="text/javascript">
         (function() {
             window.setTimeout(function(){
                 $(".share-it").removeClass("invisivel");
-            }, 10000);
+            }, 100);
             $(".share-it>h4>a").on("click", function(){
                 $(".share-it").addClass("invisivel");
             })
