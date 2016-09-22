@@ -28,9 +28,12 @@
 .candidate-number {
     font-size: 3em;
 }
-.info-text.party, .info-text.contagem,.info-text.nota {
+.info-text.party, .info-text.contagem {
     color: #d8b212;
 }
 .info-text.nota {
-    text-decoration: underline;
+    padding-top: .2em;
+    background-color: #d8b212;
+    color: #532985;
+    border-radius: .3em;
 }
