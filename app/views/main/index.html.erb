@@ -69,7 +69,7 @@
         padding: 1.3em 1em .7em 1em;
         text-transform: uppercase;
     }
-    .link.contact:before {
+    .link.facebook:before, .link.contact:before {
         content: "";
         background-size: 2em;
         background-color: rgba(211, 211, 211, 0.35);
@@ -119,10 +119,13 @@
             position: relative;
             margin-right: 1.5em;
         }
+        .link.facebook {
+            margin-right: .665em;
+        }
         .link.about {
             padding: 5.3em 1em 2.7em 1em;
         }
-        .link.contact:before {
+        .link.contact:before, .link.facebook:before {
             background-size: 3em;
             height: 8em;
             width: 5em;
@@ -191,9 +194,8 @@
 <% end %>
 <% content_for :header do %>
     <div class="links">
-<!--         <a href="https://www.facebook.com/pages/Rede-Nossas-Cidades/711876345548757?pnref=lhc" class="link facebook" target="_new">Facebook</a>
- -->
-         <%= link_to "Contato", contact_path, {class: "link contact"} %>
+        <a href="https://www.facebook.com/merepresenta.org.br" class="link facebook" target="_new">Facebook</a>
+        <%= link_to "Contato", contact_path, {class: "link contact"} %>
         <%= link_to "Sobre o projeto", about_path, {class: "link about"} %>
     </div>
 <% end %>
