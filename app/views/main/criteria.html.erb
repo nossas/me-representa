@@ -67,20 +67,21 @@
 	.container {
 		margin-bottom: 5rem;
 	}
-	#info_detalhada:before {
-		content: "*";
-	}
 	#info_detalhada {
-		color: #d8b212;
+	    font-family: ProximaNovaSoft-Bold; 
+		color: #FFF;
 		margin-top: 2em;
 		text-align: center;
 		font-size: 1.3em;
-		font-weight: bolder;
+		text-transform: uppercase;
+	}
+	#info_detalhada a {
+		font-size: 1.1em;
+		color: #097e74;
 	}
 	h2 {
 	    margin: 1em 0; 
 	    background-color: #097e74;
-	    font-weight: bolder;
 	    display: inline-block;
 	    padding: .3em .75em;
 	    font-family: ProximaNovaSoft-Bold;
@@ -101,7 +102,7 @@
 <div class="container">
 	<h1>Avaliação das coligações</h1>
 
-	<p>As coligações são muito importantes porque a eleição da Câmara Municipal é proporcional. Ou seja, seu voto não é exclusivo do candidato que você escolhe, ele é contabilizado no total de votos da coligação. São eleitos os candidatos mais votados desta coligação (independentemente do partido). Isso significa que o seu voto pode não eleger o seu candidato e ajudar a eleger candidatos e partidos nos quais você não votaria. Precisamos aprender a votar de acordo com as regras atuais do sistema eleitoral, por isso avaliamos as coligações conforme a atuação dos partidos em pautas de direitos humanos. <a href="#info_detalhada">Para mais detalhes de metodologia e notas, clique aqui.</a>.</p>
+	<p>As coligações são muito importantes porque a eleição da Câmara Municipal é proporcional. Ou seja, seu voto não é exclusivo do candidato que você escolhe, ele é contabilizado no total de votos da coligação. São eleitos os candidatos mais votados desta coligação (independentemente do partido). Isso significa que o seu voto pode não eleger o seu candidato e ajudar a eleger candidatos e partidos nos quais você não votaria. Precisamos aprender a votar de acordo com as regras atuais do sistema eleitoral, por isso avaliamos as coligações conforme a atuação dos partidos em pautas de direitos humanos. <a href="/assets/documentolegal_merepresenta.pdf">Para mais detalhes de metodologia e notas, clique aqui.</a>.</p>
 	<p>Cada um dos 35 <strong>partidos</strong> recebeu uma nota entre 0 e 100. As notas foram calculadas a partir de quatro categorias, cada uma valendo 25 pontos, a saber: LGBT, igualdade de gênero, igualdade racial e participação em “frentes e bancadas” no Congresso Nacional.</p>
 	<p>Já a nota atribuída à <strong>coligação</strong> resultou da soma das notas de todos os partidos da coligação dividida pelo número de partidos que a compõem. Por exemplo, se a coligação tem dois partidos, somou-se a nota dos dois partidos e dividiu-se por dois. Os partidos que não fazem parte de nenhuma coligação mantiveram suas notas individuais.</p>
 
@@ -262,6 +263,6 @@
 		</tbody>
 	</table>
 
-	<div id="info_detalhada">Em breve disponibilizaremos a avaliação detalhada</div>
+	<div id="info_detalhada">Para baixar a avaliação detalhada, <a href="/assets/documentolegal_merepresenta.pdf">clique aqui</a></div>
 </div>
 <% end %>
