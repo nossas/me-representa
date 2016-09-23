@@ -5,7 +5,7 @@ class CandidatesController < ApplicationController
   inherit_resources
   respond_to :csv
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:delete]
   skip_authorize_resource :only => [:check, :home, :create  ]
 
   optional_belongs_to :party
@@ -71,6 +71,7 @@ class CandidatesController < ApplicationController
   end
 
   def show
+    @current_user = User.find session[:user_id] if session[:user_id] and ( not @current_user )
     @candidate = Candidate.find params[:id]
     render layout: "merepresentaunlogged" if not session[:user_id]
   end
@@ -90,6 +91,36 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find(session[:candidate_id])
     @candidate.update_attributes :finished_at => Time.now
     CandidateMailer.finished(@candidate).deliver
+  end
+
+  def management
+    @candidates = nil
+    if params[:city_id]
+      @candidates = (Candidate.where "city_id = #{params[:city_id]}").order(:nickname)
+    end
+  end
+
+  def destroy
+    @candidate.transaction do 
+      @candidate.answers.each {|a| a.destroy}
+      @authorization = Authorization.where "user_id = #{@candidate.id}"
+      @authorization.each {|a| a.destroy}
+      @user = User.find @candidate.id
+      @user.destroy
+      @candidate.destroy
+      flash[:success] = 'Registro apagado com sucesso'
+    end
+    redirect_to candidates_management_path
+  end
+
+  def free
+    @candidate = Candidate.find params[:candidate_id]
+
+    @candidate.finished_at = nil
+    if @candidate.save
+      flash[:success] = 'Registro liberado'
+    end
+    redirect_to candidates_management_path
   end
   
   def check

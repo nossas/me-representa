@@ -30,6 +30,12 @@ class Ability
 
     if user and user.admin?
       can :manage, :all
+      can :free, User
+      can :destroy, Candidate
+      can :management, Candidate
+    else
+      cannot :free, User
+      cannot :destroy, Candidate
     end
   end
 end

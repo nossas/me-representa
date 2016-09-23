@@ -8,6 +8,7 @@ CariocaPergunta::Application.routes.draw do
   get '/candidates/confirm', to: 'candidates#confirm', as: :candidate_confirmation
   put '/candidates/finish', to: 'candidates#finish', as: :candidate_finish
   get '/candidates/matches', to: 'users#matchup_data', as: :candidates_matchup_data 
+  get '/candidates/management', to: 'candidates#management', as: :candidates_management
   
   resources :likes, only: [:create, :update]
 
@@ -19,6 +20,7 @@ CariocaPergunta::Application.routes.draw do
   post  '/contact', :to => 'contact#create'
   
   resources :candidates do
+    get '/free', :to => 'candidates#free', as: :free
     resources :answers, except: [:destroy] 
   end
 
