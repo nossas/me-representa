@@ -11,6 +11,10 @@
 		padding-bottom: 1em;
 		margin-bottom: 3em;
 	}
+	a, a:hover {
+		color: #fff;
+		font-weight: bolder;
+	}
 	h1 {
 		text-transform: uppercase;
 	    color: #d8b212;
@@ -95,15 +99,17 @@
 
 <% content_for :main do %>
 <div class="container">
-	<h1>Nossos critérios de avaliação.</h1>
+	<h1>Avaliação das coligações</h1>
 
-	<p>As coligações são muito importantes porque a eleição da câmara municipal é proporcional. Ou seja, seu voto não é exclusivo do candidato que você escolhe, ele é contabilizado no total de votos da coligação. São eleitos os candidatos mais votados desta coligação (independentemente do partido). Isso significa que o seu voto pode não eleger o seu candidato e ajudar a eleger candidatos de partidos nos quais você não votaria. Precisamos aprender a votar de acordo com as regras atuais, por isso avaliamos as coligações conforme a atuação dos partidos em pautas de direitos humanos. Para mais detalhes de metodologia e notas, clique <a href="#info_detalhada">aqui</a>.</p>
-	<p>Cada um dos 35 <strong>partidos</strong> recebeu uma nota entre 0 e 100. As notas foram calculadas a partir de quatro categorias, cada uma valendo 25 pontos, a saber: LGBT, igualdade de gênero, igualdade racial e “frentes e bancadas”. Ao final esta nota foi dividida por 100.</p>
-	<p>Já a nota atribuída à <strong>coligação</strong> resultou da soma das notas de todos os partidos da coligação dividida pelo número de partidos que a compõem. Por exemplo, se a coligação tem dois partidos, somou-se a nota dos dois partidos e dividiu-se por dois. Os partidos que não pertencem a coligações mantiveram suas notas individuais.</p>
-	<p>Os <strong>candidatos</strong> que se inscrevem na plataforma também recebem uma nota pessoal de acordo com a quantidade de pautas de direitos humanos as quais declara apoio na plataforma (de 1 a 14), sendo essas pautas as mesmas que aparecem para o eleitor.</p>
-	<p>Após selecionar as pautas que são importantes na definição de seu voto, <strong>você receberá a lista de todas as candidaturas cadastradas que selecionaram no mínimo as mesmas pautas que você</strong>, ordenadas conforme o número obtido da multiplicação da nota pessoal do candidato pela nota da coligação. Quanto maior este número, antes aparecerá o candidato. O critério de desempate é a nota do partido, e, permanecendo o empate, as candidaturas aparecem em ordem aleatória.</p>
+	<p>As coligações são muito importantes porque a eleição da Câmara Municipal é proporcional. Ou seja, seu voto não é exclusivo do candidato que você escolhe, ele é contabilizado no total de votos da coligação. São eleitos os candidatos mais votados desta coligação (independentemente do partido). Isso significa que o seu voto pode não eleger o seu candidato e ajudar a eleger candidatos e partidos nos quais você não votaria. Precisamos aprender a votar de acordo com as regras atuais do sistema eleitoral, por isso avaliamos as coligações conforme a atuação dos partidos em pautas de direitos humanos. <a href="#info_detalhada">Para mais detalhes de metodologia e notas, clique aqui.</a>.</p>
+	<p>Cada um dos 35 <strong>partidos</strong> recebeu uma nota entre 0 e 100. As notas foram calculadas a partir de quatro categorias, cada uma valendo 25 pontos, a saber: LGBT, igualdade de gênero, igualdade racial e participação em “frentes e bancadas” no Congresso Nacional.</p>
+	<p>Já a nota atribuída à <strong>coligação</strong> resultou da soma das notas de todos os partidos da coligação dividida pelo número de partidos que a compõem. Por exemplo, se a coligação tem dois partidos, somou-se a nota dos dois partidos e dividiu-se por dois. Os partidos que não fazem parte de nenhuma coligação mantiveram suas notas individuais.</p>
 
-	<h1>Notas finais dos partidos</h1>
+	<h2>Avaliação dos candidatos</h2>
+	<p>Os <strong>candidatos</strong> que se inscreveram também recebem uma nota pessoal, de acordo com a quantidade de pautas de direitos humanos que apóia, baseado nas respostas declaradas na plataforma (de 1 a 14), sendo essas pautas as mesmas que aparecem para escolha do eleitor.</p>
+	<p><strong>Após selecionar as pautas que são importantes na definição de seu voto, você receberá a lista de todas as candidaturas cadastradas que selecionaram no mínimo as mesmas pautas que você</strong>, ordenadas conforme a nota total obtida da multiplicação da nota pessoal do candidato pela nota da coligação. Quanto maior este número, antes aparecerá o candidato. As candidaturas com notas totais entre 7 e 10, aparecem de forma aleatória entre as primeiras posições. As candidaturas com notas totais entre 4 e 6,99, aparecem de forma aleatória na sequência. E, por último, aparecem as candidaturas com notas totais entre 0,01 e 3,99.</p>
+
+	<h2>Notas finais dos partidos</h2>
 
 	<table class="table table-striped classificacao">
 		<thead>
