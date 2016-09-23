@@ -319,6 +319,7 @@
         <li><a href="<%= edit_candidate_path(@current_user.id) %>" class="dropdown-item">Perfil no #MeRepresenta</a></li>
     <% elsif session[:user_id] %>
         <% if @current_user.admin? %>
+            <%= link_to "Gereciar dados de candidatos", candidates_management_path, {class: "dropdown-item"} %>
             <li>
                 <%= form_for @candidate, method: :delete do %>
                     <button type="submit" class="dropdown-item">Apagar Registro</button>

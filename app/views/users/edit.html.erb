@@ -62,6 +62,15 @@
 </style>
 <% end %>
 
+<% content_for :menu_logged do %>
+    <% if session[:user_id] %>
+        <% if @current_user.admin? %>
+            <%= link_to "Gereciar dados de candidatos", candidates_management_path, {class: "dropdown-item"} %>
+            <div class="dropdown-divider"></div>
+        <% end %>
+    <% end %>
+<% end %>
+
 <% content_for :main do %>
 <div class="container">
    <div class="header">

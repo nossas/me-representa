@@ -85,6 +85,10 @@
 <% end %>
 
 <% content_for :menu_logged do %>
+    <% if @current_user.admin? %>
+        <%= link_to "Gereciar dados de candidatos", candidates_management_path, {class: "dropdown-item"} %>
+        <div class="dropdown-divider"></div>
+    <% end %>
     <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
     <li><%= link_to "Refazer questionário", new_answer_path, {class: "dropdown-item"} %>
 <% end %>
