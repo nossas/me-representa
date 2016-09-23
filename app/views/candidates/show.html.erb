@@ -325,7 +325,7 @@
                     <button type="submit" class="dropdown-item">Apagar Registro</button>
                 <% end %>
             <li>
-            <%= link_to "Liberar registro", candidate_free_path(@candidate.id), {class: "dropdown-item"} %>
+            <%= link_to "Liberar Questionário", candidate_free_path(@candidate.id), {class: "dropdown-item"} %>
             <div class="dropdown-divider"></div>
         <% end %>
         <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
