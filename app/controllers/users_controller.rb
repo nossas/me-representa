@@ -14,6 +14,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    if @user.id == session[:user_id]
+      edit!
+    else
+      redirect_to edit_user_path session[:user_id]
+    end
+  end
+
   def update
     update! do |success, failure|
       success.html { redirect_to params[:redirect_to] || new_answer_path }
