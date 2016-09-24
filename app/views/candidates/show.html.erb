@@ -457,13 +457,14 @@
         .share-it {
             width: 87.5%;
             position: fixed;
-            top: 20%;
+            top: 7%;
             background-color: #532985;
             left: 6.25%;
             animation-name: treme;
             box-shadow: 0 0 0 calc( 100vw + 100vh ) rgba(0,0,0,.6);
             font-size: 1.2em;
             text-align: center;
+            padding-bottom: 2em;
         }
         .share-it h4 {
             font-size: 1.1em;
@@ -503,20 +504,44 @@
             right: 0px;
         }
         .share-it a, .share-it a:hover {
-            color: #fff;
+            /*color: #fff;*/
             text-decoration: none;
+            width: 250px;
+            position: relative;
+            padding-left: 3em;
+        }
+        .btn-compartilhe:before, .btn-compartilhe:hover:before {
+            content: "";
+            background-image: url("/assets/face3.svg");
+            background-size: cover;
+            width: 1.5em;
+            height: 2em;
+            display: inline-block;
+            position: absolute;
+            left: .5em;
+            top: .1em;
+        }
+        .btn-compartilhe:after, .btn-compartilhe:hover:after {
+            content: "";
+            border-left: 1px double #532985;
+            position: absolute;
+            top: .5em;
+            left: 2.6em;
+            height: 1.3em;
         }
         @media screen and (min-width: 650px) {
             .share-it {
                 width: 550px;
                 left: calc( ( 100% - 550px ) / 2 );
+                padding-bottom: 1em;
             }
         }
     </style>
     <div class="share-it invisivel">
         <h4>Ei, psiu !!! <a href="#">fechar</a></h4>
         <p>Essa plataforma te representa?</p>
-        <p><a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode root_url %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>">Compartilhe</a> no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
+        <p>Compartilhe no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
+        <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode root_url %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn-compartilhe btn btn-amarelo-roxo">Compartilhar com amigos</a>
     </div>
     <script type="text/javascript">
         (function() {
