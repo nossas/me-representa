@@ -29,22 +29,22 @@
 body { 
     font-family: ProximaNovaSoft-Regular; 
 }
-.btn-amarelo-roxo {
+.btn-amarelo-roxo,.btn-amarelo-roxo:hover {
     background-color: #d8b212;
     color: #582985;
     font-weight: bolder;
 }
-.btn-roxo-amarelo {
+.btn-roxo-amarelo,.btn-roxo-amarelo:hover {
     background-color: #582985;
     color: #d8b212;
     font-weight: bolder;
 }
-.btn-verdeescuro-roxo {
+.btn-verdeescuro-roxo,.btn-verdeescuro-roxo:hover {
     background-color: #097e74;
     color: #097e74;
     font-weight: bolder;
 }
-.btn-verdeclaro-roxo {
+.btn-verdeclaro-roxo,.btn-verdeclaro-roxo:hover {
     background-color: #00a99d;
     color: #097e74;
     font-weight: bolder;
