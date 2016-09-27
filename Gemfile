@@ -19,6 +19,8 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'foreigner'
 
+gem 'puma'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'taps'
