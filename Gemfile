@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Last updated version of rails
 ruby '2.1.9'
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.22.5'
 
 # Back-end stuff
 gem 'inherited_resources'
