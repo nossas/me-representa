@@ -19,7 +19,9 @@ Please refer to https://developers.facebook.com/ for more information about them
 
 In ubuntu linux you may configure them in your .bashrc file, located at your user's home dir as showed below:
 > export FB_ID="12312312312"
+
 > export FB_SECRET="SASDSEWEWEWFA"
+
 Please refer your OS' environment variables section for more information.
 
 For contacts, you must change the app/controllers/contact_controller.rb file, to reflect your project needs.
