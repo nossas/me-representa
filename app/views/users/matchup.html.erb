@@ -1,0 +1,138 @@
+<% content_for :head do %>
+    <link rel="stylesheet" href="/assets/candidates-match.css">
+<% end %>
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Contato", contact_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
+<% end %>
+
+<% content_for :menu_logged do %>
+    <% if @current_user.admin? %>
+        <%= link_to "Gereciar dados de candidatos", candidates_management_path, {class: "dropdown-item"} %>
+        <div class="dropdown-divider"></div>
+    <% end %>
+    <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
+    <li><%= link_to "Refazer questionário", new_answer_path, {class: "dropdown-item"} %>
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <div class="conteudo">
+            <h1>Essas são as candidaturas que mais respeitam os direitos humanos na sua cidade!</h1>
+            <p>Aqui estão as candidaturas que escolheram <a href="<%= criteria_path %>">no mínimo</a> as mesmas pautas que você. As candidaturas que apoiam mais pautas e que fazem parte de coligações mais bem avaliadas aparecem primeiro, mas todas que concordam com você aparecem! <a href="<%= criteria_path %>">Aqui</a> você sabe mais sobre a avaliação das coligações e os critérios para ordem de exibição.</p>
+            <p>Agora clique nas candidaturas para conhecer mais sobre a opinião do/a candidato/a e sobre a coligação que receberá seu voto! Na dúvida, escolha uma mulher e ajude a promover a igualdade de gênero na Câmara de Vereadores de sua cidade!</p>
+
+            <%= render partial: "candidatos" %>
+
+            <% if @matdata.size() > 0 %>
+            <button id="btn-mais-cand" type="button" class="btn btn-2">mostrar mais</button>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+    var CandidateDateGetter = function(match_url, candidatesPath, candidates, noMoreDataCallback){
+        var retorno = {
+            _url: match_url + ".json"
+            , _candidates: candidates
+            , _searching: false
+            , callForMore: function() {
+                if (retorno._searching) return;
+                var nextList = retorno._candidates.slice(0,6);
+                retorno._candidates = retorno._candidates.slice(6,retorno._candidates.length);
+                retorno._searching =  true;
+                $.ajax({
+                    url: retorno._url
+                    , method: 'get'
+                    , dataType: "json"
+                    , data: {
+                        list: nextList
+                    }
+                    , error: function(data) {
+                        retorno._searching = false;
+                        alert("Erro ao buscar dados do servidor. Por favor, tente novamente ou recarregue a página");
+                    }
+                    , success: function(data){
+                        var divGrupo = $("div.candidatos");
+                        data.forEach(function(match){
+                            var   link  = $("<a>", {href: candidatesPath +'/'+ match["id"] })
+                                , divCand = $("<div>", {class: 'candidato'})
+                                , imgCand = $("<img>", {class: 'can-pic', src: match['picture'] + "?type=large", alt:"Foto do candidato"})
+                                , nickname = $("<span>", {class: 'info-text name'})
+                                , candNumber = $("<span>", {class: 'info-text number'})
+                                , number = $("<span>", {class: 'candidate-number'})
+                                , party = $("<span>", {class: 'info-text party'}) 
+                                , score = $("<span>", {class: 'info-text nota'}) 
+                                , score_val = 0 
+                                , contagem = $("<span>", {class: 'info-text contagem'}) 
+                                , img = $("<img>", {src: (match.id == retorno.candidateId ? "/assets/c1.svg" : "/assets/c0.svg")} );
+
+                            number.text(match['number']);
+                            contagem.text(match['vote_intension'] + ' #MeRepresenta');
+
+                            candNumber.text("nº ");
+                            candNumber.append(number);
+
+                            nickname.text(match['nickname']);
+
+                            if (match['union'] == null){
+                                party.text('Partido: ' + match['party_symbol']);
+                                score.text('Nota do Partido: ' + (Math.roundmatch['party_score']));
+                                score_val = match['party_score']
+                            } else {
+                                party.text('Coligação: ' + match['union']);    
+                                score.text('Nota da Coligação: ' + match['union_score']);
+                                score_val = match['union_score']
+                            }
+                            if (score_val <= 5)
+                                score.addClass('perigo');
+
+                            link.append(imgCand);
+                            divCand.append(link);
+                            divCand.append(nickname);
+                            divCand.append(candNumber);
+                            divCand.append(party);
+                            divCand.append(score);
+                            divCand.append(contagem);
+
+
+                            divGrupo.append(divCand);
+
+                            retorno._candidates.slice(retorno._candidates.findIndex(function(x){
+                                return x == match["id"];
+                            }))
+                        });
+                        if (retorno._candidates.length == 0)
+                            noMoreDataCallback();
+                        retorno._searching = false;
+                    }
+                });
+            }
+        };
+        return retorno;
+
+    };
+
+    var candidateMatchList = [<%= @matdata.map{|m| m[:id] }.reduce{|t, o| "#{t}, #{o}"} %>];
+    var botaoBuscaCand = $("#btn-mais-cand");
+
+    (function(){
+        var candidateDateGetter = CandidateDateGetter("<%= candidates_matchup_data_path %>", "<%= candidates_path %>", candidateMatchList, function() { botaoBuscaCand.addClass("invisivel"); } );
+
+        $("#btn-mais-cand").on("click", candidateDateGetter.callForMore);
+    })();
+</script>
+<% end %>

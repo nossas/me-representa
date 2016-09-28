@@ -1,0 +1,120 @@
+<% content_for :main do %>
+    <link rel="stylesheet" href="/assets/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.theme.css">
+    <style>
+    	table {
+    		margin: 2em 0;
+    	}
+    	th {
+    		text-align: center;
+    	}
+    	thead {
+    		background-color: gray;
+    		text-transform: uppercase;
+    	}
+    </style>
+<% end %>
+
+<% content_for :main do %>
+	<div class="container">
+		<h1>Candidatos Registrados no Sistema #MeRepresenta</h1>
+		<%= form_tag dataclip_who_didnt_answered_path, method: :get do %>
+			<div class="form-group">
+				<input type="hidden" name="city_id" id="city_id">
+				<label for="cidade">Município:</label>
+				<input id="cidade" type="text" class="form-control" />
+			</div>
+			<button type="submit" id="submit" class="btn btn-primary" disabled>Pesquisar</button>
+		<% end %>
+
+		<% if @candidates %>
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th colspan="8"><%= "#{@city.name}, #{@city.state}" %></th>
+					</tr>
+					<tr>
+						<th>nome</th>
+						<th>nome urna</th>
+						<th>código partido</th>
+						<th>sigla</th>
+						<th>codigo urna</th>
+						<th>email</th>
+						<th>cidade</th>
+						<th>uf</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @candidates.each do |c| %>
+					<tr>
+						<td>
+							<%= c.name %>
+						</td> 
+						<td>
+							<%= c.nickname %>
+						</td> 
+						<td>
+							<%= c.party_id %>
+						</td> 
+						<td>
+							<%= c.party.symbol %>
+						</td> 
+						<td>
+							<%= c.number %>
+						</td> 
+						<td>
+							<%= c.email %>
+						</td> 
+						<td>
+							<%= c.city.name %>
+						</td> 
+						<td>
+							<%= c.city.state %>
+						</td> 
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<a href="<%= dataclip_who_didnt_answered_path(:city_id => @city_id, :format => "csv") %>" class="btn btn-primary">csv</a>
+			<a href="<%= dataclip_who_didnt_answered_path(:city_id => @city_id, :format => "xml") %>" class="btn btn-primary">xml</a>
+			<a href="<%= dataclip_who_didnt_answered_path(:city_id => @city_id, :format => "json") %>" class="btn btn-primary">json</a>
+		<% end %>
+	</div>
+<% end %>
+
+<% content_for :scripts do %>
+  <script src="/assets/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#cidade" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+            url: "/cities?match=" + request.term
+            , method: "get"
+            , accept: "application/json"
+            , success: function( data ) { //data.map(a=>{"label": a[1], "value": a[0]}
+                var objetos  = data.map(function(cidade){
+                    return {
+                        value: cidade[0]
+                        , label: cidade[1]
+                    };
+                });
+                response( data.length === 1 && data[ 0 ].length === 0 ? [] : objetos );
+            }
+        })
+      },
+      minLength: 2  ,
+      select: function( event, ui ) {
+        $("#city_id").val(ui.item.value);
+        $("#submit").removeAttr('disabled');
+        return false;
+      }
+      , focus: function( event, ui ) {
+        event.preventDefault();
+        $(event.target).val(ui.item.label);
+      }
+    } );
+  } );
+  </script>
+<% end %>

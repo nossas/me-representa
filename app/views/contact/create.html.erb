@@ -1,0 +1,27 @@
+<% content_for :head do %>
+    <link rel="stylesheet" href="/assets/contact.css">
+<% end %>
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <span class="nav-link disabled">Contato</span>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <h1>Obrigada pela mensagem!</h1>
+        <div class='mensagem'>
+            Em breve entramos em contato com você.
+        </div>
+    </div>
+<% end %>

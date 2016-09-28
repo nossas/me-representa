@@ -1,13 +1,12 @@
 class Candidate < ActiveRecord::Base
   attr_accessible :born_at, :male, :name, :nickname, :number, :party_id, :party, :email, :mobile_phone, :bio, :finished_at, :group_id, :short_url, :politician, :occupation, :scholarity, :city_id, :cpf, :electoral_title
-  validates :number, :token, :uniqueness => true
-  validates :name, :number, :party_id, :cpf, :electoral_title, :born_at, :city_id, :presence => true
+
+  validates :nickname, :email, :number, :party_id, :cpf, :born_at, :city_id, :presence => true
   validate :verify_tse_data
 
   belongs_to :party
   belongs_to :city
   
-  has_one :union, :through => :party
   has_many :answers, :as => :responder
   has_many :users
   before_create { self.token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{self.number}") }
@@ -53,8 +52,18 @@ class Candidate < ActiveRecord::Base
     connection.select_all(candidates.order("score DESC").group("candidates.name, candidates.nickname, candidates.id, symbol"))
   end
 
+  def party_union
+    u = Union.joins(:parties).where("parties.id = #{party.id} and unions.city_id = #{city_id}")
+    (u.count > 0)?u[0]:nil
+  end
+
   def gang
-    Candidate.joins(:party).where("(candidates.party_id = ? OR parties.union_id = ?) AND candidates.id <> ?", self.party_id, self.party.union_id, self.id)
+    if party_union
+      result = party_union.parties.sort{|a,b| a.score-b.score}.slice(0,6).map{|p| select_one_of_tse_worsts p.id}
+    else
+      result = [ select_one_of_tse_worsts(self.party_id) ]
+    end
+    result.select{|v|v != nil}
   end
 
   def verify_tse_data
@@ -64,7 +73,28 @@ class Candidate < ActiveRecord::Base
       errors.add(:cpf, "Dados passados não correspondem aos dados fornecidos pelo TSE") if (registros == [])
   end
 
+  def rank
+      return 4;
+  end
+        
+  def picture
+      (User.find id).picture
+  end
+
+  def vote_intension
+    User.where("candidate_id = #{id}").count
+  end
+
   private
+
+  def select_one_of_tse_worsts party_id_to_search
+    tse = TseData.joins(:party)
+      .where("tse_data.city_id = #{city_id} and tse_data.male='true' and (party_id = #{party_id_to_search})")
+      .order("(100 - extract(year from age(tse_data.born_at))) * parties.score, parties.score")
+      .limit(15)
+
+    tse[Random.rand(tse.size)] if tse != []
+  end
 
   def corrige_dados
     self.mobile_phone.gsub! /\D/, '' if self.mobile_phone != nil

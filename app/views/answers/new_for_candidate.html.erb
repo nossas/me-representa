@@ -1,0 +1,76 @@
+<% content_for :head do %>
+    <link rel="stylesheet" href="/assets/new_for_candidates.css">
+<% end %>
+
+<% content_for :main do %>
+
+
+<div class="container">
+    <h1>Questionário</h1>
+    <h2>Responda as perguntas abaixo para que suas eleitoras e eleitores saibam o que você pensa!</h2>
+    <% @candidate.answers
+        .select{|c| c.id !=nil }
+        .sort{|a,b| a.id-b.id }
+        .each do |a| %>
+        <div class="question">
+            <span class="question-title">
+                <%= a.question.text %>
+            </span>
+            <div class="opiniao" answer_id="<%= a.id %>">
+                <label>
+                   <input type="radio" class="resposta" name="short_answer<%= a.id %>" value="Sim" <%= "checked" if a.short_answer == "Sim" %>>
+                   <span>Sim</span>
+                </label>
+                <label>
+                   <input type="radio" class="resposta" name="short_answer<%= a.id %>" value="Não" <%= "checked" if a.short_answer == "Não" %>>
+                    <span>Não</span>
+                </label>
+            </div>
+        </div>
+        <div class="alert alert-danger invisivel">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          Erro ao completar a operação, dados não foram gravados. Por favor recarregue a página.
+        </div>
+    <% end %>
+    <a href="<%= candidate_confirmation_path %>" class="btn btn-1">Submeter respostas</a>
+</div>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+    (function(){
+        var toSend = {
+            <%= request_forgery_protection_token.to_s %>: "<%= form_authenticity_token %>"
+            , candidate_id: <%= @candidate.id %>
+        }, url = "<%= candidate_answers_path(@candidate.id) %>/";
+        
+        var submit = function() {
+            var prev = $(this).prev();
+            prev.val();
+            $(this).parent().parent().submit();
+        }
+        $("input[type='radio']").on("change", function(){
+            var div = $(this).parent().parent().parent();
+            toSend["short_answer"] = this.value;
+            div.removeClass("dados-erro");
+            $.ajax({
+                  method: "put"
+                , contentType: "application/json"
+                , data: JSON.stringify(toSend)
+                , url: url + $(this).parent().parent().attr("answer_id")
+                , error(data) {
+                    div.addClass("dados-erro");
+                    $("#alert").removeClass("invisivel");
+                }
+                , success(data) {
+                    div.addClass("dados-ok");
+                    setTimeout(function(){
+                        div.removeClass("dados-ok");
+                    }, 1000);
+                }
+            })
+            ;
+        });
+    })();
+</script>
+<% end %>

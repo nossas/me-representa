@@ -1,11 +1,11 @@
 # coding: utf-8
 class CandidatesController < ApplicationController
-  layout "application_phase_two"
+  layout "merepresentalogged"
   
   inherit_resources
   respond_to :csv
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:delete]
   skip_authorize_resource :only => [:check, :home, :create  ]
 
   optional_belongs_to :party
@@ -36,6 +36,7 @@ class CandidatesController < ApplicationController
 
   before_filter { @user = User.find(params[:user_id]) if params[:user_id] }
   before_filter only: [:home] { @truths = Question.truths.chosen; @dares = Question.dares.chosen }
+  before_filter only: [:edit] { @current_user = User.find session[:user_id] }
 
   before_filter only: [:create] do
     @candidate.id = params['f_code']
@@ -55,32 +56,71 @@ class CandidatesController < ApplicationController
   before_filter :only => [:index] { render partial: 'candidates/list', locals: { candidates: @candidates } if request.xhr? }
   before_filter :only => [:check] { render json: nil if params[:candidate][:email].blank? and params[:candidate][:mobile_phone].blank? }
 
+  def edit
+    if @candidate.id == session[:candidate_id]
+      edit!
+    else
+      redirect_to edit_candidate_path session[:candidate_id]
+    end
+  end
+
 
   def home;end
+    
+  def profile      
+  end
 
-  def create
-    create! do |success, failure|
-      success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }
-      failure.html { 
-        envia_erros(@candidate)
-      }
-    end
+  def show
+    @current_user = User.find session[:user_id] if session[:user_id] and ( not @current_user )
+    @candidate = Candidate.find params[:id]
+    render layout: "merepresentaunlogged" if not session[:user_id]
   end
 
   def update
     update! do |success, failure|
       success.html { redirect_to new_candidate_answer_url(@candidate, :token => @candidate.token) }
-      failure.html { 
-        envia_erros(@candidate)
-      }
+      failure.html
     end
   end
 
+  def confirm
+    @current_candidate = Candidate.find session[:candidate_id]
+  end
+
   def finish
-    @candidate = Candidate.find(params[:candidate_id])
+    @candidate = Candidate.find(session[:candidate_id])
     @candidate.update_attributes :finished_at => Time.now
     CandidateMailer.finished(@candidate).deliver
-    redirect_to root_path, :notice => "#{@candidate.name}, seu questionário foi enviado com sucesso, obrigado pela sua participação!"
+  end
+
+  def management
+    @candidates = nil
+    if params[:city_id]
+      @candidates = (Candidate.where "city_id = #{params[:city_id]}").order(:nickname)
+    end
+  end
+
+  def destroy
+    @candidate.transaction do 
+      @candidate.answers.each {|a| a.destroy}
+      @authorization = Authorization.where "user_id = #{@candidate.id}"
+      @authorization.each {|a| a.destroy}
+      @user = User.find @candidate.id
+      @user.destroy
+      @candidate.destroy
+      flash[:success] = 'Registro apagado com sucesso'
+    end
+    redirect_to candidates_management_path
+  end
+
+  def free
+    @candidate = Candidate.find params[:candidate_id]
+
+    @candidate.finished_at = nil
+    if @candidate.save
+      flash[:success] = 'Registro liberado'
+    end
+    redirect_to candidates_management_path
   end
   
   def check
@@ -108,13 +148,4 @@ class CandidatesController < ApplicationController
       end
     end
   end
-
-  private
-    def envia_erros(modelo)
-        msgs = {}
-        modelo.errors.keys.each {|k| msgs[k] = modelo.errors[k].join("; ") }
-        flash[:erros] = msgs
-        flash[:candidate] = modelo
-        redirect_to :back # edit_user_path(modelo.id)       
-    end
 end

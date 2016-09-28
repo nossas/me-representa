@@ -1,0 +1,101 @@
+<% content_for :head do %>
+<style>
+	.container {
+		margin: 2em auto;
+	}
+	h1 {
+	    font-size: 1.7em;
+	    text-align: center;
+	}
+	h2 {
+	    font-size: 1.1em;
+	    color: darkorange;
+	    margin: 2em 0 1.5em 0;
+	    text-align: center;
+	}
+	body {
+		background-color: #582985;
+		color: #fff;
+		background-image: url('/assets/FE3.png');
+		text-transform: uppercase;
+	}
+	.btn {
+		text-transform: uppercase;
+		width: 30ch;
+		max-width: 100%;
+	}
+	tr:nth-child(even) {
+		background-color: #4b137b;
+	}
+	tr:nth-child(odd) {
+		background-color: #663d8a;
+	}
+	td:nth-child(even) {
+		text-align: center;
+	}
+	thead>tr:first-child {
+	    background-color: #340260;
+	    text-align: center;
+	    font-weight: bolder;
+	}
+	.nav {
+		margin-bottom: 1em;
+	}
+	.nav .btn {
+		margin: 0 auto 1em auto;
+		display: block;
+	}
+	@media screen and (min-width: 800px) {
+		h1 {
+		    font-size: 3em;
+		    font-weight: bolder;
+		}
+		h2 {
+		    font-size: 1.5em;
+		    margin-bottom: 1.5em;
+		}
+		.nav, .nav .btn {
+			margin: 0;
+		}
+		.nav .btn:first-child {
+			float: left;
+		}
+		.nav .btn:last-child {
+			float: right;
+		}
+	}
+
+</style>
+<% end %>
+
+<% content_for :main do %>
+	<div class="container">
+		<h1>Confirme os dados</h1>
+		<h2>Uma vez submetidos, as respostas não poderão ser mais alteradas</h2>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<td>Questão</td>
+					<td>Resposta</td>
+				</tr>
+			</thead>
+			<tbody>
+				<% @current_candidate.answers.sort{|a,b| a.question_id - b.question_id}.each do |answer| %>
+				<tr>
+					<td><%= answer.question.text %></td>
+					<td><%= answer.short_answer %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<div class="nav">
+			<a href="<%= url_for(:back) %>" class="btn btn-3">Voltar</a>
+		    <form action="<%= candidate_finish_path %>" method="post">
+		        <input type="hidden" name="<%= request_forgery_protection_token.to_s %>" value="<%= form_authenticity_token %>">
+		        <input name="_method" type="hidden" value="put">
+		        <button type="submit" class="btn btn-3">Submeter respostas</button>
+		    </form>
+		</div>
+	</div>
+<% end %>

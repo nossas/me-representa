@@ -1,0 +1,268 @@
+<% content_for :head do %>
+<style>
+	body {
+		background-color: #582985;
+		background-image: url('/assets/FE3.png');
+		color: #fff;
+		font-size: .8rem;
+	}
+	header {
+		border-bottom: 1px solid #fff;
+		padding-bottom: 1em;
+		margin-bottom: 3em;
+	}
+	a, a:hover {
+		color: #fff;
+		font-weight: bolder;
+	}
+	h1 {
+		text-transform: uppercase;
+	    color: #d8b212;
+	    font-family: ProximaNovaSoft-Bold;
+	    letter-spacing: .2em;
+	    text-align: center;	
+	    margin: 1.5em 0 1em 0; 
+	}
+	.notas {
+		width: 100%;
+		margin-bottom: 2em;
+		position: relative;
+	}
+	.notas td:first-child:after {
+		content: "";
+	    position: absolute;
+	    border-bottom: 1px dotted white;
+	    width: 100ch;
+	    top: 1em;
+	    margin: 0 .5em;
+	}
+	.notas td:first-child {
+		width: calc( 100% - 12ch );
+		overflow: hidden;
+		position: relative;
+	}
+	.notas td:last-child {
+		width: 12ch;
+		padding-left: .5em;
+	}
+	table.classificacao {
+	    width: 100%;
+	    max-width: 400px;
+	    margin-bottom: 1rem;
+	    margin: 0 auto;
+	    text-align: center;
+    }
+	table.classificacao  td:first-child {
+		width: 100%;
+	}
+	table.classificacao td, table.classificacao th {
+		text-align: center;
+		vertical-align: middle;
+	}
+	table.classificacao tbody>tr:nth-of-type(odd) {
+		background-color: rgba(64,18,104,.5);
+	}
+	p {
+	}
+	.container {
+		margin-bottom: 5rem;
+	}
+	#info_detalhada {
+	    font-family: ProximaNovaSoft-Bold; 
+		color: #FFF;
+		margin-top: 2em;
+		text-align: center;
+		font-size: 1.3em;
+		text-transform: uppercase;
+	}
+	#info_detalhada a {
+		font-size: 1.1em;
+		color: #097e74;
+	}
+	h2 {
+	    margin: 1em 0; 
+	    background-color: #097e74;
+	    display: inline-block;
+	    padding: .3em .75em;
+	    font-family: ProximaNovaSoft-Bold;
+	    letter-spacing: .3em;
+	    color: #582985;
+	}
+	@media screen and (min-width: 500px) {
+		body {
+			font-size: 1rem;
+		}
+		.avaliacao {
+		}
+	}
+</style>
+<% end %> 
+
+<% content_for :main do %>
+<div class="container">
+	<h1>Avaliação das coligações</h1>
+
+	<p>As coligações são muito importantes porque a eleição da Câmara Municipal é proporcional. Ou seja, seu voto não é exclusivo do candidato que você escolhe, ele é contabilizado no total de votos da coligação. São eleitos os candidatos mais votados desta coligação (independentemente do partido). Isso significa que o seu voto pode não eleger o seu candidato e ajudar a eleger candidatos e partidos nos quais você não votaria. Precisamos aprender a votar de acordo com as regras atuais do sistema eleitoral, por isso avaliamos as coligações conforme a atuação dos partidos em pautas de direitos humanos. <a href="/assets/documentolegal_merepresenta.pdf" target="_new">Para mais detalhes de metodologia e notas, clique aqui.</a>.</p>
+	<p>Cada um dos 35 <strong>partidos</strong> recebeu uma nota entre 0 e 100. As notas foram calculadas a partir de quatro categorias, cada uma valendo 25 pontos, a saber: LGBT, igualdade de gênero, igualdade racial e participação em “frentes e bancadas” no Congresso Nacional.</p>
+	<p>Já a nota atribuída à <strong>coligação</strong> resultou da soma das notas de todos os partidos da coligação dividida pelo número de partidos que a compõem. Por exemplo, se a coligação tem dois partidos, somou-se a nota dos dois partidos e dividiu-se por dois. Os partidos que não fazem parte de nenhuma coligação mantiveram suas notas individuais.</p>
+
+	<h2>Avaliação dos candidatos</h2>
+	<p>Os <strong>candidatos</strong> que se inscreveram também recebem uma nota pessoal, de acordo com a quantidade de pautas de direitos humanos que apóia, baseado nas respostas declaradas na plataforma (de 1 a 14), sendo essas pautas as mesmas que aparecem para escolha do eleitor.</p>
+	<p><strong>Após selecionar as pautas que são importantes na definição de seu voto, você receberá a lista de todas as candidaturas cadastradas que selecionaram no mínimo as mesmas pautas que você</strong>, ordenadas conforme a nota total obtida da multiplicação da nota pessoal do candidato pela nota da coligação. Quanto maior este número, antes aparecerá o candidato. As candidaturas com notas totais entre 7 e 10, aparecem de forma aleatória entre as primeiras posições. As candidaturas com notas totais entre 4 e 6,99, aparecem de forma aleatória na sequência. E, por último, aparecem as candidaturas com notas totais entre 0,01 e 3,99.</p>
+
+	<h2>Notas finais dos partidos</h2>
+
+	<table class="table table-striped classificacao">
+		<thead>
+			<tr>
+				<th>Partido</th>
+				<th>Avaliação #MeRepresenta</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>DEM</td>
+				<td>14,42</td>
+			</tr>
+			<tr>
+				<td>NOVO</td>
+				<td>50,00</td>
+			</tr>
+			<tr>
+				<td>PCB</td>
+				<td>100,00</td>
+			</tr>
+			<tr>
+				<td>PC do B</td>
+				<td>91,48</td>
+			</tr>
+			<tr>
+				<td>PCO</td>
+				<td>50,00</td>
+			</tr>
+			<tr>
+				<td>PDT</td>
+				<td>52,19</td>
+			</tr>
+			<tr>
+				<td>PEN</td>
+				<td>26,39</td>
+			</tr>
+			<tr>
+				<td>PHS</td>
+				<td>30,48</td>
+			</tr>
+			<tr>
+				<td>PMB</td>
+				<td>54,17</td>
+			</tr>
+			<tr>
+				<td>PMDB</td>
+				<td>38,81</td>
+			</tr>
+			<tr>
+				<td>PMN</td>
+				<td>37,50</td>
+			</tr>
+			<tr>
+				<td>PP</td>
+				<td>14,74</td>
+			</tr>
+			<tr>
+				<td>PPL</td>
+				<td>50,00</td>
+			</tr>
+			<tr>
+				<td>PPS</td>
+				<td>68,18</td>
+			</tr>
+			<tr>
+				<td>PR</td>
+				<td>15,21</td>
+			</tr>
+			<tr>
+				<td>PRB</td>
+				<td>14,02</td>
+			</tr>
+			<tr>
+				<td>PROS</td>
+				<td>36,90</td>
+			</tr>
+			<tr>
+				<td>PRP</td>
+				<td>16,67</td>
+			</tr>
+			<tr>
+				<td>PRTB</td>
+				<td>29,17</td>
+			</tr>
+			<tr>
+				<td>PSB</td>
+				<td>56,38</td>
+			</tr>
+			<tr>
+				<td>PSC</td>
+				<td>17,64</td>
+			</tr>
+			<tr>
+				<td>PSD</td>
+				<td>13,94</td>
+			</tr>
+			<tr>
+				<td>PSDB</td>
+				<td>28,12</td>
+			</tr>
+			<tr>
+				<td>PSDC</td>
+				<td>25,00</td>
+			</tr>
+			<tr>
+				<td>PSL</td>
+				<td>50,00</td>
+			</tr>
+			<tr>
+				<td>PSOL</td>
+				<td>100,00</td>
+			</tr>
+			<tr>
+				<td>PSTU</td>
+				<td>100,00</td>
+			</tr>
+			<tr>
+				<td>PT</td>
+				<td>90,32</td>
+			</tr>
+			<tr>
+				<td>PTB</td>
+				<td>35,93</td>
+			</tr>
+			<tr>
+				<td>PTC</td>
+				<td>37,50</td>
+			</tr>
+			<tr>
+				<td>PT do B</td>
+				<td>29,17</td>
+			</tr>
+			<tr>
+				<td>PTN</td>
+				<td>54,17</td>
+			</tr>
+			<tr>
+				<td>PV</td>
+				<td>50,50</td>
+			</tr>
+			<tr>
+				<td>REDE</td>
+				<td>72,92</td>
+			</tr>
+			<tr>
+				<td>SD</td>
+				<td>33,54</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div id="info_detalhada">Para baixar a avaliação detalhada, <a href="/assets/documentolegal_merepresenta.pdf" target="_new">clique aqui</a></div>
+</div>
+<% end %>

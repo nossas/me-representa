@@ -1,0 +1,65 @@
+<% content_for :head do %>
+    <link rel="stylesheet" href="/assets/contact.css">
+<% end %>
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <span class="nav-link disabled">Contato</span>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <h1>Contato</h1>
+        <div class='form'>
+            <%= form_tag contact_path do %>
+                <div class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="nome">Nome</label>
+                        <div class="col-md-10">
+                            <input class="form-control" id="nome" name="nome" size="30" type="text" placeholder="Seu nome" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="email">E-mail</label>
+                        <div class="col-md-10">
+                            <input class="form-control" id="email" name="email" type="text" placeholder="fulano@meuhost.com.br" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="city">Cidade</label>
+                        <div class="col-md-10">
+                            <input type="hidden" name="city_id" id="cityid" class="form-control">
+                            <input type="text" name="city" id="city" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="mensagem">Mensagem</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" cols="40" id="mensagem" name="mensagem" rows="20"></textarea>
+                       </div>
+                    </div>
+                </div>                
+                <button type="submit" class="btn btn-amarelo-roxo">Enviar</button>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+
+<% content_for :scripts do %>
+    <script src="/assets/cidades.js"></script>
+    <script>
+        ligaCidades("#city", function(erro, dados){
+            $("#cityid").val(dados.id);
+        });
+    </script>
+<% end %>

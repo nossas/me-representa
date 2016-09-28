@@ -1,0 +1,267 @@
+<% content_for :open_graph do %>
+    <meta name="og:url" content="<%= candidate_url(@candidate) %>">
+    <meta name="og:title" content="Eu já encontrei uma candidatura para vereador/a que te representa! E você?">
+    <meta name="og:description" content="Encontrei o candidato <%= @candidate.nickname %> (<%= @candidate.number %>) do <%= @candidate.party.symbol%> no site do #MeRepresenta! 'Bora lá?"
+<% end %>
+
+<% content_for :head do %>
+    <title>Perfil de Candidato</title>
+    <link rel="stylesheet" href="/assets/perfil_candidato.css">
+<% end %>
+
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Contato", contact_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
+<% end %>
+
+<% content_for :menu_logged do %>
+    <% if session[:candidate_id] %>
+        <li><a href="<%= edit_candidate_path(@current_user.id) %>" class="dropdown-item">Perfil no #MeRepresenta</a></li>
+    <% elsif session[:user_id] %>
+        <% if @current_user.admin? %>
+            <%= link_to "Gereciar dados de candidatos", candidates_management_path, {class: "dropdown-item"} %>
+            <li>
+                <%= form_for @candidate, method: :delete do %>
+                    <button type="submit" class="dropdown-item">Apagar Registro</button>
+                <% end %>
+            <li>
+            <%= link_to "Liberar Questionário", candidate_free_path(@candidate.id), {class: "dropdown-item"} %>
+            <div class="dropdown-divider"></div>
+        <% end %>
+        <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
+        <li><%= link_to "Refazer questionário", new_answer_path, {class: "dropdown-item"} %>
+    <% end %>
+<% end %>
+
+<% content_for :main do %>
+<% 
+   require 'uri'
+%>
+<div class="container">
+    <div class="flex">
+        <div class="info-basica">        
+            <img class="can-pic" src="<%= @candidate.picture %>?type=large" alt="Foto do/a candidato/a">
+            <span class="info-text name">
+                <%= @candidate.nickname %>
+            </span>
+            <span class="info-text number">
+                nº <span class="candidate-number"><%= @candidate.number %></span>
+            </span>
+            <span class="info-text party">
+                Partido: <%= @candidate.party.symbol %>
+            </span>
+            <% if @candidate.party_union and @candidate.party_union.parties.count > 1 %>
+            <span class="info-text coligacao">
+                Coligação: <%= @candidate.party_union.name %>
+            </span>
+            <span class="info-text score">
+                Nota da Coligação: <%= (@candidate.party_union.score * 10.0).round 2 %>
+            </span>
+            <% else %><br>
+            <span class="info-text score">
+                Nota do Partido: <%= (@candidate.party.score * 10.0).round 2 %>
+            </span>
+            <% end %>
+            <span class="votes-int">
+                <%= User.where("users.candidate_id = #{@candidate.id}" ).count %> #MeRepresenta
+            </span>
+        </div>
+        <div class="info-bio">
+            <div class="bio">
+                <h3>Sobre o/a candidato/a</h3>
+                <textarea readonly rows="11" cols="40">
+                    <%= @candidate.bio %>
+                </textarea>
+            </div>
+            <% if ! session[:candidate_id] and  session[:user_id] %>
+                <% if @candidate.id != @current_user.candidate_id %>
+                    <%= form_for @current_user do |f| %>
+                        <%= f.hidden_field :candidate_id, value: @candidate.id %>
+                        <input type="hidden" name="redirect_to" value="<%= candidate_path(@candidate.id)%>">
+                        <button type="submit" id="votar" class="btn btn-amarelo-roxo">
+                            Quero escolher essa candidatura
+                        </button>
+                    <% end %>
+                <% end %>
+            <% end %>
+            
+        </div>
+    </div>
+       
+    <div class="puxar">
+        <div class="title">
+            <h3>Atenção às coligações!</h3>
+            <h5>Os votos nesse/a candidato/a vão para todos os partidos de sua coligação e podem acabar elegendo alguém em quem você não votaria. Veja como avaliamos cada partido dessa coligação em relação às pautas dos direitos humanos e exemplos de quem pode se beneficiar dos votos que essa candidatura receber.</h5>
+        </div>
+
+        <table class="brother">
+            <tbody>
+                <% @candidate.gang.each do |brother| %>
+                <tr>
+                    <td class="candidato">
+                        <%= brother.nickname %>                            
+                    </td>
+                    <td class="partido">
+                        <span class="partido"><%= brother.party.symbol %></span>
+                        <a href="<%= criteria_path %>">
+                            <span class="nota">nota do partido = <%= (10 * brother.party.score).round %></span>
+                        </a>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="respostas">
+        <h2>Veja o que o/a candidato/a respondeu</h2>
+
+        <table>
+            <tbody>
+                <% @candidate.answers.sort{|a, b| a.question_id - b.question.id}.each do |answer| %>
+                    <%  
+                        if session[:user_id]
+                            resposta_eleitor = @current_user.answers.select{|a| a.question_id == answer.question_id}
+                            classe = ""
+                            if resposta_eleitor.count > 0
+                                resposta_eleitor = resposta_eleitor[0]
+                                if not session[:candidate_id]
+                                    if answer.short_answer == "Não"
+                                        classe = "perigo"
+                                    end
+                                end
+                            end
+                        end
+                    %>
+                    <tr>
+                        <td class="pergunta <%= classe %>"><%= answer.question.text %></td>
+                        <td class="resposta <%= classe %>"><%= answer.short_answer %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
+    <% if ( not session[:candidate_id] ) and session[:user_id]%>
+    <div class="nav">   
+        <a href="<%= user_matchup_path(@current_user) %>" class="btn btn-roxo-amarelo" id="btn-voltar"><span>Voltar aos candidatos</span></a>
+        <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode candidate_url(@candidate) %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn btn-roxo-amarelo" id="btn-compartilhar"><span>Compartilhe no facebook!</span></a>
+    </div>
+    <% end %>
+</div>
+
+<% end %>
+
+<% content_for :scripts do %>
+    <style type="text/css">
+        .share-it {
+            width: 87.5%;
+            position: fixed;
+            top: 7%;
+            background-color: #532985;
+            left: 6.25%;
+            animation-name: treme;
+            box-shadow: 0 0 0 calc( 100vw + 100vh ) rgba(0,0,0,.6);
+            font-size: 1.2em;
+            text-align: center;
+            padding-bottom: 2em;
+        }
+        .share-it h4 {
+            font-size: 1.1em;
+            font-family: ProximaNovaSoft-Bold;
+            background-color: #532985;
+            color: #d8b212;
+            padding: .4em .4em .4em .85em;
+            text-transform: uppercase;
+            padding: 1.5em;
+        }
+        .share-it p {
+            margin: 0;
+            color: #fff;
+            padding: 0 2em 1.5em 2em;
+        }
+        .share-it>h4>a {
+            position: absolute;
+            right: .5em;
+            color: transparent;
+        }
+        .share-it>h4>a:after {
+            content: "X";
+            position: absolute;
+            right: 0.2em;
+            color: #d8b212;
+            top: -17px;
+        }
+        .share-it:after {
+            content: "";
+            position: absolute;
+            background-image: url('/assets/01_.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100px;
+            width: 100px;
+            bottom: -54px;
+            right: 0px;
+        }
+        .btn-compartilhe, .btn-compartilhe:hover {
+            /*color: #fff;*/
+            text-decoration: none;
+            width: 250px;
+            position: relative;
+            padding-left: 3em;
+        }
+        .btn-compartilhe:before, .btn-compartilhe:hover:before {
+            content: "";
+            background-image: url("/assets/face3.svg");
+            background-size: cover;
+            width: 1.5em;
+            height: 2em;
+            display: inline-block;
+            position: absolute;
+            left: .5em;
+            top: .1em;
+        }
+        .btn-compartilhe:after, .btn-compartilhe:hover:after {
+            content: "";
+            border-left: 1px double #532985;
+            position: absolute;
+            top: .5em;
+            left: 2.6em;
+            height: 1.3em;
+        }
+        @media screen and (min-width: 650px) {
+            .share-it {
+                width: 550px;
+                left: calc( ( 100% - 550px ) / 2 );
+                padding-bottom: 1em;
+            }
+        }
+    </style>
+    <div class="share-it invisivel">
+        <h4>Ei, psiu !!! <a href="#">fechar</a></h4>
+        <p>Essa plataforma te representa?</p>
+        <p>Compartilhe no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
+        <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode root_url %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn-compartilhe btn btn-amarelo-roxo">Compartilhar com amigos</a>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            window.setTimeout(function(){
+                $(".share-it").removeClass("invisivel");
+            }, 20000);
+            $(".share-it>h4>a").on("click", function(){
+                $(".share-it").addClass("invisivel");
+            })
+        })();
+    </script>
+<% end %>

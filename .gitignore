@@ -25,3 +25,4 @@ config/database.yml
 config/initializers/01_envvars.rb
 db/schema.rb
 *.dat
+public

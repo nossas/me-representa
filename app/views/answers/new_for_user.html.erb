@@ -1,0 +1,99 @@
+<% content_for :main do %>
+    <link rel="stylesheet" href="/assets/new_for_users.css">
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <h1>O que é importante pra você?</h1>
+        <div class="conteudo">
+            <h2>Marque as pautas das quais você não abre mão na hora de escolher sua candidatura:</h2>
+        </div>
+
+        <% @current_user.answers.sort{|a,b| a.question_id-b.question_id }.each do |answer| %>
+        <div class="question">
+            <div class="answer">
+                <input type="checkbox" id="question-<%= answer.question_id %>" answer-id="<%= answer.id %>" <%= "checked" if answer.weight == 2 %> >
+                <label for="question-<%= answer.question_id %>">Sim</label>
+            </div>
+            <span class="question-title">
+                <%= answer.question.afirmative||answer.question.text %>
+            </span>            
+        </div>
+        <div class="alert alert-danger invisivel" id="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <div></div>
+        </div>
+        <% end %>
+        <%= link_to "Encontrar candidaturas", user_matchup_path(@current_user), {class: "btn btn-1-inv"} %>
+    </div>
+<% end %>
+
+
+<% content_for :menu_logged do %>
+    <% if @current_user.admin? %>
+        <%= link_to "Gereciar dados de candidatos", candidates_management_path, {class: "dropdown-item"} %>
+        <div class="dropdown-divider"></div>
+    <% end %>
+    <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+    var UserCall = function(restUrl, tokenName, token) {
+        var retorno = {
+            _url: restUrl + "/"
+            , _tokenName: tokenName
+            , _token: token
+            , bindElement: function ( elements, event ) {
+                $(elements).on(event, function() {
+                    var div = $(this).parent().parent()
+                        divErro = div.next();
+                    checkbox = $(this);
+                    checkbox.attr("disabled", "disabled");
+                    dados = {
+                        weight: checkbox.prop("checked")?2:0
+                    }
+                    dados[retorno._tokenName] = retorno._token;
+                    divErro.addClass("invisivel")
+                    div.removeClass("dados-erro");
+                    $.ajax({
+                        url: retorno._url + checkbox.attr("answer-id")
+                        , contentType: "application/json"
+                        , method: "PUT"
+                        , data: JSON.stringify (dados)
+                        , success: function(dados) {
+                            div.addClass("dados-ok");
+                            window.setTimeout(function(){
+                                div.removeClass("dados-ok");
+                            }, 1000);
+                            checkbox.removeAttr("disabled");
+                        }
+                        , error: function(dados) {
+                            div.addClass("dados-erro");
+                            checkbox.removeAttr("disabled");
+                            divErro.removeClass("invisivel")
+                            var msg;
+                            if (dados.status == 0)
+                                msg = "Não foi possível completar a operação, erro de comunicação com o site, por favor recarregue a página.";
+                            else {
+                                msg = "Erro de processamento";
+                                checkbox.prop("checked",! checkbox.prop("checked"));
+                            }
+                            divErro.children("div").text(msg);
+                        }
+                    });
+                });
+            }
+        };
+        return retorno;
+    };
+
+    
+    (function(){
+        var userCall = UserCall( "<%= user_answers_path(@current_user) %>", "<%= request_forgery_protection_token.to_s %>", "<%= form_authenticity_token %>" );
+
+        userCall.bindElement(".answer input", "change");
+    })();
+
+</script>
+<% end %>

@@ -1,0 +1,35 @@
+            <h2>Clique na foto para ver o perfil do/a candidato/a</h2>
+            <div class="candidatos">
+                <% @matching.each do |match| %>
+                    <div class="candidato">
+                        <a href="<%= candidate_path(match[:id]) %>">
+                            <img class="can-pic" src="<%= match[:picture] %>?type=large" alt="Foto do candidato">
+                        </a>
+                        <span class="info-text name">
+                            <%= match[:nickname] %>
+                        </span>
+                        <span class="info-text number">
+                            nº <span class="candidate-number"><%= match[:number] %></span>
+                        </span>
+                        <span class="info-text party">
+                            <% if match[:union] %>
+                                Coligação: <%= match[:union] %>
+                            <% else %>
+                                Partido: <%= match[:party] %>
+                            <% end %>
+                        </span>
+                        <% nota = (match[:union] ? match[:union_score] : match[:party_score] ) %>
+                        <span class="info-text nota <%= 'perigo' if (nota <= 5 ) %>">
+                            <% if match[:union] %>
+                                Nota da Coligação:
+                            <% else %>
+                                Nota do Partido:
+                            <% end %>
+                            <%= nota.round 2 %>
+                        </span>
+                        <span class="info-text contagem">
+                            <%= match[:vote_intension] %> #MeRepresenta
+                        </span>                        
+                    </div>
+                <% end %>
+            </div>

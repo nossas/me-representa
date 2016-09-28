@@ -1,0 +1,84 @@
+<% content_for :head do %>
+<style>
+    body {
+        background-color: #00a99d;
+        background-image: url("/assets/FC3.png");
+    }
+    .container {
+        text-transform: uppercase;
+        color: #d8b212;
+    }
+    h1 {
+        font-size: 3em;
+        text-shadow: -.1em 0 #582985;
+    }
+    table {
+        width: 100%;
+        margin: 2em 0;
+    }
+    .indice {
+        width: 10%;
+        text-align: center;
+        font-weight: bolder;
+        font-size: 2em;
+    }
+    .coligacao {
+        width: 90%;
+        background-color: #582985;
+        border-radius: .5em;
+        padding: 1.5em;
+    }
+    .coligacao a, .coligacao a:hover {
+        color: #00a99d;
+        font-weight: bolder;
+        font-size: 1.5em;
+    }
+    .coligacao a:hover {
+        color: #00a99d;
+        text-decoration: none;
+        font-size: 2em;
+    }
+    .container {
+        margin-top: 2em;
+    }
+    .btn-1-inv {
+        border: 2px solid #582985;
+        width: 40%;
+        letter-spacing: .2em;
+        display: block;
+        margin: 0 auto;
+        padding: 1em;
+        font-weight: bolder;
+    }
+</style>
+<% end %>
+
+<% content_for :menu do %>
+    <li><a href="<%= new_answer_path %>" class="dropdown-item">Refazer questionário</a></li>
+<% end %>
+
+<% content_for :main do %>
+<div class="container">
+    <h1>Com qual coligação partidária você mais se identifica?</h1>
+    <table>
+        <% (0 .. (@matching.size() -1)).each do |idx|
+           match = @matching[idx]
+        %>
+        <tr>
+            <td class="indice"><%= idx + 1 %></td>
+            <td class="coligacao">
+               <% if %>
+                <%= link_to match["name"], user_party_candidates_path(params[:user_id], match["id"]) %>        
+               <% else %>
+                <%= link_to match["name"], user_union_candidates_path(params[:user_id], match["id"]) %>        
+               <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </table>
+    
+    <% if @matching.size() > 10 %>
+    <a href="#" class="btn btn-1-inv">Mostrar mais</a>
+    <% end %>
+</div>  
+<% end %>

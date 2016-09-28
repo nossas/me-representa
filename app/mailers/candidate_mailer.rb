@@ -1,7 +1,7 @@
 # coding: utf-8
 class CandidateMailer < ActionMailer::Base
-  default from: "Bernardo Castro - Meu Rio <bernardo@verdadeouconsequencia.org.br>"
-  MR = "equipe@verdadeouconsequencia.org.br"
+  default from: "Alessandra Orofino - Nossas Cidades <alessandra@nossascidades.org>"
+  MR = "pirola@nossascidades.org"
 
   def welcome candidate
     @candidate = candidate

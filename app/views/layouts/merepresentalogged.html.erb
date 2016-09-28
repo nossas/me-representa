@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if content_for? :open_graph %>
+        <%= yield :open_graph %>
+    <% else %>
+    <meta name="og:title" content="Encontre candidaturas a vereador/a comprometidas com Direitos Humanos!">
+    <meta name="og:description" content="Responda ao questionário e encontre candidaturas que respeitam e promovem Direitos Humanos na sua cidade.">
+    <% end %>
+    <meta name="og:image" content="https://s3.amazonaws.com/hub-central/uploads/1473183975_thumb_Meme_Minha_Sampa_1024.jpg">
+    <link rel="icon" href="/assets/4ico.png">
+    <link rel="stylesheet" href="/assets/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/assets/jquery-ui.theme.css">
+    <link rel="stylesheet" href="/assets/MyFontsWebfontsKit.css">
+    <link rel="stylesheet" href="/assets/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/merepresenta.css">
+    <link rel="stylesheet" href="/assets/merepresentalogged.css">
+    <%= yield :head %>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-light">
+            <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                &#9776;
+            </button>
+            <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
+                <div class="nav navbar-nav">
+                <%= yield :menu_items %>
+                <% if session[:user_id] or session[:candidate_id] %>
+                <div class="nav-item dropdown pull-md-right">
+                    <a id="dLabel" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                       <img class="user-image" src="<%= @current_user.picture %>" alt="Foto de <%= @current_user.name %>">
+                        <span><%= (@current_user||@user).name %></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <%= yield :menu %>
+                        <%= yield :menu_logged %>
+                        <li>
+                            <a href="#" id="sair" class="dropdown-item">Sair</a>
+                            <%= form_tag(session_path(session[:user_id]), method: :delete) do %><% end %>
+                        </li>
+                    </ul>
+                </div>
+                <% end %>
+            </div>
+               
+           </div>
+        </nav>
+    </header>
+    <main>
+        <%= yield :main %>
+    </main>
+    <footer>
+        <%= yield :footer %>
+    </footer>
+    <script src="/assets/jquery-3.1.0.min.js"></script>
+    <script src="/assets/jquery.mask.min.js"></script>
+    <script src="/assets/jquery-ui.js"></script>
+    <script src="/assets/tether.min.js"></script><!-- Tether for Bootstrap --> 
+    <script src="/assets/bootstrap.min.js"></script>
+    <script src="/assets/merepresenta.js"></script>
+    <%= yield :scripts %>
+    <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+         ga('create', 'UA-26278513-33', 'auto');
+         ga('send', 'pageview');
+    </script>
+</body>
+</html>

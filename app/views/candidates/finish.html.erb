@@ -1,0 +1,70 @@
+<% content_for :head do %>
+<style>
+    body {
+        background: #582985;
+        background-image: url('/assets/FC4.png');
+        color: #fff;
+        text-transform: uppercase;
+    }
+    h1 {
+        color: #d8b212;
+        font-size: 2.3em;
+        transform: rotate(-3deg);
+        margin: 1em 0;
+        text-align: center;
+        text-shadow: -.05em -.02em #00a99d;
+        font-weight: bolder;
+        margin-bottom: 1em;
+    }
+    h2 {
+        font-size: 1.1em;
+        font-weight: bolder;
+        color: #d8b212;
+        text-align: center;
+        margin-bottom: 1.5em;
+    }
+    p {
+        font-size: 1em;
+        color: #d8b212;
+        text-align: right;        
+    }
+    .dropdown-item {
+        white-space: normal;
+    }
+    @media screen and (min-width: 400px) {
+        main {
+            font-size: 1.2em;
+        }
+    }
+    @media screen and (min-width: 600px) {
+        main {
+            font-size: 2em;
+        }
+        h1 {
+            font-size: 2em;
+        }
+    }
+    @media screen and (min-width: 1000px) {
+        h1 {
+            font-size: 3em;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        h1 {
+            font-size: 4em;
+        }
+    }
+</style>
+<% end %>
+
+<% content_for :menu do %>
+    <li><%= link_to "Perfil no #MeRepresenta", candidate_path(@candidate.id), {class: "dropdown-item"} %></li>
+<% end %>
+<% content_for :main do %>
+<div class="container">
+    <h1>Obrigada!</h1>
+    <h2>Seu perfil no #MeRepresenta está completo! Divulgue-o e acompanhe a sua popularidade entre eleitoras e eleitores.</h2>
+    <p>Boa campanha!</p>
+    <p>Equipe #MeRepresenta</p>
+</div>
+<% end %>

@@ -19,13 +19,13 @@ end
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :meurio, ENV["MEURIO_ID"], ENV["MEURIO_SECRET"]
-  provider :facebook, ENV["FB_ID"], ENV["FB_SECRET"], :scope => "email,public_profile,user_birthday,user_location"
+  provider :facebook, ENV["FB_ID"], ENV["FB_SECRET"], :scope => "email,public_profile,user_location"
 end
 
 # email           ##SA##
 # public_profile  ##SA##
 # user_about_me   # RETIRADO #
-# user_birthday => Ao enviar para análise, seja claro com relação ao motivo da age_range não ser suficiente para seu caso de uso.
+# user_birthday => # RETIRADO #
 # user_location   => Mostre um conteúdo relevante à cidade dessa pessoa.
 # user_education_history # RETIRADO #
 # + Mostre conteúdo relevante a ex-alunos.

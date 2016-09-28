@@ -1,0 +1,57 @@
+<% content_for :head do %>
+    <link rel="stylesheet" href="/assets/about.css">
+<% end %>
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <span class="nav-link disabled">Saiba mais</span>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Contato", contact_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
+<% end %>
+
+<% content_for :menu do %>
+    <% if session[:candidate_id] %>
+        <li><a href="<%= edit_candidate_path(session[:candidate_id]) %>" class="dropdown-item">Perfil</a></li>
+    <% elsif session[:user_id] %>
+        <li><a href="<%= edit_user_path(session[:user_id]) %>" class="dropdown-item">Perfil</a></li>
+    <% end %>
+<% end %>
+
+<% content_for :main do %>
+    <div class="container">
+        <h1>Saiba mais sobre o projeto</h1>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/9gdkygw0W3Q" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h2>O que é o #MeRepresenta?</h2>
+        <p>Resultado de uma parceria entre as campanhas #VoteLGBT, #AgoraéQueSãoElas, a Rede Feminista de Juristas (#DeFEMde), a Rede Nossas Cidades (Meu Rio, Minha Sampa, Minha Porto Alegre e Meu Recife), a organização não governamental CFEMEA e o grupo LGBT Brasil, a plataforma #MeRepresenta tem como objetivo divulgar aos eleitores as posições de candidatos a vereador sobre pautas relevantes à construção das igualdades de gênero, racial e de orientação sexual.</p>
+        
+        <h2>Qual o critério para incluir candidaturas no site?</h2>
+        <p>A plataforma #MeRepresenta está aberta à participação de qualquer candidatura à Câmara Municipal de qualquer cidade do Brasil. Se você está se candidatando a vereadora ou vereador e quer incluir sua campanha aqui, basta se cadastrar e responder a dez perguntas, declarando sua opinião sobre pautas de direitos humanos que influenciam diretamente a vida das pessoas.</p>
+        <p>Nas cidades de São Paulo, Rio de Janeiro, Recife, Porto Alegre, Belo Horizonte, Salvador e Campinas equipes de voluntárias e voluntários estão fazendo uma busca ativa junto a todos os candidatos a vereador para que respondam a essas mesmas perguntas. O intuito é realizar uma pesquisa com relevância estatística nessas cidades, permitindo a análise do perfil dos candidatos, partidos e coligações em relação a essas pautas.</p>
+        
+        <h2>Como funciona o ranqueamento das candidaturas?</h2>
+        <p>As candidaturas são mostradas para eleitoras e eleitores de acordo com a concordância com relação às pautas de direitos humanos elencadas. Mas não só. O ranqueamento também leva em conta os partidos da coligação de cada candidato ou candidata. Isso porque, para as eleições do Legislativo, os votos não são exclusivos da candidatura, sendo direcionados a toda a coligação. Portanto, os eleitores devem prestar atenção não apenas ao candidato, mas também aos partidos de sua coligação.</p>
+        <p>É possível que em algumas cidades, especialmente as menores, as coligações formadas tenham todas partidos hostis às pautas de direitos humanos e que, ainda assim, apresentem candidatos favoráveis. Nesse contexto sugerimos que se avalie com muito rigor de caso a caso.</p>
+
+        <div class="parcerias">
+            <img src="/assets/agora-e-que-sao-elas.png" alt="Agora é que são elas - Logo">
+            <img src="/assets/vote_geral-branco.png" alt="Vote LGBT - Logo">
+            <img src="/assets/RFJUR-branco.png" alt="Rede Feministas de Juristas - Logo">
+            <img src="/assets/lgbt-brasil.png" alt="LGBT Brasil - Logo">
+            <img src="/assets/logo_cfemea-2.png" alt="CFemea - Logo">
+            <img src="/assets/MR.png" alt="Meu Rio - Logo">
+            <img src="/assets/MSP.png" alt="Minha Sampa - Logo">
+            <img src="/assets/MREC.png" alt="Meu Recife - Logo">
+            <img src="/assets/MPOA.png" alt="Minha Porto Alegre - Logo">
+        </div>
+</div>
+<% end %>

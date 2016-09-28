@@ -1,0 +1,197 @@
+<% content_for :head do %>
+    <title>Faça seu cadastro</title>
+    <link rel="stylesheet" href="/assets/questionnaire.css">
+    <link rel="stylesheet" href="/assets/candidates.css">
+<% end %>
+
+<% content_for :menu_items do %>
+    <div class="nav-item">
+        <%= link_to "Home", root_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Saiba mais", about_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Contato", contact_path, {class: "nav-link"} %>
+    </div>
+    <div class="nav-item">
+        <%= link_to "Política de Privacidade", privacy_path, {class: "nav-link"} %>
+    </div>    
+<% end %>
+
+<% content_for :main do %>
+<div class="container">
+    <div class="header">
+        <h1>Crie sua conta</h1>
+        <p class="intro">
+            Por favor, informe seus dados para criar seu perfil na nossa plataforma:
+        </p>
+       
+    </div>
+    <% if not @candidate.city_id %>
+    <div class="login">
+        <div class="texto">
+            <p>Prezada/o candidata/o,</p>
+
+            <p>Informamos que a foto que contará para o perfil do site será a mesma da conta de Facebook vinculada</p>
+        </div>
+        <div class="nav">
+            <%= form_tag(session_path(session[:user_id]), method: :delete) do %>
+                <button class="btn btn-verdeclaro-roxo" id="btn_login_voltar" type="submit">Voltar</button>
+            <% end %>
+            <button  class="btn btn-verdeclaro-roxo" id="btn_login_prosseguir" type="button">Prosseguir</button>
+        </div>
+    </div>
+    <% end %>
+    <div class="form-content">
+        <%= form_for @candidate do |f| %>
+            <% p @candidate %>
+            <div id="form-horizontal">
+                <% if @candidate.errors[:nickname].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:nickname].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <div class="form-group row">
+                    <%= f.label :nickname, "Nome de urna *",  {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
+                        <%= f.text_field :nickname, {class: "form-control"} %>
+                    </div>
+                </div>
+            
+                <% if @candidate.errors[:email].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:email].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <div class="form-group row">
+                    <%= f.label :email, "Email *",  {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
+                        <%= f.text_field :email, {class: "form-control"} %>
+                    </div>
+                </div>
+
+                <% if @candidate.errors[:born_at].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:born_at].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <div class="form-group row">
+                    <%= f.label :born_at, "Data de nascimento *", {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
+                        <% if @candidate.born_at %>
+                        <%= f.text_field :born_at, {value: @candidate.born_at.strftime("%d/%m/%Y"), class: "form-control date-input"} %>
+                        <% else %>
+                        <%= f.text_field :born_at, {class: "form-control date-input"} %>
+                        <% end %>
+                    </div>
+                </div>
+
+                <% if @candidate.errors[:cpf].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:cpf].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <div class="form-group row">
+                    <%= f.label :cpf, "CPF *",  {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
+                        <%= f.text_field :cpf, {class: "form-control cpf-input"} %>
+                    </div>
+                </div>
+
+                <% if @candidate.errors[:party_id].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:party_id].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <div class="form-group row">
+                    <%= f.label :party_id, "Partido *", {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
+                        <%= f.select :party_id, Party.all.sort{|a,b| a.symbol <=> b.symbol }.collect { |p| [ "#{p.symbol} - #{p.number}", p.id ] }, {},  {class: "form-control col-md-10"} %>
+                    </div>
+                </div>
+
+                <% if @candidate.errors[:number].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:number].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <div class="form-group row">
+                    <%= f.label :number, "Número de urna *",  {class: "col-md-2 control-label"} %>
+                    <div class="col-md-10">
+                        <%= f.text_field :number, {class: "form-control"} %>
+                    </div>
+                </div>
+
+                <% if @candidate.errors[:city_id].count > 0 %>
+                <div class="alert alert-danger" role="alert">
+                    <ul class="erros">
+                        <% @candidate.errors[:city_id].each do |msg| %>
+                        <li class="erro"><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <div class="form-group row ">
+                    <label for="city_name" class="col-md-2 control-label">Confirmar município de voto*</label>
+                    <div class="col-md-10">
+                        <%= f.hidden_field :city_id %>
+                        <input type="text" id="city_name" class="form-control" value= '<%= "#{@candidate.city.name}, #{@candidate.city.state}" if @candidate.city %>'>
+                        <span class="loading_msg">Carregando...</span>
+                        ** às vezes o menu de cidades demora pra carregar, mas espera um pouquinho que vai!
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <%= f.label :bio, "Escrever mini bio",  {class: "col-md-2 control-label"} %>
+                    <div class="col-lg-10">
+                        <%= f.text_area :bio, {class: "form-control"} %>
+                    </div>
+                </div>
+                <p class="explicacao">* Campos obrigatórios.</p>
+                <div class="buttons">
+                    <%= f.submit (@candidate.finished_at ? "Salvar os dados!" : "E ai, vamos lá? Faça o seu questionário!"), {class: "btn btn-3"} %>                
+                </div>
+            </div>
+        <% end %>
+    </div>    
+</div>
+<% end %>
+
+<% content_for :scripts do %>
+    <script src="/assets/cidades.js"></script>
+    <script>
+        (function(){
+            ligaCidades("#city_name", function(erro, dados){
+                $("#candidate_city_id").val(dados.id);
+            });            
+            $('#btn_login_prosseguir').on("click", function(){
+                $('.login').addClass('invisivel');
+            });
+        })();
+    </script>
+<% end %>
