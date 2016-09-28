@@ -305,6 +305,7 @@
                     <div class="col-md-10">
                         <%= f.hidden_field :city_id %>
                         <input type="text" id="city_name" class="form-control" value= '<%= "#{@candidate.city.name}, #{@candidate.city.state}" if @candidate.city %>'>
+                        ** às vezes o menu de cidades demora pra carregar, mas espera um pouquinho que vai!
                     </div>
                 </div>
 

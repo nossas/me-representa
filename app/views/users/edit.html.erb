@@ -25,6 +25,7 @@
     .form-content {
         width: 100%;
         margin-bottom: 2em;
+        color: #fff;
     }
     h1 {
         font-family: ProximaNovaSoft-Bold;
@@ -126,6 +127,7 @@
                     <div class="col-lg-10">
                         <%= f.hidden_field :city_id %>
                         <input type="text" id="city_name" class="form-control" value= '<%= "#{@user.city.name}, #{@user.city.state}" if @user.city %>'>
+                        ** às vezes o menu de cidades demora pra carregar, mas espera um pouquinho que vai!
                     </div>
                 </div>
                 <%= f.hidden_field :candidate_id %>
