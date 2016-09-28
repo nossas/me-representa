@@ -278,6 +278,12 @@ span.info-text.score {
         margin-left: 1em;
     }
 }
+
+    span.info-text.city {
+        font-size: 0.7em;
+        margin: 1em 0;
+    }
+
 @media screen and (min-width:1200px) {
     .partido {
         width: 25%;
@@ -286,3 +292,86 @@ span.info-text.score {
         display: inline;
     }
 }
+
+    .share-it {
+        width: 87.5%;
+        position: fixed;
+        top: 7%;
+        background-color: #532985;
+        left: 6.25%;
+        animation-name: treme;
+        box-shadow: 0 0 0 calc( 100vw + 100vh ) rgba(0,0,0,.6);
+        font-size: 1.2em;
+        text-align: center;
+        padding-bottom: 2em;
+    }
+    .share-it h4 {
+        font-size: 1.1em;
+        font-family: ProximaNovaSoft-Bold;
+        background-color: #532985;
+        color: #d8b212;
+        padding: .4em .4em .4em .85em;
+        text-transform: uppercase;
+        padding: 1.5em;
+    }
+    .share-it p {
+        margin: 0;
+        color: #fff;
+        padding: 0 2em 1.5em 2em;
+    }
+    .share-it>h4>a {
+        position: absolute;
+        right: .5em;
+        color: transparent;
+    }
+    .share-it>h4>a:after {
+        content: "X";
+        position: absolute;
+        right: 0.2em;
+        color: #d8b212;
+        top: -17px;
+    }
+    .share-it:after {
+        content: "";
+        position: absolute;
+        background-image: url('/assets/01_.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100px;
+        width: 100px;
+        bottom: -54px;
+        right: 0px;
+    }
+    .btn-compartilhe, .btn-compartilhe:hover {
+        /*color: #fff;*/
+        text-decoration: none;
+        width: 250px;
+        position: relative;
+        padding-left: 3em;
+    }
+    .btn-compartilhe:before, .btn-compartilhe:hover:before {
+        content: "";
+        background-image: url("/assets/face3.svg");
+        background-size: cover;
+        width: 1.5em;
+        height: 2em;
+        display: inline-block;
+        position: absolute;
+        left: .5em;
+        top: .1em;
+    }
+    .btn-compartilhe:after, .btn-compartilhe:hover:after {
+        content: "";
+        border-left: 1px double #532985;
+        position: absolute;
+        top: .5em;
+        left: 2.6em;
+        height: 1.3em;
+    }
+    @media screen and (min-width: 650px) {
+        .share-it {
+            width: 550px;
+            left: calc( ( 100% - 550px ) / 2 );
+            padding-bottom: 1em;
+        }
+    }
