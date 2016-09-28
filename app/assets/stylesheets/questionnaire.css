@@ -17,6 +17,29 @@
     margin-bottom: 1em;
     color: #fff;
 }
+span.loading_msg {
+    display: none;
+}
+/*background: transparent url("/assets/ui-anim_basic_16x16.gif") right center no-repeat;*/
+.ui-autocomplete-loading+ span.loading_msg {
+    display: inline-block;
+    position: absolute;
+    top: .5em;
+    right: 2em;
+    color: rgba(0,0,0,.5);
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes blinker {
+    from {
+        color: rgba(0,0,0,.5);
+    }
+    to {
+        color: #ff0000;
+    }
+}
 @media screen and (min-width: 544px) {
     .control-label {
     }
