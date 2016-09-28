@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
 
 
   def matches
+    ors = answers.select{|a| a.weight > 0}.map{|a| "ca.question_id = #{a.question_id}"}.join(" or ")
+
     match_data = Candidate.
       select(
         %Q{
@@ -42,11 +44,9 @@ class User < ActiveRecord::Base
                 count(*)
               from 
                 answers ca 
-                inner join
-                  answers ua
-                  on (ua.responder_id = #{id}) and (ca.question_id = ua.question_id) and (ua.responder_type = 'User') and (ua.weight>0)
               where 
-                ca.responder_id = candidates.id and ca.responder_type='Candidate' and ca.short_answer = 'Sim'
+                ca.responder_id = candidates.id and ca.responder_type='Candidate' and ca.short_answer = 'Sim' and 
+                (#{ors})
           ) as score_eleitor
           ,(
             select
