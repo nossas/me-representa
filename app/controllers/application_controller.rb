@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :create_user_question_through_session
   before_filter { session[:votes] ||= [] }
 
-  before_action :set_raven_context
+  before_filter :set_raven_context
 
   rescue_from CanCan::AccessDenied do |exception|
     session[:redirect_url] = request.url
