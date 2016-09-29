@@ -20,6 +20,7 @@ gem 'pg'
 gem 'foreigner'
 
 gem 'puma'
+gem "sentry-raven"
 
 group :test, :development do
   gem 'rspec-rails'
