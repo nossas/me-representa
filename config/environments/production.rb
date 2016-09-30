@@ -1,6 +1,12 @@
 CariocaPergunta::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  config.action_dispatch.show_exceptions = false
+
+  Raven.configure do |config|
+    config.dsn = 'https://c43dd03bcce94793babcbdcc237e2688:fe650ac5118a4923a7f2c271e6b3a99c@sentry.io/102625'
+  end
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
