@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   def matches
     ors = answers.select{|a| a.weight > 0}.map{|a| "ca.question_id = #{a.question_id}"}.join(" or ")
-
+    ors = "1==1" if (ors == '')
     match_data = Candidate.
       select(
         %Q{
@@ -114,12 +114,14 @@ class User < ActiveRecord::Base
           merge_fields = {
             CIDADE: u.city ? "#{u.city.name}" : '',
             UF: u.city ? "#{u.city.state}" : '',
+            FNAME: u.name,
             NOME: u.name
           }
         else
           merge_fields = {
             CIDADE: u.city ? "#{u.city.name}" : '',
             UF: u.city ? "#{u.city.state}" : '',
+            FNAME: u.name,
             NOME: u.name,
             NOME_URNA: u.candidate.nickname,
             NUMERO: u.candidate.number,
