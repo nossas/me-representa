@@ -1,0 +1,26 @@
+<% content_for :head do %>
+    <link rel="stylesheet" href="/assets/convine.css">
+<% end %>
+
+<% content_for :menu_logged do %>
+    <% if session[:user_id] %>
+    <li><%= link_to "Perfil", edit_user_path(session[:user_id]), {class: "dropdown-item"} %>
+    <li><%= link_to "Refazer questionário", new_answer_path(session[:user_id]), {class: "dropdown-item"} %>
+    <% end %>
+<% end %>
+
+<% content_for :main do %>
+<div class="conteudo">
+    <div class="left">
+        <img src="/assets/sadfacey.svg" id="sadface" alt="Icone SadFace">
+    </div>
+    <div class="right">
+        <div>
+            <h2>Desculpe o inconveniente, mas ocorreu um erro:</h2>
+            <div>
+				<p><%= flash[:error] %></p>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
