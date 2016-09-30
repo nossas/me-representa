@@ -22,6 +22,8 @@ gem 'foreigner'
 gem 'puma'
 gem "sentry-raven"
 
+gem 'gibbon'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'taps'
