@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   def matches
     ors = answers.select{|a| a.weight > 0}.map{|a| "ca.question_id = #{a.question_id}"}.join(" or ")
-    ors = "1==1" if (ors == '')
+    ors = "1=1" if (ors == '')
     match_data = Candidate.
       select(
         %Q{
