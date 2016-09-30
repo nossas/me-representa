@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
           , (select count(*) from users us where us.candidate_id = candidates.id) as votos 
         }).
       joins(:party).
-      where("candidates.finished_at is not null and candidates.city_id = #{city_id}").
+      where("candidates.finished_at is not null and candidates.city_id = #{self.city_id}").
       select { |dt| dt.score_direitos_humanos.to_i > 0 }
 
     match_data.map do |dt|
