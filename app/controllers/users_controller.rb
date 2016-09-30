@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def matchup_data
-    render :json => get_match_data(params[:list])
+    render :json => get_match_data(params[:list]) if params[:list]
   end
 
   def matchup
