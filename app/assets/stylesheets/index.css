@@ -121,6 +121,7 @@ header {
     }
     .link.about {
         padding: 5.3em 1em 2.7em 1em;
+        margin-right: 0;
     }
     .link.contact:before, .link.facebook:before {
         background-size: 3em;
