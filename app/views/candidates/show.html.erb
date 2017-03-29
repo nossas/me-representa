@@ -173,7 +173,9 @@
         <p>Compartilhe no seu facebook e ajude outras pessoas a encontrarem candidaturas pró-direitos humanos no Brasil :)</p>
         <a href="https://www.facebook.com/dialog/share?app_id=<%= URI.encode ENV['FB_ID'] %>&display=page&href=<%= URI.encode root_url %>&redirect_uri=<%= URI.encode candidate_url(@candidate) %>" class="btn-compartilhe btn btn-amarelo-roxo">Compartilhar com amigos</a>
     </div>
-    <script type="text/javascript">
+    <!-- Este script faz aparecer o botão de "Psiu, compartilhe" depois de 20 segundos
+         Removido temporariamente (2017)
+        script type="text/javascript">
         (function() {
             window.setTimeout(function(){
                 $(".share-it").removeClass("invisivel");
@@ -182,5 +184,5 @@
                 $(".share-it").addClass("invisivel");
             })
         })();
-    </script>
+    </script-->
 <% end %>
