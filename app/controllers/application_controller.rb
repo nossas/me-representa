@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :create_user_question_through_session
   before_filter { session[:votes] ||= [] }
 
-
+  before_filter :set_raven_context
 
   rescue_from CanCan::AccessDenied do |exception|
     session[:redirect_url] = request.url
@@ -48,7 +48,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
   private
+  def set_raven_context
+    Raven.user_context(id: session[:user_id]) # or anything else in session
+    Raven.extra_context(params: params.to_hash, url: request.url)
+  end
 
   def current_ability
     @current_ability ||= Ability.new(current_user, request)

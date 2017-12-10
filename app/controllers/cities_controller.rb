@@ -12,6 +12,7 @@ class CitiesController < ApplicationController
 	def convine
 		@city = City.find params[:id]
         @current_user = current_user
+        render layout: "merepresentaunlogged" if not current_user
     end
     
     def candidates

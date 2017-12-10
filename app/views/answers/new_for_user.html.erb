@@ -57,7 +57,8 @@
                     divErro.addClass("invisivel")
                     div.removeClass("dados-erro");
                     $.ajax({
-                        url: retorno._url + checkbox.attr("answer-id")
+                        url: retorno._url + checkbox.attr("answer-id") + ".json"
+                        , headers: {Accept: "application/json"}
                         , contentType: "application/json"
                         , method: "PUT"
                         , data: JSON.stringify (dados)
