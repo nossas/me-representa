@@ -30,27 +30,38 @@ class UsersController < ApplicationController
   end
 
   def matchup_data
-    render :json => get_match_data(params[:list])
+    render :json => get_match_data(params[:list]) if params[:list]
   end
 
   def matchup
-    @user = User.find params[:user_id]
-
-
-    @matdata = @user.matches
-    if (@matdata.size == 0)
-      redirect_to city_convine_path(@user.city_id)
-    else
-      qtde_importantes = @user.answers.select{|a| a.weight > 0}.count
-
-      match_total = @matdata.select{|dt| dt[:score] >= qtde_importantes}
-
-      if (match_total.size > 0)
-        @matching = get_match_data match_total.slice(0,6).map{|dt| dt[:id]}
-        @matdata = match_total.slice( 6, match_total.count) || []
+    @user = nil
+    @user = User.find params[:user_id] if User.exists? params[:user_id]
+    if @user == nil
+        flash[:error] = 'Usuário inexistente'
+        redirect_to error_path(@user)      
+    elsif @user.city_id == nil
+      if @user_id == @current_user.id
+        redirect_to edit_user_path(@user)
       else
-        @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
-        render "semi_match"
+        flash[:error] = 'Usuário não preencheu cidade para poder realizar o match'
+        redirect_to error_path(@user)
+      end
+    else
+      @matdata = @user.matches
+      if (@matdata.size == 0)
+        redirect_to city_convine_path(@user.city_id)
+      else
+        qtde_importantes = @user.answers.select{|a| a.weight > 0}.count
+
+        match_total = @matdata.select{|dt| dt[:score] >= qtde_importantes}
+
+        if (match_total.size > 0)
+          @matching = get_match_data match_total.slice(0,6).map{|dt| dt[:id]}
+          @matdata = match_total.slice( 6, match_total.count) || []
+        else
+          @matching = get_match_data @matdata.slice(0,6).map{|dt| dt[:id]}
+          render "semi_match"
+        end
       end
     end
   end

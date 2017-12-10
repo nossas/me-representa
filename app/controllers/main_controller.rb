@@ -39,6 +39,9 @@ class MainController < ApplicationController
         end
     end
     
+    def error
+    end
+
     def about
     end
 

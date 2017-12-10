@@ -103,6 +103,9 @@ GEM
     foreigner (1.7.4)
       activerecord (>= 3.0.0)
     gherkin (4.0.0)
+    gibbon (2.2.4)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
     googl (0.7.1)
       httparty (~> 0.10)
       json (>= 1.4.6)
@@ -238,6 +241,8 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    sentry-raven (2.0.1)
+      faraday (>= 0.7.6, < 0.10.x)
     sequel (3.20.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
@@ -295,6 +300,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   foreigner
+  gibbon
   googl
   has_scope
   inherited_resources
@@ -312,6 +318,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   selenium-webdriver (= 2.53.4)
+  sentry-raven
   shoulda-matchers
   simple_form
   slim

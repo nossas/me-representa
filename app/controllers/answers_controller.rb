@@ -43,7 +43,7 @@ class AnswersController < ApplicationController
     if @answer.save
       render :json => @answer
     else
-      render :status => 500
+      render :json => @answer.error.messages, :status => 500
     end
   end
 
